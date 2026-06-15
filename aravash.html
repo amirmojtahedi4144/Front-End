@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>آراوش | اپ مدیتیشن فارسی</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            vazir: ['Vazirmatn', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+    scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: #020617;
+    }
+  </style>
+</head>
+
+<body class="font-vazir bg-slate-950 text-white">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 border-b border-white/10 bg-white/95 text-slate-900 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#" class="flex items-center gap-2 text-[18px] font-extrabold text-emerald-800">
+        <i class="ti ti-leaf text-emerald-600"></i>
+        <span>آراوش</span>
+      </a>
+
+      <ul class="hidden items-center gap-8 md:flex">
+        <li><a href="#services" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">خدمات</a></li>
+        <li><a href="#plans" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">طرح‌های عضویت</a></li>
+        <li><a href="#blog" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">وبلاگ</a></li>
+        <li><a href="#about" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">درباره ما</a></li>
+        <li><a href="#contact" class="text-sm font-medium text-slate-600 transition hover:text-emerald-700">تماس</a></li>
+      </ul>
+
+      <button class="rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-600">
+        دانلود رایگان
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-emerald-500 px-4 py-20 sm:px-6 sm:py-24 lg:py-28">
+    <div class="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-white/15 blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-green-900/20 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-6xl text-center">
+      <span class="inline-flex items-center rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium text-white/95 ring-1 ring-white/20">
+        اولین اپ مدیتیشن تخصصی فارسی
+      </span>
+
+      <h1 class="mt-6 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-7xl">
+        ذهنت رو آروم کن،<br class="hidden sm:block" />
+        زندگیت رو تغییر بده
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/90 sm:text-lg lg:text-xl">
+        با تمرین‌های علمی مدیتیشن، ذهن‌آگاهی و مراقبه به زبان فارسی، آرامش را وارد روتین روزانه‌ات کن و کیفیت زندگی‌ات را بالا ببر.
+      </p>
+
+      <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+        <a href="#plans" class="rounded-full bg-white px-8 py-4 text-base font-bold text-emerald-700 transition hover:bg-emerald-50">
+          شروع رایگان
+        </a>
+        <a href="#services" class="rounded-full border border-white/25 bg-white/10 px-8 py-4 text-base font-bold text-white transition hover:bg-white/15">
+          مشاهده خدمات
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="bg-slate-950 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold tracking-[0.2em] text-emerald-400">خدمات آراوش</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+          همه چیز برای آرامش ذهنت
+        </h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">
+          مجموعه‌ای از دوره‌ها و ابزارهای آرام‌سازی برای خواب بهتر، تمرکز بیشتر و کاهش استرس.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <article class="group rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg transition hover:-translate-y-1 hover:bg-white/[0.07]">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-300">
+            <i class="ti ti-music"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">موسیقی آرام‌بخش</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            پلی‌لیست‌های تخصصی برای آرام‌سازی ذهن، تمرکز عمیق و خواب راحت.
+          </p>
+          <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition group-hover:text-emerald-300">
+            بیشتر بدانید <i class="ti ti-arrow-left"></i>
+          </a>
+        </article>
+
+        <article class="group rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg transition hover:-translate-y-1 hover:bg-white/[0.07]">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-300">
+            <i class="ti ti-brain"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">مدیتیشن هدایت‌شده</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            تمرین‌های صوتی و تصویری با راهنمایی گام‌به‌گام برای مبتدی‌ها و حرفه‌ای‌ها.
+          </p>
+          <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition group-hover:text-emerald-300">
+            بیشتر بدانید <i class="ti ti-arrow-left"></i>
+          </a>
+        </article>
+
+        <article class="group rounded-3xl border border-white/10 bg-white/5 p-6 shadow-lg transition hover:-translate-y-1 hover:bg-white/[0.07]">
+          <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-300">
+            <i class="ti ti-moon"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">برنامه خواب</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            روتین‌های شبانه برای آرامش قبل از خواب و بهبود کیفیت استراحت.
+          </p>
+          <a href="#" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition group-hover:text-emerald-300">
+            بیشتر بدانید <i class="ti ti-arrow-left"></i>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="bg-slate-900 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold tracking-[0.2em] text-emerald-400">چطور کار می‌کند؟</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+          شروع آرامش در ۴ قدم
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-lg font-black text-white">1</div>
+          <h3 class="mt-5 text-lg font-bold text-white">ثبت‌نام</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">حساب کاربری‌ات را سریع بساز و وارد شو.</p>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-lg font-black text-white">2</div>
+          <h3 class="mt-5 text-lg font-bold text-white">انتخاب مسیر</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">از بین تمرین‌ها و دوره‌ها مسیر مناسب را انتخاب کن.</p>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-lg font-black text-white">3</div>
+          <h3 class="mt-5 text-lg font-bold text-white">تمرین روزانه</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">روزانه چند دقیقه تمرین کن و پیشرفت را ببین.</p>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-lg font-black text-white">4</div>
+          <h3 class="mt-5 text-lg font-bold text-white">آرامش بیشتر</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-300">با استمرار، ذهنی آرام‌تر و زندگی متعادل‌تر می‌سازی.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" class="bg-slate-950 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold tracking-[0.2em] text-emerald-400">طرح‌های عضویت</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+          انتخاب با توست
+        </h2>
+        <p class="mt-4 text-base leading-7 text-slate-300">
+          همه طرح‌ها شامل دوره آزمایشی ۷ روزه رایگان می‌شن
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <h3 class="text-xl font-bold text-white">پایه</h3>
+          <p class="mt-2 text-slate-300">برای شروع</p>
+          <div class="mt-6 text-4xl font-black text-white">رایگان</div>
+          <ul class="mt-6 space-y-3 text-sm text-slate-300">
+            <li>• دسترسی به محتوای پایه</li>
+            <li>• چند تمرین روزانه</li>
+            <li>• پشتیبانی محدود</li>
+          </ul>
+          <a href="#" class="mt-8 inline-flex w-full justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:bg-white/10">
+            شروع رایگان
+          </a>
+        </div>
+
+        <div class="rounded-3xl border border-emerald-400/30 bg-emerald-500/10 p-8 ring-1 ring-emerald-400/20">
+          <div class="inline-flex rounded-full bg-emerald-500 px-3 py-1 text-xs font-bold text-white">
+            محبوب‌ترین
+          </div>
+          <h3 class="mt-4 text-xl font-bold text-white">پلاس</h3>
+          <p class="mt-2 text-slate-300">برای رشد مداوم</p>
+          <div class="mt-6 text-4xl font-black text-white">۱۹۹k</div>
+          <ul class="mt-6 space-y-3 text-sm text-slate-200">
+            <li>• همه محتوای پایه</li>
+            <li>• دوره‌های کامل</li>
+            <li>• تمرین‌های شخصی‌سازی شده</li>
+          </ul>
+          <a href="#" class="mt-8 inline-flex w-full justify-center rounded-full bg-white px-6 py-3 font-bold text-emerald-700 transition hover:bg-emerald-50">
+            انتخاب طرح
+          </a>
+        </div>
+
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
+          <h3 class="text-xl font-bold text-white">پریمیوم</h3>
+          <p class="mt-2 text-slate-300">برای حرفه‌ای‌ها</p>
+          <div class="mt-6 text-4xl font-black text-white">۳۹۹k</div>
+          <ul class="mt-6 space-y-3 text-sm text-slate-300">
+            <li>• همه امکانات پلاس</li>
+            <li>• جلسات اختصاصی</li>
+            <li>• پشتیبانی ویژه</li>
+          </ul>
+          <a href="#" class="mt-8 inline-flex w-full justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 font-bold text-white transition hover:bg-white/10">
+            انتخاب طرح
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="bg-slate-900 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-semibold tracking-[0.2em] text-emerald-400">نظرات کاربران</p>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
+          تجربه واقعی کاربران
+        </h2>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-300">
+          «بعد از دو هفته استفاده، خوابم بهتر شد و اضطرابم خیلی کمتر شد.»
+          <footer class="mt-4 text-sm font-semibold text-white">– مریم</footer>
+        </blockquote>
+
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-300">
+          «تمرین‌های کوتاهش باعث شد حتی وسط روز هم ذهنم آروم‌تر بشه.»
+          <footer class="mt-4 text-sm font-semibold text-white">– علی</footer>
+        </blockquote>
+
+        <blockquote class="rounded-3xl border border-white/10 bg-white/5 p-6 text-slate-300">
+          «نسخه فارسی و محتوای تخصصی واقعاً حس خوبی می‌ده.»
+          <footer class="mt-4 text-sm font-semibold text-white">– سارا</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-green-500 py-20 sm:py-24">
+    <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-black tracking-tight text-white sm:text-5xl">
+        همین الان شروع کن
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-white/90">
+        اولین قدم برای آرامش، فقط چند ثانیه فاصله داره.
+      </p>
+      <a href="#" class="mt-8 inline-flex rounded-full bg-white px-8 py-4 text-base font-bold text-emerald-700 transition hover:bg-emerald-50">
+        شروع رایگان
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 bg-slate-950 px-4 py-14 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div>
+          <a href="#" class="flex items-center gap-2 text-[18px] font-extrabold text-emerald-100">
+            <i class="ti ti-leaf text-emerald-400"></i>
+            <span>آراوش</span>
+          </a>
+          <p class="mt-4 max-w-sm text-[13px] leading-8 text-white/60">
+            آراوش همراه توست تا با تمرین‌های علمی و محتوای فارسی، آرامش را وارد زندگی روزمره‌ات کند.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-white">لینک‌ها</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#services" class="text-[13px] text-white/60 transition hover:text-white">خدمات</a></li>
+            <li><a href="#plans" class="text-[13px] text-white/60 transition hover:text-white">طرح‌ها</a></li>
+            <li><a href="#blog" class="text-[13px] text-white/60 transition hover:text-white">وبلاگ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-white">دسترسی</h4>
+          <ul class="mt-4 space-y-2">
+            <li><a href="#about" class="text-[13px] text-white/60 transition hover:text-white">درباره ما</a></li>
+            <li><a href="#contact" class="text-[13px] text-white/60 transition hover:text-white">تماس</a></li>
+            <li><a href="#" class="text-[13px] text-white/60 transition hover:text-white">سوالات متداول</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold text-white">شبکه‌های اجتماعی</h4>
+          <div class="mt-4 flex items-center gap-3">
+            <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-emerald-500 hover:text-white">
+              <i class="ti ti-brand-instagram"></i>
+            </a>
+            <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-emerald-500 hover:text-white">
+              <i class="ti ti-brand-telegram"></i>
+            </a>
+            <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-emerald-500 hover:text-white">
+              <i class="ti ti-brand-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/50">
+        © 2026 آراوش. همه حقوق محفوظ است.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

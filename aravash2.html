@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آراوش - اپ مدیتیشن فارسی</title>
+    <!--Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b'
+                        }
+                    },
+                    boxShadow: {
+                        glow: '0 20px 60px rgba(16, 185, 129, 0.18)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Vazirmatn, sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(16, 185, 129, 0.12), transparent 28%),
+                radial-gradient(circle at left center, rgba(14, 165, 233, 0.08), transparent 25%),
+                #020617;
+        }
+
+        ::selection {
+            background: rgba(16, 185, 129, 0.35);
+            color: white;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .soft-border {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .grid-fade {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: radial-gradient(circle at center, black 28%, transparent 88%);
+        }
+    </style>
+</head>
+
+<body class="text-slate-100 overflow-x-hidden">
+
+    <!-- Background SVGs -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <svg class="absolute -top-32 -left-24 w-152 opacity-25 blur-3xl" viewBox="0 0 400 400" fill="none">
+            <path
+                d="M210,55 C264,74 304,123 307,180 C311,245 264,302 204,318 C145,333 84,312 54,258 C23,202 28,123 79,78 C121,42 160,42 210,55 Z"
+                fill="#10b981" />
+        </svg>
+        <svg class="absolute top-1/3 -right-28 w-155 opacity-20 blur-3xl" viewBox="0 0 400 400" fill="none">
+            <path
+                d="M198,40 C263,48 320,102 330,168 C341,240 293,307 225,326 C157,345 84,324 52,264 C20,204 32,124 86,77 C128,42 154,34 198,40 Z"
+                fill="#0ea5e9" />
+        </svg>
+        <div class="absolute inset-0 grid-fade opacity-40"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50">
+        <div class="glass border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="h-20 flex items-center justify-between gap-4">
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div
+                            class="w-11 h-11 rounded-2xl bg-green-500  shadow-glow flex items-center justify-center">
+                            <svg viewBox="0 0 64 64" class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M32 52c10 0 18-8 18-18S42 16 32 16 14 24 14 34s8 18 18 18Z" />
+                                <path d="M32 20c0 0 10 6 10 14s-4 12-10 16c-6-4-10-8-10-16s10-14 10-14Z" />
+                                <path d="M24 34c4 2 8 2 16 0" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-extrabold leading-tight">آراوش</h1>
+                            <p class="text-xs text-white/60">Meditation for Persian minds</p>
+                        </div>
+                    </a>
+
+                    <nav class="hidden lg:flex items-center gap-8 text-sm text-white/80">
+                        <a href="#services" class="hover:text-white transition">خدمات</a>
+                        <a href="#features" class="hover:text-white transition">ویژگی‌ها</a>
+                        <a href="#screenshots" class="hover:text-white transition">اسکرین‌شات‌ها</a>
+                        <a href="#plans" class="hover:text-white transition">طرح‌ها</a>
+                        <a href="#blog" class="hover:text-white transition">وبلاگ</a>
+                        <a href="#contact" class="hover:text-white transition">تماس</a>
+                    </nav>
+
+                    <div class="flex items-center gap-3">
+                        <a href="#download"
+                            class="hidden sm:inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold transition shadow-glow">
+                            دانلود رایگان
+                        </a>
+                        <button id="menuBtn"
+                            class="lg:hidden w-11 h-11 rounded-2xl glass flex items-center justify-center">
+                            <i class="ti ti-menu-2 text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu -->
+                <div id="mobileMenu" class="hidden lg:hidden pb-5">
+                    <div class="glass rounded-3xl p-4 space-y-2">
+                        <a href="#services" class="block px-4 py-3 rounded-2xl hover:bg-white/10">خدمات</a>
+                        <a href="#features" class="block px-4 py-3 rounded-2xl hover:bg-white/10">ویژگی‌ها</a>
+                        <a href="#screenshots" class="block px-4 py-3 rounded-2xl hover:bg-white/10">اسکرین‌شات‌ها</a>
+                        <a href="#plans" class="block px-4 py-3 rounded-2xl hover:bg-white/10">طرح‌ها</a>
+                        <a href="#blog" class="block px-4 py-3 rounded-2xl hover:bg-white/10">وبلاگ</a>
+                        <a href="#contact" class="block px-4 py-3 rounded-2xl hover:bg-white/10">تماس</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative pt-16 pb-20 lg:pt-24 lg:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-white/85 mb-6">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-400 animate-pulse"></span>
+                        اولین اپ مدیتیشن تخصصی فارسی
+                    </div>
+
+                    <h2 class="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight tracking-tight">
+                        ذهنت رو آروم کن،
+                        <span
+                            class="block text-transparent bg-clip-text bg-cyan-300 to-cyan-300">
+                            زندگیت رو تغییر بده
+                        </span>
+                    </h2>
+
+                    <p class="mt-6 text-base sm:text-lg leading-8 text-white/70 max-w-xl">
+                        با تمرین‌های علمی مدیتیشن، ذهن‌آگاهی و مراقبه به زبان فارسی، آرامش را وارد روتین روزانه‌ات کن و
+                        کیفیت خواب، تمرکز و حال خوبت را بالا ببر.
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="#download"
+                            class="inline-flex items-center justify-center px-7 py-4 rounded-2xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-extrabold transition shadow-glow">
+                            شروع رایگان
+                            <i class="ti ti-arrow-left mr-2"></i>
+                        </a>
+                        <a href="#services"
+                            class="inline-flex items-center justify-center px-7 py-4 rounded-2xl glass hover:bg-white/10 font-bold transition">
+                            مشاهده خدمات
+                        </a>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-3 gap-4 max-w-lg">
+                        <div class="glass rounded-3xl p-4 text-center">
+                            <div class="text-2xl font-black text-brand-300">120+</div>
+                            <div class="text-xs text-white/55 mt-1">جلسه مدیتیشن</div>
+                        </div>
+                        <div class="glass rounded-3xl p-4 text-center">
+                            <div class="text-2xl font-black text-cyan-300">50k+</div>
+                            <div class="text-xs text-white/55 mt-1">دانلود</div>
+                        </div>
+                        <div class="glass rounded-3xl p-4 text-center">
+                            <div class="text-2xl font-black text-amber-300">4.9</div>
+                            <div class="text-xs text-white/55 mt-1">امتیاز کاربران</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 relative">
+                    <div class="absolute inset-0 -z-10 blur-3xl opacity-50 bg-brand-500/20 rounded-full"></div>
+
+                    <!-- Big SVG Illustration -->
+                    <svg viewBox="0 0 760 760" class="w-full max-w-2xl mx-auto drop-shadow-2xl">
+                        <defs>
+                            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#34d399" />
+                                <stop offset="100%" stop-color="#059669" />
+                            </linearGradient>
+                            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#0ea5e9" />
+                                <stop offset="100%" stop-color="#2563eb" />
+                            </linearGradient>
+                            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000"
+                                    flood-opacity="0.35" />
+                            </filter>
+                        </defs>
+
+                        <circle cx="380" cy="380" r="310" fill="rgba(255,255,255,0.04)" />
+                        <circle cx="380" cy="380" r="250" fill="rgba(16,185,129,0.08)" />
+                        <circle cx="380" cy="380" r="190" fill="rgba(255,255,255,0.03)" />
+
+                        <path
+                            d="M380 120C511 120 618 227 618 358C618 497 497 607 360 607C228 607 122 502 122 372C122 236 228 120 380 120Z"
+                            fill="url(#g1)" opacity="0.15" />
+
+                        <g filter="url(#shadow)">
+                            <rect x="220" y="140" rx="38" ry="38" width="320" height="500" fill="#0f172a"
+                                stroke="rgba(255,255,255,0.08)" />
+                            <rect x="240" y="170" rx="28" ry="28" width="280" height="60"
+                                fill="rgba(255,255,255,0.05)" />
+                            <circle cx="278" cy="200" r="12" fill="#34d399" />
+                            <rect x="300" y="193" rx="8" ry="8" width="110" height="14" fill="rgba(255,255,255,0.7)" />
+                            <rect x="260" y="260" rx="24" ry="24" width="220" height="110" fill="url(#g2)"
+                                opacity="0.9" />
+                            <circle cx="375" cy="315" r="42" fill="rgba(255,255,255,0.85)" />
+                            <path d="M375 280c0 0 34 20 34 43 0 27-15 39-34 51-19-12-34-24-34-51 0-23 34-43 34-43Z"
+                                fill="#0f172a" />
+                            <rect x="260" y="390" rx="18" ry="18" width="110" height="86"
+                                fill="rgba(255,255,255,0.05)" />
+                            <rect x="382" y="390" rx="18" ry="18" width="110" height="86"
+                                fill="rgba(255,255,255,0.05)" />
+                            <rect x="260" y="492" rx="18" ry="18" width="232" height="88"
+                                fill="rgba(255,255,255,0.05)" />
+                            <path d="M289 436h52M289 453h36" stroke="rgba(255,255,255,0.5)" stroke-width="8"
+                                stroke-linecap="round" />
+                            <path d="M412 436h50M412 453h30" stroke="rgba(255,255,255,0.5)" stroke-width="8"
+                                stroke-linecap="round" />
+                            <path d="M300 530h120" stroke="#34d399" stroke-width="10" stroke-linecap="round" />
+                        </g>
+
+                        <g>
+                            <circle cx="160" cy="180" r="32" fill="rgba(52,211,153,0.22)" />
+                            <circle cx="160" cy="180" r="16" fill="#34d399" />
+                            <circle cx="620" cy="230" r="24" fill="rgba(14,165,233,0.22)" />
+                            <circle cx="620" cy="230" r="12" fill="#38bdf8" />
+                            <circle cx="560" cy="580" r="30" fill="rgba(52,211,153,0.16)" />
+                            <path d="M548 580h24M560 568v24" stroke="#86efac" stroke-width="4" stroke-linecap="round" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos / Trust -->
+    <section class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-white/45 mb-6">مورد اعتماد کاربران علاقه‌مند به آرامش و تمرکز</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="glass rounded-2xl py-4 text-center text-white/65 font-semibold">دیجیاتو</div>
+                <div class="glass rounded-2xl py-4 text-center text-white/65 font-semibold">زومیت</div>
+                <div class="glass rounded-2xl py-4 text-center text-white/65 font-semibold">کافه‌بازار</div>
+                <div class="glass rounded-2xl py-4 text-center text-white/65 font-semibold">اپ‌استور</div>
+                <div class="glass rounded-2xl py-4 text-center text-white/65 font-semibold">مایکت</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <span class="inline-flex px-4 py-2 rounded-full glass text-sm text-brand-300">خدمات آراوش</span>
+                <h3 class="mt-5 text-3xl sm:text-4xl font-black">همه چیز برای آرامش ذهنت</h3>
+                <p class="mt-4 text-white/65 leading-8">
+                    مجموعه‌ای از دوره‌ها و ابزارهای آرام‌سازی برای خواب بهتر، تمرکز بیشتر و کاهش استرس؛ همه در یک تجربه
+                    فارسی و ساده.
+                </p>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                <article class="glass rounded-3xl p-7 soft-border hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-500/15 flex items-center justify-center text-brand-300">
+                        <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 42c6-12 18-12 24 0" />
+                            <path d="M16 28c3-6 9-10 16-10s13 4 16 10" />
+                            <path d="M12 48h40" />
+                            <path d="M22 48V34" />
+                            <path d="M42 48V34" />
+                        </svg>
+                    </div>
+                    <h4 class="mt-6 text-xl font-bold">موسیقی آرام‌بخش</h4>
+                    <p class="mt-3 text-white/65 leading-7">
+                        پلی‌لیست‌های تخصصی برای آرام‌سازی ذهن، تمرکز عمیق و خواب راحت.
+                    </p>
+                    <a href="#" class="inline-flex mt-5 text-brand-300 font-semibold">بیشتر بدانید <i
+                            class="ti ti-arrow-left mr-2"></i></a>
+                </article>
+
+                <article class="glass rounded-3xl p-7 soft-border hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/15 flex items-center justify-center text-cyan-300">
+                        <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M32 10c11 0 20 9 20 20s-9 24-20 24S12 41 12 30 21 10 32 10Z" />
+                            <path d="M32 18v12l8 5" />
+                        </svg>
+                    </div>
+                    <h4 class="mt-6 text-xl font-bold">مدیتیشن هدایت‌شده</h4>
+                    <p class="mt-3 text-white/65 leading-7">
+                        تمرین‌های صوتی و تصویری با راهنمایی گام‌به‌گام برای مبتدی‌ها و حرفه‌ای‌ها.
+                    </p>
+                    <a href="#" class="inline-flex mt-5 text-brand-300 font-semibold">بیشتر بدانید <i
+                            class="ti ti-arrow-left mr-2"></i></a>
+                </article>
+
+                <article class="glass rounded-3xl p-7 soft-border hover:-translate-y-1 transition duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-500/15 flex items-center justify-center text-amber-300">
+                        <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 40c7 0 7-18 14-18s7 18 14 18 7-18 14-18" />
+                            <path d="M14 48h36" />
+                        </svg>
+                    </div>
+                    <h4 class="mt-6 text-xl font-bold">برنامه خواب</h4>
+                    <p class="mt-3 text-white/65 leading-7">
+                        روتین‌های شبانه برای آرامش قبل از خواب و بهبود کیفیت استراحت.
+                    </p>
+                    <a href="#" class="inline-flex mt-5 text-brand-300 font-semibold">بیشتر بدانید <i
+                            class="ti ti-arrow-left mr-2"></i></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-flex px-4 py-2 rounded-full glass text-sm text-cyan-300">ویژگی‌ها</span>
+                    <h3 class="mt-5 text-3xl sm:text-4xl font-black">طراحی شده برای آرامش واقعی</h3>
+                    <p class="mt-4 text-white/65 leading-8">
+                        آراوش فقط یک اپ مدیتیشن نیست؛ یک تجربه آرام، هدفمند و شخصی‌سازی شده است که به سبک زندگی
+                        فارسی‌زبان‌ها نزدیک باشد.
+                    </p>
+
+                    <div class="mt-10 space-y-4">
+                        <div class="glass rounded-2xl p-5 flex gap-4 items-start">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-brand-500/15 text-brand-300 flex items-center justify-center shrink-0">
+                                <i class="ti ti-flame text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">تمرین‌های شخصی‌سازی شده</h4>
+                                <p class="mt-1 text-sm text-white/65 leading-7">بر اساس حال روزانه، سطح استرس و هدف شما.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-2xl p-5 flex gap-4 items-start">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-cyan-500/15 text-cyan-300 flex items-center justify-center shrink-0">
+                                <i class="ti ti-bell text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">یادآورهای هوشمند</h4>
+                                <p class="mt-1 text-sm text-white/65 leading-7">عادت‌های خوب با نوتیفیکیشن‌های سبک و
+                                    محترمانه.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-2xl p-5 flex gap-4 items-start">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-300 flex items-center justify-center shrink-0">
+                                <i class="ti ti-moon text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">حالت خواب شبانه</h4>
+                                <p class="mt-1 text-sm text-white/65 leading-7">فضای تاریک، آرام و مناسب قبل از خواب.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <svg viewBox="0 0 700 620" class="w-full">
+                        <defs>
+                            <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#0f172a" />
+                                <stop offset="100%" stop-color="#111827" />
+                            </linearGradient>
+                            <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#34d399" />
+                                <stop offset="100%" stop-color="#06b6d4" />
+                            </linearGradient>
+                        </defs>
+
+                        <rect x="70" y="45" rx="42" ry="42" width="560" height="530" fill="url(#panel)"
+                            stroke="rgba(255,255,255,0.08)" />
+                        <rect x="120" y="95" rx="26" ry="26" width="460" height="80" fill="rgba(255,255,255,0.04)" />
+                        <circle cx="180" cy="135" r="18" fill="#34d399" />
+                        <rect x="215" y="123" rx="8" ry="8" width="170" height="16" fill="rgba(255,255,255,0.72)" />
+                        <rect x="215" y="145" rx="8" ry="8" width="120" height="12" fill="rgba(255,255,255,0.28)" />
+
+                        <rect x="120" y="205" rx="24" ry="24" width="210" height="150" fill="rgba(255,255,255,0.05)" />
+                        <rect x="350" y="205" rx="24" ry="24" width="230" height="150" fill="rgba(255,255,255,0.05)" />
+                        <rect x="120" y="375" rx="24" ry="24" width="460" height="150" fill="rgba(255,255,255,0.05)" />
+
+                        <path d="M160 300 C190 250, 250 250, 280 300" stroke="url(#acc)" stroke-width="12" fill="none"
+                            stroke-linecap="round" />
+                        <circle cx="220" cy="280" r="28" fill="#0ea5e9" opacity="0.35" />
+                        <circle cx="470" cy="280" r="34" fill="#34d399" opacity="0.25" />
+                        <path d="M455 280c0 0 15 8 15 19s-7 17-15 23c-8-6-15-12-15-23s15-19 15-19Z" fill="#d1fae5" />
+                        <path d="M170 450h180M170 476h240" stroke="rgba(255,255,255,0.45)" stroke-width="12"
+                            stroke-linecap="round" />
+                        <circle cx="520" cy="450" r="42" fill="#0ea5e9" opacity="0.22" />
+                        <path d="M520 430v40M500 450h40" stroke="#7dd3fc" stroke-width="7" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section id="screenshots" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="inline-flex px-4 py-2 rounded-full glass text-sm text-brand-300">اسکرین‌شات‌ها</span>
+                <h3 class="mt-5 text-3xl sm:text-4xl font-black">رابط کاربری تمیز و مینیمال</h3>
+                <p class="mt-4 text-white/65 leading-8">چیدمانی الهام‌گرفته از اپ‌های حرفه‌ای مدیتیشن با تمرکز روی
+                    خوانایی، سکون و تجربه کاربری آرام.</p>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                <div class="glass rounded-3xl p-5">
+                    <svg viewBox="0 0 360 680" class="w-full">
+                        <rect x="50" y="20" rx="38" ry="38" width="260" height="640" fill="#0f172a"
+                            stroke="rgba(255,255,255,0.08)" />
+                        <circle cx="180" cy="92" r="54" fill="rgba(52,211,153,0.18)" />
+                        <circle cx="180" cy="92" r="24" fill="#34d399" />
+                        <rect x="86" y="180" rx="20" ry="20" width="188" height="76" fill="rgba(255,255,255,0.06)" />
+                        <rect x="86" y="275" rx="20" ry="20" width="188" height="76" fill="rgba(255,255,255,0.06)" />
+                        <rect x="86" y="370" rx="20" ry="20" width="188" height="76" fill="rgba(255,255,255,0.06)" />
+                        <path d="M114 218h60M114 236h100" stroke="rgba(255,255,255,0.6)" stroke-width="8"
+                            stroke-linecap="round" />
+                        <path d="M114 313h80M114 331h70" stroke="rgba(255,255,255,0.6)" stroke-width="8"
+                            stroke-linecap="round" />
+                        <path d="M114 408h90M114 426h76" stroke="rgba(255,255,255,0.6)" stroke-width="8"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+                    <svg viewBox="0 0 360 680" class="w-full">
+                        <rect x="50" y="20" rx="38" ry="38" width="260" height="640" fill="#0f172a"
+                            stroke="rgba(255,255,255,0.08)" />
+                        <rect x="80" y="76" rx="24" ry="24" width="200" height="230" fill="rgba(14,165,233,0.12)" />
+                        <circle cx="180" cy="193" r="58" fill="rgba(255,255,255,0.7)" />
+                        <path d="M180 150c0 0 34 20 34 44 0 27-15 41-34 53-19-12-34-26-34-53 0-24 34-44 34-44Z"
+                            fill="#0f172a" />
+                        <rect x="80" y="338" rx="18" ry="18" width="200" height="56" fill="rgba(255,255,255,0.06)" />
+                        <rect x="80" y="410" rx="18" ry="18" width="200" height="56" fill="rgba(255,255,255,0.06)" />
+                        <rect x="80" y="482" rx="18" ry="18" width="200" height="56" fill="rgba(255,255,255,0.06)" />
+                    </svg>
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+                    <svg viewBox="0 0 360 680" class="w-full">
+                        <rect x="50" y="20" rx="38" ry="38" width="260" height="640" fill="#0f172a"
+                            stroke="rgba(255,255,255,0.08)" />
+                        <rect x="78" y="80" rx="24" ry="24" width="204" height="180" fill="rgba(16,185,129,0.12)" />
+                        <path d="M110 180c26-40 66-40 90 0 24-40 64-40 90 0" fill="none" stroke="#34d399"
+                            stroke-width="10" stroke-linecap="round" />
+                        <rect x="78" y="286" rx="22" ry="22" width="204" height="82" fill="rgba(255,255,255,0.06)" />
+                        <path d="M110 330h98" stroke="rgba(255,255,255,0.7)" stroke-width="10" stroke-linecap="round" />
+                        <rect x="78" y="392" rx="22" ry="22" width="204" height="190" fill="rgba(255,255,255,0.05)" />
+                        <circle cx="180" cy="486" r="46" fill="#34d399" opacity="0.2" />
+                        <path d="M180 462v48M156 486h48" stroke="#bbf7d0" stroke-width="7" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="inline-flex px-4 py-2 rounded-full glass text-sm text-cyan-300">چطور کار می‌کند؟</span>
+                <h3 class="mt-5 text-3xl sm:text-4xl font-black">شروع آرامش در ۴ قدم</h3>
+            </div>
+
+            <div class="mt-14 grid md:grid-cols-4 gap-6">
+                <div class="glass rounded-3xl p-6">
+                    <div class="text-5xl font-black text-brand-300">1</div>
+                    <h4 class="mt-5 text-lg font-bold">ثبت‌نام</h4>
+                    <p class="mt-3 text-sm text-white/65 leading-7">حساب کاربری‌ات را سریع بساز و وارد شو.</p>
+                </div>
+                <div class="glass rounded-3xl p-6">
+                    <div class="text-5xl font-black text-brand-300">2</div>
+                    <h4 class="mt-5 text-lg font-bold">انتخاب مسیر</h4>
+                    <p class="mt-3 text-sm text-white/65 leading-7">از بین تمرین‌ها و دوره‌ها مسیر مناسب را انتخاب کن.
+                    </p>
+                </div>
+                <div class="glass rounded-3xl p-6">
+                    <div class="text-5xl font-black text-brand-300">3</div>
+                    <h4 class="mt-5 text-lg font-bold">تمرین روزانه</h4>
+                    <p class="mt-3 text-sm text-white/65 leading-7">روزانه چند دقیقه تمرین کن و پیشرفت را ببین.</p>
+                </div>
+                <div class="glass rounded-3xl p-6">
+                    <div class="text-5xl font-black text-brand-300">4</div>
+                    <h4 class="mt-5 text-lg font-bold">آرامش بیشتر</h4>
+                    <p class="mt-3 text-sm text-white/65 leading-7">با استمرار، ذهنی آرام‌تر و زندگی متعادل‌تری می‌سازی.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans -->
+    <section id="plans" class="py-20 lg:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="inline-flex px-4 py-2 rounded-full glass text-sm text-brand-300">طرح‌های عضویت</span>
+                <h3 class="mt-5 text-3xl sm:text-4xl font-black">انتخاب با توست</h3>
+                <p class="mt-4 text-white/65 leading-8">همه طرح‌ها شامل دوره آزمایشی ۷ روزه رایگان می‌شن.</p>
+            </div>
+
+            <div class="mt-14 grid lg:grid-cols-3 gap-6">
+                <div class="glass rounded-3xl p-8">
+                    <h4 class="text-xl font-bold">پایه</h4>
+                    <p class="mt-2 text-white/55">برای شروع</p>
+                    <div class="mt-6 text-4xl font-black">رایگان</div>
+                    <ul class="mt-6 space-y-3 text-sm text-white/70">
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> دسترسی به محتوای
+                            پایه</li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> چند تمرین روزانه
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> پشتیبانی محدود
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="mt-8 inline-flex w-full items-center justify-center py-3 rounded-2xl bg-white/10 hover:bg-white/15 font-bold transition">شروع
+                        رایگان</a>
+                </div>
+
+                <div class="glass rounded-3xl p-8 border border-brand-400/50 shadow-glow relative">
+                    <div
+                        class="absolute -top-4 right-6 px-4 py-2 rounded-full bg-brand-500 text-slate-950 text-xs font-extrabold">
+                        محبوب‌ترین</div>
+                    <h4 class="text-xl font-bold">پلاس</h4>
+                    <p class="mt-2 text-white/55">برای رشد مداوم</p>
+                    <div class="mt-6 text-4xl font-black">۱۹۹k</div>
+                    <ul class="mt-6 space-y-3 text-sm text-white/70">
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> همه محتوای پایه
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> دوره‌های کامل
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> تمرین‌های
+                            شخصی‌سازی شده</li>
+                    </ul>
+                    <a href="#"
+                        class="mt-8 inline-flex w-full items-center justify-center py-3 rounded-2xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-extrabold transition">انتخاب
+                        طرح</a>
+                </div>
+
+                <div class="glass rounded-3xl p-8">
+                    <h4 class="text-xl font-bold">پریمیوم</h4>
+                    <p class="mt-2 text-white/55">برای حرفه‌ای‌ها</p>
+                    <div class="mt-6 text-4xl font-black">۳۹۹k</div>
+                    <ul class="mt-6 space-y-3 text-sm text-white/70">
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> همه امکانات پلاس
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> جلسات اختصاصی
+                        </li>
+                        <li class="flex items-center gap-2"><i class="ti ti-check text-brand-300"></i> پشتیبانی ویژه
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="mt-8 inline-flex w-full items-center justify-center py-3 rounded-2xl bg-white/10 hover:bg-white/15 font-bold transition">انتخاب
+                        طرح</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<footer dir="rtl"
+    class="relative mt-32 bg-slate-900 border-white/10 overflow-hidden">
+
+    <!-- Glow -->
+    <div
+        class="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-63 bg-emerald-500/20 blur-3xl rounded-full">
+    </div>
+
+    <!-- Wave -->
+    <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
+        <svg viewBox="0 0 1440 120" class="w-full h-24">
+            <path fill="#020617">
+                <animate attributeName="d" dur="12s" repeatCount="indefinite" values="
+                M0,64L80,69C160,75,320,85,480,90C640,96,800,96,960,85C1120,75,1280,53,1360,48L1440,43L1440,0L0,0Z;
+                M0,60L80,55C160,50,320,70,480,80C640,90,800,70,960,60C1120,50,1280,55,1360,60L1440,64L1440,0L0,0Z;
+                M0,64L80,69C160,75,320,85,480,90C640,96,800,96,960,85C1120,75,1280,53,1360,48L1440,43L1440,0L0,0Z
+                " />
+            </path>
+        </svg>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 pt-32 pb-16">
+
+        <!-- Trust Logos -->
+        <div class="text-center mb-20">
+            <span
+                class="inline-block px-4 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm mb-6">
+                درباره آراوش در رسانه‌ها
+            </span>
+
+            <div
+                class="flex flex-wrap justify-center items-center gap-8 text-white/60 font-bold text-lg">
+                <span>دیجیاتو</span>
+                <span>زومیت</span>
+                <span>کافه‌بازار</span>
+                <span>مایکت</span>
+                <span>App Store</span>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+
+            <!-- Brand -->
+            <div class="lg:col-span-2">
+
+                <div class="flex items-center gap-4 mb-6">
+
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-cyan-300 flex items-center justify-center shadow-lg shadow-emerald-900/40">
+
+                        <i class="ti ti-leaf text-white text-2xl"></i>
+
+                    </div>
+
+                    <div>
+                        <h3 class="text-white text-2xl font-black">
+                            آراوش
+                        </h3>
+                        <p class="text-white/50 text-sm">
+                            اپ مدیتیشن فارسی
+                        </p>
+                    </div>
+
+                </div>
+
+                <p class="text-white/60 leading-8 max-w-md">
+                    آراوش کمک می‌کند ذهنی آرام‌تر داشته باشی. با تمرین‌های مدیتیشن،
+                    موسیقی‌های آرام‌بخش و مسیرهای تمرینی شخصی‌سازی شده می‌توانی
+                    تمرکز، خواب بهتر و آرامش بیشتری در زندگی تجربه کنی.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-8">
+
+                    <a href="#"
+                        class="flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition">
+
+                        دانلود از بازار
+
+                    </a>
+
+                    <a href="#"
+                        class="flex items-center gap-2 px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white transition">
+
+                        App Store
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Product -->
+            <div>
+
+                <h4 class="text-white font-bold mb-6">
+                    محصول
+                </h4>
+
+                <ul class="space-y-4 text-white/60 text-sm">
+
+                    <li><a href="#services" class="hover:text-white transition">خدمات</a></li>
+
+                    <li><a href="#features" class="hover:text-white transition">ویژگی‌ها</a></li>
+
+                    <li><a href="#plans" class="hover:text-white transition">طرح‌های عضویت</a></li>
+
+                    <li><a href="#blog" class="hover:text-white transition">وبلاگ</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Company -->
+            <div>
+
+                <h4 class="text-white font-bold mb-6">
+                    شرکت
+                </h4>
+
+                <ul class="space-y-4 text-white/60 text-sm">
+
+                    <li><a href="#about" class="hover:text-white transition">درباره ما</a></li>
+
+                    <li><a href="#contact" class="hover:text-white transition">تماس با ما</a></li>
+
+                    <li><a href="#faq" class="hover:text-white transition">سوالات متداول</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Newsletter -->
+            <div>
+
+                <h4 class="text-white font-bold mb-6">
+                    خبرنامه
+                </h4>
+
+                <p class="text-white/60 text-sm leading-7 mb-4">
+                    مقالات مدیتیشن، تمرین‌های ذهن‌آگاهی و بروزرسانی‌های آراوش را
+                    از طریق ایمیل دریافت کن.
+                </p>
+
+                <div class="flex">
+
+                    <input type="email"
+                        placeholder="ایمیل شما"
+                        class="w-full px-4 py-3 rounded-r-xl bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-emerald-500">
+
+                    <button
+                        class="px-5 bg-emerald-600 hover:bg-emerald-500 rounded-l-xl text-white transition">
+
+                        ارسال
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom -->
+        <div
+            class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+
+            <p class="text-white/40 text-sm">
+                © 2026 آراوش — همه حقوق محفوظ است
+            </p>
+
+            <div class="flex gap-6 text-white/60 text-sm">
+
+                <a href="#" class="hover:text-white transition">
+                    قوانین استفاده
+                </a>
+
+                <a href="#" class="hover:text-white transition">
+                    حریم خصوصی
+                </a>
+
+            </div>
+
+            <div class="flex items-center gap-5 text-xl text-white/60">
+
+                <a href="#" class="hover:text-white transition">
+                    <i class="ti ti-brand-instagram"></i>
+                </a>
+
+                <a href="#" class="hover:text-white transition">
+                    <i class="ti ti-brand-telegram"></i>
+                </a>
+
+                <a href="#" class="hover:text-white transition">
+                    <i class="ti ti-brand-linkedin"></i>
+                </a>
+
+                <a href="#" class="hover:text-white transition">
+                    <i class="ti ti-brand-twitter"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+</body>
+
+</html>

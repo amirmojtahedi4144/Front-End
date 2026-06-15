@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هنرستان هیات امنایی زنده‌یاد عمادی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Vazirmatn', sans-serif; background: #f8f7f4; color: #1a1a2e; direction: rtl; }
+
+  nav {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 70px;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-text { color: #fff; }
+  .logo-text .title { font-size: 15px; font-weight: 700; }
+  .logo-text .sub { font-size: 11px; color: #a0aec0; }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    color: #cbd5e0; font-size: 13px; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px; text-decoration: none;
+    transition: all .2s;
+  }
+  .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .nav-btn {
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    color: #fff; border: none; padding: 10px 22px; border-radius: 10px;
+    font-size: 13px; font-family: 'Vazirmatn', sans-serif; font-weight: 600;
+    cursor: pointer; transition: opacity .2s;
+  }
+  .nav-btn:hover { opacity: .85; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 520px; display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='30' cy='30' r='4' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; padding: 60px 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-text h1 { color: #fff; font-size: 36px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; }
+  .hero-text h1 span { color: #e8a045; }
+  .hero-text p { color: #a0aec0; font-size: 16px; line-height: 1.8; margin-bottom: 32px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    color: #fff; padding: 14px 28px; border-radius: 12px;
+    font-weight: 700; font-size: 15px; text-decoration: none;
+    box-shadow: 0 8px 24px rgba(232,160,69,0.4); transition: transform .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,0.3); color: #fff;
+    padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 15px;
+    text-decoration: none; transition: all .2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.1); }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card {
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 16px;
+    padding: 24px; text-align: center;
+  }
+  .stat-card .num { font-size: 32px; font-weight: 800; color: #e8a045; }
+  .stat-card .lbl { font-size: 13px; color: #a0aec0; margin-top: 4px; }
+
+  .ticker {
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    padding: 12px 24px; overflow: hidden;
+  }
+  .ticker-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+  .ticker-label {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,0.2); color: #fff; padding: 4px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 700; white-space: nowrap;
+  }
+  .ticker-track { overflow: hidden; flex: 1; }
+  .ticker-text {
+    color: #fff; font-size: 13px; font-weight: 500;
+    animation: ticker 28s linear infinite;
+    white-space: nowrap; display: inline-block;
+  }
+  @keyframes ticker { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+  section { padding: 64px 24px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-header .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .section-header h2 { font-size: 28px; font-weight: 800; color: #1a1a2e; }
+  .section-header p { color: #718096; margin-top: 8px; font-size: 15px; }
+
+  .fields-bg { background: #fff; }
+  .fields-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .field-card {
+    border-radius: 16px; padding: 28px 20px; text-align: center;
+    transition: transform .2s, box-shadow .2s; cursor: pointer;
+    border: 2px solid transparent;
+  }
+  .field-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+  .field-card .svg-icon { width: 56px; height: 56px; margin: 0 auto 14px; }
+  .field-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .field-card p { font-size: 12px; line-height: 1.6; }
+  .fc1 { background: linear-gradient(135deg, #fff5e6, #fff0d4); border-color: #f6c87a; }
+  .fc1 h3 { color: #b07518; } .fc1 p { color: #a07040; }
+  .fc2 { background: linear-gradient(135deg, #e8f4fd, #d4ecf9); border-color: #7ab8e8; }
+  .fc2 h3 { color: #1a6fa0; } .fc2 p { color: #3a7fa8; }
+  .fc3 { background: linear-gradient(135deg, #f0fff4, #d4f9e0); border-color: #7ae8a0; }
+  .fc3 h3 { color: #1a8040; } .fc3 p { color: #3a9050; }
+  .fc4 { background: linear-gradient(135deg, #fdf0ff, #f0d4f9); border-color: #c87ae8; }
+  .fc4 h3 { color: #6a1a90; } .fc4 p { color: #7a3aa0; }
+  .fc5 { background: linear-gradient(135deg, #fff0f0, #f9d4d4); border-color: #e87a7a; }
+  .fc5 h3 { color: #901a1a; } .fc5 p { color: #a03a3a; }
+
+  .news-bg { background: #f8f7f4; }
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .news-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform .2s, box-shadow .2s;
+  }
+  .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+  .news-img {
+    width: 100%; height: 180px; background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .news-body { padding: 20px; }
+  .news-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #fff5e6; color: #d4652a;
+    padding: 2px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-bottom: 10px;
+  }
+  .news-body h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; line-height: 1.5; margin-bottom: 8px; }
+  .news-body p { font-size: 13px; color: #718096; line-height: 1.7; }
+  .news-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+  .news-date { font-size: 12px; color: #a0aec0; display: flex; align-items: center; gap: 4px; }
+  .news-link { color: #d4652a; font-size: 12px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .news-link:hover { text-decoration: underline; }
+
+  .notif-bg { background: #fff; }
+  .notif-list { display: flex; flex-direction: column; gap: 12px; }
+  .notif-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: #f8f7f4; border-radius: 12px; padding: 16px 20px;
+    border-right: 4px solid #e8a045; transition: background .2s;
+  }
+  .notif-item:hover { background: #fff5e6; }
+  .notif-icon { flex-shrink: 0; margin-top: 2px; }
+  .notif-text p { font-size: 13px; color: #2d3748; line-height: 1.7; }
+  .notif-text span { font-size: 11px; color: #a0aec0; display: block; margin-top: 4px; }
+
+  .staff-bg { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); }
+  .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .staff-card { text-align: center; }
+  .staff-avatar {
+    width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px;
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    display: flex; align-items: center; justify-content: center;
+    border: 4px solid rgba(255,255,255,0.2);
+  }
+  .staff-card h3 { color: #fff; font-size: 15px; font-weight: 700; }
+  .staff-card p { color: #a0aec0; font-size: 13px; margin-top: 4px; }
+  .staff-bg .section-header h2 { color: #fff; }
+  .staff-bg .section-header p { color: #a0aec0; }
+
+  .contact-bg { background: #f8f7f4; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .contact-info h3, .contact-links h3 { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #1a1a2e; }
+  .contact-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+  .contact-row .c-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: linear-gradient(135deg, #e8a045, #d4652a);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-row .c-text strong { display: block; font-size: 13px; color: #718096; margin-bottom: 2px; }
+  .contact-row .c-text span { font-size: 15px; font-weight: 600; color: #1a1a2e; }
+  .ext-links { display: flex; flex-direction: column; gap: 10px; }
+  .ext-link {
+    display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+    background: #fff; border-radius: 12px; text-decoration: none;
+    border: 1px solid #e8e8e8; transition: all .2s; color: #1a1a2e;
+  }
+  .ext-link:hover { border-color: #e8a045; background: #fff5e6; }
+  .ext-link p { font-size: 13px; font-weight: 600; }
+
+  footer {
+    background: #1a1a2e; color: #a0aec0;
+    padding: 40px 24px 24px; text-align: center;
+  }
+  footer .footer-logo { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+  footer p { font-size: 13px; margin-bottom: 24px; }
+  footer .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
+  footer .footer-links a { color: #a0aec0; text-decoration: none; font-size: 13px; transition: color .2s; }
+  footer .footer-links a:hover { color: #e8a045; }
+  footer .divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 0 0 20px; }
+  footer .copy { font-size: 12px; }
+
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-text h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <!-- palette SVG -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
+          <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12a10 10 0 0 0 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <div class="title">هنرستان زنده‌یاد عمادی</div>
+        <div class="sub">هیات امنایی ساری ناحیه ۲</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#">صفحه اصلی</a>
+      <a href="#">کادر مدرسه</a>
+      <a href="#">اخبار</a>
+      <a href="#">اطلاعیه</a>
+      <a href="#">درباره ما</a>
+      <a href="#">ارتباط با ما</a>
+    </div>
+    <button class="nav-btn">ورود دانش‌آموز</button>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+      اخبار
+    </span>
+    <div class="ticker-track">
+      <span class="ticker-text">نتایج مرحله شهرستانی پرسش مهر ریاست جمهوری ۱۴۰۵-۱۴۰۴ اعلام شد &nbsp;|&nbsp; پذیرش هنرجو برای سال تحصیلی ۱۴۰۶-۱۴۰۵ آغاز شد &nbsp;|&nbsp; هنرستان عمادی موفق به کسب ۷ رتبه برتر در جشنواره الگوی برتر تدریس شد</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>آینده‌ای روشن با<br><span>هنر و مهارت</span></h1>
+      <p>هنرستان هیات امنایی زنده‌یاد عمادی با بیش از یک دهه سابقه درخشان در آموزش هنرهای تخصصی، محیطی الهام‌بخش برای رشد استعدادهای شما فراهم کرده است.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-primary">پیش ثبت‌نام</a>
+        <a href="#" class="btn-outline">درباره ما بیشتر بدانید</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="num">۵</div>
+        <div class="lbl">رشته تخصصی</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">۷</div>
+        <div class="lbl">رتبه برتر کشوری</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">۳</div>
+        <div class="lbl">پایه تحصیلی</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">۱۵+</div>
+        <div class="lbl">استاد متخصص</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIELDS -->
+<section class="fields-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        رشته‌های تخصصی
+      </div>
+      <h2>رشته‌های ما</h2>
+      <p>در هنرستان عمادی پنج رشته تخصصی در شاخه فنی و حرفه‌ای ارائه می‌شود</p>
+    </div>
+    <div class="fields-grid">
+
+      <!-- طراحی و دوخت -->
+      <div class="field-card fc1">
+        <div class="svg-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#f6c87a" fill-opacity=".3"/>
+            <path d="M20 18c0 0 4 3 8 3s8-3 8-3v14c0 4-4 7-8 7s-8-3-8-7V18z" stroke="#b07518" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M28 21v8M24 24l4-3 4 3" stroke="#b07518" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 36c-1.5 1-2.5 2.5-2 4h16c.5-1.5-.5-3-2-4" stroke="#b07518" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>طراحی و دوخت</h3>
+        <p>شاخه فنی و حرفه‌ای | آموزش طراحی لباس و دوخت تخصصی</p>
+      </div>
+
+      <!-- کامپیوتر -->
+      <div class="field-card fc2">
+        <div class="svg-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#7ab8e8" fill-opacity=".25"/>
+            <rect x="15" y="17" width="26" height="17" rx="3" stroke="#1a6fa0" stroke-width="1.8" fill="none"/>
+            <path d="M22 38h12M28 34v4" stroke="#1a6fa0" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M20 22h3M20 25h6M20 28h4" stroke="#1a6fa0" stroke-width="1.4" stroke-linecap="round"/>
+            <rect x="31" y="22" width="6" height="7" rx="1" stroke="#1a6fa0" stroke-width="1.4" fill="none"/>
+          </svg>
+        </div>
+        <h3>شبکه و نرم‌افزار</h3>
+        <p>رشته کامپیوتر | شاخه فنی و حرفه‌ای</p>
+      </div>
+
+      <!-- عکاسی -->
+      <div class="field-card fc3">
+        <div class="svg-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#7ae8a0" fill-opacity=".25"/>
+            <path d="M17 22h3l2-3h12l2 3h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V24a2 2 0 0 1 2-2z" stroke="#1a8040" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="28" cy="30" r="4.5" stroke="#1a8040" stroke-width="1.7" fill="none"/>
+            <circle cx="28" cy="30" r="2" fill="#1a8040"/>
+            <path d="M36 25h.5" stroke="#1a8040" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>عکاسی</h3>
+        <p>شاخه فنی و حرفه‌ای | آموزش عکاسی حرفه‌ای</p>
+      </div>
+
+      <!-- نقاشی -->
+      <div class="field-card fc4">
+        <div class="svg-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#c87ae8" fill-opacity=".2"/>
+            <path d="M22 36l-4 2 2-4 14-14 2 2-14 14z" stroke="#6a1a90" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M32 22l2 2" stroke="#6a1a90" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="20" cy="37" r="1" fill="#6a1a90"/>
+            <path d="M26 38c0 0 1.5-1.5 4-1s4 2 4 2" stroke="#6a1a90" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>نقاشی و گرافیک</h3>
+        <p>شاخه فنی و حرفه‌ای | هنرهای تجسمی</p>
+      </div>
+
+      <!-- صنایع غذایی -->
+      <div class="field-card fc5">
+        <div class="svg-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="28" cy="28" r="28" fill="#e87a7a" fill-opacity=".2"/>
+            <path d="M20 18v6c0 3.3 3.6 6 8 6s8-2.7 8-6v-6" stroke="#901a1a" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+            <line x1="28" y1="30" x2="28" y2="38" stroke="#901a1a" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M22 38h12" stroke="#901a1a" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M24 18c0-2 1.5-3.5 4-3.5" stroke="#901a1a" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>صنایع غذایی</h3>
+        <p>شاخه فنی و حرفه‌ای | مدیریت آشپزی</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>
+        آخرین اخبار
+      </div>
+      <h2>اخبار هنرستان</h2>
+      <p>از آخرین رویدادها و فعالیت‌های هنرستان باخبر شوید</p>
+    </div>
+    <div class="news-grid">
+
+      <div class="news-card">
+        <div class="news-img">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <circle cx="36" cy="36" r="28" fill="rgba(232,160,69,0.15)" stroke="rgba(232,160,69,0.4)" stroke-width="1.5"/>
+            <path d="M36 18l4.5 9 9.9 1.5-7.2 7 1.7 9.9L36 40.7l-8.9 4.7 1.7-9.9-7.2-7L31.5 27 36 18z" fill="none" stroke="#e8a045" stroke-width="2" stroke-linejoin="round"/>
+            <circle cx="36" cy="50" r="3" fill="#e8a045"/>
+          </svg>
+        </div>
+        <div class="news-body">
+          <span class="news-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            افتخارات
+          </span>
+          <h3>نتایج مرحله شهرستانی پرسش مهر ریاست جمهوری ۱۴۰۵-۱۴۰۴</h3>
+          <p>دانش‌آموزان هنرستان عمادی در مسابقات پرسش مهر ریاست جمهوری نتایج درخشانی کسب کردند.</p>
+          <div class="news-meta">
+            <span class="news-date">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              ۱۴۰۵/۰۲/۱۵
+            </span>
+            <a href="#" class="news-link">ادامه مطلب
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-img">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <circle cx="36" cy="36" r="28" fill="rgba(122,184,232,0.15)" stroke="rgba(122,184,232,0.4)" stroke-width="1.5"/>
+            <rect x="22" y="20" width="28" height="34" rx="3" fill="none" stroke="#7ab8e8" stroke-width="2"/>
+            <path d="M28 30h16M28 36h16M28 42h10" stroke="#7ab8e8" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="28" y="23" width="7" height="5" rx="1" fill="rgba(122,184,232,0.4)" stroke="#7ab8e8" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="news-body">
+          <span class="news-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            رشته‌ها
+          </span>
+          <h3>بروشور معرفی رشته‌های هنرستان عمادی سال تحصیلی ۱۴۰۶-۱۴۰۵</h3>
+          <p>هنرستان زنده‌یاد عمادی در رشته‌های طراحی دوخت، کامپیوتر، عکاسی، نقاشی و صنایع غذایی هنرجو می‌پذیرد.</p>
+          <div class="news-meta">
+            <span class="news-date">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              ۱۴۰۵/۰۲/۱۴
+            </span>
+            <a href="#" class="news-link">ادامه مطلب
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-img">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <circle cx="36" cy="36" r="28" fill="rgba(122,232,160,0.15)" stroke="rgba(122,232,160,0.4)" stroke-width="1.5"/>
+            <rect x="22" y="24" width="28" height="20" rx="3" fill="none" stroke="#7ae8a0" stroke-width="2"/>
+            <circle cx="36" cy="34" r="5" fill="none" stroke="#7ae8a0" stroke-width="2"/>
+            <path d="M36 29v3l2 2" stroke="#7ae8a0" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M28 48l2-4h12l2 4" stroke="#7ae8a0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="news-body">
+          <span class="news-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            بازدید علمی
+          </span>
+          <h3>بازدید هنرجویان از مرکز هوش مصنوعی شرکت تیوانت</h3>
+          <p>هنرجویان رشته کامپیوتر و گرافیک از کارگاه آموزشی هوش مصنوعی بازدید کردند.</p>
+          <div class="news-meta">
+            <span class="news-date">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              ۱۴۰۳/۰۸/۱۵
+            </span>
+            <a href="#" class="news-link">ادامه مطلب
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#d4652a" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="#" class="btn-primary" style="display:inline-block;">مشاهده همه اخبار</a>
+    </div>
+  </div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section class="notif-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        اطلاعیه‌ها
+      </div>
+      <h2>اطلاعیه‌های اخیر</h2>
+      <p>آخرین اطلاعیه‌های مهم مدرسه برای اولیا و دانش‌آموزان</p>
+    </div>
+    <div class="notif-list">
+
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="12" y2="15"/></svg>
+        </div>
+        <div class="notif-text">
+          <p>برنامه امتحانات نیمسال اول (دی ماه ۱۴۰۴) هنرستان عمادی در سایت هنرستان قرار گرفته شد.</p>
+          <span>۱۴۰۴/۰۹/۲۰</span>
+        </div>
+      </div>
+
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="11" y2="17"/></svg>
+        </div>
+        <div class="notif-text">
+          <p>اولیای گرامی برای دریافت کارنامه میان‌ترم می‌توانید روز چهارشنبه ۱۲ آذر تشریف بیاورید. دقت داشته باشید که کارنامه فقط به پدر یا مادر داده می‌شود.</p>
+          <span>۱۴۰۴/۰۹/۱۰</span>
+        </div>
+      </div>
+
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="notif-text">
+          <p>جهت اطلاع از نمرات روزانه، حضور و غیاب، تکالیف و ... وارد سایت هنرستان شوید. شماره همراه: کد ملی دانش‌آموز | رمز عبور: کد ملی دانش‌آموز.</p>
+          <span>۱۴۰۴/۰۸/۰۵</span>
+        </div>
+      </div>
+
+      <div class="notif-item">
+        <div class="notif-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="notif-text">
+          <p>روز سه‌شنبه ۶ آبان ۱۴۰۴ به علت برگزاری جلسه شورای دبیران، کلیه کلاس‌ها راس ساعت ۱۲:۱۵ پایان می‌یابند.</p>
+          <span>۱۴۰۴/۰۸/۰۴</span>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:32px;">
+      <a href="#" class="btn-primary" style="display:inline-block;">مشاهده همه اطلاعیه‌ها</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section class="staff-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        کادر آموزشی
+      </div>
+      <h2>معرفی کادر مدرسه</h2>
+      <p>اعضای متخصص و مجرب هنرستان زنده‌یاد عمادی</p>
+    </div>
+    <div class="staff-grid">
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>خانم فلاح‌نژاد</h3>
+        <p>مدیر هنرستان</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>خانم سهیلا بابایی</h3>
+        <p>رتبه اول استان | کامپیوتر</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>خانم رضوانه بابازاده</h3>
+        <p>رتبه اول استان | کامپیوتر</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>خانم کاملی میان‌رودی</h3>
+        <p>رتبه اول استان | آشپزی</p>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-avatar">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>خانم نیلوفر ضابطی</h3>
+        <p>رتبه دوم استان | طراحی لباس</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        ارتباط با ما
+      </div>
+      <h2>تماس و اطلاعات</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>اطلاعات تماس</h3>
+
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="c-text">
+            <strong>آدرس</strong>
+            <span>ساری، خیابان امیرمازندرانی، کوچه تبریزی، کوچه قائمی</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div class="c-text">
+            <strong>تلفن ثابت</strong>
+            <span>۰۱۱-۳۳۳۶۲۶۶۷</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div class="c-text">
+            <strong>موبایل</strong>
+            <span>۰۱۱-۳۳۳۵۹۸۴۹</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="c-text">
+            <strong>ایمیل</strong>
+            <span>emadiartschool@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div class="c-text">
+            <strong>اینستاگرام</strong>
+            <span>@emadi.art.school</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="contact-links">
+        <h3>پیوندهای مفید</h3>
+        <div class="ext-links">
+          <a href="https://mazand.medu.gov.ir/" class="ext-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <p>آموزش و پرورش استان مازندران</p>
+          </a>
+          <a href="https://medu.gov.ir/" class="ext-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <p>وزارت آموزش و پرورش</p>
+          </a>
+          <a href="https://sari1.medu.gov.ir/" class="ext-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <p>آموزش و پرورش ساری ناحیه ۱</p>
+          </a>
+          <a href="https://sari2.medu.gov.ir/" class="ext-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <p>آموزش و پرورش ساری ناحیه ۲</p>
+          </a>
+          <a href="https://doondi.ir/" class="ext-link" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <p>سامانه آموزش آنلاین دوندی</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8a045" stroke-width="2" stroke-linecap="round">
+      <circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/>
+      <circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/>
+      <path d="M12 2C6.5 2 2 6.5 2 12a10 10 0 0 0 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+    </svg>
+    هنرستان زنده‌یاد عمادی
+  </div>
+  <p>هیات امنایی ساری ناحیه ۲ | کدپستی: ۴۸۱۶۶۶۹۸۵۹</p>
+  <div class="footer-links">
+    <a href="#">صفحه اصلی</a>
+    <a href="#">کادر مدرسه</a>
+    <a href="#">اخبار</a>
+    <a href="#">گالری تصاویر</a>
+    <a href="#">دانلود اپلیکیشن</a>
+    <a href="#">ارتباط با ما</a>
+    <a href="#">استاندارد رشته‌ها</a>
+    <a href="#">فایل‌های دروس</a>
+  </div>
+  <hr class="divider">
+  <p class="copy">© ۱۴۰۵ هنرستان هیات امنایی زنده‌یاد عمادی | طراحی و توسعه توسط صدرا رایانه نوین طبرستان</p>
+</footer>
+
+</body>
+</html>

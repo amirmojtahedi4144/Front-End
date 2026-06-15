@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرامیا — پنل مدیریت تخصصی</title>
+    <!--alpine.js-->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <!--Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif']
+                    },
+                    colors: {
+                        cream: { DEFAULT: '#f7f3ec', 50: '#faf8f3', 100: '#f0ead8', 200: '#ddd3bb' },
+                        ink: { DEFAULT: '#1a1814', 50: '#f5f4f2', 100: '#e5e2db', 200: '#c5bfb3', 400: '#8a8275', 600: '#544e44', 800: '#2c2820', 900: '#1a1814' },
+                        gold: { light: '#e8d5a3', DEFAULT: '#b5904a', dark: '#7d6130', muted: '#c9b07a' },
+                        sage: { DEFAULT: '#6b7c6e', light: '#e8ede9' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #faf8f3;
+            color: #1a1814;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0ead8;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #b5904a;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body x-data="{ 
+    desktopSidebarOpen: true, 
+    mobileSidebarOpen: false,
+    userMenuOpen: false, 
+    notificationsOpen: false, 
+    activeTab: 'dashboard'
+}" class="antialiased text-ink-900 bg-cream-50">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <div x-show="mobileSidebarOpen" x-cloak @click="mobileSidebarOpen = false"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-40 bg-black/50 md:hidden"></div>
+
+        <aside id="sidebar" :class="{ 
+                   'w-64': desktopSidebarOpen, 
+                   'md:w-20': !desktopSidebarOpen,
+                   'translate-x-0': mobileSidebarOpen,
+                   'translate-x-full md:translate-x-0': !mobileSidebarOpen
+               }"
+            class="fixed inset-y-0 right-0 z-50 flex flex-col h-full transition-all duration-300 ease-in-out border-l bg-ink-900 text-ink-100 border-ink-800 md:static md:h-auto overflow-hidden">
+
+            <div class="flex items-center justify-between h-16 px-4 shrink-0 border-b border-ink-800 bg-ink-950">
+                <a href="#" class="flex items-center gap-3 overflow-hidden">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" class="shrink-0">
+                        <circle cx="16" cy="16" r="15.5" stroke="#b5904a" stroke-width="1" />
+                        <circle cx="16" cy="16" r="10" stroke="#b5904a" stroke-width="0.5" opacity="0.4" />
+                        <path d="M16 6 C9 6 5 11 5 16.5 C5 22 9 27 16 27" stroke="#b5904a" stroke-width="1.2"
+                            fill="none" />
+                        <circle cx="16" cy="16" r="2.5" fill="#b5904a" />
+                    </svg>
+                    <div class="leading-none transition-opacity duration-300"
+                        :class="desktopSidebarOpen ? 'opacity-100' : 'md:opacity-0 md:w-0'">
+                        <div class="text-sm font-semibold text-white tracking-wide whitespace-nowrap">آرامیا پنل</div>
+                        <div class="text-[8px] text-gold tracking-wider mt-0.5">MANAGEMENT</div>
+                    </div>
+                </a>
+
+                <button @click="desktopSidebarOpen = !desktopSidebarOpen"
+                    class="hidden md:block text-ink-400 hover:text-gold transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 transition-transform duration-300"
+                        :class="!desktopSidebarOpen && 'rotate-180'">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+
+                <button @click="mobileSidebarOpen = false"
+                    class="text-ink-400 hover:text-gold transition-colors md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+                <button @click="activeTab = 'dashboard'; mobileSidebarOpen = false"
+                    :class="activeTab === 'dashboard' ? 'bg-gold text-white' : 'hover:bg-ink-800 text-ink-200'"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span class="text-xs font-medium transition-opacity duration-200"
+                        :class="desktopSidebarOpen ? 'opacity-100 block' : 'md:opacity-0 md:hidden'">داشبورد اصلی</span>
+                </button>
+
+                <button @click="activeTab = 'content'; mobileSidebarOpen = false"
+                    :class="activeTab === 'content' ? 'bg-gold text-white' : 'hover:bg-ink-800 text-ink-200'"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                    </svg>
+                    <span class="text-xs font-medium transition-opacity duration-200"
+                        :class="desktopSidebarOpen ? 'opacity-100 block' : 'md:opacity-0 md:hidden'">مدیریت
+                        پادکست‌ها</span>
+                </button>
+
+                <button @click="activeTab = 'users'; mobileSidebarOpen = false"
+                    :class="activeTab === 'users' ? 'bg-gold text-white' : 'hover:bg-ink-800 text-ink-200'"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-2.533-4.65l-.221-.075.21-.87a.75.75 0 00-.011-.476 11.454 11.454 0 00-6.293-6.293.75.75 0 00-.476-.011l-.872.21-.075-.221a4.125 4.125 0 00-4.65-2.533 9.336 9.336 0 00-.952 4.121 9.38 9.38 0 00.373 2.625c.534.017 1.05.17 1.512.445v.082a4.116 4.116 0 01.325 1.543l.033.424a5.952 5.952 0 01.444 2.12c.014.283.02.568.016.852H15z" />
+                    </svg>
+                    <span class="text-xs font-medium transition-opacity duration-200"
+                        :class="desktopSidebarOpen ? 'opacity-100 block' : 'md:opacity-0 md:hidden'">کاربران ویژه</span>
+                </button>
+
+                <button @click="activeTab = 'analytics'; mobileSidebarOpen = false"
+                    :class="activeTab === 'analytics' ? 'bg-gold text-white' : 'hover:bg-ink-800 text-ink-200'"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 shrink-0">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                    </svg>
+                    <span class="text-xs font-medium transition-opacity duration-200"
+                        :class="desktopSidebarOpen ? 'opacity-100 block' : 'md:opacity-0 md:hidden'">گزارش‌های
+                        آماری</span>
+                </button>
+            </nav>
+
+            <div class="p-3 border-t border-ink-800 bg-ink-950 flex items-center gap-3 overflow-hidden shrink-0">
+                <div
+                    class="w-8 h-8 rounded-full bg-gold flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    ام
+                </div>
+                <div class="leading-tight transition-opacity duration-300"
+                    :class="desktopSidebarOpen ? 'opacity-100' : 'md:opacity-0 md:w-0'">
+                    <div class="text-xs font-medium text-white whitespace-nowrap">الناز محمدی</div>
+                    <div class="text-[10px] text-ink-400 whitespace-nowrap">مدیر ارشد محتوا</div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+
+            <header
+                class="h-16 bg-white border-b border-ink-100 flex items-center justify-between px-4 md:px-6 z-30 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button @click="mobileSidebarOpen = true"
+                        class="md:hidden p-2 text-ink-600 hover:text-ink-900 rounded-lg hover:bg-cream-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    <h2 class="text-base font-semibold text-ink-900"
+                        x-text="activeTab === 'dashboard' ? 'داشبورد اصلی' : activeTab === 'content' ? 'مدیریت پادکست‌ها' : activeTab === 'users' ? 'کاربران ویژه' : 'گزارش‌های آماری'">
+                    </h2>
+                </div>
+
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="relative" @click.outside="notificationsOpen = false">
+                        <button @click="notificationsOpen = !notificationsOpen"
+                            class="p-2 text-ink-600 hover:text-gold rounded-full hover:bg-cream-50 relative transition-colors">
+                            <span class="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                            </svg>
+                        </button>
+                        <div x-show="notificationsOpen" x-cloak x-transition
+                            class="absolute left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-ink-100 py-2 text-xs text-ink-700 z-50">
+                            <div class="px-4 py-2 border-b border-ink-100 font-semibold text-ink-900">اعلان‌های جدید
+                            </div>
+                            <a href="#" class="block px-4 py-3 hover:bg-cream-50 border-b border-ink-50">
+                                <div class="font-medium text-ink-900">پرداخت موفق عضویت</div>
+                                <div class="text-[10px] text-ink-400 mt-0.5">۲ دقیقه پیش — توسط کاربری حمید مهدوی</div>
+                            </a>
+                            <a href="#" class="block px-4 py-3 hover:bg-cream-50">
+                                <div class="font-medium text-ink-900">تأیید پادکست جدید</div>
+                                <div class="text-[10px] text-ink-400 mt-0.5">۱ ساعت پیش — پادکست «آرامش شبانه ۳» با
+                                    موفقیت بارگذاری شد.</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative" @click.outside="userMenuOpen = false">
+                        <button @click="userMenuOpen = !userMenuOpen"
+                            class="flex items-center gap-2 focus:outline-none">
+                            <div
+                                class="w-8 h-8 rounded-full bg-cream-200 border border-gold flex items-center justify-center text-ink-900 font-bold text-xs">
+                                ان
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-3 h-3 text-ink-400 hidden sm:block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="userMenuOpen" x-cloak x-transition
+                            class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-ink-100 py-1 text-xs text-ink-700 z-50">
+                            <a href="#" class="block px-4 py-2.5 hover:bg-cream-50">تنظیمات حساب کاربر</a>
+                            <a href="#" class="block px-4 py-2.5 hover:bg-cream-50">پشتیبانی سیستم</a>
+                            <hr class="border-ink-100 my-1">
+                            <a href="#" class="block px-4 py-2.5 hover:bg-cream-50 text-red-600 font-medium">خروج از
+                                پنل</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-cream-50/40">
+
+                <div x-show="activeTab === 'dashboard'" class="space-y-6" x-transition>
+                    <div
+                        class="bg-ink-900 text-white p-5 md:p-6 rounded-2xl relative overflow-hidden flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div class="z-10">
+                            <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">روز بخیر، الناز عزیز</h3>
+                            <p class="text-xs md:text-sm text-ink-200 font-light max-w-xl">آخرین مانیتورینگ سیستم نشان
+                                می‌دهد میزان تعامل کاربران با مدیتیشن‌های صوتی جدید نسبت به هفته گذشته ۱۴٪ افزایش یافته
+                                است.</p>
+                        </div>
+                        <div class="shrink-0 z-10 w-full sm:w-auto">
+                            <button @click="activeTab = 'content'"
+                                class="w-full sm:w-auto bg-gold text-white text-xs font-medium px-5 py-2.5 rounded-xl hover:bg-amber-700 transition-colors whitespace-nowrap">
+                                افزودن پادکست جدید
+                            </button>
+                        </div>
+                        <div class="absolute inset-0 opacity-10 pointer-events-none">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                <circle cx="90" cy="50" r="30" stroke="#b5904a" stroke-width="0.5" fill="none" />
+                                <circle cx="90" cy="50" r="20" stroke="#b5904a" stroke-width="0.5" fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div
+                            class="bg-white p-5 rounded-2xl border border-ink-100 shadow-sm flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] font-bold text-ink-400 tracking-wider block uppercase mb-1">کل
+                                    کاربران فعال</span>
+                                <span class="text-2xl font-light text-ink-900">۱۲,۴۸۰</span>
+                                <span class="text-emerald-600 text-[11px] font-medium mt-1 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" class="w-3 h-3">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                    </svg>
+                                    +۸.۲٪ این ماه
+                                </span>
+                            </div>
+                            <div class="p-3 bg-cream-100 text-gold rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                                </svg>
+
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-2xl border border-ink-100 shadow-sm flex justify-between items-start">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-ink-400 tracking-wider block uppercase mb-1">دقایق
+                                    پخش پادکست</span>
+                                <span class="text-2xl font-light text-ink-900">۹۴,۲۰۰</span>
+                                <span class="text-emerald-600 text-[11px] font-medium mt-1 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" class="w-3 h-3">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                    </svg>
+                                    +۱۴.۵٪ امروز
+                                </span>
+                            </div>
+                            <div class="p-3 bg-cream-100 text-gold rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-2xl border border-ink-100 shadow-sm flex justify-between items-start">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-ink-400 tracking-wider block uppercase mb-1">درآمد
+                                    ماه جاری</span>
+                                <span class="text-2xl font-light text-ink-900">۸۴.۵ م</span>
+                                <span class="text-emerald-600 text-[11px] font-medium mt-1 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor" class="w-3 h-3">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                                    </svg>
+                                    +۳.۲٪ هدف
+                                </span>
+                            </div>
+                            <div class="p-3 bg-cream-100 text-gold rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-5 rounded-2xl border border-ink-100 shadow-sm flex justify-between items-start">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-ink-400 tracking-wider block uppercase mb-1">محتوای
+                                    صوتی فعال</span>
+                                <span class="text-2xl font-light text-ink-900">۵۱۲ قطعه</span>
+                                <span class="text-ink-400 text-[11px] font-medium block mt-1">بروزرسانی مداوم</span>
+                            </div>
+                            <div class="p-3 bg-cream-100 text-gold rounded-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-2xl border border-ink-100 shadow-sm lg:col-span-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                                <h4 class="text-xs font-semibold text-ink-900">نمودار رشد هفتگی مخاطبان پلتفرم</h4>
+                                <span class="text-[11px] text-gold font-medium">مجموع داده های ۷ روز اخیر</span>
+                            </div>
+                            <div class="w-full h-52 bg-cream-50/30 rounded-2xl relative p-4">
+                                <svg class="w-full h-full" viewBox="0 0 500 150" preserveAspectRatio="none">
+                                    <line x1="0" y1="37.5" x2="500" y2="37.5" stroke="#e5e2db" stroke-width="0.5"
+                                        stroke-dasharray="4" />
+                                    <line x1="0" y1="75" x2="500" y2="75" stroke="#e5e2db" stroke-width="0.5"
+                                        stroke-dasharray="4" />
+                                    <line x1="0" y1="112.5" x2="500" y2="112.5" stroke="#e5e2db" stroke-width="0.5"
+                                        stroke-dasharray="4" />
+
+                                    <path d="M 0 130 Q 80 90 160 110 T 320 50 T 500 20 L 500 150 L 0 150 Z"
+                                        fill="#b5904a" fill-opacity="0.08" />
+                                    <path d="M 0 130 Q 80 90 160 110 T 320 50 T 500 20" fill="none" stroke="#b5904a"
+                                        stroke-width="2" />
+
+                                    <circle cx="160" cy="110" r="4" fill="#1a1814" stroke="#b5904a"
+                                        stroke-width="1.5" />
+                                    <circle cx="320" cy="50" r="4" fill="#1a1814" stroke="#b5904a" stroke-width="1.5" />
+                                    <circle cx="500" cy="20" r="4" fill="#1a1814" stroke="#b5904a" stroke-width="1.5" />
+                                </svg>
+                                <div
+                                    class="flex justify-between text-[10px] text-ink-400 mt-3 px-1 overflow-x-auto gap-2">
+                                    <span>شنبه</span><span>یکشنبه</span><span>دوشنبه</span><span>سه‌شنبه</span><span>چهارشنبه</span><span>پنجشنبه</span><span>جمعه</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border border-ink-100 shadow-sm">
+                            <h4 class="text-xs font-semibold text-ink-900 mb-4">دسته‌بندی‌های محبوب این هفته</h4>
+                            <div class="space-y-5">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1.5">
+                                        <span class="text-ink-700">مدیتیشن کاهش استرس</span>
+                                        <span class="text-ink-900 font-semibold">۴۲٪</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-cream-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gold" style="width: 42%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1.5">
+                                        <span class="text-ink-700">پادکست خواب عمیق</span>
+                                        <span class="text-ink-900 font-semibold">۳۵٪</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-cream-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-ink-600" style="width: 35%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-1.5">
+                                        <span class="text-ink-700">موسیقی تمرکز زنده</span>
+                                        <span class="text-ink-900 font-semibold">۲۳٪</span>
+                                    </div>
+                                    <div class="w-full h-1.5 bg-cream-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-sage" style="width: 23%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-show="activeTab === 'content'"
+                    class="bg-white rounded-2xl border border-ink-100 shadow-sm p-4 md:p-6" x-transition>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <div>
+                            <h3 class="text-sm font-semibold text-ink-900">لیست پادکست‌های منتشر شده آرامیا</h3>
+                            <p class="text-xs text-ink-400 mt-1">تغییر وضعیت، ویرایش جزئیات پادکست‌ها یا بارگذاری مستقیم
+                                فایل جدید.</p>
+                        </div>
+                        <button
+                            class="w-full sm:w-auto bg-ink-900 text-white text-xs font-medium px-5 py-2.5 rounded-xl hover:bg-ink-800 transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            افزودن ترک صوتی جدید
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-ink-100">
+                        <table class="w-full text-right border-collapse text-xs min-w-160">
+                            <thead>
+                                <tr class="bg-cream-50 text-ink-700 uppercase tracking-wider border-b border-ink-100">
+                                    <th class="p-4 font-semibold">عنوان ترک صوتی</th>
+                                    <th class="p-4 font-semibold">استاد / مدرس</th>
+                                    <th class="p-4 font-semibold">دسته‌بندی</th>
+                                    <th class="p-4 font-semibold">مدت زمان</th>
+                                    <th class="p-4 font-semibold">وضعیت نمایش</th>
+                                    <th class="p-4 font-semibold text-left">عملیات</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-ink-100 text-ink-600">
+                                <tr class="hover:bg-cream-50/60 transition-colors">
+                                    <td class="p-4 font-medium text-ink-900">آرامش ذهن در ۵ دقیقه</td>
+                                    <td class="p-4">دکتر سهراب علوی</td>
+                                    <td class="p-4"><span
+                                            class="bg-cream-100 text-gold px-3 py-1 rounded-full text-[11px]">مدیتیشن
+                                            روزانه</span></td>
+                                    <td class="p-4 font-mono text-left" dir="ltr">05:24</td>
+                                    <td class="p-4"><span
+                                            class="text-emerald-600 font-medium flex items-center gap-1.5"><span
+                                                class="w-2 h-2 bg-emerald-600 rounded-full"></span>منتشر شده</span></td>
+                                    <td class="p-4 text-left">
+                                        <button class="text-ink-400 hover:text-gold mx-2 text-sm">ویرایش</button>
+                                        <button class="text-red-500 hover:text-red-700 mx-2 text-sm">حذف</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-cream-50/60 transition-colors">
+                                    <td class="p-4 font-medium text-ink-900">مدیریت اضطراب محیط کار</td>
+                                    <td class="p-4">استاد نیلوفر رحیمی</td>
+                                    <td class="p-4"><span
+                                            class="bg-ink-100 text-ink-700 px-3 py-1 rounded-full text-[11px]">کاهش
+                                            استرس</span></td>
+                                    <td class="p-4 font-mono text-left" dir="ltr">18:40</td>
+                                    <td class="p-4"><span
+                                            class="text-emerald-600 font-medium flex items-center gap-1.5"><span
+                                                class="w-2 h-2 bg-emerald-600 rounded-full"></span>منتشر شده</span></td>
+                                    <td class="p-4 text-left">
+                                        <button class="text-ink-400 hover:text-gold mx-2 text-sm">ویرایش</button>
+                                        <button class="text-red-500 hover:text-red-700 mx-2 text-sm">حذف</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-cream-50/60 transition-colors">
+                                    <td class="p-4 font-medium text-ink-900">فرکانس ییلاقات مازندران</td>
+                                    <td class="p-4">صداهای طبیعت</td>
+                                    <td class="p-4"><span
+                                            class="bg-cream-100 text-gold px-3 py-1 rounded-full text-[11px]">صداهای
+                                            محیطی</span></td>
+                                    <td class="p-4 font-mono text-left" dir="ltr">45:00</td>
+                                    <td class="p-4"><span
+                                            class="text-amber-600 font-medium flex items-center gap-1.5"><span
+                                                class="w-2 h-2 bg-amber-500 rounded-full"></span>در انتظار تایید</span>
+                                    </td>
+                                    <td class="p-4 text-left">
+                                        <button class="text-ink-400 hover:text-gold mx-2 text-sm">ویرایش</button>
+                                        <button class="text-red-500 hover:text-red-700 mx-2 text-sm">حذف</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div x-show="activeTab === 'users'" class="bg-white rounded-2xl border border-ink-100 shadow-sm p-6"
+                    x-transition>
+                    <h3 class="text-sm font-semibold text-ink-900 mb-2">لیست کاربران پریمیوم و اعضای ویژه</h3>
+                    <p class="text-xs text-ink-400 mb-6">لیست افرادی که اشتراک فعال ویژه پلتفرم آرامیا را تهیه کرده‌اند.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                            class="border border-ink-100 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-cream-50/30 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-2xl bg-gold/10 text-gold flex items-center justify-center font-bold text-lg shrink-0">
+                                    ع</div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-ink-900">علی علیزاده</h4>
+                                    <p class="text-xs text-ink-400">ali@example.com</p>
+                                </div>
+                            </div>
+                            <span
+                                class="w-fit bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-2xl text-xs font-medium">اشتراک
+                                ۳ ماهه فعال</span>
+                        </div>
+                        <div
+                            class="border border-ink-100 p-5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-cream-50/30 hover:bg-cream-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-2xl bg-gold/10 text-gold flex items-center justify-center font-bold text-lg shrink-0">
+                                    س</div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-ink-900">سارا کریمی</h4>
+                                    <p class="text-xs text-ink-400">sara@example.com</p>
+                                </div>
+                            </div>
+                            <span
+                                class="w-fit bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-2xl text-xs font-medium">اشتراک
+                                سالانه فعال</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div x-show="activeTab === 'analytics'" class="bg-white rounded-2xl border border-ink-100 shadow-sm p-6"
+                    x-transition>
+                    <h3 class="text-sm font-semibold text-ink-900 mb-2">گزارشات تکمیلی زیرساخت</h3>
+                    <p class="text-xs text-ink-400 mb-6">آمار دقیق سخت‌افزاری سرورهای بارگذاری ترک‌های صوتی پلتفرم.</p>
+                    <div class="space-y-6 max-w-md">
+                        <div>
+                            <div class="flex justify-between text-xs mb-2"><span>فضای دیسک کل سرور</span><span
+                                    class="font-medium">۷۲٪</span></div>
+                            <div class="w-full h-2.5 bg-cream-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gold rounded-full" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs mb-2"><span>پهنای باند مصرفی پادکست‌ها</span><span
+                                    class="font-medium">۴۵٪</span></div>
+                            <div class="w-full h-2.5 bg-cream-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-sage rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

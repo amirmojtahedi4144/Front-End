@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>آرامیا - آرامش ذهن، قدرت زندگی</title>
+<!--Google Font-->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<!--Tailwind-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
+      colors: {
+        bg:    '#f8f6f2',
+        bg2:   '#ffffff',
+        bg3:   '#f0ede8',
+        t1:    '#1a1714',
+        t2:    '#5c5853',
+        t3:    '#9b968f',
+        ac:    '#6c5ce7',
+        ac2:   '#0984e3',
+        acl:   '#ede9ff',
+        acl2:  '#e3f0ff',
+        bdr:   '#e8e3dc',
+        bdr2:  '#d4cdc4',
+        grn:   '#00b894',
+        grnl:  '#e0f7f2',
+        pnk:   '#e84393',
+        pnkl:  '#fce8f4',
+        orn:   '#fd7e14',
+        ornl:  '#fff0e6',
+        tel:   '#0abde3',
+        tell:  '#e0f7fd',
+      },
+      keyframes: {
+        blink:  { '0%,100%': {opacity:'1'}, '50%': {opacity:'.3'} },
+        wave:   { '0%,100%': {transform:'scaleY(.3)'}, '50%': {transform:'scaleY(1)'} },
+        floatY: { '0%,100%': {transform:'translateY(0)'}, '50%': {transform:'translateY(-8px)'} },
+      },
+      animation: {
+        blink:  'blink 2s infinite',
+        wave:   'wave 1.4s ease-in-out infinite',
+        floatY: 'floatY 4s ease-in-out infinite',
+        floatY2:'floatY 4s ease-in-out infinite 2s',
+      },
+    }
+  }
+}
+</script>
+<style>
+body {
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#6c5ce7, #0984e3);
+    border-radius: 3px;
+}
+
+.grad-text {
+    background: linear-gradient(135deg, #6c5ce7, #0984e3); background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.grad-bg {
+    background: linear-gradient(135deg, #6c5ce7, #0984e3);
+}
+
+.grad-bg-r {
+    background: linear-gradient(135deg, #e84393, #fd7e14);
+}
+
+.grad-bg-g {
+    background: linear-gradient(135deg, #00b894, #0abde3);
+}
+
+.svc-card:hover {
+    transform: translateY(-4px);
+}
+
+.plan-card:hover {
+    transform: translateY(-4px);
+}
+
+.testi-card:hover {
+    transform: translateY(-4px);
+}
+
+.faq-a { 
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out; 
+}
+
+.faq-item.open .faq-a { 
+  max-height: 200px; 
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-icon {
+  transition: transform 0.3s ease;
+}
+
+.wave-bar { 
+    animation: wave 1.4s ease-in-out infinite; 
+    flex: 1; 
+    border-radius: 3px; 
+    background: linear-gradient(#6c5ce7, #0984e3); 
+}
+
+.progress-fill { 
+    height: 100%; 
+    width: 62%; 
+    background: linear-gradient(90deg, #6c5ce7, #0984e3); 
+    border-radius: 3px; 
+}
+</style>
+</head>
+<body class="bg-bg text-t1 overflow-x-hidden leading-relaxed font-vazir">
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 bg-[rgba(248,246,242,0.92)] backdrop-blur-xl border-b border-bdr">
+  <div class="max-w-6xl mx-auto px-10 py-4 flex items-center justify-between gap-6">
+    <a href="#" class="flex items-center gap-2.5 no-underline">
+      <div class="w-9 h-9 grad-bg rounded-xl flex items-center justify-center shadow-[0_4px_12px_rgba(108,92,231,0.3)]">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C9 3 6.5 5.5 6.5 8.5c0 1.8.8 3.4 2.1 4.5V15h6.8v-2c1.3-1.1 2.1-2.7 2.1-4.5C17.5 5.5 15 3 12 3z" fill="white" opacity=".95"/><path d="M9.5 15v.8a2.5 2.5 0 005 0V15h-5z" fill="white" opacity=".75"/></svg>
+      </div>
+      <span class="text-xl font-black grad-text">آرامیا</span>
+    </a>
+    <ul class="hidden md:flex gap-1 list-none">
+      <li><a href="#" class="text-t2 no-underline text-sm px-4 py-1.5 rounded-full transition hover:text-ac hover:bg-acl font-medium">خدمات</a></li>
+      <li><a href="#" class="text-t2 no-underline text-sm px-4 py-1.5 rounded-full transition hover:text-ac hover:bg-acl font-medium">محتوا</a></li>
+      <li><a href="#" class="text-t2 no-underline text-sm px-4 py-1.5 rounded-full transition hover:text-ac hover:bg-acl font-medium">مشاوران</a></li>
+      <li><a href="#" class="text-t2 no-underline text-sm px-4 py-1.5 rounded-full transition hover:text-ac hover:bg-acl font-medium">پلن‌ها</a></li>
+      <li><a href="#" class="text-t2 no-underline text-sm px-4 py-1.5 rounded-full transition hover:text-ac hover:bg-acl font-medium">درباره ما</a></li>
+    </ul>
+    <div class="flex items-center gap-2.5">
+      <button class="hidden md:block bg-transparent text-t2 border border-bdr2 px-5 py-2 rounded-full text-sm font-semibold transition hover:border-ac hover:text-ac">ورود</button>
+      <button class="grad-bg text-white border-0 px-5 py-2 rounded-full text-sm font-bold shadow-[0_4px_15px_rgba(108,92,231,0.3)] transition hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(108,92,231,0.4)]">شروع رایگان</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="min-h-screen flex items-center pt-36 pb-24 px-10 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[.025] pointer-events-none" style="background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%224%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E')"></div>
+  <div class="absolute w-145 h-145 rounded-full pointer-events-none blur-[60px] bg-[rgba(108,92,231,0.07)] -top-52 -left-36"></div>
+  <div class="absolute w-127 h-128 rounded-full pointer-events-none blur-[60px] bg-[rgba(9,132,227,0.06)] -bottom-52 -right-24"></div>
+  <div class="absolute w-72 h-72 rounded-full pointer-events-none blur-[60px] bg-[rgba(0,184,148,0.06)] top-1/2 right-1/5"></div>
+
+  <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-20 items-center relative z-10">
+    <div>
+      <div class="inline-flex items-center gap-2 bg-white border border-bdr rounded-full px-4 py-2 text-xs text-t2 mb-7 shadow-[0_2px_20px_rgba(108,92,231,0.08)]">
+        <div class="w-1.5 h-1.5 bg-grn rounded-full animate-blink"></div>
+        بیش از ۵,۰۰۰ نفر از آرامیا استفاده می‌کنند
+      </div>
+      <h1 class="text-4xl lg:text-5xl font-black leading-tight tracking-tight mb-5">
+        ذهن آرام،<br/>
+        <span class="grad-text">زندگی قدرتمند</span>
+      </h1>
+      <p class="text-t2 leading-loose mb-10 max-w-xl">
+        با آرامیا، سفر خود را به سوی آرامش ذهنی و رشد شخصی آغاز کنید.
+        محتوای علمی، مشاوره تخصصی و ابزارهای هوشمند همیشه در کنار شما هستند.
+      </p>
+      <div class="flex gap-3 flex-wrap">
+        <button class="flex items-center gap-2 px-8 py-3.5 rounded-full grad-bg text-white font-bold text-base shadow-[0_6px_24px_rgba(108,92,231,0.35)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_32px_rgba(108,92,231,0.45)]">
+          شروع رایگان
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="flex items-center gap-2 px-8 py-3.5 rounded-full bg-white text-t1 border border-bdr2 shadow-[0_2px_20px_rgba(108,92,231,0.08)] font-bold text-base transition hover:border-ac hover:text-ac">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+          مشاهده معرفی
+        </button>
+      </div>
+      <div class="flex items-center gap-4 mt-10">
+        <div class="flex">
+          <div class="w-8 h-8 rounded-full border-2 border-white -ml-2.5 flex items-center justify-center text-xs font-bold text-white grad-bg">س</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white -ml-2.5 flex items-center justify-center text-xs font-bold text-white grad-bg-r">ع</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white -ml-2.5 flex items-center justify-center text-xs font-bold text-white grad-bg-g">ن</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white -ml-2.5 flex items-center justify-center text-xs font-bold text-white" style="background:linear-gradient(135deg,#fd7e14,#e84393)">م</div>
+        </div>
+        <div class="text-sm text-t2"><strong class="text-t1 font-bold">+۵,۰۰۰ نفر</strong> به آرامیا اعتماد کردند</div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="bg-white rounded-3xl p-9 shadow-[0_20px_60px_rgba(108,92,231,0.12)] border border-bdr">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-11 h-11 rounded-xl bg-acl flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="11" r="4" stroke="#6c5ce7" stroke-width="1.8"/><path d="M5 11c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round"/><path d="M12 15v4M9 19h6" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="font-bold text-sm">مدیتیشن صبحگاهی</div>
+            <div class="text-xs text-t3">۱۲ دقیقه · آرامش ذهن</div>
+          </div>
+          <div class="mr-auto w-9 h-9 rounded-full grad-bg flex items-center justify-center shadow-[0_4px_12px_rgba(108,92,231,0.3)]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 h-12 my-5">
+          <div class="wave-bar" style="animation-delay:0s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.15s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.3s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.45s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.6s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.75s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:.9s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:1.05s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:1.2s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:1.35s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:1.5s;height:100%"></div>
+          <div class="wave-bar" style="animation-delay:1.65s;height:100%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-t3 mb-1.5"><span>۷:۲۴</span><span>۱۲:۰۰</span></div>
+        <div class="h-1 bg-bg3 rounded overflow-hidden"><div class="progress-fill"></div></div>
+        <div class="flex gap-2 mt-5 flex-wrap">
+          <span class="bg-acl text-ac text-xs font-bold px-3 py-1 rounded-full">آرامش</span>
+          <span class="bg-grnl text-grn text-xs font-bold px-3 py-1 rounded-full">تمرکز</span>
+          <span class="bg-acl2 text-ac2 text-xs font-bold px-3 py-1 rounded-full">خواب بهتر</span>
+        </div>
+      </div>
+
+      <!-- Float 1 -->
+      <div class="absolute -top-5 -right-5 bg-white rounded-2xl px-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.1)] border border-bdr flex items-center gap-3 animate-floatY">
+        <div class="w-9 h-9 rounded-xl bg-grnl flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#00b894" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><div class="font-bold text-sm">۹۴٪ رضایت</div><div class="text-xs text-t3">از نتایج پلتفرم</div></div>
+      </div>
+      <!-- Float 2 -->
+      <div class="absolute -bottom-5 -left-5 bg-white rounded-2xl px-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.1)] border border-bdr flex items-center gap-3 animate-floatY2">
+        <div class="w-9 h-9 rounded-xl bg-ornl flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#fd7e14"/></svg>
+        </div>
+        <div><div class="font-bold text-sm">۴.۹ از ۵</div><div class="text-xs text-t3">امتیاز کاربران</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="bg-white">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-x-reverse divide-bdr border-t border-bdr">
+    <div class="py-10 px-8 text-center"><div class="text-4xl font-black grad-text leading-none">+۵,۰۰۰</div><div class="text-sm text-t2 mt-2 font-medium">کاربر فعال</div></div>
+    <div class="py-10 px-8 text-center"><div class="text-4xl font-black grad-text leading-none">+۲۰۰</div><div class="text-sm text-t2 mt-2 font-medium">محتوای تخصصی</div></div>
+    <div class="py-10 px-8 text-center"><div class="text-4xl font-black grad-text leading-none">+۳۰</div><div class="text-sm text-t2 mt-2 font-medium">مشاور متخصص</div></div>
+    <div class="py-10 px-8 text-center"><div class="text-4xl font-black grad-text leading-none">۹۴٪</div><div class="text-sm text-t2 mt-2 font-medium">رضایت کاربران</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="py-24 px-10 bg-bg">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-[380px_1fr] gap-16 items-start">
+      <div class="md:sticky md:top-32">
+        <div class="inline-flex items-center gap-1.5 bg-acl text-ac rounded-full px-3.5 py-1 text-xs font-bold mb-3.5 tracking-wide">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/></svg>
+          خدمات ما
+        </div>
+        <h2 class="text-4xl font-black leading-tight tracking-tight mb-3.5">همه چیز برای<br/><span class="grad-text">آرامش شما</span></h2>
+        <p class="text-t2 leading-loose max-w-sm">مجموعه‌ای جامع از خدمات سلامت روان، محتوای آموزشی و ابزارهای هوشمند برای بهبود کیفیت زندگی روزمره</p>
+        <button class="mt-8 flex items-center gap-2 px-8 py-3.5 rounded-full grad-bg text-white font-bold shadow-[0_6px_24px_rgba(108,92,231,0.35)] transition hover:-translate-y-0.5">مشاهده همه خدمات</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- svc 1 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-acl flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="11" r="4" stroke="#6c5ce7" stroke-width="1.8"/><path d="M5 11c0-3.87 3.13-7 7-7s7 3.13 7 7" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round"/><path d="M12 15v4M9 19h6" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">پادکست آرامش</h3>
+          <p class="text-sm text-t2 leading-relaxed">محتوای صوتی علمی برای کاهش استرس و بهبود خواب</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-acl text-ac mt-3.5">+۱۲۰ قسمت</span>
+        </div>
+        <!-- svc 2 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-acl2 flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="15" height="14" rx="2" stroke="#0984e3" stroke-width="1.8"/><path d="M17 9l5-3v12l-5-3V9z" stroke="#0984e3" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">ویدیوهای آموزشی</h3>
+          <p class="text-sm text-t2 leading-relaxed">آموزش‌های تصویری از روانشناسان معتبر</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-acl2 text-ac2 mt-3.5">HD کیفیت</span>
+        </div>
+        <!-- svc 3 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-grnl flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3c-1.5 3-4 4.5-4 7.5 0 2.5 1.8 4.5 4 4.5s4-2 4-4.5C16 7.5 13.5 6 12 3z" stroke="#00b894" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 15v3M8 20c0-1.1 1.8-2 4-2s4 .9 4 2" stroke="#00b894" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">مدیتیشن هدایت‌شده</h3>
+          <p class="text-sm text-t2 leading-relaxed">تمرینات ذهن‌آگاهی و تنفس عمیق روزانه</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-grnl text-grn mt-3.5">هر روز جدید</span>
+        </div>
+        <!-- svc 4 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-pnkl flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="#e84393" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10h8M8 13h5" stroke="#e84393" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">مشاوره آنلاین</h3>
+          <p class="text-sm text-t2 leading-relaxed">ارتباط مستقیم با روانشناسان مجرب</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-pnkl text-pnk mt-3.5">تا ۲۴ ساعته</span>
+        </div>
+        <!-- svc 5 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-ornl flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="#fd7e14" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 2v6h6M8 13h8M8 17h5" stroke="#fd7e14" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">مقالات تخصصی</h3>
+          <p class="text-sm text-t2 leading-relaxed">محتوای علمی به زبان ساده و کاربردی</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-ornl text-orn mt-3.5">هفتگی</span>
+        </div>
+        <!-- svc 6 -->
+        <div class="svc-card bg-white border border-bdr rounded-2xl p-7 transition duration-300 cursor-pointer hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)] hover:border-[rgba(108,92,231,0.3)]">
+          <div class="w-12 h-12 rounded-xl bg-tell flex items-center justify-center mb-4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="#0abde3" stroke-width="1.8"/><path d="M8 7V5a4 4 0 018 0v2" stroke="#0abde3" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="13" r="1.5" fill="#0abde3"/><circle cx="15" cy="13" r="1.5" fill="#0abde3"/><path d="M9 17c.8.8 5.2.8 6 0" stroke="#0abde3" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-bold mb-2">دستیار هوشمند AI</h3>
+          <p class="text-sm text-t2 leading-relaxed">راهنمایی اولیه سلامت روان با هوش مصنوعی</p>
+          <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-tell text-tel mt-3.5">۲۴/۷</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-24 px-10 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-1.5 bg-acl text-ac rounded-full px-3.5 py-1 text-xs font-bold mb-3.5">چطور کار می‌کند؟</div>
+      <h2 class="text-4xl font-black leading-tight tracking-tight mb-3.5">در ۳ قدم شروع کنید</h2>
+      <p class="text-t2 leading-loose max-w-lg mx-auto">آغاز سفر آرامش با آرامیا ساده‌ترین کاری است که می‌توانید برای خود انجام دهید</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      <div class="text-center px-7 py-10 bg-bg rounded-3xl border border-bdr">
+        <div class="w-12 h-12 rounded-full grad-bg text-white text-xl font-black flex items-center justify-center mx-auto mb-6 shadow-[0_6px_20px_rgba(108,92,231,0.3)]">۱</div>
+        <div class="w-16 h-16 rounded-2xl bg-acl flex items-center justify-center mx-auto mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="7" r="4" stroke="#6c5ce7" stroke-width="1.8"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-2.5">پروفایل خود را بسازید</h3>
+        <p class="text-sm text-t2 leading-relaxed">در کمتر از ۲ دقیقه ثبت‌نام کنید و نیازها و اهداف خود را مشخص کنید</p>
+      </div>
+      <div class="text-center px-7 py-10 bg-bg rounded-3xl border border-bdr">
+        <div class="w-12 h-12 rounded-full grad-bg text-white text-xl font-black flex items-center justify-center mx-auto mb-6 shadow-[0_6px_20px_rgba(108,92,231,0.3)]">۲</div>
+        <div class="w-16 h-16 rounded-2xl bg-grnl flex items-center justify-center mx-auto mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#00b894" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#00b894" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-2.5">برنامه شخصی دریافت کنید</h3>
+        <p class="text-sm text-t2 leading-relaxed">هوش مصنوعی ما یک مسیر رشد منحصربه‌فرد بر اساس نیازهای شما طراحی می‌کند</p>
+      </div>
+      <div class="text-center px-7 py-10 bg-bg rounded-3xl border border-bdr">
+        <div class="w-12 h-12 rounded-full grad-bg text-white text-xl font-black flex items-center justify-center mx-auto mb-6 shadow-[0_6px_20px_rgba(108,92,231,0.3)]">۳</div>
+        <div class="w-16 h-16 rounded-2xl bg-acl2 flex items-center justify-center mx-auto mb-5">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#0984e3" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="text-lg font-bold mb-2.5">تغییر را احساس کنید</h3>
+        <p class="text-sm text-t2 leading-relaxed">با استفاده روزانه، بهبود واقعی در آرامش ذهنی، خواب و کیفیت زندگی را تجربه کنید</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="py-24 px-10 bg-bg">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-1.5 bg-acl text-ac rounded-full px-3.5 py-1 text-xs font-bold mb-3.5">پلن‌های اشتراک</div>
+      <h2 class="text-4xl font-black leading-tight tracking-tight mb-3.5">سرمایه‌گذاری در <span class="grad-text">سلامت روان</span></h2>
+      <p class="text-t2 leading-loose">بدون قرارداد. هر زمان که خواستید لغو کنید.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto mt-14">
+      <!-- free -->
+      <div class="plan-card bg-white border border-bdr rounded-3xl p-9 transition duration-300 hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)]">
+        <div class="text-xs font-bold text-t3 uppercase tracking-widest mb-2">رایگان</div>
+        <div class="text-5xl font-black leading-none mt-3 mb-1 tracking-tight">۰<sup class="text-base font-semibold">تومان</sup></div>
+        <div class="text-sm text-t3 mb-5">برای همیشه رایگان</div>
+        <div class="h-px bg-bdr mb-5"></div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>دسترسی به ۲۰ پادکست رایگان</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>۵ ویدیوی آموزشی</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>دستیار هوشمند محدود</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>مقالات پایه</div>
+        <div class="mt-6"><button class="w-full py-3 rounded-full bg-transparent border border-bdr2 text-t1 font-bold text-sm transition hover:border-ac hover:text-ac">شروع رایگان</button></div>
+      </div>
+      <!-- premium -->
+      <div class="plan-card bg-white border-2 border-ac rounded-3xl p-9 transition duration-300 shadow-[0_12px_40px_rgba(108,92,231,0.12)] relative">
+        <div class="absolute -top-3.5 right-7 grad-bg text-white text-xs font-extrabold px-4 py-1 rounded-full shadow-[0_4px_12px_rgba(108,92,231,0.4)]">محبوب‌ترین</div>
+        <div class="text-xs font-bold text-t3 uppercase tracking-widest mb-2">پریمیوم</div>
+        <div class="text-4xl font-black leading-none mt-3 mb-1 tracking-tight">۱۴۹,۰۰۰<sup class="text-base font-semibold">تومان</sup></div>
+        <div class="text-sm text-t3 mb-5">ماهانه · تخفیف ۳۰٪ سالانه</div>
+        <div class="h-px bg-bdr mb-5"></div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>دسترسی کامل به همه محتوا</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>مدیتیشن‌های هدایت‌شده</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>دستیار هوشمند نامحدود</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>یک جلسه مشاوره رایگان</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>برنامه کاملاً شخصی‌سازی‌شده</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>دسترسی آفلاین</div>
+        <div class="mt-6"><button class="w-full py-3 rounded-full grad-bg text-white font-bold text-sm shadow-[0_6px_20px_rgba(108,92,231,0.3)] transition hover:shadow-[0_10px_30px_rgba(108,92,231,0.4)] hover:-translate-y-px">انتخاب پریمیوم</button></div>
+      </div>
+      <!-- org -->
+      <div class="plan-card bg-white border border-bdr rounded-3xl p-9 transition duration-300 hover:shadow-[0_8px_40px_rgba(108,92,231,0.15)]">
+        <div class="text-xs font-bold text-t3 uppercase tracking-widest mb-2">سازمانی</div>
+        <div class="text-3xl font-black leading-none mt-3 mb-1 tracking-tight">تماس بگیرید</div>
+        <div class="text-sm text-t3 mb-5">برای تیم‌ها و سازمان‌ها</div>
+        <div class="h-px bg-bdr mb-5"></div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>همه امکانات پریمیوم</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>داشبورد مدیریت تیم</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>جلسات گروهی آنلاین</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>گزارش‌های تحلیلی پیشرفته</div>
+        <div class="flex items-start gap-2.5 mb-3 text-sm"><div class="w-4 h-4 rounded-full bg-acl flex items-center justify-center mt-0.5 shrink-0"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="#6c5ce7" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></div>پشتیبانی اختصاصی ۲۴/۷</div>
+        <div class="mt-6"><button class="w-full py-3 rounded-full bg-transparent border border-bdr2 text-t1 font-bold text-sm transition hover:border-ac hover:text-ac">درخواست دمو</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 px-10 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-1.5 bg-acl text-ac rounded-full px-3.5 py-1 text-xs font-bold mb-3.5">نظرات کاربران</div>
+      <h2 class="text-4xl font-black leading-tight tracking-tight">آن‌ها <span class="grad-text">تغییر را احساس کردند</span></h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="testi-card bg-bg border border-bdr rounded-2xl p-7 transition duration-300 hover:shadow-[0_2px_20px_rgba(108,92,231,0.08)] hover:border-[rgba(108,92,231,0.25)]">
+        <div class="flex gap-1 mb-3.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <span class="text-4xl leading-none text-acl font-serif">"</span>
+        <p class="text-sm text-t2 leading-loose mb-5">آرامیا واقعاً زندگی‌ام را تغییر داد. اضطراب شبانه‌ام با مدیتیشن‌های روزانه به شکل چشمگیری کاهش یافته و خوابم بهتر شده.</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-bdr">
+          <div class="w-10 h-10 rounded-full grad-bg flex items-center justify-center text-white text-sm font-extrabold">س</div>
+          <div><div class="font-bold text-sm">سارا محمدی</div><div class="text-xs text-t3 mt-0.5">طراح گرافیک · تهران</div></div>
+        </div>
+      </div>
+      <div class="testi-card bg-bg border border-bdr rounded-2xl p-7 transition duration-300 hover:shadow-[0_2px_20px_rgba(108,92,231,0.08)] hover:border-[rgba(108,92,231,0.25)]">
+        <div class="flex gap-1 mb-3.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <span class="text-4xl leading-none text-acl font-serif">"</span>
+        <p class="text-sm text-t2 leading-loose mb-5">پادکست‌های آرامیا رو قبل از خواب گوش می‌دم. کیفیت خوابم به‌طور باورنکردنی بهتر شده و انرژی بیشتری دارم.</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-bdr">
+          <div class="w-10 h-10 rounded-full grad-bg-r flex items-center justify-center text-white text-sm font-extrabold">ع</div>
+          <div><div class="font-bold text-sm">علی رضایی</div><div class="text-xs text-t3 mt-0.5">مهندس نرم‌افزار · اصفهان</div></div>
+        </div>
+      </div>
+      <div class="testi-card bg-bg border border-bdr rounded-2xl p-7 transition duration-300 hover:shadow-[0_2px_20px_rgba(108,92,231,0.08)] hover:border-[rgba(108,92,231,0.25)]">
+        <div class="flex gap-1 mb-3.5">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <span class="text-4xl leading-none text-acl font-serif">"</span>
+        <p class="text-sm text-t2 leading-loose mb-5">جلسه مشاوره آنلاین کمکم کرد مشکلاتم را از زاویه‌ی جدیدی ببینم. دستیار هوشمند هم همیشه در کنارم است.</p>
+        <div class="flex items-center gap-3 pt-4 border-t border-bdr">
+          <div class="w-10 h-10 rounded-full grad-bg-g flex items-center justify-center text-white text-sm font-extrabold">ن</div>
+          <div><div class="font-bold text-sm">نیلوفر کریمی</div><div class="text-xs text-t3 mt-0.5">معلم · مشهد</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-24 px-10 bg-bg">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-2">
+      <div class="inline-flex items-center gap-1.5 bg-acl text-ac rounded-full px-3.5 py-1 text-xs font-bold mb-3.5">سوالات متداول</div>
+      <h2 class="text-4xl font-black leading-tight tracking-tight mb-3.5">پاسخ به <span class="grad-text">سوالات شما</span></h2>
+    </div>
+    <div class="max-w-2xl mx-auto mt-14 space-y-2.5">
+      <div class="faq-item border border-bdr rounded-2xl overflow-hidden bg-white">
+        <div class="faq-q px-6 py-5 font-bold cursor-pointer flex justify-between items-center text-sm" onclick="toggleFaq(this)">
+          آیا آرامیا برای همه مناسب است؟
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5c5853" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a px-6 text-sm text-t2 leading-loose">
+          <p class="pb-5">بله، آرامیا برای همه افرادی که به دنبال بهبود سلامت روان و کیفیت زندگی خود هستند طراحی شده. از کسانی که فقط کنجکاوند تا افرادی که با اضطراب، استرس یا مشکلات خواب دست‌وپنجه نرم می‌کنند.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-bdr rounded-2xl overflow-hidden bg-white">
+        <div class="faq-q px-6 py-5 font-bold cursor-pointer flex justify-between items-center text-sm" onclick="toggleFaq(this)">
+          آیا مشاوران آرامیا دارای مجوز هستند؟
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5c5853" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a px-6 text-sm text-t2 leading-loose">
+          <p class="pb-5">تمام مشاوران ما دارای مدرک تخصصی روانشناسی و مجوز نظام روانشناسی ایران هستند. قبل از پذیرش، یک فرایند دقیق بررسی و احراز هویت انجام می‌دهیم.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-bdr rounded-2xl overflow-hidden bg-white">
+        <div class="faq-q px-6 py-5 font-bold cursor-pointer flex justify-between items-center text-sm" onclick="toggleFaq(this)">
+          آیا اطلاعات من محرمانه است؟
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5c5853" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a px-6 text-sm text-t2 leading-loose">
+          <p class="pb-5">بله، حریم خصوصی شما برای ما اولویت اول است. تمام داده‌ها رمزگذاری‌شده هستند و هرگز بدون اجازه شما با کسی به اشتراک گذاشته نمی‌شوند.</p>
+        </div>
+      </div>
+      <div class="faq-item border border-bdr rounded-2xl overflow-hidden bg-white">
+        <div class="faq-q px-6 py-5 font-bold cursor-pointer flex justify-between items-center text-sm" onclick="toggleFaq(this)">
+          چطور می‌توانم اشتراک را لغو کنم؟
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#5c5853" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="faq-a px-6 text-sm text-t2 leading-loose">
+          <p class="pb-5">لغو اشتراک در هر زمان از پنل کاربری امکان‌پذیر است. هیچ جریمه‌ای دریافت نمی‌شود و تا پایان دوره پرداخت‌شده به خدمات دسترسی خواهید داشت.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 px-10 bg-white">
+  <div class="max-w-3xl mx-auto grad-bg rounded-3xl p-16 text-center relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-white/10"></div>
+    <div class="absolute -bottom-16 -left-16 w-60 h-60 rounded-full bg-white/5"></div>
+    <div class="inline-flex items-center gap-1.5 bg-white/20 text-white rounded-full px-3.5 py-1 text-xs font-bold mb-5 relative z-10">آماده‌اید؟</div>
+    <h2 class="text-4xl font-black text-white mb-4 relative z-10">سفر آرامش را<br/>امروز شروع کنید</h2>
+    <p class="text-white/80 leading-loose mb-9 relative z-10">به هزاران نفر بپیوندید که با آرامیا زندگی بهتر و آرام‌تری را تجربه می‌کنند.<br/>اولین قدم رایگان است — بدون نیاز به کارت اعتباری.</p>
+    <div class="flex gap-3.5 justify-center relative z-10">
+      <button class="bg-white text-ac px-8 py-3.5 rounded-full font-extrabold shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)]">شروع رایگان</button>
+      <button class="bg-white/15 text-white px-8 py-3.5 rounded-full font-bold border-2 border-white/40 transition hover:bg-white/25 backdrop-blur">با مشاور صحبت کن</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#1a1714] pt-20 pb-10 px-10">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[2.5fr_1fr_1fr_1fr] gap-12 mb-16">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 grad-bg rounded-xl flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3C9 3 6.5 5.5 6.5 8.5c0 1.8.8 3.4 2.1 4.5V15h6.8v-2c1.3-1.1 2.1-2.7 2.1-4.5C17.5 5.5 15 3 12 3z" fill="white"/><path d="M9.5 15v.8a2.5 2.5 0 005 0V15h-5z" fill="white" opacity=".7"/></svg>
+        </div>
+        <span class="text-xl font-extrabold text-white">آرامیا</span>
+      </div>
+      <p class="text-[#6b6560] text-sm leading-loose mt-4 mb-6 max-w-xs">در عصر شتاب و استرس، با تکنولوژی فضایی برای آرامش و آسایش ذهنی ایجاد می‌کنیم.</p>
+      <div class="flex gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer transition hover:bg-[rgba(108,92,231,0.3)] hover:border-[rgba(108,92,231,0.5)]">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="#6b6560" stroke-width="1.8"/></svg>
+        </div>
+        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer transition hover:bg-[rgba(108,92,231,0.3)] hover:border-[rgba(108,92,231,0.5)]">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#6b6560" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#6b6560" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="#6b6560"/></svg>
+        </div>
+        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer transition hover:bg-[rgba(108,92,231,0.3)] hover:border-[rgba(108,92,231,0.5)]">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.93.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" fill="#6b6560"/></svg>
+        </div>
+        <div class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center cursor-pointer transition hover:bg-[rgba(108,92,231,0.3)] hover:border-[rgba(108,92,231,0.5)]">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><polygon points="5,3 19,12 5,21" stroke="#6b6560" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 class="text-xs font-bold text-white mb-5 tracking-widest">خدمات</h4>
+      <ul class="space-y-3 list-none">
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">پادکست</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">ویدیو</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">مدیتیشن</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">مشاوره</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">دستیار AI</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-xs font-bold text-white mb-5 tracking-widest">شرکت</h4>
+      <ul class="space-y-3 list-none">
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">درباره ما</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">تیم ما</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">وبلاگ</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">همکاری</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">تماس</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-xs font-bold text-white mb-5 tracking-widest">پشتیبانی</h4>
+      <ul class="space-y-3 list-none">
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">راهنما</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">سوالات متداول</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">حریم خصوصی</a></li>
+        <li><a href="#" class="text-[#6b6560] text-sm no-underline transition hover:text-white">شرایط استفاده</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto flex justify-between items-center border-t border-white/[.07] pt-8 flex-wrap gap-3">
+    <p class="text-[#4a4540] text-xs">© 1405 آرامیا. تمامی حقوق محفوظ است.</p>
+    <p class="text-[#4a4540] text-xs">ساخته‌شده برای آرامش ایرانیان</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const currentItem = el.parentElement;
+  const isOpen = currentItem.classList.contains('open');
+  
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.classList.remove('open');
+  });
+  
+  if (!isOpen) {
+    currentItem.classList.add('open');
+  }
+}
+</script>
+
+</body>
+
+</html>
