@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>هنرستان هیأت امنایی زنده‌یاد عمادی</title>
+    <!--alpine.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.5/cdn.min.js" defer></script>
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
+                    colors: {
+                        navy: { DEFAULT: '#0f1f4b', dark: '#091435' },
+                        brand: { DEFAULT: '#1a4bbd', light: '#2563eb' },
+                        gold: { DEFAULT: '#e8a020', light: '#f5bc45' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c0cce0;
+            border-radius: 3px
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #1e3060
+        }
+
+        .chart-bar {
+            border-radius: 8px 8px 0 0;
+            transition: all .4s cubic-bezier(.4, 0, .2, 1);
+            cursor: pointer
+        }
+
+        .chart-bar:hover {
+            filter: brightness(1.15)
+        }
+
+        .prog-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1.2s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        [x-cloak] {
+            display: none !important
+        }
+
+        /* Dashboard layout fix */
+        .dash-main {
+            transition: margin-right 0.3s ease;
+        }
+
+        @media (max-width: 640px) {
+            .dash-main {
+                margin-right: 0 !important;
+            }
+        }
+
+        /* Fix for dark mode card backgrounds */
+        .dark .bg-white {
+            background-color: #0f1e3d !important;
+        }
+
+        .dark .border-\[\#dde4f0\] {
+            border-color: #1e3060 !important;
+        }
+
+        .dark .bg-\[\#eef2fb\] {
+            background-color: #162040 !important;
+        }
+
+        .dark .text-\[\#5a6a85\] {
+            color: #7a90b8 !important;
+        }
+    </style>
+</head>
+
+<body x-data="App()" :class="dark ? 'dark bg-[#080f24] text-[#e8eef8]' : 'bg-[#f4f7fd] text-[#0f172a]'"
+    class="font-vazir transition-colors duration-300">
+
+    <!--PUBLIC SITE-->
+    <div x-show="page==='public'" x-cloak>
+        <!-- NAV -->
+        <nav class="sticky top-0 z-50 border-b border-white/7 backdrop-blur-xl" style="background:rgba(9,20,53,.96)">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 py-3 sm:h-16 sm:py-0">
+                    <!-- Brand -->
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                            style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-sm font-black text-white leading-tight">هنرستان عمادی</div>
+                            <div class="text-[10px] text-white/40">سامانه آموزشی ساری</div>
+                        </div>
+                    </div>
+                    <!-- Links -->
+                    <div
+                        class="flex items-center gap-1 overflow-x-auto w-full sm:w-auto order-last sm:order-first pb-1 sm:pb-0">
+                        <template x-for="n in pubNav" :key="n.id">
+                            <button
+                                class="px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all whitespace-nowrap border-none cursor-pointer font-vazir"
+                                :class="pubSec===n.id ? 'bg-blue-600/35 text-white' : 'text-white/65 hover:text-white hover:bg-white/10'"
+                                @click="pubSec=n.id" x-text="n.label" style="background:transparent"></button>
+                        </template>
+                    </div>
+                    <!-- Actions -->
+                    <div class="flex items-center gap-2">
+                        <button @click="dark=!dark"
+                            class="w-9 h-9 rounded-lg flex items-center justify-center cursor-pointer border-none"
+                            style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)">
+                            <svg x-show="!dark" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                            </svg>
+                            <svg x-show="dark" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                            </svg>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold cursor-pointer border-none font-vazir text-white transition-all hover:-translate-y-px"
+                            style="background:linear-gradient(135deg,#e8a020,#f5bc45);box-shadow:0 4px 12px rgba(232,160,32,.3)"
+                            @click="page='login'">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                                <polyline points="10 17 15 12 10 7" />
+                                <line x1="15" y1="12" x2="3" y2="12" />
+                            </svg>
+                            ورود به پنل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HOME -->
+        <div x-show="pubSec==='home'">
+            <!-- HERO -->
+            <div class="relative overflow-hidden py-20 sm:py-24"
+                style="background:linear-gradient(135deg,#091435 0%,#0d2468 40%,#1a4bbd 100%)">
+                <div class="absolute inset-0"
+                    style="background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px">
+                </div>
+                <div class="absolute w-150 h-150 rounded-full -top-52 left-1/2 -translate-x-1/2"
+                    style="background:radial-gradient(circle,rgba(37,99,235,.2) 0%,transparent 70%)"></div>
+                <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+                    <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[13px] font-medium text-white/80 mb-6 backdrop-blur-sm"
+                        style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15)">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                        سال تحصیلی ۱۴۰۶–۱۴۰۵ | ناحیه ۲ ساری
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-snug mb-5">
+                        هنرستان هیأت امنایی<br><span style="color:#f5bc45">زنده‌یاد عمادی</span>
+                    </h1>
+                    <p class="text-white/70 text-sm sm:text-base max-w-lg mx-auto mb-9 leading-loose">مرکز پیشتاز آموزش
+                        مهارت‌های فنی، هنری و حرفه‌ای در مازندران؛ پرورش خلاقیت و کارآفرینی نسل آینده</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 flex-wrap">
+                        <button
+                            class="flex items-center gap-2 px-7 py-3 rounded-xl text-base font-semibold text-white cursor-pointer border-none font-vazir w-full sm:w-auto justify-center hover:-translate-y-px transition-transform"
+                            style="background:linear-gradient(135deg,#e8a020,#f5bc45);box-shadow:0 4px 12px rgba(232,160,32,.3)">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <line x1="19" y1="8" x2="19" y2="14" />
+                                <line x1="22" y1="11" x2="16" y2="11" />
+                            </svg>
+                            پیش‌ثبت‌نام
+                        </button>
+                        <button
+                            class="flex items-center gap-2 px-7 py-3 rounded-xl text-base font-semibold cursor-pointer border border-white/30 text-white font-vazir w-full sm:w-auto justify-center hover:bg-white/10 transition-all"
+                            style="background:transparent" @click="pubSec='depts'">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="16" />
+                                <line x1="8" y1="12" x2="16" y2="12" />
+                            </svg>
+                            آشنایی با رشته‌ها
+                        </button>
+                    </div>
+                    <!-- Hero Stats -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-14">
+                        <template x-for="s in heroStats" :key="s.label">
+                            <div class="rounded-2xl p-5 text-center backdrop-blur-sm hover:bg-white/10 transition-colors"
+                                style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)">
+                                <div class="text-3xl font-black leading-none" style="color:#f5bc45" x-text="s.val">
+                                </div>
+                                <div class="text-xs text-white/55 mt-1.5" x-text="s.label"></div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALERT -->
+            <div class="flex items-center justify-center gap-2.5 px-6 py-3"
+                style="background:linear-gradient(90deg,#1a4bbd,#7c3aed)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"
+                    class="shrink-0">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <p class="text-sm text-white font-medium">اطلاعیه: برنامه امتحانات نوبت اول (دی ماه ۱۴۰۵) در سایت
+                    بارگذاری شد — <a href="#" style="color:#f5bc45" class="font-bold">مشاهده برنامه</a></p>
+            </div>
+
+            <!-- NEWS -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300">آخرین اخبار و رویدادها
+                        </h2>
+                        <div class="w-12 h-1 rounded mt-2.5 mb-3"
+                            style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+                        <p class="text-[#5a6a85] text-sm">آخرین اطلاعیه‌ها، موفقیت‌ها و برنامه‌های هنرستان</p>
+                    </div>
+                    <button
+                        class="self-start sm:self-auto px-3 py-1.5 rounded-lg text-sm font-semibold border border-brand text-brand hover:bg-brand hover:text-white transition-all cursor-pointer font-vazir">مشاهده
+                        همه اخبار</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <template x-for="n in pubNews" :key="n.id">
+                        <div class="rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <div class="h-40 flex items-center justify-center relative"
+                                :style="'background:linear-gradient(135deg,'+n.c1+','+n.c2+')'">
+                                <div x-html="n.svg" class="opacity-60"></div>
+                            </div>
+                            <div class="p-5">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                                    :style="'background:'+n.c1+'22;color:'+n.c1" x-text="n.cat"></span>
+                                <h3 class="text-[15px] font-bold mt-2.5 mb-1.5 leading-relaxed" x-text="n.title"></h3>
+                                <p class="text-[13px] leading-loose" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'"
+                                    x-text="n.excerpt"></p>
+                                <div class="flex items-center justify-between mt-3.5 pt-3 border-t"
+                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                    <span class="text-xs" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'"
+                                        x-text="n.date"></span>
+                                    <button
+                                        class="text-[12px] font-bold text-brand border-none bg-transparent cursor-pointer font-vazir">ادامه
+                                        مطلب ←</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- FEATURES -->
+            <div :class="dark ? 'bg-[#0f1e3d]' : 'bg-[#eef2fb]'" class="py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300">چرا هنرستان عمادی؟</h2>
+                        <div class="w-12 h-1 rounded mx-auto mt-2.5 mb-3"
+                            style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+                        <p class="text-[#5a6a85] text-sm">ما با رویکردی مدرن و تخصصی، بستر رشد حرفه‌ای دانش‌آموزان را
+                            فراهم می‌کنیم</p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <template x-for="f in features" :key="f.title">
+                            <div class="rounded-2xl p-7 border transition-all hover:border-brand hover:shadow-lg cursor-default"
+                                :class="dark ? 'bg-[#162040] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                                <div class="w-13 h-13 rounded-2xl flex items-center justify-center mb-4"
+                                    :style="'background:'+f.c+'22;width:52px;height:52px'">
+                                    <div x-html="f.svg" :style="'color:'+f.c"></div>
+                                </div>
+                                <h3 class="text-[15px] font-black mb-2" x-text="f.title"></h3>
+                                <p class="text-[13px] leading-loose" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'"
+                                    x-text="f.desc"></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEPTS PREVIEW -->
+            <div class="py-16" style="background:linear-gradient(135deg,#091435,#0d2468)">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl sm:text-3xl font-black text-white">رشته‌های تحصیلی</h2>
+                        <div class="w-12 h-1 rounded mx-auto mt-2.5 mb-3"
+                            style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+                        <p class="text-white/50 text-sm">۸ رشته تخصصی فنی، هنری و حرفه‌ای</p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <template x-for="d in depts" :key="d.name">
+                            <div class="rounded-2xl p-5 sm:p-6 text-center cursor-pointer transition-all hover:-translate-y-1 hover:bg-white/12"
+                                style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09)">
+                                <div class="w-14 h-14 rounded-2xl mx-auto mb-3.5 flex items-center justify-center"
+                                    :style="'background:'+d.c+'30'">
+                                    <div x-html="d.svg" :style="'color:'+d.c"></div>
+                                </div>
+                                <div class="text-sm font-bold text-white mb-1" x-text="d.name"></div>
+                                <div class="text-[11px] text-white/45" x-text="d.desc"></div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="text-center mt-9">
+                        <button
+                            class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white cursor-pointer border-none font-vazir hover:-translate-y-px transition-transform"
+                            style="background:linear-gradient(135deg,#e8a020,#f5bc45);box-shadow:0 4px 12px rgba(232,160,32,.3)"
+                            @click="pubSec='depts'">مشاهده جزئیات رشته‌ها</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAFF -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+                <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300 mb-2">کادر آموزشی برجسته</h2>
+                <div class="w-12 h-1 rounded mb-3" style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+                <p class="text-[#5a6a85] text-sm mb-10">مدرسان مجرب و متخصص در رشته‌های مختلف</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <template x-for="t in pubTeachers" :key="t.name">
+                        <div class="rounded-2xl p-6 text-center border transition-all hover:border-brand hover:shadow-lg"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <div class="w-16 h-16 rounded-full mx-auto mb-3.5 flex items-center justify-center text-2xl font-black text-white"
+                                :style="'background:linear-gradient(135deg,'+t.c1+','+t.c2+')'">
+                                <div x-html="t.svg"></div>
+                            </div>
+                            <h3 class="font-black text-[15px] mb-1" x-text="t.name"></h3>
+                            <p class="text-xs mb-3" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'" x-text="t.role">
+                            </p>
+                            <span class="inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                                :style="'background:'+t.c1+'22;color:'+t.c1" x-text="t.field"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div x-show="pubSec==='about'" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+            <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300 mb-2">درباره هنرستان عمادی</h2>
+            <div class="w-12 h-1 rounded mb-10" style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div class="rounded-2xl p-7 border"
+                    :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                    <h3 class="text-lg font-black mb-4 text-navy dark:text-blue-300">تاریخچه</h3>
+                    <p class="text-[14px] leading-loose" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">هنرستان
+                        هیأت امنایی زنده‌یاد عمادی در ساری (ناحیه ۲) یکی از مراکز پیشتاز آموزش فنی و حرفه‌ای در استان
+                        مازندران است. این مؤسسه با بیش از دو دهه سابقه، دانش‌آموزان را در رشته‌های متنوع هنری و فنی
+                        آموزش می‌دهد.</p>
+                </div>
+                <div class="rounded-2xl p-7 border"
+                    :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                    <h3 class="text-lg font-black mb-4 text-navy dark:text-blue-300">اهداف و چشم‌انداز</h3>
+                    <p class="text-[14px] leading-loose" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">هدف اصلی ما
+                        پرورش مهارت‌های عملی و کارآفرینی در نسل جوان است. با بهره‌گیری از کادر مجرب و تجهیزات به‌روز،
+                        دانش‌آموزان را برای ورود موفق به بازار کار آماده می‌کنیم.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEPTS PAGE -->
+        <div x-show="pubSec==='depts'" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+            <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300 mb-2">رشته‌های تحصیلی</h2>
+            <div class="w-12 h-1 rounded mb-3" style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+            <p class="text-[#5a6a85] text-sm mb-10">هنرستان عمادی با ۸ رشته تخصصی، طیف گسترده‌ای از علایق دانش‌آموزان را
+                پوشش می‌دهد</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                <template x-for="d in depts" :key="d.name">
+                    <div class="rounded-2xl p-6 text-center border transition-all hover:shadow-lg"
+                        :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                        <div class="w-15 h-15 rounded-2xl mx-auto mb-4 flex items-center justify-center"
+                            :style="'background:'+d.c+'18;width:60px;height:60px'">
+                            <div x-html="d.svg" :style="'color:'+d.c"></div>
+                        </div>
+                        <h3 class="font-black text-[15px] mb-1.5" x-text="d.name"></h3>
+                        <p class="text-xs mb-3.5" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'" x-text="d.desc">
+                        </p>
+                        <button
+                            class="w-full py-1.5 rounded-lg text-xs font-semibold border border-brand text-brand hover:bg-brand hover:text-white transition-all cursor-pointer font-vazir">جزئیات</button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div x-show="pubSec==='contact'" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+            <h2 class="text-2xl sm:text-3xl font-black text-navy dark:text-blue-300 mb-2">ارتباط با ما</h2>
+            <div class="w-12 h-1 rounded mb-10" style="background:linear-gradient(90deg,#e8a020,#f5bc45)"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
+                <div class="rounded-2xl p-7 border"
+                    :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                    <h3 class="text-base font-black mb-5">اطلاعات تماس</h3>
+                    <div class="flex flex-col gap-4">
+                        <template x-for="c in contactInfo" :key="c.label">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-brand"
+                                    :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'" x-html="c.svg"></div>
+                                <div>
+                                    <div class="text-[11px] mb-0.5" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'"
+                                        x-text="c.label"></div>
+                                    <div class="text-[14px] font-semibold" x-text="c.val"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="rounded-2xl p-7 border"
+                    :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                    <h3 class="text-base font-black mb-5">ارسال پیام</h3>
+                    <div class="flex flex-col gap-4">
+                        <input
+                            class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0] text-[#0f172a]'"
+                            type="text" placeholder="نام و نام خانوادگی" />
+                        <input
+                            class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0] text-[#0f172a]'"
+                            type="text" placeholder="شماره تماس" />
+                        <input
+                            class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0] text-[#0f172a]'"
+                            type="email" placeholder="آدرس ایمیل (اختیاری)" />
+                        <textarea
+                            class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none"
+                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0] text-[#0f172a]'"
+                            rows="4" placeholder="متن پیام شما..."></textarea>
+                        <button
+                            class="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer border-none font-vazir hover:-translate-y-px transition-transform"
+                            style="background:linear-gradient(135deg,#1a4bbd,#2563eb);box-shadow:0 4px 12px rgba(37,99,235,.3)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                            ارسال پیام
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer style="background:#091435" class="text-white pt-14 pb-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-10">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+                                style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                                    stroke-width="2">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-black text-[15px]">هنرستان عمادی</div>
+                                <div class="text-[11px] text-white/35">سامانه مدیریت آموزشی</div>
+                            </div>
+                        </div>
+                        <p class="text-[13px] text-white/45 leading-loose max-w-xs">مرکز آموزش مهارت‌های فنی، هنری و
+                            حرفه‌ای در ساری، مازندران</p>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm mb-3.5">دسترسی سریع</div>
+                        <template
+                            x-for="l in ['صفحه اصلی','رشته‌های تحصیلی','اخبار و رویدادها','کادر مدرسه','پیش‌ثبت‌نام']"
+                            :key="l">
+                            <a class="block text-[13px] text-white/50 py-1 hover:text-white/90 transition-colors cursor-pointer"
+                                x-text="l"></a>
+                        </template>
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm mb-3.5">لینک‌های مرتبط</div>
+                        <template
+                            x-for="l in ['سامانه آموزش آنلاین دوندی','آموزش‌وپرورش مازندران','وزارت آموزش‌وپرورش','ناحیه ۲ ساری','سنجش و پذیرش دانش‌آموز']"
+                            :key="l">
+                            <a class="block text-[13px] text-white/50 py-1 hover:text-white/90 transition-colors cursor-pointer"
+                                x-text="l"></a>
+                        </template>
+                    </div>
+                </div>
+                <div class="border-t border-white/8 pt-5 flex flex-wrap justify-between gap-2">
+                    <span class="text-[12px] text-white/30">© ۱۴۰۵ هنرستان عمادی — تمامی حقوق محفوظ است</span>
+                    <a href="https://irancompile.com/" target="_blank"
+                        class="text-[12px] text-white/30 hover:text-white">طراحی و توسعه: شرکت صدرا رایانه نوین
+                        طبرستان</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--LOGIN-->
+    <div x-show="page==='login'" x-cloak
+        class="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden"
+        style="background:linear-gradient(135deg,#091435 0%,#0d2468 100%)">
+        <div class="absolute w-125 h-125 rounded-full -top-52 -right-24"
+            style="background:radial-gradient(circle,rgba(37,99,235,.15),transparent 70%)"></div>
+        <div class="absolute w-200 h-200 rounded-full -bottom-24 -left-24"
+            style="background:radial-gradient(circle,rgba(124,58,237,.1),transparent 70%)"></div>
+        <div class="relative z-10 w-full max-w-md rounded-3xl p-8 sm:p-10 shadow-2xl"
+            :class="dark ? 'bg-[#0f1e3d] border border-[#1e3060]' : 'bg-white border border-[#dde4f0]'">
+            <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                style="background:linear-gradient(135deg,#0f1f4b,#1a4bbd);box-shadow:0 8px 24px rgba(37,99,235,.35)">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+            </div>
+            <div class="text-center mb-7">
+                <h1 class="text-xl font-black">ورود به سامانه</h1>
+                <p class="text-xs mt-1.5" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">هنرستان هیأت امنایی
+                    زنده‌یاد عمادی</p>
+            </div>
+            <!-- Role Tabs -->
+            <div class="grid grid-cols-3 gap-1.5 rounded-xl p-1 mb-6" :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                <template
+                    x-for="r in [{id:'manager',label:'مدیر'},{id:'teacher',label:'مدرس'},{id:'student',label:'دانش‌آموز'}]"
+                    :key="r.id">
+                    <button
+                        class="py-2 rounded-xl text-[13px] font-semibold transition-all cursor-pointer border-none font-vazir"
+                        :class="role===r.id ? (dark ? 'bg-[#0f1e3d] text-brand shadow' : 'bg-white text-brand shadow') : (dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]')"
+                        @click="role=r.id" x-text="r.label"></button>
+                </template>
+            </div>
+            <!-- Form -->
+            <div class="flex flex-col gap-4">
+                <div>
+                    <label class="block text-[13px] font-semibold mb-1.5">نام کاربری / کد ملی</label>
+                    <input
+                        class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                        :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'"
+                        type="text" placeholder="نام کاربری خود را وارد کنید" x-model="lUser" />
+                </div>
+                <div>
+                    <label class="block text-[13px] font-semibold mb-1.5">رمز عبور</label>
+                    <input
+                        class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                        :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'"
+                        type="password" placeholder="••••••••" x-model="lPass" />
+                </div>
+                <div class="flex items-center justify-between text-[13px]">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="accent-blue-600" /> مرا به خاطر بسپار
+                    </label>
+                    <a href="#" class="text-brand font-semibold">فراموشی رمز عبور</a>
+                </div>
+                <button
+                    class="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-[15px] font-semibold text-white cursor-pointer border-none font-vazir mt-1 hover:-translate-y-px transition-transform"
+                    style="background:linear-gradient(135deg,#1a4bbd,#2563eb);box-shadow:0 4px 12px rgba(37,99,235,.3)"
+                    @click="doLogin()">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                        <polyline points="10 17 15 12 10 7" />
+                        <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
+                    ورود به سامانه
+                </button>
+            </div>
+            <div class="rounded-xl px-4 py-3 mt-5 text-[12px] text-center border"
+                :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#7a90b8]' : 'bg-[#eef2fb] border-[#dde4f0] text-[#5a6a85]'">
+                ورود آزمایشی: <strong class="text-brand">admin</strong> / <strong class="text-brand">1234</strong>
+            </div>
+            <button
+                class="w-full flex items-center justify-center gap-2 mt-3 py-2.5 rounded-xl text-[13px] font-medium cursor-pointer border font-vazir transition-all hover:bg-opacity-80"
+                :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#7a90b8] hover:text-[#e8eef8]' : 'bg-transparent border-[#dde4f0] text-[#5a6a85] hover:bg-[#eef2fb]'"
+                @click="page='public'">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                </svg>
+                بازگشت به سایت عمومی
+            </button>
+        </div>
+    </div>
+    <!--DASHBOARD-->
+    <div x-show="page==='dashboard'" x-cloak class="flex min-h-screen">
+        <!-- SIDEBAR -->
+        <aside
+            class="fixed top-0 right-0 h-full z-30 flex flex-col transition-all duration-300 overflow-hidden shadow-2xl"
+            :class="[sideOpen ? 'w-66' : 'w-17', sidebarMobile ? 'translate-x-0' : 'translate-x-full sm:translate-x-0']"
+            style="background:linear-gradient(180deg,#091435 0%,#0f1f4b 100%)">
+            <!-- Brand -->
+            <div class="flex items-center gap-3 px-4 py-5 border-b border-white/8 shrink-0">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style="background:linear-gradient(135deg,#1a4bbd,#2563eb);box-shadow:0 4px 12px rgba(37,99,235,.4)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                </div>
+                <div class="overflow-hidden whitespace-nowrap" x-show="sideOpen">
+                    <h2 class="text-sm font-black text-white leading-tight">هنرستان عمادی</h2>
+                    <p class="text-[10px] text-white/45 mt-0.5">پنل مدیریت سازمانی</p>
+                </div>
+            </div>
+            <!-- User -->
+            <div class="flex items-center gap-2.5 px-4 py-3.5 border-b border-white/8 shrink-0" x-show="sideOpen">
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm text-white shrink-0"
+                    style="background:linear-gradient(135deg,#2563eb,#7c3aed)">م</div>
+                <div class="overflow-hidden whitespace-nowrap">
+                    <strong class="block text-[13px] text-white font-bold">خانم فلاح‌نژاد</strong>
+                    <span class="text-[11px] text-white/40">مدیر هنرستان</span>
+                </div>
+            </div>
+            <!-- Nav -->
+            <nav class="flex-1 overflow-y-auto py-2">
+                <div class="text-[10px] font-bold tracking-widest text-white/25 px-5 pt-4 pb-1.5 whitespace-nowrap overflow-hidden"
+                    x-show="sideOpen">منوی اصلی</div>
+                <template x-for="m in menu" :key="m.id">
+                    <div class="flex items-center gap-2.5 px-4 py-2.5 mx-2.5 rounded-xl cursor-pointer transition-all overflow-hidden whitespace-nowrap mb-0.5"
+                        :class="sec===m.id ? 'bg-blue-600/30 text-white shadow-inner' : 'text-white/55 hover:bg-white/7 hover:text-white/85'"
+                        :style="sec===m.id ? 'box-shadow:inset 0 0 0 1px rgba(37,99,235,.4)' : ''"
+                        @click="sec=m.id;sidebarMobile=false">
+                        <div x-html="m.icon" class="w-4.5 h-4.5 shrink-0" style="width:18px;height:18px"></div>
+                        <span class="text-[13px] font-medium" x-show="sideOpen" x-text="m.label"></span>
+                        <span class="mr-auto text-[10px] font-black px-1.5 py-0.5 rounded-full bg-rose-600 text-white"
+                            x-show="sideOpen && m.badge" x-text="m.badge"></span>
+                    </div>
+                </template>
+                <div class="text-[10px] font-bold tracking-widest text-white/25 px-5 pt-4 pb-1.5 whitespace-nowrap overflow-hidden mt-2"
+                    x-show="sideOpen">سایر</div>
+                <div class="flex items-center gap-2.5 px-4 py-2.5 mx-2.5 rounded-xl cursor-pointer text-white/55 hover:bg-white/7 hover:text-white/85 transition-all mb-0.5"
+                    @click="page='public';sidebarMobile=false">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        class="shrink-0">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    </svg>
+                    <span class="text-[13px] font-medium" x-show="sideOpen">سایت عمومی</span>
+                </div>
+                <div class="flex items-center gap-2.5 px-4 py-2.5 mx-2.5 rounded-xl cursor-pointer text-white/55 hover:bg-white/7 hover:text-white/85 transition-all"
+                    @click="page='login';sidebarMobile=false">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        class="shrink-0">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                    </svg>
+                    <span class="text-[13px] font-medium" x-show="sideOpen">خروج</span>
+                </div>
+            </nav>
+            <!-- Collapse -->
+            <div class="border-t border-white/8 p-3">
+                <div class="flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl cursor-pointer text-white/55 hover:bg-white/7 hover:text-white/85 transition-all"
+                    @click="sideOpen=!sideOpen">
+                    <svg :style="sideOpen ? 'transform:rotate(180deg)' : ''"
+                        style="transition:transform .3s;flex-shrink:0" width="18" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span class="text-[13px]" x-show="sideOpen">جمع کردن منو</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- OVERLAY (mobile) -->
+        <div class="fixed inset-0 bg-black/50 z-20 sm:hidden" x-show="sidebarMobile" @click="sidebarMobile=false"></div>
+
+        <!-- MAIN -->
+        <div class="flex-1 flex flex-col min-h-screen dash-main"
+            :style="'margin-right:' + (sideOpen ? '268px' : '68px')">
+
+            <!-- TOPBAR -->
+            <header
+                class="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-6 h-15 border-b backdrop-blur-md"
+                :class="dark ? 'bg-[#080f24]/90 border-[#1e3060]' : 'bg-white/90 border-[#dde4f0]'"
+                style="box-shadow:0 1px 8px rgba(0,0,0,.05)">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="sm:hidden w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer border-none"
+                        :class="dark ? 'bg-[#162040] text-[#7a90b8]' : 'bg-[#eef2fb] text-[#5a6a85]'"
+                        @click="sidebarMobile=true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </button>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-black leading-tight"
+                            x-text="menu.find(m=>m.id===sec)?.label||'داشبورد'"></h1>
+                        <p class="text-[11px] hidden sm:block" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">
+                            سامانه مدیریت هنرستان عمادی — ساری</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button @click="dark=!dark"
+                        class="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer border-none transition-colors"
+                        :class="dark ? 'bg-[#162040] text-[#7a90b8] hover:bg-[#1e3060]' : 'bg-[#eef2fb] text-[#5a6a85] hover:bg-[#dde4f0]'">
+                        <svg x-show="!dark" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <svg x-show="dark" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </button>
+                    <button
+                        class="w-9 h-9 rounded-xl flex items-center justify-center cursor-pointer border-none relative transition-colors"
+                        :class="dark ? 'bg-[#162040] text-[#7a90b8] hover:bg-[#1e3060]' : 'bg-[#eef2fb] text-[#5a6a85] hover:bg-[#dde4f0]'">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                        <span
+                            class="absolute top-1.5 left-1.5 w-2 h-2 bg-rose-600 rounded-full border-2 border-white dark:border-[#080f24]"></span>
+                    </button>
+                    <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm text-white cursor-pointer"
+                        style="background:linear-gradient(135deg,#1a4bbd,#7c3aed)">م</div>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <div class="p-4 sm:p-6 flex-1">
+
+                <!-- OVERVIEW -->
+                <div x-show="sec==='overview'">
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <template x-for="s in kpis" :key="s.label">
+                            <div class="rounded-2xl p-5 text-white relative overflow-hidden cursor-default"
+                                :style="'background:linear-gradient(135deg,'+s.c1+','+s.c2+')'">
+                                <div class="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/8"></div>
+                                <div class="absolute -bottom-5 -left-2 w-24 h-24 rounded-full bg-white/5"></div>
+                                <div class="flex items-start justify-between relative z-10">
+                                    <div>
+                                        <div class="text-3xl font-black leading-none" x-text="s.val"></div>
+                                        <div class="text-[13px] font-medium opacity-80 mt-1.5" x-text="s.label"></div>
+                                        <div class="text-[11px] opacity-60 mt-2" x-text="s.note"></div>
+                                    </div>
+                                    <div class="w-11 h-11 rounded-xl flex items-center justify-center bg-white/15"
+                                        x-html="s.icon"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Chart & Alerts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+                        <!-- Bar Chart -->
+                        <div class="lg:col-span-2 rounded-2xl p-6 border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <div class="flex items-center justify-between mb-5">
+                                <div>
+                                    <h3 class="text-[15px] font-black">آمار حضور و غیاب هفتگی</h3>
+                                    <p class="text-[12px] mt-1" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">درصد
+                                        حضور دانش‌آموزان — هفته جاری</p>
+                                </div>
+                                <span
+                                    class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">این
+                                    هفته</span>
+                            </div>
+                            <div class="flex items-end gap-3 h-40">
+                                <template x-for="b in bars" :key="b.day">
+                                    <div class="flex flex-col items-center flex-1 gap-1.5">
+                                        <span class="text-[12px] font-bold" :style="'color:'+b.color"
+                                            x-text="b.pct+'%'"></span>
+                                        <div class="chart-bar w-full"
+                                            :style="'height:'+b.h+'%;background:linear-gradient(180deg,'+b.color+','+b.color+'99)'">
+                                        </div>
+                                        <span class="text-[12px]" :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'"
+                                            x-text="b.day"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <!-- Alerts -->
+                        <div class="rounded-2xl p-6 border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <h3 class="text-[15px] font-black mb-4">اطلاعیه‌های اخیر</h3>
+                            <div class="flex flex-col gap-3">
+                                <template x-for="n in notifs" :key="n.text">
+                                    <div class="flex items-start gap-2.5 p-2.5 rounded-xl"
+                                        :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                        <div class="w-2 h-2 rounded-full shrink-0 mt-1.5"
+                                            :style="'background:'+n.color"></div>
+                                        <div>
+                                            <p class="text-[13px] leading-relaxed" x-text="n.text"></p>
+                                            <p class="text-[11px] mt-1"
+                                                :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'" x-text="n.time"></p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress & Top Students -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <div class="rounded-2xl p-6 border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <h3 class="text-[15px] font-black mb-4">پیشرفت تحصیلی رشته‌ها</h3>
+                            <div class="flex flex-col gap-4">
+                                <template x-for="p in progData" :key="p.name">
+                                    <div>
+                                        <div class="flex items-center justify-between text-[13px] mb-1.5">
+                                            <span class="font-medium" x-text="p.name"></span>
+                                            <span class="font-bold" :style="'color:'+p.c" x-text="p.v+'%'"></span>
+                                        </div>
+                                        <div class="h-1.5 rounded-full" :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                            <div class="prog-fill rounded-full"
+                                                :style="'width:'+p.v+'%;background:'+p.c"></div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2 rounded-2xl overflow-hidden border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <div class="flex items-center justify-between px-5 py-4 border-b"
+                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                <h3 class="text-[15px] font-black">دانش‌آموزان برتر</h3>
+                                <button
+                                    class="px-3 py-1 rounded-lg text-xs font-semibold border border-brand text-brand hover:bg-brand hover:text-white transition-all cursor-pointer font-vazir">مشاهده
+                                    همه</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse" style="min-width:560px">
+                                    <thead>
+                                        <tr>
+                                            <template x-for="h in ['نام','رشته','پایه','معدل','وضعیت']" :key="h">
+                                                <th class="px-3.5 py-3 text-right text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
+                                                    :class="dark ? 'bg-[#162040] text-[#7a90b8]' : 'bg-[#eef2fb] text-[#5a6a85]'"
+                                                    x-text="h"></th>
+                                            </template>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template x-for="s in topStu" :key="s.name">
+                                            <tr class="transition-colors"
+                                                :class="dark ? 'hover:bg-[#162040]' : 'hover:bg-[#eef2fb]'">
+                                                <td class="px-3.5 py-3 border-t"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black text-white shrink-0"
+                                                            :style="'background:linear-gradient(135deg,'+s.c1+','+s.c2+')'"
+                                                            x-text="s.name[0]"></div>
+                                                        <span class="text-[13px]" x-text="s.name"></span>
+                                                    </div>
+                                                </td>
+                                                <td class="px-3.5 py-3 text-[13px] border-t"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"
+                                                    x-text="s.field"></td>
+                                                <td class="px-3.5 py-3 text-[13px] border-t"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"
+                                                    x-text="s.grade"></td>
+                                                <td class="px-3.5 py-3 border-t"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"><strong
+                                                        class="text-[13px]" x-text="s.avg"></strong></td>
+                                                <td class="px-3.5 py-3 border-t"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                    <span
+                                                        class="inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                                                        :style="'background:'+s.sc+'22;color:'+s.sc"
+                                                        x-text="s.stat"></span>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STUDENTS -->
+                <div x-show="sec==='students'">
+                    <div class="rounded-2xl overflow-hidden border"
+                        :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                        <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b"
+                            :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <input
+                                    class="px-3 py-2 rounded-xl border text-[13px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 w-48"
+                                    :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'"
+                                    placeholder="جستجو..." type="text" />
+                                <select
+                                    class="px-3 py-2 rounded-xl border text-[13px] font-vazir outline-none cursor-pointer w-36"
+                                    :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'">
+                                    <option>همه رشته‌ها</option>
+                                    <option>کامپیوتر</option>
+                                    <option>طراحی دوخت</option>
+                                </select>
+                            </div>
+                            <button
+                                class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-semibold text-white cursor-pointer border-none font-vazir"
+                                style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <line x1="12" y1="5" x2="12" y2="19" />
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                </svg>
+                                دانش‌آموز جدید
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse" style="min-width:700px">
+                                <thead>
+                                    <tr>
+                                        <template
+                                            x-for="h in ['#','نام','کد ملی','رشته','پایه','معدل','وضعیت','عملیات']"
+                                            :key="h">
+                                            <th class="px-3.5 py-3 text-right text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
+                                                :class="dark ? 'bg-[#162040] text-[#7a90b8]' : 'bg-[#eef2fb] text-[#5a6a85]'"
+                                                x-text="h"></th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="(s,i) in allStu" :key="s.name">
+                                        <tr :class="dark ? 'hover:bg-[#162040]' : 'hover:bg-[#eef2fb]'"
+                                            class="transition-colors">
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060] text-[#7a90b8]' : 'border-[#dde4f0] text-[#5a6a85]'"
+                                                x-text="i+1"></td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                <div class="flex items-center gap-2">
+                                                    <div class="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black text-white shrink-0"
+                                                        :style="'background:linear-gradient(135deg,'+s.c1+','+s.c2+')'"
+                                                        x-text="s.name[0]"></div>
+                                                    <span class="text-[13px]" x-text="s.name"></span>
+                                                </div>
+                                            </td>
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060] text-[#7a90b8]' : 'border-[#dde4f0] text-[#5a6a85]'"
+                                                x-text="s.code"></td>
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"
+                                                x-text="s.field"></td>
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"
+                                                x-text="s.grade"></td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"><strong
+                                                    class="text-[13px]" x-text="s.avg"></strong></td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"><span
+                                                    class="inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                                                    :style="'background:'+s.sc+'22;color:'+s.sc" x-text="s.stat"></span>
+                                            </td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                <div class="flex items-center gap-1">
+                                                    <button
+                                                        class="px-2.5 py-1 rounded-lg text-[12px] font-medium cursor-pointer border-none bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-vazir">ویرایش</button>
+                                                    <button
+                                                        class="px-2.5 py-1 rounded-lg text-[12px] font-medium cursor-pointer border-none bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400 font-vazir">حذف</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEACHERS -->
+                <div x-show="sec==='teachers'">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <template x-for="t in teachers" :key="t.name">
+                            <div class="rounded-2xl p-6 border transition-all hover:shadow-lg"
+                                :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg text-white shrink-0"
+                                        :style="'background:linear-gradient(135deg,'+t.c1+','+t.c2+')'"
+                                        x-text="t.name[0]"></div>
+                                    <div>
+                                        <div class="font-black text-[14px]" x-text="t.name"></div>
+                                        <div class="text-[12px] mt-0.5"
+                                            :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'" x-text="t.field"></div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2.5 mb-4">
+                                    <div class="rounded-xl p-2.5 text-center"
+                                        :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                        <div class="text-lg font-black" x-text="t.hours+'h'"></div>
+                                        <div class="text-[10px] mt-0.5"
+                                            :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">ساعت تدریس</div>
+                                    </div>
+                                    <div class="rounded-xl p-2.5 text-center"
+                                        :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                        <div class="text-lg font-black" x-text="t.classes"></div>
+                                        <div class="text-[10px] mt-0.5"
+                                            :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">کلاس</div>
+                                    </div>
+                                </div>
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold mb-3"
+                                    :style="'background:'+t.c1+'22;color:'+t.c1" x-text="t.spec"></span>
+                                <div class="flex gap-2 mt-2">
+                                    <button
+                                        class="flex-1 py-2 rounded-xl text-[13px] font-medium cursor-pointer border font-vazir transition-all hover:bg-opacity-80"
+                                        :class="dark ? 'bg-transparent border-[#1e3060] text-[#7a90b8] hover:text-white' : 'bg-transparent border-[#dde4f0] text-[#5a6a85] hover:bg-[#eef2fb]'">پروفایل</button>
+                                    <button
+                                        class="flex-1 py-2 rounded-xl text-[13px] font-medium text-white cursor-pointer border-none font-vazir hover:-translate-y-px transition-transform"
+                                        style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">پیام</button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- SCHEDULE -->
+                <div x-show="sec==='schedule'">
+                    <div class="rounded-2xl p-6 border"
+                        :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                        <div class="flex items-center justify-between mb-5">
+                            <h3 class="text-[15px] font-black">برنامه هفتگی — کلاس دهم کامپیوتر</h3>
+                            <select
+                                class="px-3 py-2 rounded-xl border text-[13px] font-vazir outline-none cursor-pointer w-40"
+                                :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'">
+                                <option>دهم کامپیوتر</option>
+                                <option>یازدهم گرافیک</option>
+                            </select>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse" style="min-width:560px">
+                                <thead>
+                                    <tr>
+                                        <th class="px-3 py-2.5 text-right text-[11px] font-bold border w-24"
+                                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#7a90b8]' : 'bg-[#eef2fb] border-[#dde4f0] text-[#5a6a85]'">
+                                            زنگ / روز</th>
+                                        <template x-for="d in ['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه']"
+                                            :key="d">
+                                            <th class="px-3 py-2.5 text-center text-[11px] font-bold border"
+                                                :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#7a90b8]' : 'bg-[#eef2fb] border-[#dde4f0] text-[#5a6a85]'"
+                                                x-text="d"></th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="(row,ri) in sched" :key="ri">
+                                        <tr>
+                                            <td class="px-3 py-2 text-center text-[12px] font-bold border whitespace-nowrap"
+                                                :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#7a90b8]' : 'bg-[#eef2fb] border-[#dde4f0] text-[#5a6a85]'"
+                                                x-text="row.bell"></td>
+                                            <template x-for="(cell,ci) in row.cells" :key="ci">
+                                                <td class="p-2 border"
+                                                    :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                    <div x-show="cell"
+                                                        class="py-2 px-1 text-center text-[12px] font-semibold rounded-lg"
+                                                        :style="'background:'+cell?.c+'22;color:'+cell?.c"
+                                                        x-text="cell?.s"></div>
+                                                </td>
+                                            </template>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GRADES -->
+                <div x-show="sec==='grades'">
+                    <div class="rounded-2xl p-6 border"
+                        :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+                            <h3 class="text-[15px] font-black">کارنامه تحصیلی — نوبت اول</h3>
+                            <div class="flex items-center gap-2">
+                                <select
+                                    class="px-3 py-2 rounded-xl border text-[13px] font-vazir outline-none cursor-pointer w-40"
+                                    :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'">
+                                    <option>دهم کامپیوتر</option>
+                                    <option>دهم گرافیک</option>
+                                </select>
+                                <button
+                                    class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-semibold text-white cursor-pointer border-none font-vazir"
+                                    style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="6 9 6 2 18 2 18 9" />
+                                        <path
+                                            d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                        <rect x="6" y="14" width="12" height="8" />
+                                    </svg>
+                                    چاپ
+                                </button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse" style="min-width:480px">
+                                <thead>
+                                    <tr>
+                                        <template x-for="h in ['درس','مستمر (۴)','پایانی (۱۶)','نمره نهایی','وضعیت']"
+                                            :key="h">
+                                            <th class="px-3.5 py-3 text-right text-[11px] font-bold uppercase tracking-wider"
+                                                :class="dark ? 'bg-[#162040] text-[#7a90b8]' : 'bg-[#eef2fb] text-[#5a6a85]'"
+                                                x-text="h"></th>
+                                        </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template x-for="g in grades" :key="g.sub">
+                                        <tr :class="dark ? 'hover:bg-[#162040]' : 'hover:bg-[#eef2fb]'"
+                                            class="transition-colors">
+                                            <td class="px-3.5 py-3 text-[13px] font-semibold border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'" x-text="g.sub">
+                                            </td>
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'" x-text="g.c">
+                                            </td>
+                                            <td class="px-3.5 py-3 text-[13px] border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'" x-text="g.f">
+                                            </td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'"><strong
+                                                    class="text-[13px]" x-text="g.t"></strong></td>
+                                            <td class="px-3.5 py-3 border-t"
+                                                :class="dark ? 'border-[#1e3060]' : 'border-[#dde4f0]'">
+                                                <span
+                                                    class="inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                                                    :style="g.t>=10 ? 'background:#f0fdf4;color:#15803d' : 'background:#fef2f2;color:#dc2626'"
+                                                    x-text="g.t>=10 ? 'قبول' : 'مردود'"></span>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS -->
+                <div x-show="sec==='settings'">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="rounded-2xl p-7 border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <h3 class="text-[15px] font-black mb-5">اطلاعات هنرستان</h3>
+                            <div class="flex flex-col gap-4">
+                                <template
+                                    x-for="f in [{label:'نام هنرستان',val:'هنرستان هیأت امنایی زنده‌یاد عمادی'},{label:'کد آموزشگاه',val:'۱۲۳۴۵۶'},{label:'تلفن',val:'۰۱۱۳۳۳۶۲۶۶۷'}]"
+                                    :key="f.label">
+                                    <div>
+                                        <label class="block text-[13px] font-semibold mb-1.5" x-text="f.label"></label>
+                                        <input
+                                            class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                            :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'"
+                                            :value="f.val" />
+                                    </div>
+                                </template>
+                                <div>
+                                    <label class="block text-[13px] font-semibold mb-1.5">آدرس</label>
+                                    <textarea
+                                        class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none resize-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                        :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'"
+                                        rows="2">ساری، خیابان امیرمازندرانی، کوچه تبریزی</textarea>
+                                </div>
+                                <button
+                                    class="w-full py-2.5 rounded-xl text-[14px] font-semibold text-white cursor-pointer border-none font-vazir hover:-translate-y-px transition-transform"
+                                    style="background:linear-gradient(135deg,#1a4bbd,#2563eb)">ذخیره تغییرات</button>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl p-7 border"
+                            :class="dark ? 'bg-[#0f1e3d] border-[#1e3060]' : 'bg-white border-[#dde4f0]'">
+                            <h3 class="text-[15px] font-black mb-5">تنظیمات سیستم</h3>
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center justify-between p-3.5 rounded-xl"
+                                    :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                    <div>
+                                        <div class="text-[14px] font-semibold">حالت تاریک</div>
+                                        <div class="text-[12px] mt-0.5"
+                                            :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">تغییر ظاهر سامانه</div>
+                                    </div>
+                                    <button @click="dark=!dark"
+                                        class="w-12 h-6 rounded-full relative border-none cursor-pointer transition-all duration-300 shrink-0"
+                                        :style="dark ? 'background:#1a4bbd' : 'background:#dde4f0'">
+                                        <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-all duration-300 shadow"
+                                            :style="dark ? 'right:2px' : 'left:2px'"></div>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between p-3.5 rounded-xl"
+                                    :class="dark ? 'bg-[#162040]' : 'bg-[#eef2fb]'">
+                                    <div>
+                                        <div class="text-[14px] font-semibold">اعلان پیامکی</div>
+                                        <div class="text-[12px] mt-0.5"
+                                            :class="dark ? 'text-[#7a90b8]' : 'text-[#5a6a85]'">ارسال پیامک به والدین
+                                        </div>
+                                    </div>
+                                    <button class="w-12 h-6 rounded-full relative border-none cursor-pointer shrink-0"
+                                        style="background:#1a4bbd">
+                                        <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 shadow">
+                                        </div>
+                                    </button>
+                                </div>
+                                <div>
+                                    <label class="block text-[13px] font-semibold mb-1.5">سال تحصیلی</label>
+                                    <select
+                                        class="w-full px-3.5 py-2.5 rounded-xl border text-[14px] font-vazir outline-none cursor-pointer"
+                                        :class="dark ? 'bg-[#162040] border-[#1e3060] text-[#e8eef8]' : 'bg-white border-[#dde4f0]'">
+                                        <option>۱۴۰۶–۱۴۰۵</option>
+                                        <option>۱۴۰۵–۱۴۰۴</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function App() {
+            const blue = '#1a4bbd', violet = '#7c3aed', emerald = '#0d9488', gold = '#e8a020', rose = '#e11d48', slate = '#475569';
+            return {
+                page: 'public', dark: false, pubSec: 'home', role: 'manager',
+                lUser: '', lPass: '', sideOpen: true, sidebarMobile: false, sec: 'overview',
+
+                doLogin() {
+                    if (this.lUser === 'admin' && this.lPass === '1234') this.page = 'dashboard';
+                    else alert('اطلاعات ورود اشتباه است\n\nورود آزمایشی: admin / 1234');
+                },
+
+                pubNav: [{ id: 'home', label: 'صفحه اصلی' }, { id: 'about', label: 'درباره ما' }, { id: 'depts', label: 'رشته‌ها' }, { id: 'contact', label: 'تماس با ما' }],
+
+                heroStats: [{ val: '۳۲۰+', label: 'دانش‌آموز فعال' }, { val: '۲۸', label: 'مدرس متخصص' }, { val: '۸', label: 'رشته تخصصی' }, { val: '۹۴٪', label: 'نرخ قبولی' }],
+
+                pubNews: [
+                    { id: 1, title: 'موفقیت دانش‌آموزان در مرحله شهرستانی پرسش مهر', excerpt: 'تیم هنرستان عمادی در مسابقات پرسش مهر استانی موفق به کسب مقام اول شد.', date: '۱۵ خرداد ۱۴۰۵', cat: 'افتخارات', c1: blue, c2: violet, svg: '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+                    { id: 2, title: 'برنامه امتحانات نوبت اول (دی ماه) ۱۴۰۴', excerpt: 'برنامه‌بندی کامل امتحانات نیمسال اول برای پایه‌های دهم، یازدهم و دوازدهم اعلام شد.', date: '۲۲ آبان ۱۴۰۴', cat: 'امتحانات', c1: gold, c2: '#f59e0b', svg: '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+                    { id: 3, title: 'بازدید علمی رشته کامپیوتر از مرکز هوش مصنوعی مازندران', excerpt: 'هنرجویان با کاربردهای هوش مصنوعی در صنعت و آینده بازار کار آشنا شدند.', date: '۱۵ آبان ۱۴۰۳', cat: 'بازدید علمی', c1: emerald, c2: '#0891b2', svg: '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' }
+                ],
+
+                features: [
+                    { title: 'مدرسان متخصص و مجرب', desc: 'کادر آموزشی ما از میان برترین متخصصان حوزه فنی و هنری انتخاب شده‌اند.', c: blue, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
+                    { title: 'تجهیزات و امکانات مدرن', desc: 'کارگاه‌های مجهز و به‌روز برای آموزش عملی و حرفه‌ای دانش‌آموزان.', c: emerald, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' },
+                    { title: 'ارتباط مستقیم با بازار کار', desc: 'همکاری با کارخانه‌ها و کارگاه‌های محلی برای کارآموزی و استخدام فارغ‌التحصیلان.', c: gold, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>' },
+                    { title: 'سامانه آنلاین پیشرفته', desc: 'پنل مدیریتی برای دانش‌آموزان، والدین و مدرسان جهت پیگیری آسان وضعیت تحصیلی.', c: violet, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>' },
+                    { title: 'فعالیت‌های فوق‌برنامه', desc: 'باشگاه‌های هنری، مسابقات علمی و اردوهای آموزشی برای پرورش همه‌جانبه دانش‌آموزان.', c: rose, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' },
+                    { title: 'مشاوره تحصیلی و شغلی', desc: 'راهنمایی دانش‌آموزان در انتخاب مسیر تحصیلی و شغلی مناسب با توانمندی‌هایشان.', c: slate, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' }
+                ],
+
+                depts: [
+                    { name: 'کامپیوتر', desc: 'شبکه و نرم‌افزار', c: blue, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' },
+                    { name: 'طراحی دوخت', desc: 'فنی و حرفه‌ای', c: rose, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' },
+                    { name: 'نقاشی', desc: 'هنرهای تجسمی', c: '#ea580c', svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="0.5"/><circle cx="17.5" cy="10.5" r="0.5"/><circle cx="8.5" cy="7.5" r="0.5"/><circle cx="6.5" cy="12.5" r="0.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>' },
+                    { name: 'عکاسی', desc: 'هنر دیجیتال', c: violet, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>' },
+                    { name: 'صنایع غذایی', desc: 'آشپزی و شیرینی', c: '#0891b2', svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>' },
+                    { name: 'گرافیک', desc: 'طراحی گرافیک', c: emerald, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>' },
+                    { name: 'سرامیک', desc: 'صنایع دستی', c: gold, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' },
+                    { name: 'اقتصاد خانواده', desc: 'کاردانش', c: slate, svg: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' }
+                ],
+
+                pubTeachers: [
+                    { name: 'سهیلا بابایی', role: 'مدرس ارشد', field: 'کامپیوتر', c1: blue, c2: violet, svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>' },
+                    { name: 'منیرالسادات کاملی', role: 'مدرس', field: 'صنایع غذایی', c1: gold, c2: '#f59e0b', svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>' },
+                    { name: 'نیلوفر ضابطی', role: 'مدرس', field: 'طراحی دوخت', c1: rose, c2: '#f43f5e', svg: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>' }
+                ],
+
+                contactInfo: [
+                    { label: 'آدرس', val: 'ساری، خیابان امیرمازندرانی، کوچه تبریزی', svg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>' },
+                    { label: 'تلفن', val: '۰۱۱۳۳۳۶۲۶۶۷', svg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 9.82 19.79 19.79 0 0 1 1.6 1.22 2 2 0 0 1 3.6 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.91a16 16 0 0 0 8.18 8.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 23 18v-.08z"/></svg>' },
+                    { label: 'ایمیل', val: 'emadiartschool@gmail.com', svg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>' },
+                    { label: 'اینستاگرام', val: 'emadi.art.school', svg: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>' }
+                ],
+
+                menu: [
+                    { id: 'overview', label: 'داشبورد', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>' },
+                    { id: 'students', label: 'دانش‌آموزان', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+                    { id: 'teachers', label: 'مدرسان', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
+                    { id: 'schedule', label: 'برنامه هفتگی', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
+                    { id: 'grades', label: 'کارنامه', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>' },
+                    { id: 'settings', label: 'تنظیمات', badge: '', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M19.07 19.07l-1.41-1.41M5.34 5.34l-1.41-1.41M22 12h-2M4 12H2M12 22v-2M12 4V2"/></svg>' }
+                ],
+
+                kpis: [
+                    { val: '۳۲۰', label: 'دانش‌آموز فعال', note: '↑ ۱۲ نفر از ترم قبل', c1: '#0f1f4b', c2: '#1a4bbd', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+                    { val: '۲۸', label: 'مدرس متخصص', note: '۴ مدرس جدید', c1: '#4c1d95', c2: '#7c3aed', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' },
+                    { val: '۹۴٪', label: 'نرخ حضور', note: 'این هفته', c1: '#064e3b', c2: '#0d9488', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>' },
+                    { val: '۱۸.۶', label: 'میانگین معدل', note: 'نوبت اول', c1: '#78350f', c2: '#e8a020', icon: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>' }
+                ],
+
+                bars: [
+                    { day: 'ش', h: 92, pct: 92, color: '#1a4bbd' }, { day: '۱ش', h: 88, pct: 88, color: '#7c3aed' },
+                    { day: '۲ش', h: 96, pct: 96, color: '#0d9488' }, { day: '۳ش', h: 79, pct: 79, color: '#e8a020' },
+                    { day: '۴ش', h: 85, pct: 85, color: '#e11d48' }
+                ],
+
+                notifs: [
+                    { text: 'برنامه امتحانات دی ماه بارگذاری شد', time: '۲ ساعت پیش', color: '#1a4bbd' },
+                    { text: 'کارنامه میان‌ترم آماده تحویل است', time: 'دیروز', color: '#e8a020' },
+                    { text: 'جلسه شورای دبیران: سه‌شنبه ۱۲', time: '۲ روز پیش', color: '#0d9488' },
+                    { text: 'مسابقات علمی استانی — ثبت‌نام', time: '۳ روز پیش', color: '#7c3aed' }
+                ],
+
+                progData: [
+                    { name: 'کامپیوتر', v: 84, c: '#1a4bbd' }, { name: 'نقاشی', v: 91, c: '#0d9488' },
+                    { name: 'طراحی دوخت', v: 76, c: '#7c3aed' }, { name: 'گرافیک', v: 80, c: '#e8a020' },
+                    { name: 'صنایع غذایی', v: 69, c: '#e11d48' }
+                ],
+
+                topStu: [
+                    { name: 'زهرا محمدی', field: 'کامپیوتر', grade: 'دهم', avg: 19.8, stat: 'ممتاز', sc: '#0d9488', c1: '#1a4bbd', c2: '#7c3aed' },
+                    { name: 'فاطمه رضایی', field: 'نقاشی', grade: 'یازدهم', avg: 19.5, stat: 'ممتاز', sc: '#0d9488', c1: '#e8a020', c2: '#f59e0b' },
+                    { name: 'مریم کریمی', field: 'دوخت', grade: 'دوازدهم', avg: 18.9, stat: 'عالی', sc: '#1a4bbd', c1: '#e11d48', c2: '#f43f5e' },
+                    { name: 'سارا احمدی', field: 'گرافیک', grade: 'دهم', avg: 18.6, stat: 'عالی', sc: '#1a4bbd', c1: '#0d9488', c2: '#0891b2' },
+                    { name: 'نیلوفر حسینی', field: 'عکاسی', grade: 'یازدهم', avg: 18.2, stat: 'خوب', sc: '#e8a020', c1: '#7c3aed', c2: '#a78bfa' }
+                ],
+
+                allStu: [
+                    { name: 'زهرا محمدی', code: '۲۳۴۵۶۷۸۹۰۱', field: 'کامپیوتر', grade: 'دهم', avg: 19.8, stat: 'ممتاز', sc: '#0d9488', c1: '#1a4bbd', c2: '#7c3aed' },
+                    { name: 'فاطمه رضایی', code: '۳۴۵۶۷۸۹۰۱۲', field: 'نقاشی', grade: 'یازدهم', avg: 19.5, stat: 'ممتاز', sc: '#0d9488', c1: '#e8a020', c2: '#f59e0b' },
+                    { name: 'مریم کریمی', code: '۴۵۶۷۸۹۰۱۲۳', field: 'دوخت', grade: 'دوازدهم', avg: 18.9, stat: 'عالی', sc: '#1a4bbd', c1: '#e11d48', c2: '#f43f5e' },
+                    { name: 'سارا احمدی', code: '۵۶۷۸۹۰۱۲۳۴', field: 'گرافیک', grade: 'دهم', avg: 18.6, stat: 'عالی', sc: '#1a4bbd', c1: '#0d9488', c2: '#0891b2' },
+                    { name: 'نیلوفر حسینی', code: '۶۷۸۹۰۱۲۳۴۵', field: 'عکاسی', grade: 'یازدهم', avg: 18.2, stat: 'خوب', sc: '#e8a020', c1: '#7c3aed', c2: '#a78bfa' },
+                    { name: 'الهام صادقی', code: '۷۸۹۰۱۲۳۴۵۶', field: 'صنایع غذایی', grade: 'دوازدهم', avg: 17.9, stat: 'خوب', sc: '#e8a020', c1: '#e8a020', c2: '#f59e0b' },
+                    { name: 'ریحانه نوری', code: '۸۹۰۱۲۳۴۵۶۷', field: 'کامپیوتر', grade: 'یازدهم', avg: 17.4, stat: 'متوسط', sc: '#475569', c1: '#475569', c2: '#64748b' },
+                    { name: 'آیدا قنبری', code: '۹۰۱۲۳۴۵۶۷۸', field: 'سرامیک', grade: 'دهم', avg: 16.8, stat: 'متوسط', sc: '#475569', c1: '#1a4bbd', c2: '#3b82f6' }
+                ],
+
+                teachers: [
+                    { name: 'سهیلا بابایی', field: 'کامپیوتر', hours: 24, classes: 4, spec: 'شبکه و نرم‌افزار', c1: '#1a4bbd', c2: '#7c3aed' },
+                    { name: 'رضوانه بابازاده', field: 'کامپیوتر', hours: 20, classes: 3, spec: 'برنامه‌نویسی', c1: '#0d9488', c2: '#0891b2' },
+                    { name: 'منیرالسادات کاملی', field: 'صنایع غذایی', hours: 22, classes: 4, spec: 'مدیریت آشپزی', c1: '#e8a020', c2: '#f59e0b' },
+                    { name: 'عاطفه اسحقی', field: 'صنایع غذایی', hours: 18, classes: 3, spec: 'شیرینی‌پزی', c1: '#e11d48', c2: '#f43f5e' },
+                    { name: 'نیلوفر ضابطی', field: 'طراحی دوخت', hours: 20, classes: 3, spec: 'طراحی لباس', c1: '#7c3aed', c2: '#a78bfa' },
+                    { name: 'سمیه زلیکانی', field: 'طراحی دوخت', hours: 16, classes: 2, spec: 'دوخت صنعتی', c1: '#475569', c2: '#64748b' }
+                ],
+
+                sched: [
+                    { bell: 'زنگ ۱', cells: [{ s: 'ریاضی', c: '#1a4bbd' }, { s: 'فارسی', c: '#7c3aed' }, { s: 'برنامه‌نویسی', c: '#0d9488' }, { s: 'دین', c: '#e8a020' }, { s: 'ورزش', c: '#e11d48' }] },
+                    { bell: 'زنگ ۲', cells: [{ s: 'شبکه', c: '#0d9488' }, { s: 'ریاضی', c: '#1a4bbd' }, { s: 'فارسی', c: '#7c3aed' }, { s: 'برنامه‌نویسی', c: '#0d9488' }, { s: 'ریاضی', c: '#1a4bbd' }] },
+                    { bell: 'زنگ ۳', cells: [{ s: 'فارسی', c: '#7c3aed' }, { s: 'شبکه', c: '#0d9488' }, null, { s: 'ورزش', c: '#e11d48' }, { s: 'برنامه‌نویسی', c: '#0d9488' }] },
+                    { bell: 'زنگ ۴', cells: [{ s: 'عربی', c: '#e8a020' }, { s: 'انگلیسی', c: '#1a4bbd' }, { s: 'ریاضی', c: '#1a4bbd' }, { s: 'فارسی', c: '#7c3aed' }, null] },
+                    { bell: 'زنگ ۵', cells: [{ s: 'ورزش', c: '#e11d48' }, null, { s: 'عربی', c: '#e8a020' }, { s: 'شبکه', c: '#0d9488' }, { s: 'دین', c: '#e8a020' }] }
+                ],
+
+                grades: [
+                    { sub: 'ریاضی', c: 3, f: 11, t: 14 }, { sub: 'فارسی', c: 3.5, f: 12, t: 15.5 },
+                    { sub: 'برنامه‌نویسی', c: 4, f: 14, t: 18 }, { sub: 'شبکه', c: 3.5, f: 13, t: 16.5 },
+                    { sub: 'انگلیسی', c: 2.5, f: 8, t: 10.5 }, { sub: 'دین و زندگی', c: 4, f: 13, t: 17 },
+                    { sub: 'ورزش', c: 4, f: 15, t: 19 }, { sub: 'عربی', c: 2, f: 6, t: 8 }
+                ]
+            }
+        }
+    </script>
+</body>
+
+</html>
