@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه ثبت نام</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        direction: rtl;
+    }
+
+    body {
+        background: #f5f7fb;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        padding: 40px;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .right {
+        width: 50%;
+        height: 100%;
+        float: right;
+        position: relative;
+    }
+
+    .right_info {
+        width: 350px;
+        min-height: 200px;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: auto;
+        transform: translate(-50%, -50%);
+    }
+
+    .label {
+        font-size: 14px;
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: 500;
+    }
+
+    .input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 14px;
+        margin-bottom: 15px;
+        transition: all 0.2s ease;
+    }
+
+    .input:focus {
+        outline: none;
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    .forgot_password {
+        font-size: 12px;
+        color: #2563eb;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        margin: -10px 0 20px;
+    }
+
+    .forgot_password:hover {
+        text-decoration: underline;
+    }
+
+    .button {
+        width: 100%;
+        padding: 12px;
+        background-color: #111827;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+
+    .button:hover {
+        background-color: #1f2937;
+    }
+
+    .or_text {
+        text-align: center;
+        font-size: 14px;
+        margin: 20px 0;
+        color: #6b7280;
+        position: relative;
+    }
+
+    .or_text::before,
+    .or_text::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 45%;
+        height: 1px;
+        background: #e5e7eb;
+    }
+
+    .or_text::before {
+        right: 0;
+    }
+
+    .or_text::after {
+        left: 0;
+    }
+
+    .social_but {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .social_but button {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #e5e7eb;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: background 0.2s;
+    }
+
+    .social_but button:hover {
+        background: #f9fafb;
+    }
+
+    .social_but button img {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .social_but button span {
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 500;
+    }
+
+    .social_but .span_sm {
+        display: none;
+    }
+
+    .signup_text {
+        text-align: center;
+        margin-top: 24px;
+        color: #374151;
+        font-size: 14px;
+    }
+
+    .signup_text a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 5px;
+    }
+
+    .signup_text a:hover {
+        text-decoration: underline;
+    }
+
+    .left {
+        width: 50%;
+        position: relative;
+        height: 100%;
+        float: left;
+    }
+
+    .left img {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        display: block;
+        margin: auto;
+        object-fit: cover;
+        box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    @media(max-width:768px) {
+        .container {
+            height: auto;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right,
+        .left {
+            width: 100%;
+            height: auto;
+            float: none;
+        }
+
+        .right {
+            padding: 0;
+            position: relative;
+            top: 0;
+            order: 1;
+        }
+
+        .right_info {
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            transform: none;
+            width: 100%;
+            max-width: 380px;
+            margin: 20px auto;
+        }
+
+        .left {
+            order: 0;
+            margin-bottom: 20px;
+            height: 240px;
+        }
+
+        .left img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .social_but .span {
+            display: inline;
+        }
+
+        .social_but .span_sm {
+            display: none;
+        }
+    }
+
+    @media(max-width:480px) {
+        .container {
+            padding: 16px;
+        }
+
+        .right_info {
+            padding: 0 8px;
+        }
+
+        .social_but button span {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="right">
+            <div class="right_info">
+                <h1 style="font-size: 28px; margin-bottom: 8px; color: #111827;">به بازگشت‌تان خوش آمدید</h1>
+                <p style="color: #6b7280; margin-bottom: 28px; font-size: 14px;">امروز روز جدیدی است. روز توست. آن را
+                    شکل بده.</p>
+
+                <form action="#" method="post">
+                    <label for="email" class="label">ایمیل</label>
+                    <input type="email" id="email" class="input" placeholder="Example@email.com" required>
+
+                    <label for="password" class="label">رمز عبور</label>
+                    <input type="password" id="password" class="input" placeholder="حداقل ۸ کاراکتر" required>
+
+                    <a href="#" class="forgot_password">رمز عبور را فراموش کرده‌اید؟</a>
+
+                    <button type="submit" class="button">ورود</button>
+                </form>
+
+                <div class="or_text">یا</div>
+
+                <div class="social_but">
+                    <button type="button">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='20px' height='20px'%3E%3Cpath fill='%23FFC107' d='M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z'/%3E%3Cpath fill='%23FF3D00' d='M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z'/%3E%3Cpath fill='%234CAF50' d='M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z'/%3E%3Cpath fill='%231976D2' d='M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z'/%3E%3C/svg%3E"
+                            alt="google">
+                        <span class="span">ورود با گوگل</span>
+                        <span class="span_sm">گوگل</span>
+                    </button>
+                    <button type="button">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='20px' height='20px'%3E%3Cpath fill='%233b5998' d='M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.914,2.7-2.363,3.251-4.086c-1.428,0.847-3.008,1.462-4.692,1.791c-1.346-1.435-3.266-2.333-5.391-2.333c-4.078,0-7.384,3.306-7.384,7.384c0,0.578,0.065,1.142,0.192,1.684C17.017,17.622,12.102,14.794,9.06,10.535c-0.636,1.092-1,2.362-1,3.718c0,2.563,1.305,4.826,3.287,6.152c-1.211-0.037-2.351-0.37-3.347-0.924c0,0.031,0,0.062,0,0.094c0,3.581,2.548,6.567,5.926,7.246c-0.62,0.169-1.274,0.259-1.946,0.259c-0.476,0-0.937-0.047-1.388-0.132c0.938,2.932,3.667,5.067,6.895,5.127c-2.527,1.981-5.712,3.162-9.172,3.162c-0.596,0-1.183-0.035-1.761-0.104C9.997,40.562,14.297,42,19.006,42c15.206,0,23.523-12.594,23.523-23.523c0-0.359-0.008-0.715-0.024-1.069C39.866,15.263,41.109,13.939,42,12.429z'/%3E%3C/svg%3E"
+                            alt="facebook">
+                        <span class="span">ورود با فیسبوک</span>
+                        <span class="span_sm">فیسبوک</span>
+                    </button>
+                </div>
+                <p class="signup_text">
+                    حساب کاربری ندارید؟ <a href="#">ثبت نام کنید</a>
+                </p>
+            </div>
+        </div>
+        <div class="left">
+            <img src="assets/IMAGES/new-flower2.jpg" alt="">
+        </div>
+    </div>
+</body>
+
+</html>

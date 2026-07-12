@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>نارنجی‌شاپ - فروشگاه ایرانی مدرن</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #fff;
+            direction: rtl;
+        }
+
+        nav {
+            padding: 10px 0!important;
+        }
+
+        .main-header {
+            background: linear-gradient(90deg, #ff8500 0%, #ffb700 100%);
+            border-bottom-right-radius: 32px;
+            border-bottom-left-radius: 32px;
+            box-shadow: 0 2px 22px #ffba002b;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 2.1rem;
+            letter-spacing: 1.5px;
+            color: #fff;
+            margin-right: 20px;
+        }
+
+        .main-nav {
+            padding: 0;
+        }
+
+        .main-menu {
+            margin-right: auto;
+        }
+
+        .main-menu .nav-link {
+            color: #fff !important;
+            font-size: 1.11rem;
+            border-radius: 10px;
+            font-weight: 500;
+            margin-left: 6px;
+            margin-right: 6px;
+            transition: background .19s, padding .14s, box-shadow .18s;
+            position: relative;
+        }
+
+        .main-menu .nav-link.active,
+        .main-menu .nav-link:focus,
+        .main-menu .nav-link:hover {
+            background: #fff6;
+            color: #ff9300 !important;
+            font-weight: 700;
+            box-shadow: 0 4px 16px #ffd99344;
+            padding-right: 17px;
+            padding-left: 17px;
+        }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .offcanvas {
+            background: linear-gradient(135deg, #ff9500 0%, #ffb700 100%);
+            border: none;
+        }
+
+        .offcanvas-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+        }
+
+        .offcanvas-title {
+            color: #fff;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
+
+        .offcanvas-body {
+            padding: 2rem 1.5rem;
+        }
+
+        .offcanvas .nav-link {
+            color: #fff !important;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .offcanvas .nav-link:hover,
+        .offcanvas .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff !important;
+            padding-right: 1rem;
+            border-radius: 10px;
+        }
+
+        .offcanvas .nav-link:last-child {
+            border-bottom: none;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(180deg, #fff8ee 80%, #fff 100%);
+            text-align: center;
+            padding: 3.2rem 0 2.1rem 0;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #222;
+        }
+
+        .hero-desc {
+            color: #757575;
+            font-size: 1.1rem;
+            margin: 1.1rem 0 1.31rem 0;
+        }
+
+        .btn-orange {
+            background: linear-gradient(90deg, #ff9500, #ffb700 90%);
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.13rem;
+            border: none;
+            border-radius: 11px;
+            padding: 0.83rem 2.58rem;
+            box-shadow: 0 2px 18px #ffc10715, 0 2px 18px #ffd80f13 inset;
+            position: relative;
+            overflow: hidden;
+            transition: transform .18s, box-shadow .21s, background .24s;
+            isolation: isolate;
+        }
+
+        .btn-orange:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 0%;
+            height: 0%;
+            background: rgba(255, 255, 255, 0.23);
+            border-radius: 100%;
+            transform: translate(-50%, -50%);
+            transition: width .31s, height .31s;
+            z-index: 0;
+        }
+
+        .btn-orange:hover,
+        .btn-orange:focus {
+            background: linear-gradient(90deg, #ffb700, #ff9300 90%);
+            transform: scale(1.04) translateY(-2px);
+            box-shadow: 0 8px 32px #ffd99333, 0 2px 18px #ffd9930c inset;
+        }
+
+        .btn-orange:hover:after,
+        .btn-orange:focus:after {
+            width: 230%;
+            height: 230%;
+        }
+
+        .btn-orange span,
+        .product-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FEATURES */
+        .features {
+            background: #fff6e6;
+            padding: 2.7rem 0 2.1rem 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #ff9300;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 18px #ffc10710;
+            width: 63px;
+            height: 63px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto .8rem auto;
+        }
+
+        /* PRODUCTS */
+        .products-section {
+            padding: 2.8rem 0 2.2rem 0;
+            background: #fff;
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 14px #ffbe2d1a;
+            min-height: 410px;
+            background: #fff8f0;
+            transition: box-shadow .2s, transform .19s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 10px 38px #ffda7f58;
+            transform: scale(1.025) translateY(-2px);
+        }
+
+        .product-img {
+            border-radius: 14px 14px 0 0;
+            object-fit: cover;
+            width: 100%;
+            height: 200px;
+            background: #fff4d9;
+            box-shadow: 0 2px 18px #ffc96020;
+            margin-bottom: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-img.loaded {
+            opacity: 1;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: .65rem 0 .21rem 0;
+        }
+
+        .product-price {
+            color: #ff9300;
+            font-size: 1.12rem;
+            font-weight: bold;
+            margin-bottom: .7rem;
+        }
+
+        .product-btn {
+            background: linear-gradient(90deg, #ffb700, #ff9300 80%);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 13px;
+            padding: 0.51rem 0;
+            width: 100%;
+            transition: transform .17s, box-shadow .2s, background .2s;
+            box-shadow: 0 0px 12px #ffe6aa29;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .product-btn:hover,
+        .product-btn:focus {
+            background: linear-gradient(90deg, #ff9500, #ffb700 90%);
+            box-shadow: 0 8px 30px #ffd9733b;
+            transform: scale(1.03) translateY(-2.2px);
+        }
+
+        /* ABOUT & NEWSLETTER */
+        .about {
+            padding: 2.12rem 0 1.7rem 0;
+            background: #fff6e6;
+            color: #4b3200;
+            text-align: center;
+        }
+
+        .newsletter {
+            background: linear-gradient(135deg, #ff9500 0%, #ffb700 50%, #ff8a00 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            pointer-events: none;
+        }
+
+        .newsletter .newsletter-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(255, 149, 0, 0.3);
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            max-width: 500px;
+            margin: auto;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .newsletter .newsletter-icon {
+            background: linear-gradient(135deg, #ff9500, #ffb700);
+            color: #fff;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(255, 149, 0, 0.4);
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-desc {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .newsletter input[type="email"] {
+            text-align: center;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            background: #f8f9fa;
+            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .newsletter input[type="email"]:focus {
+            outline: none;
+            border-color: #ff9500;
+            background: #fff;
+            box-shadow: 0 8px 25px rgba(255, 149, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .newsletter .btn-orange {
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(255, 149, 0, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            background: linear-gradient(135deg, #ff9500, #ffb700);
+        }
+
+        .newsletter .btn-orange:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 149, 0, 0.4);
+        }
+
+        .newsletter-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1a140a;
+            color: #fff;
+            padding: 1.1rem 0 .95rem 0;
+            text-align: center;
+            font-size: 1rem;
+            letter-spacing: 0.13px;
+            border-top-right-radius: 19px;
+            border-top-left-radius: 19px;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 991px) {
+            .logo {
+                font-size: 1.35rem;
+            }
+
+            .main-header {
+                border-bottom-right-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
+
+            .main-menu .nav-link {
+                font-size: .96rem
+            }
+        }
+
+        @media (max-width: 767px) {
+            .main-header {
+                padding-bottom: 0;
+            }
+
+            .hero-title {
+                font-size: 1.13rem;
+            }
+
+            .product-card {
+                min-height: 320px;
+            }
+
+            .product-img {
+                height: 120px;
+            }
+
+            .newsletter .newsletter-box {
+                padding: 15px 5px 20px 5px;
+            }
+
+            .newsletter .newsletter-icon {
+                font-size: 1.4rem;
+                width: 41px;
+                height: 41px;
+                top: -16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg main-nav">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                    <div class="d-none d-lg-block">
+                        <div class="main-menu">
+                            <ul class="navbar-nav align-items-center" style="gap:0;">
+                                <li class="nav-item"><a class="nav-link active" href="#">خانه</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">محصولات</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">ویژگی‌ها</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">درباره ما</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">تماس</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="logo">نارنجی‌شاپ</span>
+
+                    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">نارنجی‌شاپ</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="#" data-bs-dismiss="offcanvas">خانه</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" data-bs-dismiss="offcanvas">محصولات</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" data-bs-dismiss="offcanvas">ویژگی‌ها</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" data-bs-dismiss="offcanvas">درباره ما</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" data-bs-dismiss="offcanvas">تماس</a></li>
+            </ul>
+        </div>
+    </div>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">فروشگاه اینترنتی مدرن و متفاوت با تم نارنجی</h1>
+            <p class="hero-desc">بهترین محصولات، ارسال سریع، پرداخت امن و تضمین بازگشت وجه<br>همین حالا خرید کن و متفاوت
+                باش!</p>
+            <button class="btn btn-orange shadow-sm px-4"><span>مشاهده محصولات</span></button>
+        </div>
+    </section>
+    <section class="features">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-truck"></i></div>
+                        <div class="feature-title">ارسال سریع</div>
+                        <div class="feature-desc">سراسر کشور</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
+                        <div class="feature-title">پرداخت امن</div>
+                        <div class="feature-desc">کاملا مطمئن</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-arrow-counterclockwise"></i></div>
+                        <div class="feature-title">ضمانت برگشت</div>
+                        <div class="feature-desc">تا ۷ روز</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="bi bi-star"></i></div>
+                        <div class="feature-title">پشتیبانی عالی</div>
+                        <div class="feature-desc">۷ روز هفته</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="products-section">
+        <div class="container">
+            <h2 class="fw-bold mb-4 text-center" style="color:#b06700">جدیدترین محصولات</h2>
+            <div class="row g-4" id="product-list">
+                <!-- محصولات توسط JS رندر می‌شوند -->
+            </div>
+        </div>
+    </section>
+    <section class="about">
+        <div class="container">
+            <h3 class="fw-bold mb-3">درباره نارنجی‌شاپ</h3>
+            <p>نارنجی‌شاپ فروشگاهی با طراحی ایرانی و خدمات حرفه‌ای است.<br>همین حالا متفاوت خرید کن!</p>
+        </div>
+    </section>
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-box">
+                <div class="newsletter-icon">
+                    <i class="bi bi-envelope-heart-fill"></i>
+                </div>
+                <h3 class="newsletter-title">عضویت در خبرنامه نارنجی‌شاپ</h3>
+                <p class="newsletter-desc">از آخرین محصولات، تخفیف‌ها و اخبار ما باخبر شوید</p>
+                <form class="newsletter-form-row" id="newsletterForm" autocomplete="off">
+                    <input type="email" class="form-control" placeholder="ایمیل خود را وارد کنید..." required>
+                    <button type="submit" class="btn btn-orange">
+                        <span><i class="bi bi-send-fill"></i> عضویت در خبرنامه</span>
+                    </button>
+                </form>
+                <div id="newsletterMsg" class="newsletter-success">🎉 با موفقیت عضو خبرنامه شدید!</div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            همه حقوق متعلق به <span style="color:#ff9300">نارنجی‌شاپ</span> است © ۲۰۲۵
+        </div>
+    </footer>
+    <script>
+        const products = [
+            { title: "کفش اسپرت مردانه", price: "۲,۵۰۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=200&fit=crop&crop=center" },
+            { title: "ساعت هوشمند شیائومی", price: "۳,۴۰۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=200&fit=crop&crop=center" },
+            { title: "هدفون بی‌سیم جی‌بی‌ال", price: "۱,۹۰۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop&crop=center" },
+            { title: "کیف لپ‌تاپ مدل FASHION", price: "۱,۲۱۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=200&fit=crop&crop=center" },
+            { title: "ماگ طرح ایرانی", price: "۹۸,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop&crop=center" },
+            { title: "ادکلن مردانه فرانسوی", price: "۲,۶۵۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=300&h=200&fit=crop&crop=center" },
+            { title: "چراغ مطالعه رومیزی", price: "۶۷۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=300&h=200&fit=crop&crop=center" },
+            { title: "کاپشن زمستانی مردانه", price: "۴,۳۰۰,۰۰۰ تومان", img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=200&fit=crop&crop=center" },
+        ];
+        const productList = document.getElementById("product-list");
+        products.forEach(p => {
+            const el = document.createElement("div");
+            el.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+            el.innerHTML = `
+        <div class="card product-card h-100 d-flex flex-column">
+          <img src="${p.img}" class="product-img" loading="lazy" alt="${p.title}">
+          <div class="card-body d-flex flex-column">
+            <div class="product-title">${p.title}</div>
+            <div class="product-price mb-1">${p.price}</div>
+            <button class="product-btn mt-auto"><span><i class="bi bi-cart-plus"></i> افزودن به سبد خرید</span></button>
+          </div>
+        </div>
+      `;
+            productList.appendChild(el);
+
+            // اضافه کردن event listener برای لود شدن عکس
+            const img = el.querySelector('.product-img');
+            img.addEventListener('load', function () {
+                this.classList.add('loaded');
+            });
+        });
+        // فرم خبرنامه
+        document.getElementById("newsletterForm").onsubmit = function (e) {
+            e.preventDefault();
+            const msgElement = document.getElementById("newsletterMsg");
+            msgElement.classList.add("show");
+            setTimeout(() => msgElement.classList.remove("show"), 3000);
+            this.reset();
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

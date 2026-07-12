@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه فروش</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border: none;
+        outline: none;
+        direction: rtl;
+    }
+
+    body {
+        background-color: #02ffc8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-image: url(../picture/python.jpeg);
+        background-size: cover;
+    }
+
+    .container {
+        display: flex;
+        gap: 50px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid #4d7247;
+        border-radius: 30px;
+        width: 350px;
+        min-height: 420px;
+        padding: 40px;
+        position: relative;
+        top: 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        transition: transform 0.3s ease, top 0.3s ease;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        top: -20px;
+    }
+
+    .badge {
+        position: absolute;
+        top: 50px;
+        right: 30px;
+        color: #4d7247;
+        padding: 5px 12px;
+        font-size: 14px;
+        z-index: 10;
+    }
+
+    .card h1 {
+        color: #4d7247;
+        font-size: 30px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+
+    .card ul {
+        color: #4d7247;
+        list-style: none;
+        padding: 10px;
+        flex-grow: 1;
+    }
+
+    .card ul li {
+        margin: 20px;
+        font-size: 19px;
+        opacity: 0.9;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px;
+        background-color: linear-gradient(to left, #5c805777, #24442f);
+        color: black;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="badge">محبوب ترین ها</div>
+            <h1>پایه</h1>
+            <ul>
+                <li>دسترسی به تمام امکانات</li>
+                <li>پشتیبانی 24 ساعته</li>
+                <li>عضویت در گروه ویژه</li>
+                <li>امکان لغو در هر زمان</li>
+                <li>VIP نشان</li>
+            </ul>
+            <button class="btn">خرید</button>
+        </div>
+        <div class="card">
+            <div class="badge">محبوب ترین ها</div>
+            <h1>استاندارد</h1>
+            <ul>
+                <li>دسترسی به تمام امکانات</li>
+                <li>پشتیبانی 24 ساعته</li>
+                <li>عضویت در گروه ویژه</li>
+                <li>امکان لغو در هر زمان</li>
+                <li>VIP نشان</li>
+            </ul>
+            <button class="btn">خرید</button>
+        </div>
+        <div class="card">
+            <div class="badge">محبوب ترین ها</div>
+            <h1>حرفه ای</h1>
+            <ul>
+                <li>دسترسی به تمام امکانات</li>
+                <li>پشتیبانی 24 ساعته</li>
+                <li>عضویت در گروه ویژه</li>
+                <li>امکان لغو در هر زمان</li>
+                <li>VIP نشان</li>
+            </ul>
+            <button class="btn">خرید</button>
+        </div>
+    </div>
+</body>
+
+</html>

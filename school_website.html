@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مدرسه دانش - آینده‌سازان فردا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font/dist/font-face.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      font-family: "Vazir", sans-serif;
+    }
+
+    /* Custom Color Palette */
+    :root {
+      --primary: #6366f1;
+      --secondary: #ec4899;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --orange-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --blue-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --green-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    /* Glass Morphism */
+    .glass {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .glass-dark {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Gradient Animations */
+    .gradient-animate {
+      background: linear-gradient(
+        45deg,
+        #667eea,
+        #764ba2,
+        #f093fb,
+        #f5576c,
+        #4facfe,
+        #00f2fe
+      );
+      background-size: 600% 600%;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Floating Animations */
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+
+    .floating-delayed {
+      animation: floating 6s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    .floating-slow {
+      animation: floating 8s ease-in-out infinite;
+      animation-delay: 4s;
+    }
+
+    @keyframes floating {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Custom Hover Effects */
+    .hover-lift {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Particle Background */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.8) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      animation: particleMove 20s linear infinite;
+    }
+
+    @keyframes particleMove {
+      0% {
+        transform: translateY(100vh) translateX(0px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+
+    /* Counter Animation */
+    .counter {
+      transition: all 0.3s ease;
+    }
+
+    /* Progress Bar Animation */
+    .progress-bar {
+      width: 0%;
+      transition: width 2s ease-in-out;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 10px;
+    }
+
+    /* Typing Animation */
+    .typing {
+      overflow: hidden;
+      border-right: 2px solid #667eea;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation:
+        typing 4s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink-caret {
+      from,
+      to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #667eea;
+      }
+    }
+
+    /* Interactive Button */
+    .btn-interactive {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn-interactive:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    .btn-interactive:hover:before {
+      left: 100%;
+    }
+  </style>
+  <body
+    class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen overflow-x-hidden"
+  >
+    <!-- Particle Background -->
+    <div class="particles fixed inset-0 z-0" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="glass fixed top-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Logo -->
+          <div class="flex items-center space-x-4 space-x-reverse">
+            <div
+              class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-3 rounded-xl shadow-lg"
+            >
+              <i class="fas fa-graduation-cap text-white text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold text-white">مدرسه دانش</h1>
+              <p class="text-purple-200 text-sm">آینده‌سازان فردا</p>
+            </div>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8 space-x-reverse">
+            <a
+              href="#home"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >خانه</a
+            >
+            <a
+              href="#about"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >درباره ما</a
+            >
+            <a
+              href="#courses"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >دوره‌ها</a
+            >
+            <a
+              href="#teachers"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >اساتید</a
+            >
+            <a
+              href="#news"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >اخبار</a
+            >
+            <a
+              href="#contact"
+              class="text-white hover:text-purple-300 transition-colors font-medium nav-link"
+              >تماس</a
+            >
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center space-x-4 space-x-reverse">
+            <button
+              class="btn-interactive bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              ثبت نام
+            </button>
+            <button
+              class="glass text-white p-2 rounded-lg md:hidden"
+              id="mobileMenuBtn"
+              aria-expanded="false"
+              aria-controls="mobileMenu"
+            >
+              <i class="fas fa-bars" id="mobileMenuIcon"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden mt-4">
+          <div class="glass rounded-2xl p-4 space-y-2" id="mobileMenuPanel">
+            <a
+              href="#home"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >خانه</a
+            >
+            <a
+              href="#about"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >درباره ما</a
+            >
+            <a
+              href="#courses"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >دوره‌ها</a
+            >
+            <a
+              href="#teachers"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >اساتید</a
+            >
+            <a
+              href="#news"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >اخبار</a
+            >
+            <a
+              href="#contact"
+              class="block text-white hover:text-purple-300 transition-colors font-medium mobile-nav-link"
+              >تماس</a
+            >
+            <button
+              class="btn-interactive w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300"
+            >
+              ثبت نام
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="relative min-h-screen flex items-center justify-center pt-20 scroll-mt-24"
+    >
+      <!-- Floating Elements -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div
+          class="hidden sm:block floating absolute top-20 right-10 text-purple-400 text-6xl opacity-20"
+        >
+          <i class="fas fa-book"></i>
+        </div>
+        <div
+          class="hidden sm:block floating-delayed absolute bottom-32 left-20 text-pink-400 text-4xl opacity-20"
+        >
+          <i class="fas fa-microscope"></i>
+        </div>
+        <div
+          class="hidden sm:block floating-slow absolute top-40 left-1/3 text-indigo-400 text-5xl opacity-20"
+        >
+          <i class="fas fa-atom"></i>
+        </div>
+        <div
+          class="hidden sm:block floating absolute bottom-20 right-1/4 text-cyan-400 text-3xl opacity-20"
+        >
+          <i class="fas fa-calculator"></i>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-6 text-center relative z-10 mt-20">
+        <div class="mb-8">
+          <h2
+            class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-animate bg-clip-text text-transparent"
+          >
+            آینده را بسازیم
+          </h2>
+          <p
+            class="text-base sm:text-lg md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed typing"
+          >
+            در مدرسه دانش، هر دانش‌آموز یک الماس خام است که آماده درخشیدن است
+          </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-6 justify-center mb-12">
+          <button
+            class="btn-interactive bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white px-10 py-4 rounded-2xl text-lg font-bold hover:shadow-2xl transition-all duration-300 hover:scale-105"
+          >
+            <i class="fas fa-play ml-3"></i>
+            شروع یادگیری
+          </button>
+          <button
+            class="glass text-white px-10 py-4 rounded-2xl text-lg font-bold hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <i class="fas fa-info-circle ml-3"></i>
+            بیشتر بدانید
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="glass rounded-2xl p-6 hover-lift">
+            <div
+              class="text-3xl font-bold text-white counter"
+              data-count="1200"
+            >
+              0
+            </div>
+            <div class="text-purple-200 mt-2">دانش‌آموز</div>
+          </div>
+          <div class="glass rounded-2xl p-6 hover-lift">
+            <div class="text-3xl font-bold text-white counter" data-count="50">
+              0
+            </div>
+            <div class="text-purple-200 mt-2">استاد</div>
+          </div>
+          <div class="glass rounded-2xl p-6 hover-lift">
+            <div class="text-3xl font-bold text-white counter" data-count="25">
+              0
+            </div>
+            <div class="text-purple-200 mt-2">سال تجربه</div>
+          </div>
+          <div class="glass rounded-2xl p-6 hover-lift">
+            <div class="text-3xl font-bold text-white counter" data-count="98">
+              0
+            </div>
+            <div class="text-purple-200 mt-2">% موفقیت</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3
+            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+          >
+            درباره مدرسه دانش
+          </h3>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+            بیش از ۲۵ سال در خدمت آموزش و پرورش نسل آینده
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="glass rounded-3xl p-8 hover-lift">
+            <div class="mb-6">
+              <i
+                class="fas fa-trophy text-6xl bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent"
+              ></i>
+            </div>
+            <h4 class="text-2xl font-bold text-white mb-4">رتبه ۱ کشوری</h4>
+            <p class="text-gray-300 leading-relaxed mb-6">
+              مدرسه دانش با کسب رتبه اول در سطح کشور، به عنوان برترین مؤسسه
+              آموزشی شناخته شده است.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-gray-300">میزان رضایت والدین</span>
+                <span class="text-green-400 font-bold">96%</span>
+              </div>
+              <div class="bg-gray-700 rounded-full h-2">
+                <div
+                  class="progress-bar bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full"
+                  style="width: 96%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="glass rounded-2xl p-6 hover-lift">
+              <div class="flex items-center mb-4">
+                <div
+                  class="bg-gradient-to-r from-blue-500 to-cyan-500 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-brain text-white text-xl"></i>
+                </div>
+                <h5 class="text-xl font-bold text-white">آموزش خلاقانه</h5>
+              </div>
+              <p class="text-gray-300">
+                استفاده از جدیدترین روش‌های آموزشی و تکنولوژی‌های نوین
+              </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 hover-lift">
+              <div class="flex items-center mb-4">
+                <div
+                  class="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-users text-white text-xl"></i>
+                </div>
+                <h5 class="text-xl font-bold text-white">کلاس‌های کوچک</h5>
+              </div>
+              <p class="text-gray-300">
+                حداکثر ۱۵ دانش‌آموز در هر کلاس برای توجه بیشتر به هر فرد
+              </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 hover-lift">
+              <div class="flex items-center mb-4">
+                <div
+                  class="bg-gradient-to-r from-green-500 to-teal-500 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-medal text-white text-xl"></i>
+                </div>
+                <h5 class="text-xl font-bold text-white">مربیان حرفه‌ای</h5>
+              </div>
+              <p class="text-gray-300">
+                اساتید با مدارک بین‌المللی و سال‌ها تجربه تدریس
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3
+            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent"
+          >
+            دوره‌های آموزشی
+          </h3>
+          <p class="text-xl text-gray-300">
+            از ابتدایی تا دبیرستان با بهترین کیفیت آموزشی
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <!-- Elementary -->
+          <div class="glass rounded-3xl p-8 hover-lift group">
+            <div class="text-center mb-6">
+              <div
+                class="bg-gradient-to-r from-green-400 to-blue-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <i class="fas fa-child text-white text-2xl"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-white">دوره ابتدایی</h4>
+              <p class="text-gray-300 mt-2">کلاس اول تا ششم</p>
+            </div>
+            <ul class="space-y-3 mb-8 text-center">
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-green-400 ml-3"></i>
+                پایه‌گذاری قوی در درس‌های پایه
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-green-400 ml-3"></i>
+                آموزش زبان انگلیسی از کلاس اول
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-green-400 ml-3"></i>
+                کلاس‌های هنری و ورزشی
+              </li>
+            </ul>
+            <button
+              class="btn-interactive w-full bg-gradient-to-r from-green-400 to-blue-500 text-white py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300"
+            >
+              اطلاعات بیشتر
+            </button>
+          </div>
+
+          <!-- Middle School -->
+          <div class="glass rounded-3xl p-8 hover-lift group">
+            <div class="text-center mb-6">
+              <div
+                class="bg-gradient-to-r from-purple-400 to-pink-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <i class="fas fa-user-graduate text-white text-2xl"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-white">دوره راهنمایی</h4>
+              <p class="text-gray-300 mt-2">کلاس هفتم تا نهم</p>
+            </div>
+            <ul class="space-y-3 mb-8 text-center">
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-purple-400 ml-3"></i>
+                آمادگی برای دوره متوسطه
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-purple-400 ml-3"></i>
+                آزمون‌های آزمایشی منظم
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-purple-400 ml-3"></i>
+                مشاوره تحصیلی تخصصی
+              </li>
+            </ul>
+            <button
+              class="btn-interactive w-full bg-gradient-to-r from-purple-400 to-pink-500 text-white py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300"
+            >
+              اطلاعات بیشتر
+            </button>
+          </div>
+
+          <!-- High School -->
+          <div class="glass rounded-3xl p-8 hover-lift group">
+            <div class="text-center mb-6">
+              <div
+                class="bg-gradient-to-r from-orange-400 to-red-500 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+              </div>
+              <h4 class="text-2xl font-bold text-white">دوره دبیرستان</h4>
+              <p class="text-gray-300 mt-2">کلاس دهم تا دوازدهم</p>
+            </div>
+            <ul class="space-y-3 mb-8 text-center">
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-orange-400 ml-3"></i>
+                آمادگی کامل کنکور
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-orange-400 ml-3"></i>
+                کلاس‌های تقویتی رایگان
+              </li>
+              <li class="flex items-center justify-center text-gray-300">
+                <i class="fas fa-check text-orange-400 ml-3"></i>
+                رتبه‌های برتر کشوری
+              </li>
+            </ul>
+            <button
+              class="btn-interactive w-full bg-gradient-to-r from-orange-400 to-red-500 text-white py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300"
+            >
+              اطلاعات بیشتر
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="py-20 scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3
+            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent"
+          >
+            اساتید برجسته
+          </h3>
+          <p class="text-xl text-gray-300">
+            تیمی از بهترین و باتجربه‌ترین اساتید کشور
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="glass rounded-2xl p-6 text-center hover-lift group">
+            <div
+              class="w-24 h-24 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+            >
+              <i class="fas fa-user text-white text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">دکتر احمدی</h4>
+            <p class="text-purple-300 mb-3">ریاضیات</p>
+            <div class="flex justify-center text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-400 text-sm">۱۵ سال تجربه</p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 text-center hover-lift group">
+            <div
+              class="w-24 h-24 bg-gradient-to-r from-green-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+            >
+              <i class="fas fa-user text-white text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">مهندس حسینی</h4>
+            <p class="text-green-300 mb-3">فیزیک</p>
+            <div class="flex justify-center text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-400 text-sm">۱۲ سال تجربه</p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 text-center hover-lift group">
+            <div
+              class="w-24 h-24 bg-gradient-to-r from-pink-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+            >
+              <i class="fas fa-user text-white text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">دکتر محمدی</h4>
+            <p class="text-pink-300 mb-3">شیمی</p>
+            <div class="flex justify-center text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-400 text-sm">۱۸ سال تجربه</p>
+          </div>
+
+          <div class="glass rounded-2xl p-6 text-center hover-lift group">
+            <div
+              class="w-24 h-24 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
+            >
+              <i class="fas fa-user text-white text-2xl"></i>
+            </div>
+            <h4 class="text-xl font-bold text-white mb-2">خانم رضایی</h4>
+            <p class="text-yellow-300 mb-3">زبان انگلیسی</p>
+            <div class="flex justify-center text-yellow-400 mb-3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="text-gray-400 text-sm">۱۰ سال تجربه</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3
+            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent"
+          >
+            آخرین اخبار
+          </h3>
+          <p class="text-xl text-gray-300">جدیدترین رویدادها و اخبار مدرسه</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div class="glass rounded-2xl overflow-hidden hover-lift">
+            <div
+              class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center"
+            >
+              <i class="fas fa-trophy text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <span
+                class="text-sm bg-blue-500 text-white px-3 py-1 rounded-full"
+                >رویداد</span
+              >
+              <h4 class="text-xl font-bold text-white mt-4 mb-3">
+                کسب رتبه اول استانی
+              </h4>
+              <p class="text-gray-300 mb-4">
+                دانش‌آموزان مدرسه دانش در مسابقات علمی استان رتبه اول را کسب
+                کردند.
+              </p>
+              <div class="flex items-center text-gray-400 text-sm">
+                <i class="fas fa-calendar ml-2"></i>
+                ۱۵ بهمن ۱۴۰۲
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-2xl overflow-hidden hover-lift">
+            <div
+              class="h-48 bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center"
+            >
+              <i class="fas fa-microscope text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <span
+                class="text-sm bg-green-500 text-white px-3 py-1 rounded-full"
+                >علمی</span
+              >
+              <h4 class="text-xl font-bold text-white mt-4 mb-3">
+                آزمایشگاه جدید
+              </h4>
+              <p class="text-gray-300 mb-4">
+                آزمایشگاه علوم با تجهیزات مدرن و پیشرفته راه‌اندازی شد.
+              </p>
+              <div class="flex items-center text-gray-400 text-sm">
+                <i class="fas fa-calendar ml-2"></i>
+                ۱۰ بهمن ۱۴۰۲
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-2xl overflow-hidden hover-lift">
+            <div
+              class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center"
+            >
+              <i class="fas fa-users text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <span
+                class="text-sm bg-purple-500 text-white px-3 py-1 rounded-full"
+                >ثبت نام</span
+              >
+              <h4 class="text-xl font-bold text-white mt-4 mb-3">
+                ثبت نام سال جدید
+              </h4>
+              <p class="text-gray-300 mb-4">
+                ثبت نام برای سال تحصیلی ۱۴۰۳-۱۴۰۴ آغاز شده است.
+              </p>
+              <div class="flex items-center text-gray-400 text-sm">
+                <i class="fas fa-calendar ml-2"></i>
+                ۵ بهمن ۱۴۰۲
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 scroll-mt-24">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h3
+            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent"
+          >
+            تماس با ما
+          </h3>
+          <p class="text-xl text-gray-300">
+            ما همیشه آماده پاسخگویی به سوالات شما هستیم
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="glass rounded-3xl p-8">
+            <h4 class="text-2xl font-bold text-white mb-6">اطلاعات تماس</h4>
+            <div class="space-y-6">
+              <div class="flex items-center">
+                <div
+                  class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-map-marker-alt text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-bold">آدرس</h5>
+                  <p class="text-gray-300">تهران، خیابان ولیعصر، پلاک ۱۲۳</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="bg-gradient-to-r from-green-500 to-teal-600 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-phone text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-bold">تلفن</h5>
+                  <p class="text-gray-300">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div
+                  class="bg-gradient-to-r from-pink-500 to-red-600 p-3 rounded-xl ml-4"
+                >
+                  <i class="fas fa-envelope text-white"></i>
+                </div>
+                <div>
+                  <h5 class="text-white font-bold">ایمیل</h5>
+                  <p class="text-gray-300">info@daneshschool.ir</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass rounded-3xl p-8">
+            <h4 class="text-2xl font-bold text-white mb-6">فرم تماس</h4>
+            <form class="space-y-6">
+              <div>
+                <input
+                  type="text"
+                  placeholder="نام و نام خانوادگی"
+                  class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="ایمیل"
+                  class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <textarea
+                  placeholder="پیام شما"
+                  rows="4"
+                  class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:border-purple-500"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn-interactive w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-bold hover:shadow-xl transition-all duration-300"
+              >
+                ارسال پیام
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass mt-20 py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <div
+                class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-2 rounded-lg ml-3"
+              >
+                <i class="fas fa-graduation-cap text-white"></i>
+              </div>
+              <h4 class="text-white font-bold text-xl">مدرسه دانش</h4>
+            </div>
+            <p class="text-gray-300 leading-relaxed">
+              ما متعهد به ارائه بهترین کیفیت آموزشی و پرورش نسل آینده‌ساز هستیم.
+            </p>
+          </div>
+
+          <div>
+            <h5 class="text-white font-bold mb-4">دسترسی سریع</h5>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >خانه</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >درباره ما</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#courses"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >دوره‌ها</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#teachers"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >اساتید</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="text-white font-bold mb-4">خدمات</h5>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >ثبت نام آنلاین</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >مشاوره تحصیلی</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >کلاس‌های آنلاین</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-300 hover:text-purple-400 transition-colors"
+                  >آزمون‌های آزمایشی</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="text-white font-bold mb-4">شبکه‌های اجتماعی</h5>
+            <div class="flex space-x-4 space-x-reverse">
+              <a
+                href="#"
+                class="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-xl text-white hover:shadow-lg transition-all duration-300 hover:scale-110"
+              >
+                <i class="fab fa-telegram"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-gradient-to-r from-pink-500 to-red-500 p-3 rounded-xl text-white hover:shadow-lg transition-all duration-300 hover:scale-110"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-xl text-white hover:shadow-lg transition-all duration-300 hover:scale-110"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-white/10 mt-8 pt-8 text-center">
+          <p class="text-gray-300">© ۱۴۰۲ مدرسه دانش. تمام حقوق محفوظ است.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/JS/school_website.js"></script>
+  </body>
+</html>

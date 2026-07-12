@@ -1,0 +1,1892 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رزومه حرفه‌ای</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      min-height: 100vh;
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    .container-fluid {
+      padding: 0;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+      min-height: 100vh;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background:
+        radial-gradient(
+          circle at 20% 80%,
+          rgba(0, 212, 255, 0.15) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(0, 149, 204, 0.1) 0%,
+          transparent 50%
+        );
+      pointer-events: none;
+    }
+
+    .profile-section {
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+      position: relative;
+    }
+
+    .profile-section::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #00d4ff, #0099cc);
+      border-radius: 1px;
+    }
+
+    .profile-image {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, #00d4ff, #0099cc, #00d4ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      color: #ffffff;
+      box-shadow:
+        0 0 60px rgba(0, 212, 255, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-image::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      animation: rotate 8s linear infinite;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .title {
+      color: #00d4ff;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    .social-link:hover::before {
+      left: 100%;
+    }
+
+    .social-link:hover {
+      transform: translateY(-8px) scale(1.1);
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.5);
+      color: #ffffff;
+    }
+
+    .contact-info,
+    .skills-section,
+    .languages {
+      margin-bottom: 3rem;
+    }
+
+    .contact-info h4,
+    .skills-section h4,
+    .languages h4 {
+      color: #00d4ff;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .contact-info h4::after,
+    .skills-section h4::after,
+    .languages h4::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      right: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #00d4ff, transparent);
+      border-radius: 1px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+    }
+
+    .contact-item:hover {
+      background: rgba(0, 212, 255, 0.08);
+      border-color: rgba(0, 212, 255, 0.4);
+      transform: translateX(-8px);
+      box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+    }
+
+    .contact-item i {
+      color: #00d4ff;
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .skill-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-item span {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+      color: #e0e0e0;
+    }
+
+    .progress {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      position: relative;
+    }
+
+    .progress::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .progress-bar {
+      background: linear-gradient(90deg, #00d4ff, #0099cc, #00d4ff);
+      border-radius: 5px;
+      transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      animation: progressShine 2s infinite;
+    }
+
+    @keyframes progressShine {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    .language-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .language-item:hover {
+      background: rgba(0, 212, 255, 0.08);
+      border-color: rgba(0, 212, 255, 0.4);
+      transform: translateX(-5px);
+    }
+
+    .level {
+      color: #00d4ff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      background: rgba(0, 212, 255, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      padding: 3rem 4rem;
+      background: rgba(255, 255, 255, 0.01);
+      position: relative;
+    }
+
+    .main-content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(0, 212, 255, 0.05) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          circle at 20% 80%,
+          rgba(0, 149, 204, 0.03) 0%,
+          transparent 50%
+        );
+      pointer-events: none;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 3rem;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.08),
+        rgba(26, 26, 46, 0.6)
+      );
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(0, 212, 255, 0.1) 50%,
+          transparent 70%
+        ),
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(0, 212, 255, 0.05) 0%,
+          transparent 70%
+        );
+      animation: headerGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes headerGlow {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .main-title {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff, #00d4ff, #0099cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: #00d4ff;
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      margin-bottom: 4rem;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(15px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00d4ff, #0099cc, #00d4ff);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .section:hover::before {
+      transform: scaleX(1);
+    }
+
+    .section:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(0, 212, 255, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+    }
+
+    .section h3 {
+      color: #00d4ff;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+      padding-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section p {
+      line-height: 1.9;
+      color: #e0e0e0;
+      font-size: 1.15rem;
+    }
+
+    .experience-item {
+      margin-bottom: 2.5rem;
+      padding: 2rem;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.05),
+        rgba(0, 149, 204, 0.02)
+      );
+      border-radius: 16px;
+      border-left: 4px solid #00d4ff;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .experience-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 212, 255, 0.02),
+        transparent
+      );
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .experience-item:hover::before {
+      transform: translateX(100%);
+    }
+
+    .experience-item:hover {
+      border-left-color: #ffffff;
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    }
+
+    .experience-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .experience-header h4 {
+      color: #ffffff;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .company {
+      color: #00d4ff;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .period {
+      color: #888;
+      font-size: 0.95rem;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.15),
+        rgba(0, 149, 204, 0.1)
+      );
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    .experience-item ul {
+      list-style: none;
+      padding-right: 0;
+    }
+
+    .experience-item li {
+      margin-bottom: 1rem;
+      padding-right: 2rem;
+      position: relative;
+      color: #e0e0e0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .experience-item li::before {
+      content: "▸";
+      color: #00d4ff;
+      position: absolute;
+      right: 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .education-item h4 {
+      color: #ffffff;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .education-item p {
+      color: #00d4ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.05),
+        rgba(0, 149, 204, 0.02)
+      );
+      padding: 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 212, 255, 0.03),
+        transparent
+      );
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .project-card:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.1),
+        rgba(0, 149, 204, 0.05)
+      );
+      border-color: rgba(0, 212, 255, 0.5);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.25);
+    }
+
+    .project-card h5 {
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .project-card p {
+      color: #e0e0e0;
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .project-tech span {
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .project-tech span:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+    }
+
+    .certificates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .certificate-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.1),
+        rgba(0, 149, 204, 0.05)
+      );
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .certificate-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(0, 212, 255, 0.05),
+        transparent
+      );
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .certificate-item:hover::before {
+      transform: translateX(100%);
+    }
+
+    .certificate-item:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.2),
+        rgba(0, 149, 204, 0.1)
+      );
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+    }
+
+    .certificate-item i {
+      font-size: 1.8rem;
+      color: #00d4ff;
+      transition: all 0.3s ease;
+    }
+
+    .certificate-item:hover i {
+      transform: scale(1.2);
+      color: #ffffff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1399.98px) {
+      .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .main-content {
+        padding: 2.5rem 3rem;
+      }
+
+      .sidebar {
+        padding: 2.5rem 1.8rem;
+      }
+    }
+
+    @media (max-width: 1199.98px) {
+      .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .main-content {
+        padding: 2.5rem 2.5rem;
+      }
+
+      .sidebar {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .main-title {
+        font-size: 3.5rem;
+      }
+
+      .profile-image {
+        width: 130px;
+        height: 130px;
+        font-size: 3.2rem;
+      }
+
+      .section {
+        padding: 2.2rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .header-section {
+        padding: 2.5rem;
+        margin-bottom: 3.5rem;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .sidebar {
+        min-height: auto;
+        border-left: none;
+        border-bottom: 3px solid #00d4ff;
+        padding: 2rem 1.5rem;
+        order: 2;
+      }
+
+      .main-content {
+        padding: 2rem 2rem;
+        order: 1;
+      }
+
+      .main-title {
+        font-size: 3rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
+
+      .section {
+        padding: 2rem 1.8rem;
+        margin-bottom: 3rem;
+      }
+
+      .header-section {
+        padding: 2.5rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .experience-item {
+        padding: 1.8rem;
+        margin-bottom: 2rem;
+      }
+
+      .project-card {
+        padding: 1.8rem;
+      }
+
+      .certificate-item {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .social-link {
+        width: 45px;
+        height: 45px;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.9rem 1rem;
+      }
+
+      .skill-item {
+        margin-bottom: 1.3rem;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .sidebar,
+      .main-content {
+        padding: 1.5rem 1rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.3rem;
+      }
+
+      .section {
+        padding: 1.8rem 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .header-section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .profile-image {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+
+      .name {
+        font-size: 1.8rem;
+      }
+
+      .title {
+        font-size: 1.1rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+      }
+
+      .contact-info h4,
+      .skills-section h4,
+      .languages h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .section h3 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .experience-item {
+        padding: 1.5rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .experience-header h4 {
+        font-size: 1.3rem;
+      }
+
+      .project-card {
+        padding: 1.5rem;
+      }
+
+      .project-card h5 {
+        font-size: 1.2rem;
+      }
+
+      .certificate-item {
+        padding: 1rem 1.2rem;
+        gap: 0.8rem;
+      }
+
+      .certificate-item i {
+        font-size: 1.5rem;
+      }
+
+      .projects-grid {
+        gap: 1.2rem;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.8rem 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .skill-item {
+        margin-bottom: 1.2rem;
+      }
+
+      .progress {
+        height: 8px;
+      }
+
+      .company {
+        margin-left: 1rem;
+        font-size: 1rem;
+      }
+
+      .period {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .container-fluid {
+        padding: 0;
+      }
+
+      .sidebar,
+      .main-content {
+        padding: 1.2rem 0.8rem;
+      }
+
+      .main-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section {
+        padding: 1.5rem 1.2rem;
+        margin-bottom: 2rem;
+        border-radius: 15px;
+      }
+
+      .header-section {
+        padding: 1.8rem 1.2rem;
+        margin-bottom: 2rem;
+        border-radius: 15px;
+      }
+
+      .profile-image {
+        width: 90px;
+        height: 90px;
+        font-size: 2.2rem;
+      }
+
+      .name {
+        font-size: 1.6rem;
+      }
+
+      .title {
+        font-size: 1rem;
+      }
+
+      .social-link {
+        width: 35px;
+        height: 35px;
+      }
+
+      .contact-info h4,
+      .skills-section h4,
+      .languages h4 {
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .section p {
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      .experience-item {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+      }
+
+      .experience-header h4 {
+        font-size: 1.2rem;
+      }
+
+      .experience-item li {
+        font-size: 1rem;
+        padding-right: 1.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .project-card {
+        padding: 1.2rem;
+        border-radius: 12px;
+      }
+
+      .project-card h5 {
+        font-size: 1.1rem;
+      }
+
+      .project-card p {
+        font-size: 0.95rem;
+      }
+
+      .project-tech span {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .certificate-item {
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+      }
+
+      .certificate-item i {
+        font-size: 1.3rem;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.7rem 0.9rem;
+        border-radius: 10px;
+      }
+
+      .skill-item {
+        margin-bottom: 1rem;
+      }
+
+      .progress {
+        height: 7px;
+      }
+
+      .company {
+        margin-left: 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .period {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.7rem;
+        margin-top: 0.3rem;
+      }
+
+      .level {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.7rem;
+      }
+
+      .projects-grid {
+        gap: 1rem;
+      }
+
+      .certificates {
+        gap: 1rem;
+      }
+
+      .social-links {
+        gap: 1rem;
+      }
+
+      .contact-info,
+      .skills-section,
+      .languages {
+        margin-bottom: 2.5rem;
+      }
+
+      .profile-section {
+        margin-bottom: 3rem;
+        padding-bottom: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sidebar,
+      .main-content {
+        padding: 1rem 0.6rem;
+      }
+
+      .main-title {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 1.3rem 1rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .header-section {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .profile-image {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+      }
+
+      .name {
+        font-size: 1.5rem;
+      }
+
+      .title {
+        font-size: 0.95rem;
+      }
+
+      .social-link {
+        width: 32px;
+        height: 32px;
+      }
+
+      .section h3 {
+        font-size: 1.3rem;
+      }
+
+      .experience-item {
+        padding: 1rem;
+      }
+
+      .project-card {
+        padding: 1rem;
+      }
+
+      .certificate-item {
+        padding: 0.7rem 0.9rem;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.6rem 0.8rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .sidebar,
+      .main-content {
+        padding: 0.8rem 0.5rem;
+      }
+
+      .main-title {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .section {
+        padding: 1.2rem 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .header-section {
+        padding: 1.3rem 0.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .profile-image {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+      }
+
+      .name {
+        font-size: 1.4rem;
+      }
+
+      .title {
+        font-size: 0.9rem;
+      }
+
+      .social-link {
+        width: 30px;
+        height: 30px;
+      }
+
+      .section h3 {
+        font-size: 1.2rem;
+      }
+
+      .experience-item {
+        padding: 0.8rem;
+      }
+
+      .project-card {
+        padding: 0.8rem;
+      }
+
+      .certificate-item {
+        padding: 0.6rem 0.8rem;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.5rem 0.7rem;
+      }
+    }
+
+    /* Landscape orientation adjustments */
+    @media (max-height: 600px) and (orientation: landscape) {
+      .sidebar {
+        min-height: auto;
+        padding: 1.5rem 1rem;
+      }
+
+      .profile-section {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .profile-image {
+        width: 80px;
+        height: 80px;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .name {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .social-links {
+        gap: 0.8rem;
+      }
+
+      .social-link {
+        width: 35px;
+        height: 35px;
+      }
+
+      .contact-info,
+      .skills-section,
+      .languages {
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-info h4,
+      .skills-section h4,
+      .languages h4 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .contact-item,
+      .language-item {
+        padding: 0.6rem 0.8rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .skill-item {
+        margin-bottom: 1rem;
+      }
+
+      .main-content {
+        padding: 1.5rem 2rem;
+      }
+
+      .header-section {
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section {
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .section h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .experience-item {
+        padding: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-card {
+        padding: 1.2rem;
+      }
+    }
+
+    /* High DPI displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .profile-image {
+        border-width: 2px;
+      }
+
+      .progress {
+        border-width: 0.5px;
+      }
+
+      .section {
+        border-width: 0.5px;
+      }
+
+      .experience-item {
+        border-left-width: 2px;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .sidebar {
+        background: white;
+        border: 1px solid #ccc;
+      }
+
+      .main-content {
+        background: white;
+      }
+
+      .section {
+        background: white;
+        border: 1px solid #ccc;
+        box-shadow: none;
+      }
+
+      .profile-image {
+        background: #f0f0f0;
+        color: #666;
+        box-shadow: none;
+      }
+
+      .social-link {
+        background: #f0f0f0;
+        color: #666;
+        box-shadow: none;
+      }
+
+      .progress-bar {
+        background: #666;
+        box-shadow: none;
+      }
+
+      .project-tech span {
+        background: #f0f0f0;
+        color: #333;
+        box-shadow: none;
+      }
+
+      .certificate-item {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .contact-item,
+      .language-item {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+      }
+
+      .experience-item {
+        background: #f9f9f9;
+        border-left: 2px solid #666;
+      }
+
+      .header-section {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .main-title {
+        color: #333;
+        -webkit-text-fill-color: #333;
+      }
+
+      .subtitle {
+        color: #666;
+      }
+
+      .section h3 {
+        color: #333;
+      }
+
+      .name {
+        color: #333;
+        -webkit-text-fill-color: #333;
+      }
+
+      .title {
+        color: #666;
+      }
+
+      .company {
+        color: #666;
+      }
+
+      .level {
+        color: #666;
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .period {
+        color: #666;
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .contact-item i,
+      .section h3 i,
+      .certificate-item i {
+        color: #666;
+      }
+
+      .experience-item li::before {
+        color: #666;
+      }
+
+      .contact-info h4::after,
+      .skills-section h4::after,
+      .languages h4::after {
+        background: #666;
+      }
+
+      .profile-section::after {
+        background: #666;
+      }
+
+      .section::before {
+        background: #666;
+      }
+
+      .progress {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+      }
+
+      .progress-bar {
+        background: #666;
+      }
+
+      .project-tech span {
+        background: #f0f0f0;
+        color: #333;
+      }
+
+      .social-links {
+        display: none;
+      }
+
+      .sidebar::before,
+      .main-content::before,
+      .header-section::before,
+      .section::before,
+      .experience-item::before,
+      .project-card::before,
+      .certificate-item::before,
+      .profile-image::before,
+      .progress::before,
+      .progress-bar::after,
+      .social-link::before {
+        display: none;
+      }
+
+      .profile-image,
+      .social-link,
+      .section,
+      .experience-item,
+      .project-card,
+      .certificate-item,
+      .contact-item,
+      .language-item {
+        animation: none;
+        transform: none;
+        transition: none;
+      }
+
+      .section:hover,
+      .experience-item:hover,
+      .project-card:hover,
+      .certificate-item:hover,
+      .contact-item:hover,
+      .language-item:hover {
+        transform: none;
+        box-shadow: none;
+        background: inherit;
+        border-color: inherit;
+      }
+
+      .social-link:hover,
+      .project-tech span:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .section:hover h3,
+      .project-card:hover h5 {
+        color: inherit;
+        text-shadow: none;
+      }
+
+      .experience-item:hover {
+        border-left-color: inherit;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #00d4ff, #0099cc);
+      border-radius: 5px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #0099cc, #00d4ff);
+    }
+
+    /* Enhanced animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .section:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .section:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    .section:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    .section:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    /* Glow effects */
+    .section:hover h3 {
+      color: #ffffff;
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    .experience-item:hover {
+      border-left-color: #ffffff;
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+    }
+
+    .project-card:hover h5 {
+      color: #00d4ff;
+      text-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    /* Floating animation for profile image */
+    .profile-image {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-4 sidebar">
+          <div class="profile-section text-center">
+            <div class="profile-image">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <h2 class="name">علی محمدی</h2>
+            <p class="title">توسعه‌دهنده وب ارشد</p>
+            <div class="social-links">
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="contact-info">
+            <h4><i class="fas fa-address-card"></i> اطلاعات تماس</h4>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>ali.mohammadi@email.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+98 912 123 4567</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>تهران، ایران</span>
+            </div>
+          </div>
+
+          <div class="skills-section">
+            <h4><i class="fas fa-code"></i> مهارت‌ها</h4>
+            <div class="skill-item">
+              <span>HTML/CSS</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span>JavaScript</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span>React</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span>Node.js</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 80%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span>Python</span>
+              <div class="progress">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="languages">
+            <h4><i class="fas fa-language"></i> زبان‌ها</h4>
+            <div class="language-item">
+              <span>فارسی</span>
+              <span class="level">بومی</span>
+            </div>
+            <div class="language-item">
+              <span>انگلیسی</span>
+              <span class="level">پیشرفته</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-8 main-content">
+          <div class="header-section">
+            <h1 class="main-title">علی محمدی</h1>
+            <p class="subtitle">توسعه‌دهنده وب ارشد با ۸ سال تجربه</p>
+          </div>
+
+          <div class="section">
+            <h3><i class="fas fa-user-tie"></i> درباره من</h3>
+            <p>
+              توسعه‌دهنده وب با تجربه در طراحی و پیاده‌سازی اپلیکیشن‌های مدرن.
+              متخصص در React، Node.js و معماری‌های مقیاس‌پذیر. علاقه‌مند به
+              یادگیری تکنولوژی‌های جدید و حل چالش‌های پیچیده.
+            </p>
+          </div>
+
+          <div class="section">
+            <h3><i class="fas fa-briefcase"></i> تجربیات کاری</h3>
+
+            <div class="experience-item">
+              <div class="experience-header">
+                <h4>توسعه‌دهنده وب ارشد</h4>
+                <span class="company">شرکت فناوری پیشرو</span>
+                <span class="period">۱۴۰۰ - تاکنون</span>
+              </div>
+              <ul>
+                <li>رهبری تیم ۵ نفره توسعه‌دهندگان</li>
+                <li>طراحی و پیاده‌سازی معماری میکروسرویس</li>
+                <li>بهینه‌سازی عملکرد اپلیکیشن‌ها</li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-header">
+                <h4>توسعه‌دهنده وب</h4>
+                <span class="company">استارتاپ نوآور</span>
+                <span class="period">۱۳۹۸ - ۱۴۰۰</span>
+              </div>
+              <ul>
+                <li>توسعه فرانت‌اند با React و TypeScript</li>
+                <li>پیاده‌سازی API با Node.js و Express</li>
+                <li>همکاری با تیم طراحی UX/UI</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3><i class="fas fa-graduation-cap"></i> تحصیلات</h3>
+            <div class="education-item">
+              <h4>کارشناسی مهندسی نرم‌افزار</h4>
+              <p>دانشگاه تهران | ۱۳۹۴ - ۱۳۹۸</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3><i class="fas fa-trophy"></i> پروژه‌ها</h3>
+            <div class="projects-grid">
+              <div class="project-card">
+                <h5>سیستم مدیریت محتوا</h5>
+                <p>پلتفرم مدیریت محتوا با React و Node.js</p>
+                <div class="project-tech">
+                  <span>React</span>
+                  <span>Node.js</span>
+                  <span>MongoDB</span>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5>اپلیکیشن موبایل</h5>
+                <p>اپلیکیشن React Native برای مدیریت وظایف</p>
+                <div class="project-tech">
+                  <span>React Native</span>
+                  <span>Firebase</span>
+                  <span>Redux</span>
+                </div>
+              </div>
+              <div class="project-card">
+                <h5>پلتفرم تجارت الکترونیک</h5>
+                <p>فروشگاه آنلاین با Next.js و Stripe</p>
+                <div class="project-tech">
+                  <span>Next.js</span>
+                  <span>Stripe</span>
+                  <span>PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3><i class="fas fa-certificate"></i> گواهینامه‌ها</h3>
+            <div class="certificates">
+              <div class="certificate-item">
+                <i class="fab fa-aws"></i>
+                <span>AWS Certified Developer</span>
+              </div>
+              <div class="certificate-item">
+                <i class="fab fa-google"></i>
+                <span>Google Cloud Professional</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

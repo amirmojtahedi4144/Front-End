@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمرین ششم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            direction: rtl;
+            text-align: right;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .home_image img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid red;
+        }
+
+        .home_content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .home_content h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .home_content h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        span {
+            color: red;
+        }
+
+        .home_content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .icons a {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            border: 2px solid red;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            margin-left: 12px;
+            color: red;
+            text-decoration: none;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .icons a:hover {
+            background-color: red;
+            color: black;
+            transform: scale(1.1);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 35px;
+            border: 2px solid red;
+            border-radius: 40px;
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: red;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="home">
+        <div class="home_image">
+            <img src="assets/IMAGES/download.jfif" alt="">
+        </div>
+        <div class="home_content">
+            <h1>سلام من <span>امیر</span> هستم</h1>
+            <h3>من <span>برنامه نویس</span> هستم</h3>
+            <p>
+                اینجا یک متن نمونه است که می‌توانید برای معرفی خودتان از آن استفاده کنید.
+                اینجا یک متن نمونه است که می‌توانید برای معرفی خودتان از آن استفاده کنید.
+            </p>
+            <div class="icons">
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#" class="btn">درباره من</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,197 @@
+<html>
+<head>
+  <title>ثبت نام کردن</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: pink;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      width: 820px;
+      max-width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      position: relative;
+    }
+
+    .pro-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #1a6ef5;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 12px;
+      z-index: 10;
+    }
+
+    .connected-label {
+      position: absolute;
+      top: 22px;
+      left: 28px;
+      color: #1a6ef5;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      z-index: 10;
+    }
+
+    .form-side {
+      flex: 1;
+      padding: 60px 40px 40px 40px;
+    }
+
+    .form-side h1 {
+      font-size: 28px;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .form-side .subtitle {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 28px;
+    }
+
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 6px;
+    }
+
+    .field-group label span {
+      color: #e05;
+    }
+
+    .field-group input {
+      width: 100%;
+      border: 1.5px solid #d0d8f0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+    }
+
+    .field-group input::placeholder {
+      color: #bbb;
+    }
+
+    .field-group input:focus {
+      border-color: #1a6ef5;
+    }
+
+    .terms-text {
+      font-size: 11.5px;
+      color: #aaa;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .btn-signup {
+      width: 100%;
+      background: #1a6ef5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-signup:hover {
+      background: #1456c8;
+    }
+
+    .btn-signup:active {
+      transform: scale(0.98);
+    }
+
+    .image-side {
+      width: 300px;
+      background: #e8e8e8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <span class="connected-label">Connected</span>
+    <span class="pro-badge">Pro</span>
+    <div class="form-side">
+      <h1>Create an account</h1>
+      <p class="subtitle">Lorem ipsum dolor sit amet consectetur</p>
+      <div class="field-group">
+        <label>Full name <span>*</span></label>
+        <input type="text" placeholder="Name Surname" />
+      </div>
+      <div class="field-group">
+        <label>User name <span>*</span></label>
+        <input type="text" placeholder="User Name" />
+      </div>
+      <div class="field-group">
+        <label>Email <span>*</span></label>
+        <input type="email" placeholder="Email" />
+      </div>
+      <div class="field-group">
+        <label>Password <span>*</span></label>
+        <input type="password" placeholder="password" />
+      </div>
+      <p class="terms-text">
+        Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolomites ipsum.
+      </p>
+      <button class="btn-signup">Sign up</button>
+    </div>
+    <div class="image-side">
+      <div class="image-placeholder">
+        <img src="assets/IMAGES/creat_account.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

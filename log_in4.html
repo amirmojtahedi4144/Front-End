@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ورود و ثبت‌نام" />
+    <title>ورود | ثبت‌نام</title>
+    <link rel="icon" href="assets/IMAGES/favicon.svg" type="image/svg+xml" />
+  </head>
+  <style>
+    @font-face {
+      font-family: Vazir;
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("assets/fonts/vazir-400.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: Vazir;
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("assets/fonts/vazir-700.woff2") format("woff2");
+    }
+
+    :root {
+      --font: Vazir, sans-serif;
+      --surface: #fafaf9;
+      --ink: #1c1917;
+      --muted: #78716c;
+      --line: #e7e5e4;
+      --brand: #0d9488;
+      --brand-dark: #0f766e;
+      --brand-400: #2dd4bf;
+      --brand-800: #115e59;
+      --brand-900: #134e4a;
+      --danger: #dc2626;
+      --radius: 0.75rem;
+      --shadow: 0 12px 40px rgb(28 25 23 / 0.08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: var(--font);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      color: var(--ink);
+      background: var(--surface);
+    }
+
+    a {
+      color: var(--brand-dark);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      background:
+        radial-gradient(
+          ellipse 80% 50% at 100% 0%,
+          rgb(204 251 241 / 0.55),
+          transparent
+        ),
+        radial-gradient(
+          ellipse 60% 40% at 0% 100%,
+          rgb(240 253 250 / 0.8),
+          transparent
+        ),
+        var(--surface);
+    }
+
+    .card {
+      display: grid;
+      width: 100%;
+      max-width: 52rem;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card__side {
+      display: none;
+      position: relative;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2.5rem;
+      color: #fff;
+      overflow: hidden;
+      background: linear-gradient(
+        165deg,
+        var(--brand-800) 0%,
+        var(--brand-900) 48%,
+        #0c4a44 100%
+      );
+    }
+
+    .card__side::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+
+    .card__side-top,
+    .card__features {
+      position: relative;
+    }
+
+    .card__icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+      background: rgb(255 255 255 / 0.1);
+      box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+    }
+
+    .card__icon svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .card__title {
+      margin: 0;
+      max-width: 14rem;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .card__text {
+      margin: 1rem 0 0;
+      max-width: 16rem;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: rgb(204 251 241 / 0.85);
+    }
+
+    .card__features {
+      margin: 2.5rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      font-size: 0.875rem;
+      color: rgb(240 253 250 / 0.9);
+    }
+
+    .card__features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .feature-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      background: var(--brand-400);
+      box-shadow: 0 0 0 4px rgb(45 212 191 / 0.35);
+    }
+
+    .card__main {
+      padding: 1.5rem;
+    }
+
+    /* تب — فقط CSS */
+    .tab-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+      padding: 0.25rem;
+      background: #f5f5f4;
+      border-radius: var(--radius);
+    }
+
+    .tab {
+      padding: 0.6rem 1rem;
+      border-radius: calc(var(--radius) - 2px);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--muted);
+      cursor: pointer;
+      transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+    }
+
+    #tab-login:checked ~ .tabs label[for="tab-login"],
+    #tab-register:checked ~ .tabs label[for="tab-register"] {
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 1px 3px rgb(28 25 23 / 0.08);
+    }
+
+    .form {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #tab-login:checked ~ .form--login,
+    #tab-register:checked ~ .form--register {
+      display: flex;
+    }
+
+    .form__title {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .form__lead {
+      margin: 0 0 0.25rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .field__label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 0.7rem 0.85rem;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      background: #fafaf9;
+      font: inherit;
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition:
+        border-color 0.15s,
+        box-shadow 0.15s;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--brand);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgb(20 184 166 / 0.2);
+    }
+
+    .field--error input {
+      border-color: var(--danger);
+      background: #fffbfb;
+    }
+
+    .field__error {
+      font-size: 0.75rem;
+      color: var(--danger);
+    }
+
+    .form__row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      color: #57534e;
+    }
+
+    .check--block {
+      align-items: flex-start;
+      line-height: 1.6;
+    }
+
+    .check input {
+      width: 1rem;
+      height: 1rem;
+      accent-color: var(--brand);
+    }
+
+    .btn {
+      margin-top: 0.25rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--brand);
+      color: #fff;
+      font: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn:hover {
+      background: var(--brand-dark);
+    }
+
+    .form__note {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .switch {
+      margin: 1.25rem 0 0;
+      font-size: 0.875rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .switch--register {
+      display: none;
+    }
+
+    #tab-register:checked ~ .switch--login {
+      display: none;
+    }
+
+    #tab-register:checked ~ .switch--register {
+      display: block;
+    }
+
+    .switch__link {
+      color: var(--brand-dark);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .switch__link:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #a8a29e;
+    }
+
+    @media (min-width: 48rem) {
+      .card {
+        grid-template-columns: 0.95fr 1.05fr;
+        min-height: 36rem;
+      }
+
+      .card__side {
+        display: flex;
+      }
+
+      .card__main {
+        padding: 2rem 2.25rem;
+      }
+    }
+  </style>
+  <body>
+    <main class="page">
+      <article class="card">
+        <aside class="card__side">
+          <div class="card__side-top">
+            <div class="card__icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <h1 class="card__title">ورود امن،<br />بدون دردسر</h1>
+            <p class="card__text">
+              با طراحی مدرن و تجربه‌ای روان، ورود و ثبت‌نام را ساده‌تر از همیشه
+              تجربه کنید.
+            </p>
+          </div>
+          <ul class="card__features">
+            <li>
+              <span class="feature-dot" aria-hidden="true"></span>رابط کاربری
+              واکنش‌گرا
+            </li>
+            <li>
+              <span class="feature-dot" aria-hidden="true"></span>پشتیبانی کامل
+              از فارسی و RTL
+            </li>
+            <li>
+              <span class="feature-dot" aria-hidden="true"></span>اعتبارسنجی
+              بومی فرم‌ها
+            </li>
+          </ul>
+        </aside>
+
+        <section class="card__main">
+          <!-- تب‌ها با رادیو (بدون JavaScript) -->
+          <input
+            type="radio"
+            name="tab"
+            id="tab-login"
+            class="tab-input"
+            checked
+          />
+          <input type="radio" name="tab" id="tab-register" class="tab-input" />
+
+          <div class="tabs" role="tablist" aria-label="نوع فرم">
+            <label for="tab-login" class="tab" role="tab">ورود</label>
+            <label for="tab-register" class="tab" role="tab">ثبت‌نام</label>
+          </div>
+
+          <form id="form-login" class="form form--login" novalidate>
+            <h2 class="form__title">خوش آمدید</h2>
+            <p class="form__lead">ایمیل و رمز عبور را وارد کنید.</p>
+
+            <label class="field">
+              <span class="field__label">ایمیل</span>
+              <input
+                type="text"
+                name="email"
+                placeholder="name@example.com"
+                autocomplete="email"
+                inputmode="email"
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">رمز عبور</span>
+              <input
+                type="password"
+                name="password"
+                placeholder="رمز عبور"
+                autocomplete="current-password"
+              />
+            </label>
+
+            <div class="form__row">
+              <label class="check">
+                <input type="checkbox" name="remember" />
+                <span>مرا به خاطر بسپار</span>
+              </label>
+              <a href="#">فراموشی رمز؟</a>
+            </div>
+
+            <button type="submit" class="btn">ورود به حساب</button>
+            <p class="form__note">نمایشی — به سرور ارسال نمی‌شود.</p>
+          </form>
+
+          <form id="form-register" class="form form--register" novalidate>
+            <h2 class="form__title">ایجاد حساب</h2>
+            <p class="form__lead">اطلاعات خود را وارد کنید.</p>
+
+            <label class="field">
+              <span class="field__label">نام و نام خانوادگی</span>
+              <input
+                type="text"
+                name="name"
+                placeholder="مثلاً علی محمدی"
+                autocomplete="name"
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">ایمیل</span>
+              <input
+                type="text"
+                name="email"
+                placeholder="name@example.com"
+                autocomplete="email"
+                inputmode="email"
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">رمز عبور</span>
+              <input
+                id="register-password"
+                type="password"
+                name="password"
+                placeholder="حداقل ۸ کاراکتر"
+                autocomplete="new-password"
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">تکرار رمز عبور</span>
+              <input
+                type="password"
+                name="confirm"
+                placeholder="رمز را دوباره وارد کنید"
+                autocomplete="new-password"
+              />
+            </label>
+
+            <label class="check check--block">
+              <input type="checkbox" name="terms" />
+              <span
+                >با <a href="#">قوانین</a> و
+                <a href="#">حریم خصوصی</a> موافقم</span
+              >
+            </label>
+
+            <button type="submit" class="btn">ایجاد حساب</button>
+            <p class="form__note">نمایشی — به سرور ارسال نمی‌شود.</p>
+          </form>
+
+          <p class="switch switch--login">
+            حساب ندارید؟
+            <label for="tab-register" class="switch__link">ثبت‌نام کنید</label>
+          </p>
+          <p class="switch switch--register">
+            قبلاً ثبت‌نام کرده‌اید؟
+            <label for="tab-login" class="switch__link">وارد شوید</label>
+          </p>
+        </section>
+      </article>
+
+      <p class="footer">© ۲۰۲۶ — پنل ورود و ثبت‌نام</p>
+    </main>
+    <script src="assets/JS/login4.js" defer></script>
+  </body>
+</html>

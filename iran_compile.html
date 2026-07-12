@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صدرا رایانه نوین طبرستان | ایران کامپایل</title>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <!--Tailwind-->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { vazir: ['Vazirmatn', 'sans-serif'] },
+          colors: {
+            primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+            accent: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface2: #f1f5f9;
+      --text: #0f172a;
+      --text2: #475569;
+      --border: #e2e8f0;
+      --card: #ffffff;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #0f172a;
+      --text: #f1f5f9;
+      --text2: #94a3b8;
+      --border: #334155;
+      --card: #1e293b;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: background .3s, color .3s;
+    }
+
+    .navbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .section-alt {
+      background: var(--surface2);
+    }
+
+    .text-muted {
+      color: var(--text2);
+    }
+
+    .border-c {
+      border-color: var(--border);
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 40%, #7c3aed 100%);
+    }
+
+    [data-theme="dark"] .hero-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #4c1d95 100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 2px solid #2563eb;
+      color: #2563eb;
+    }
+
+    .btn-outline:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .service-card {
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .nav-link {
+      color: var(--text2);
+      transition: color .2s;
+    }
+
+    .nav-link:hover {
+      color: #2563eb;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .team-overlay {
+      opacity: 0;
+      transition: opacity .3s;
+      background: linear-gradient(to top, rgba(37, 99, 235, 0.9), transparent);
+    }
+
+    .team-card:hover .team-overlay {
+      opacity: 1;
+    }
+
+    .portfolio-overlay {
+      opacity: 0;
+      transition: opacity .3s;
+      background: rgba(37, 99, 235, 0.85);
+    }
+
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+
+    .toggle-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+
+    #mobile-menu {
+      display: none;
+    }
+
+    #mobile-menu.open {
+      display: block;
+    }
+
+    .faq-answer {
+      display: none;
+    }
+
+    .faq-answer.open {
+      display: block;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .6s, transform .6s;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      width: 0;
+      transition: width 1.5s ease;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 2rem;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-container {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar fixed top-0 w-full z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <!-- Logo Placeholder (fixed broken image) -->
+          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+            IC
+          </div>
+          <div>
+            <div class="font-bold text-base leading-tight" style="color:var(--text)">ایران کامپایل</div>
+            <div class="text-xs text-muted">صدرا رایانه نوین طبرستان</div>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <div class="hidden lg:flex items-center gap-6 text-sm font-medium">
+          <a href="#home" class="nav-link">خانه</a>
+          <a href="#about" class="nav-link">درباره ما</a>
+          <a href="#services" class="nav-link">خدمات</a>
+          <a href="#portfolio" class="nav-link">نمونه کارها</a>
+          <a href="#team" class="nav-link">تیم</a>
+          <a href="#blog" class="nav-link">وبلاگ</a>
+          <a href="#contact" class="nav-link">تماس</a>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-3">
+          <!-- Dark mode toggle -->
+          <button onclick="toggleTheme()" class="toggle-btn p-2 rounded-lg transition-colors" title="تغییر تم">
+            <svg id="sun-icon" class="w-5 h-5 text-yellow-500 hidden" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="5" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <svg id="moon-icon" class="w-5 h-5" style="color:var(--text2)" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </button>
+          <a href="#contact"
+            class="hidden lg:block btn-primary px-5 py-2 rounded-xl text-sm font-semibold transition-all">مشاوره
+            رایگان</a>
+          <!-- Hamburger -->
+          <button onclick="toggleMenu()" class="lg:hidden p-2 rounded-lg toggle-btn">
+            <svg class="w-5 h-5" style="color:var(--text)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="lg:hidden px-4 pb-4 pt-2 border-t border-c" style="background:var(--surface)">
+      <div class="flex flex-col gap-3 text-sm font-medium">
+        <a href="#home" onclick="toggleMenu()" class="nav-link py-2">خانه</a>
+        <a href="#about" onclick="toggleMenu()" class="nav-link py-2">درباره ما</a>
+        <a href="#services" onclick="toggleMenu()" class="nav-link py-2">خدمات</a>
+        <a href="#portfolio" onclick="toggleMenu()" class="nav-link py-2">نمونه کارها</a>
+        <a href="#team" onclick="toggleMenu()" class="nav-link py-2">تیم</a>
+        <a href="#contact" onclick="toggleMenu()" class="nav-link py-2">تماس</a>
+        <a href="#contact" class="btn-primary px-5 py-2.5 rounded-xl text-center font-semibold mt-2">مشاوره رایگان</a>
+      </div>
+    </div>
+  </nav>
+
+  <!--HERO-->
+  <section id="home" class="hero-gradient min-h-screen flex items-center pt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="text-white fade-up">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur rounded-full px-4 py-2 text-sm mb-6">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            شرکت دانش‌بنیان مهندسی
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+            راه‌حل‌های هوشمند<br />
+            <span class="text-transparent bg-clip-text bg-purple-200">دیجیتال برای کسب‌وکار شما</span>
+          </h1>
+          <p class="text-lg text-blue-100 leading-relaxed mb-8 max-w-lg">
+            صدرا رایانه نوین طبرستان با بیش از ۱۰ سال تجربه در طراحی وب، توسعه نرم‌افزار و خدمات IT، همراه مطمئن رشد
+            دیجیتال شماست.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#services"
+              class="btn-primary px-8 py-3.5 rounded-xl font-bold text-base transition-all inline-block">مشاهده
+              خدمات</a>
+            <a href="#portfolio"
+              class="btn-outline px-8 py-3.5 rounded-xl font-bold text-base transition-all inline-block border-white/40 text-white hover:bg-white hover:text-blue-700">نمونه
+              کارها</a>
+          </div>
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 mt-14">
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-3xl font-extrabold counter-num" data-target="500">۰</div>
+              <div class="text-xs text-blue-200 mt-1">پروژه موفق</div>
+            </div>
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-3xl font-extrabold counter-num" data-target="350">۰</div>
+              <div class="text-xs text-blue-200 mt-1">مشتری راضی</div>
+            </div>
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-3xl font-extrabold counter-num" data-target="10">۰</div>
+              <div class="text-xs text-blue-200 mt-1">سال تجربه</div>
+            </div>
+          </div>
+        </div>
+        <!-- Hero Visual -->
+        <div class="hidden lg:flex justify-center items-center fade-up">
+          <div class="relative w-96 h-96">
+            <div
+              class="absolute inset-0 bg-purple-600/30 rounded-3xl backdrop-blur-sm border border-white/20 flex items-center justify-center">
+              <svg class="w-48 h-48 text-white/80" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="40" width="160" height="120" rx="12" stroke="currentColor" stroke-width="3"
+                  fill="none" />
+                <path d="M60 90 L80 110 L120 70" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <circle cx="150" cy="60" r="20" fill="#7c3aed" opacity=".5" />
+                <circle cx="50" cy="140" r="15" fill="#2563eb" opacity=".5" />
+                <path d="M100 20 V40 M80 20 H120" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" />
+                <rect x="85" y="155" width="30" height="8" rx="4" fill="white" opacity=".4" />
+                <rect x="30" y="65" width="50" height="6" rx="3" fill="white" opacity=".2" />
+                <rect x="30" y="78" width="35" height="6" rx="3" fill="white" opacity=".2" />
+              </svg>
+            </div>
+            <!-- floating badges -->
+            <div class="absolute -top-4 -right-4 bg-white rounded-xl p-3 shadow-2xl flex items-center gap-2">
+              <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="text-xs font-bold text-gray-800">۲۴/۷ پشتیبانی</div>
+            </div>
+            <div class="absolute -bottom-4 -left-4 bg-white rounded-xl p-3 shadow-2xl flex items-center gap-2">
+              <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div class="text-xs font-bold text-gray-800">سریع و حرفه‌ای</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE LOGOS (Fixed)-->
+  <div class="py-6 overflow-hidden border-y border-c marquee-container" style="background:var(--surface)">
+    <div class="marquee-track">
+      <!-- First Set -->
+      <span class="text-muted font-bold text-sm">طراحی وب</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">توسعه اپلیکیشن</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">سئو و دیجیتال مارکتینگ</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">هاستینگ و سرور</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">امنیت اطلاعات</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">مشاوره IT</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">نرم‌افزار سازمانی</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">پشتیبانی شبکه</span><span class="text-purple-500">◆</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="text-muted font-bold text-sm">طراحی وب</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">توسعه اپلیکیشن</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">سئو و دیجیتال مارکتینگ</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">هاستینگ و سرور</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">امنیت اطلاعات</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">مشاوره IT</span><span class="text-purple-500">◆</span>
+      <span class="text-muted font-bold text-sm">نرم‌افزار سازمانی</span><span class="text-blue-500">◆</span>
+      <span class="text-muted font-bold text-sm">پشتیبانی شبکه</span><span class="text-purple-500">◆</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="fade-up">
+          <div
+            class="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+            درباره ما</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mb-6" style="color:var(--text)">شرکت دانش‌بنیان با تجربه‌ای
+            ماندگار</h2>
+          <p class="text-muted leading-relaxed mb-6 text-base">شرکت مهندسی صدرا رایانه نوین طبرستان با مجوز رسمی از
+            وزارت علوم، از سال ۱۳۹۲ در ساری مازندران فعالیت می‌کند. هدف ما کمک به کسب‌وکارها و توسعه آن‌ها در فضای
+            آنلاین است.</p>
+          <p class="text-muted leading-relaxed mb-8 text-base">با تیمی متخصص از مهندسان نرم‌افزار، طراحان UI/UX و
+            کارشناسان شبکه، بیش از ۵۰۰ پروژه موفق برای سازمان‌ها، شرکت‌ها و کسب‌وکارهای کوچک و بزرگ انجام داده‌ایم.</p>
+          <!-- Skills -->
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2"><span style="color:var(--text)">طراحی و توسعه
+                  وب</span><span class="text-blue-600">۹۵٪</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="95"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2"><span style="color:var(--text)">توسعه اپلیکیشن
+                  موبایل</span><span class="text-purple-600">۸۵٪</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="85" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2"><span style="color:var(--text)">سئو و دیجیتال
+                  مارکتینگ</span><span class="text-green-600">۹۰٪</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="90" style="background:linear-gradient(90deg,#059669,#34d399)"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm font-medium mb-2"><span style="color:var(--text)">امنیت شبکه و
+                  IT</span><span class="text-orange-600">۸۰٪</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="80" style="background:linear-gradient(90deg,#ea580c,#fb923c)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 fade-up">
+          <div class="card rounded-2xl p-6 col-span-2">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="font-bold text-lg mb-2" style="color:var(--text)">شرکت دانش‌بنیان مجاز</h3>
+            <p class="text-muted text-sm">دارای مجوز رسمی از وزارت علوم، تحقیقات و فناوری و عضو انجمن شرکت‌های فناوری
+              اطلاعات مازندران</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <div class="text-4xl font-extrabold text-blue-600 mb-2">۱۰+</div>
+            <div class="text-muted text-sm">سال سابقه فعالیت</div>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <div class="text-4xl font-extrabold text-purple-600 mb-2">۲۴/۷</div>
+            <div class="text-muted text-sm">پشتیبانی آنلاین</div>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <div class="text-4xl font-extrabold text-green-600 mb-2">۵۰۰+</div>
+            <div class="text-muted text-sm">پروژه موفق</div>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <div class="text-4xl font-extrabold text-orange-500 mb-2">۳۵۰+</div>
+            <div class="text-muted text-sm">مشتری راضی</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-24 section-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          خدمات ما</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">آنچه برای شما انجام می‌دهیم</h2>
+        <p class="text-muted max-w-2xl mx-auto">ارائه جامع‌ترین خدمات فناوری اطلاعات برای رشد و توسعه دیجیتال کسب‌وکار
+          شما</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service Cards -->
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-blue-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">طراحی وب‌سایت</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">طراحی وب‌سایت‌های حرفه‌ای، واکنش‌گرا و بهینه‌شده برای
+            موتورهای جستجو با رویکرد UI/UX محور</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">وردپرس</span>
+            <span class="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">React</span>
+            <span class="text-xs bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full font-medium">اختصاصی</span>
+          </div>
+        </div>
+
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-purple-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">اپلیکیشن موبایل</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">توسعه اپلیکیشن‌های Android و iOS با تجربه کاربری عالی و
+            عملکرد بالا</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-purple-50 text-purple-600 px-2.5 py-1 rounded-full font-medium">Android</span>
+            <span class="text-xs bg-purple-50 text-purple-600 px-2.5 py-1 rounded-full font-medium">iOS</span>
+            <span class="text-xs bg-purple-50 text-purple-600 px-2.5 py-1 rounded-full font-medium">Flutter</span>
+          </div>
+        </div>
+
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-green-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">سئو و دیجیتال مارکتینگ</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">افزایش رتبه سایت در گوگل و جذب مشتری هدفمند از طریق
+            استراتژی‌های جامع سئو و بازاریابی دیجیتال</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-green-50 text-green-600 px-2.5 py-1 rounded-full font-medium">سئو</span>
+            <span class="text-xs bg-green-50 text-green-600 px-2.5 py-1 rounded-full font-medium">گوگل ادز</span>
+            <span class="text-xs bg-green-50 text-green-600 px-2.5 py-1 rounded-full font-medium">شبکه اجتماعی</span>
+          </div>
+        </div>
+
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-orange-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">هاستینگ و سرور</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">سرویس‌های میزبانی وب، سرور اختصاصی و ابری با آپتایم ۹۹.۹٪ و
+            پشتیبانی ۲۴ ساعته</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-orange-50 text-orange-600 px-2.5 py-1 rounded-full font-medium">لینوکس</span>
+            <span class="text-xs bg-orange-50 text-orange-600 px-2.5 py-1 rounded-full font-medium">ویندوز سرور</span>
+            <span class="text-xs bg-orange-50 text-orange-600 px-2.5 py-1 rounded-full font-medium">ابری</span>
+          </div>
+        </div>
+
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-red-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">امنیت سایبری</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">محافظت از اطلاعات سازمانی، ممیزی امنیتی، فایروال و جلوگیری
+            از نفوذ و حملات سایبری</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-red-50 text-red-600 px-2.5 py-1 rounded-full font-medium">فایروال</span>
+            <span class="text-xs bg-red-50 text-red-600 px-2.5 py-1 rounded-full font-medium">SSL</span>
+            <span class="text-xs bg-red-50 text-red-600 px-2.5 py-1 rounded-full font-medium">پشتیبان‌گیری</span>
+          </div>
+        </div>
+
+        <div class="service-card card rounded-2xl p-6 fade-up">
+          <div class="w-14 h-14 bg-indigo-200 rounded-2xl flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-3" style="color:var(--text)">نرم‌افزار سازمانی</h3>
+          <p class="text-muted text-sm leading-relaxed mb-4">طراحی و توسعه نرم‌افزارهای مدیریت، CRM، ERP و سیستم‌های
+            اتوماسیون اداری اختصاصی</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full font-medium">CRM</span>
+            <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full font-medium">ERP</span>
+            <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full font-medium">اتوماسیون</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-up">
+        <div
+          class="inline-block bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          نمونه کارها</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">پروژه‌های موفق ما</h2>
+        <p class="text-muted max-w-xl mx-auto">نمونه‌ای از پروژه‌های طراحی و توسعه که با افتخار برای مشتریانمان انجام
+          داده‌ایم</p>
+      </div>
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10 fade-up" id="filter-tabs">
+        <button onclick="filterPortfolio('all', this)"
+          class="filter-btn active px-5 py-2 rounded-xl text-sm font-semibold bg-blue-600 text-white transition-all">همه</button>
+        <button onclick="filterPortfolio('web', this)"
+          class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold card transition-all text-muted">وب‌سایت</button>
+        <button onclick="filterPortfolio('app', this)"
+          class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold card transition-all text-muted">اپلیکیشن</button>
+        <button onclick="filterPortfolio('ecom', this)"
+          class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold card transition-all text-muted">فروشگاه</button>
+        <button onclick="filterPortfolio('crm', this)"
+          class="filter-btn px-5 py-2 rounded-xl text-sm font-semibold card transition-all text-muted">سازمانی</button>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+        <!-- Items -->
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="web">
+          <div class="w-full h-52 bg-blue-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">وب‌سایت شرکتی</h4>
+            <span class="text-blue-200 text-sm">طراحی و توسعه</span>
+            <button class="bg-white text-blue-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">وب‌سایت شرکت پارسیان</h4>
+            <p class="text-muted text-xs">طراحی وب | React + Next.js</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="ecom">
+          <div class="w-full h-52 bg-emerald-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">فروشگاه آنلاین</h4>
+            <span class="text-green-200 text-sm">طراحی و توسعه</span>
+            <button class="bg-white text-green-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">فروشگاه آنلاین تکنو مارت</h4>
+            <p class="text-muted text-xs">فروشگاه اینترنتی | WooCommerce</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="app">
+          <div class="w-full h-52 bg-violet-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">اپلیکیشن موبایل</h4>
+            <span class="text-purple-200 text-sm">توسعه اپلیکیشن</span>
+            <button class="bg-white text-purple-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">اپ رزرواسیون هتل کاسپین</h4>
+            <p class="text-muted text-xs">اپلیکیشن موبایل | Flutter</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="crm">
+          <div class="w-full h-52 bg-orange-400 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">سیستم سازمانی</h4>
+            <span class="text-orange-200 text-sm">نرم‌افزار اختصاصی</span>
+            <button class="bg-white text-orange-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">سیستم مدیریت اداری استانداری</h4>
+            <p class="text-muted text-xs">نرم‌افزار سازمانی | ASP.NET</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="web">
+          <div class="w-full h-52 bg-sky-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">پورتال آموزشی</h4>
+            <span class="text-cyan-200 text-sm">طراحی و توسعه</span>
+            <button class="bg-white text-cyan-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">پورتال آموزش آنلاین مازندران</h4>
+            <p class="text-muted text-xs">پلتفرم آموزشی | Laravel + Vue</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item relative rounded-2xl overflow-hidden fade-up" data-cat="crm">
+          <div class="w-full h-52 bg-rose-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div class="portfolio-overlay absolute inset-0 flex items-center justify-center flex-col gap-3">
+            <h4 class="text-white font-bold text-lg">سیستم CRM</h4>
+            <span class="text-pink-200 text-sm">نرم‌افزار اختصاصی</span>
+            <button class="bg-white text-pink-600 px-4 py-1.5 rounded-lg text-sm font-semibold">مشاهده جزئیات</button>
+          </div>
+          <div class="p-4 card">
+            <h4 class="font-bold mb-1" style="color:var(--text)">CRM اختصاصی گروه صنعتی آریا</h4>
+            <p class="text-muted text-xs">مدیریت ارتباط مشتری | Python + Django</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="py-24 section-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          تیم ما</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">متخصصان پشت صحنه موفقیت</h2>
+        <p class="text-muted max-w-xl mx-auto">تیمی از مهندسان و متخصصان باتجربه که برای موفقیت پروژه شما تلاش می‌کنند
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="team-card card rounded-2xl overflow-hidden fade-up">
+          <div class="relative">
+            <div class="w-full h-48 bg-blue-400 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <div class="team-overlay absolute inset-0 flex items-end p-4">
+              <div class="flex gap-2">
+                <div
+                  class="w-8 h-8 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/30">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-base mb-1" style="color:var(--text)">سعید محمدی</h3>
+            <p class="text-muted text-xs mb-3">مدیرعامل و بنیان‌گذار</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">مدیریت پروژه</span>
+              <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">استراتژی IT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card rounded-2xl overflow-hidden fade-up">
+          <div class="relative">
+            <div class="w-full h-48 bg-violet-600 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <div class="team-overlay absolute inset-0 flex items-end p-4">
+              <div class="flex gap-2">
+                <div
+                  class="w-8 h-8 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/30">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-base mb-1" style="color:var(--text)">علی رضایی</h3>
+            <p class="text-muted text-xs mb-3">سرپرست توسعه نرم‌افزار</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-xs bg-purple-50 text-purple-600 px-2 py-0.5 rounded-full">React</span>
+              <span class="text-xs bg-purple-50 text-purple-600 px-2 py-0.5 rounded-full">Node.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card rounded-2xl overflow-hidden fade-up">
+          <div class="relative">
+            <div class="w-full h-48 bg-rose-500 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <div class="team-overlay absolute inset-0 flex items-end p-4">
+              <div class="flex gap-2">
+                <div
+                  class="w-8 h-8 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/30">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-base mb-1" style="color:var(--text)">مریم حسینی</h3>
+            <p class="text-muted text-xs mb-3">طراح ارشد UI/UX</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-xs bg-pink-50 text-pink-600 px-2 py-0.5 rounded-full">Figma</span>
+              <span class="text-xs bg-pink-50 text-pink-600 px-2 py-0.5 rounded-full">UI/UX</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card card rounded-2xl overflow-hidden fade-up">
+          <div class="relative">
+            <div class="w-full h-48 bg-emerald-600 flex items-center justify-center">
+              <svg class="w-24 h-24 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <div class="team-overlay absolute inset-0 flex items-end p-4">
+              <div class="flex gap-2">
+                <div
+                  class="w-8 h-8 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center cursor-pointer hover:bg-white/30">
+                  <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-base mb-1" style="color:var(--text)">محمد کریمی</h3>
+            <p class="text-muted text-xs mb-3">متخصص سئو و دیجیتال مارکتینگ</p>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full">SEO</span>
+              <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full">Google Ads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          نظرات مشتریان</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">مشتریان راضی، بهترین سند موفقیت
+          ماست</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="testimonial-card rounded-2xl p-6 fade-up">
+          <div class="flex gap-1 mb-4"><span class="text-yellow-400 text-xl">★★★★★</span></div>
+          <p class="text-muted text-sm leading-relaxed mb-5">«همکاری با تیم ایران کامپایل برای ما یک تجربه فوق‌العاده
+            بود. پروژه را دقیقاً طبق زمان‌بندی تحویل دادند و کیفیت کار بسیار بالا بود.»</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center text-white font-bold text-sm">ا
+            </div>
+            <div>
+              <div class="font-bold text-sm" style="color:var(--text)">احمد نوری</div>
+              <div class="text-muted text-xs">مدیرعامل شرکت تجاری نوین</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card rounded-2xl p-6 fade-up">
+          <div class="flex gap-1 mb-4"><span class="text-yellow-400 text-xl">★★★★★</span></div>
+          <p class="text-muted text-sm leading-relaxed mb-5">«سایت فروشگاهی‌مان را به ایران کامپایل سپردیم. نه تنها
+            طراحی زیبایی داشت، بلکه سئو عالی و فروش ما ۳ برابر شد. توصیه می‌کنم.»</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-purple-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+              ف</div>
+            <div>
+              <div class="font-bold text-sm" style="color:var(--text)">فاطمه رستمی</div>
+              <div class="text-muted text-xs">صاحب فروشگاه آنلاین</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card rounded-2xl p-6 fade-up">
+          <div class="flex gap-1 mb-4"><span class="text-yellow-400 text-xl">★★★★★</span></div>
+          <p class="text-muted text-sm leading-relaxed mb-5">«پشتیبانی ۲۴ ساعته‌شان واقعاً حرفه‌ای است. هر بار مشکلی
+            داشتیم سریع حل کردند. قرارداد بلندمدت با این تیم داریم.»</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-green-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+              م</div>
+            <div>
+              <div class="font-bold text-sm" style="color:var(--text)">مجید عباسی</div>
+              <div class="text-muted text-xs">مدیر IT سازمان استانداری</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="py-24 section-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          وبلاگ</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">آخرین مقالات و اخبار</h2>
+        <p class="text-muted">دانش و تجربه‌مان را با شما به اشتراک می‌گذاریم</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="card rounded-2xl overflow-hidden fade-up hover:-translate-y-1 transition-transform duration-300">
+          <div class="h-44 bg-indigo-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs bg-blue-100 text-blue-600 px-2.5 py-1 rounded-full font-medium">طراحی وب</span>
+              <span class="text-xs text-muted">۱۵ خرداد ۱۴۰۴</span>
+            </div>
+            <h3 class="font-bold text-base mb-2" style="color:var(--text)">۱۰ ترند برتر طراحی وب در سال ۱۴۰۴</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">بررسی جدیدترین روندهای طراحی وب که کسب‌وکار شما را در
+              دنیای دیجیتال متمایز می‌کند...</p>
+            <a href="#" class="text-blue-600 text-sm font-semibold hover:text-blue-700 transition-colors">ادامه مطلب
+              ←</a>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden fade-up hover:-translate-y-1 transition-transform duration-300">
+          <div class="h-44 bg-teal-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs bg-green-100 text-green-600 px-2.5 py-1 rounded-full font-medium">سئو</span>
+              <span class="text-xs text-muted">۸ خرداد ۱۴۰۴</span>
+            </div>
+            <h3 class="font-bold text-base mb-2" style="color:var(--text)">راهنمای جامع سئو برای کسب‌وکارهای ایرانی</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">چطور با بودجه محدود، رتبه اول گوگل را برای کلیدواژه‌های
+              هدف خود بگیرید...</p>
+            <a href="#" class="text-green-600 text-sm font-semibold hover:text-green-700 transition-colors">ادامه مطلب
+              ←</a>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden fade-up hover:-translate-y-1 transition-transform duration-300">
+          <div class="h-44 bg-violet-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs bg-purple-100 text-purple-600 px-2.5 py-1 rounded-full font-medium">امنیت</span>
+              <span class="text-xs text-muted">۱ خرداد ۱۴۰۴</span>
+            </div>
+            <h3 class="font-bold text-base mb-2" style="color:var(--text)">۵ تهدید امنیت سایبری که باید بدانید</h3>
+            <p class="text-muted text-sm leading-relaxed mb-4">چطور از اطلاعات کسب‌وکار خود در برابر حملات سایبری
+              روزافزون محافظت کنید...</p>
+            <a href="#" class="text-purple-600 text-sm font-semibold hover:text-purple-700 transition-colors">ادامه مطلب
+              ←</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          پرسش‌های متداول</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold" style="color:var(--text)">سوالات رایج</h2>
+      </div>
+      <div class="space-y-3 fade-up">
+        <div class="card rounded-2xl overflow-hidden">
+          <button onclick="toggleFAQ(this)"
+            class="w-full flex items-center justify-between p-5 text-right font-semibold" style="color:var(--text)">
+            <span>هزینه طراحی وب‌سایت چقدر است؟</span>
+            <svg class="w-5 h-5 text-muted faq-icon transition-transform" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-muted text-sm leading-relaxed">هزینه طراحی وب‌سایت بستگی به نوع و پیچیدگی پروژه دارد. ما
+              پکیج‌های متنوعی از ۵ میلیون تومان برای وب‌سایت‌های ساده تا پروژه‌های سازمانی با بودجه سفارشی ارائه
+              می‌دهیم. برای دریافت مشاوره رایگان با ما تماس بگیرید.</p>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden">
+          <button onclick="toggleFAQ(this)"
+            class="w-full flex items-center justify-between p-5 text-right font-semibold" style="color:var(--text)">
+            <span>مدت زمان تحویل پروژه چقدر است؟</span>
+            <svg class="w-5 h-5 text-muted faq-icon transition-transform" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-muted text-sm leading-relaxed">بسته به نوع پروژه متفاوت است. وب‌سایت‌های ساده ۱ تا ۲ هفته،
+              پروژه‌های متوسط ۱ تا ۲ ماه و پروژه‌های سازمانی بزرگ ۳ تا ۶ ماه زمان می‌برند. زمان‌بندی دقیق در جلسه اول
+              مشاوره تعیین می‌شود.</p>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden">
+          <button onclick="toggleFAQ(this)"
+            class="w-full flex items-center justify-between p-5 text-right font-semibold" style="color:var(--text)">
+            <span>آیا پشتیبانی بعد از تحویل پروژه دارید؟</span>
+            <svg class="w-5 h-5 text-muted faq-icon transition-transform" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-muted text-sm leading-relaxed">بله، همه پروژه‌های ما شامل ۳ ماه پشتیبانی رایگان هستند. بعد از
+              آن می‌توانید قرارداد پشتیبانی ماهیانه یا سالانه داشته باشید. تیم پشتیبانی ما ۲۴ ساعته در دسترس است.</p>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl overflow-hidden">
+          <button onclick="toggleFAQ(this)"
+            class="w-full flex items-center justify-between p-5 text-right font-semibold" style="color:var(--text)">
+            <span>آیا سایت موبایل‌پسند (ریسپانسیو) طراحی می‌کنید؟</span>
+            <svg class="w-5 h-5 text-muted faq-icon transition-transform" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer px-5 pb-5">
+            <p class="text-muted text-sm leading-relaxed">بله، تمامی وب‌سایت‌هایی که طراحی می‌کنیم به صورت کاملاً
+              ریسپانسیو هستند و روی موبایل، تبلت و دسکتاپ به بهترین شکل نمایش داده می‌شوند.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  CONTACT -->
+  <section id="contact" class="py-24 section-alt">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div
+          class="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          تماس با ما</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mb-4" style="color:var(--text)">با ما در تماس باشید</h2>
+        <p class="text-muted">برای مشاوره رایگان و شروع همکاری با ما تماس بگیرید</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Info -->
+        <div class="space-y-6 fade-up">
+          <div class="card rounded-2xl p-5 flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-sm mb-1" style="color:var(--text)">آدرس</div>
+              <div class="text-muted text-sm">مازندران - ساری - خیابان شیخ طبرسی روبه روی خیابان ملت ساختمان طبرستان
+              </div>
+            </div>
+          </div>
+
+          <div class="card rounded-2xl p-5 flex items-center gap-4">
+            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-sm mb-1" style="color:var(--text)">تلفن</div>
+              <div class="text-muted text-sm" dir="ltr">011-33312405-6</div>
+            </div>
+          </div>
+
+          <div class="card rounded-2xl p-5 flex items-center gap-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-sm mb-1" style="color:var(--text)">ایمیل</div>
+              <div class="text-muted text-sm" dir="ltr">info@irancompile.com</div>
+            </div>
+          </div>
+
+          <div class="card rounded-2xl p-5 flex items-center gap-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <div class="font-bold text-sm mb-1" style="color:var(--text)">ساعات کاری</div>
+              <div class="text-muted text-sm">شنبه تا چهارشنبه: ۸ تا ۱۷ | پنجشنبه: ۸ تا ۱۳</div>
+            </div>
+          </div>
+
+          <!-- Social -->
+          <div class="flex gap-3">
+            <a href="#"
+              class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white hover:bg-blue-700 transition-colors"><svg
+                class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
+              </svg></a>
+            <a href="#"
+              class="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center text-white hover:bg-sky-600 transition-colors"><svg
+                class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+              </svg></a>
+            <a href="#"
+              class="w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center text-white hover:opacity-90 transition-opacity"><svg
+                class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
+              </svg></a>
+            <a href="#"
+              class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white hover:bg-green-600 transition-colors"><svg
+                class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                <path
+                  d="M12.05 2.022C6.492 2.022 2 6.513 2 12.072c0 1.908.503 3.697 1.383 5.237L2 22l4.81-1.363c1.479.806 3.185 1.283 5.003 1.283h.003c5.557 0 10.048-4.49 10.048-10.049 0-2.684-1.043-5.208-2.94-7.105A9.97 9.97 0 0012.053 2z" />
+              </svg></a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card rounded-2xl p-8 fade-up">
+          <h3 class="font-bold text-xl mb-6" style="color:var(--text)">ارسال پیام</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm font-medium text-muted block mb-1.5">نام و نام خانوادگی</label>
+                <input type="text" placeholder="نام شما"
+                  class="w-full px-4 py-3 rounded-xl text-sm border border-c focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  style="background:var(--surface2);color:var(--text)" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-muted block mb-1.5">شماره موبایل</label>
+                <input type="tel" placeholder="09xxxxxxxxx" dir="ltr"
+                  class="w-full px-4 py-3 rounded-xl text-sm border border-c focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  style="background:var(--surface2);color:var(--text)" />
+              </div>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-muted block mb-1.5">ایمیل</label>
+              <input type="email" placeholder="example@mail.com" dir="ltr"
+                class="w-full px-4 py-3 rounded-xl text-sm border border-c focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                style="background:var(--surface2);color:var(--text)" />
+            </div>
+            <div>
+              <label class="text-sm font-medium text-muted block mb-1.5">موضوع</label>
+              <select
+                class="w-full px-4 py-3 rounded-xl text-sm border border-c focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                style="background:var(--surface2);color:var(--text)">
+                <option>طراحی وب‌سایت</option>
+                <option>توسعه اپلیکیشن</option>
+                <option>سئو و دیجیتال مارکتینگ</option>
+                <option>هاستینگ و سرور</option>
+                <option>امنیت سایبری</option>
+                <option>مشاوره IT</option>
+                <option>سایر</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-muted block mb-1.5">پیام</label>
+              <textarea rows="4" placeholder="توضیحات پروژه یا سوال خود را بنویسید..."
+                class="w-full px-4 py-3 rounded-xl text-sm border border-c focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none"
+                style="background:var(--surface2);color:var(--text)"></textarea>
+            </div>
+            <button onclick="submitForm()"
+              class="w-full btn-primary py-3.5 rounded-xl font-bold text-base transition-all">ارسال پیام</button>
+            <div id="form-success"
+              class="hidden bg-green-50 border border-green-200 rounded-xl p-4 text-green-700 text-sm text-center font-medium">
+              پیام شما با موفقیت ارسال شد. به زودی با شما تماس می‌گیریم.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="hero-gradient py-20">
+    <div class="max-w-4xl mx-auto px-4 text-center text-white">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">آماده شروع پروژه‌تان هستید؟</h2>
+      <p class="text-blue-100 mb-8 text-lg">همین حالا با ما تماس بگیرید و مشاوره رایگان دریافت کنید</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:01133312405"
+          class="bg-white text-blue-700 px-8 py-3.5 rounded-xl font-bold text-base hover:bg-blue-50 transition-colors inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          تماس فوری
+        </a>
+        <a href="#contact"
+          class="border-2 border-white text-white px-8 py-3.5 rounded-xl font-bold text-base hover:bg-white/10 transition-colors">ارسال
+          پیام</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12" style="background:var(--surface)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">IC
+            </div>
+            <div>
+              <div class="font-bold" style="color:var(--text)">ایران کامپایل</div>
+              <div class="text-xs text-muted">صدرا رایانه نوین طبرستان</div>
+            </div>
+          </div>
+          <p class="text-muted text-sm leading-relaxed mb-4 max-w-sm">شرکت دانش‌بنیان مهندسی صدرا رایانه نوین طبرستان،
+            ارائه‌دهنده خدمات جامع فناوری اطلاعات در مازندران و سراسر ایران.</p>
+          <div class="text-muted text-sm" dir="ltr">011-33312405-6</div>
+          <div class="text-muted text-sm">info@irancompile.com</div>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-4 text-sm" style="color:var(--text)">خدمات</h4>
+          <ul class="space-y-2.5 text-sm text-muted">
+            <li><a href="#" class="hover:text-blue-500 transition-colors">طراحی وب‌سایت</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">توسعه اپلیکیشن</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">سئو و دیجیتال مارکتینگ</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">هاستینگ و سرور</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">امنیت سایبری</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">نرم‌افزار سازمانی</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-4 text-sm" style="color:var(--text)">لینک‌های مفید</h4>
+          <ul class="space-y-2.5 text-sm text-muted">
+            <li><a href="#about" class="hover:text-blue-500 transition-colors">درباره ما</a></li>
+            <li><a href="#portfolio" class="hover:text-blue-500 transition-colors">نمونه کارها</a></li>
+            <li><a href="#team" class="hover:text-blue-500 transition-colors">تیم ما</a></li>
+            <li><a href="#blog" class="hover:text-blue-500 transition-colors">وبلاگ</a></li>
+            <li><a href="#contact" class="hover:text-blue-500 transition-colors">تماس با ما</a></li>
+            <li><a href="#" class="hover:text-blue-500 transition-colors">حریم خصوصی</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-c pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-muted text-sm">© 1405 صدرا رایانه نوین طبرستان. تمامی حقوق محفوظ است.</p>
+        <p class="text-muted text-xs">طراحی شده با توسط تیم ایران کامپایل</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      const newTheme = isDark ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcons(newTheme);
+    }
+
+    function updateIcons(theme) {
+      const sun = document.getElementById('sun-icon');
+      const moon = document.getElementById('moon-icon');
+      if (theme === 'dark') {
+        sun.classList.remove('hidden');
+        moon.classList.add('hidden');
+      } else {
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+      }
+    }
+
+    (function loadTheme() {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateIcons(saved);
+    })();
+
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    function toggleFAQ(btn) {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      answer.classList.toggle('open');
+      icon.style.transform = answer.classList.contains('open') ? 'rotate(180deg)' : '';
+    }
+
+    function filterPortfolio(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white');
+        b.classList.add('text-muted');
+      });
+      btn.classList.add('bg-blue-600', 'text-white');
+      btn.classList.remove('text-muted');
+
+      document.querySelectorAll('.portfolio-item').forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+    function animateCounters() {
+      document.querySelectorAll('[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = Math.floor(current).toLocaleString('fa-IR');
+          if (current >= target) clearInterval(timer);
+        }, 30);
+      });
+    }
+
+    function animateSkillBars() {
+      document.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.querySelector('[data-target]')) animateCounters();
+          if (entry.target.querySelector('.skill-fill')) animateSkillBars();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    setTimeout(() => {
+      const heroCounter = document.querySelector('[data-target]');
+      if (heroCounter && heroCounter.closest('.fade-up.visible')) animateCounters();
+    }, 500);
+
+    function submitForm() {
+      const success = document.getElementById('form-success');
+      success.classList.remove('hidden');
+      setTimeout(() => success.classList.add('hidden'), 5000);
+    }
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + current ? '#2563eb' : '';
+      });
+    });
+  </script>
+</body>
+
+</html>

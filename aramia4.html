@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" x-data="appData()" :class="{ 'dark': darkMode }" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>آرامیا - پلتفرم مدیتیشن و آرامش ذهن</title>
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--alpine.js-->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!--Library of JS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                        'sm': '640px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                        '2xl': '1536px',
+                    },
+                    colors: {
+                        calm: { 50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac', 400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+                        serenity: { 50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95' },
+                        peace: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1', 800: '#075985', 900: '#0c4a6e' }
+                    },
+                    fontFamily: { 'vazir': ['Vazirmatn', 'sans-serif'] },
+                    fontSize: {
+                        'xxs': ['0.625rem', { lineHeight: '0.875rem' }],
+                        'xs': ['0.75rem', { lineHeight: '1rem' }],
+                        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+                        'base': ['1rem', { lineHeight: '1.5rem' }],
+                        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+                        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+                        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+                        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+                        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+                        '5xl': ['3rem', { lineHeight: '1.16' }],
+                        '6xl': ['3.75rem', { lineHeight: '1.1' }],
+                        '7xl': ['4.5rem', { lineHeight: '1.1' }],
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '22': '5.5rem',
+                        '26': '6.5rem',
+                        '30': '7.5rem',
+                        '34': '8.5rem',
+                        '38': '9.5rem',
+                        '42': '10.5rem',
+                        '46': '11.5rem',
+                        '50': '12.5rem',
+                        '54': '13.5rem',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'breathe': 'breathe 4s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.5s ease-out',
+                        'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-in-right': 'slideInRight 0.3s ease-out',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-20px)' } },
+                        breathe: { '0%, 100%': { transform: 'scale(1)', opacity: '0.7' }, '50%': { transform: 'scale(1.1)', opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        slideDown: { '0%': { transform: 'translateY(-20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        pulseSoft: { '0%, 100%': { opacity: '0.6' }, '50%': { opacity: '1' } },
+                        slideInRight: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(0)' } },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Responsive Sidebar */
+        .sidebar-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar-overlay {
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(4px);
+            }
+        }
+
+        .meditation-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .calm-gradient {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        .zen-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (min-width: 1024px) {
+            .card-hover:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .card-hover:active {
+                transform: scale(0.98);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #a78bfa 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .breathing-circle {
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        .social-svg {
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .social-svg:hover {
+                transform: translateY(-3px);
+                filter: brightness(1.2);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .social-svg:active {
+                transform: scale(0.9);
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            min-height: 300px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                min-height: 250px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .card-hover:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            button,
+            a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300 overflow-x-hidden">
+
+    <script>
+        function appData() {
+            return {
+                darkMode: localStorage.getItem('darkMode') === 'true' || false,
+                currentPage: 'home',
+                sidebarOpen: false,
+                mobileMenuOpen: false,
+                showLoginModal: false,
+                showRegisterModal: false,
+                activeMeditation: null,
+                meditationTimer: 0,
+                timerInterval: null,
+                isTimerRunning: false,
+                activeDashboardSection: 'overview',
+                notifications: [],
+                notificationCount: 3,
+                showNotifications: false,
+
+                // Collapsible states for dashboard sections
+                overviewCollapsed: false,
+                meditationsCollapsed: false,
+                statsCollapsed: false,
+                remindersCollapsed: false,
+                settingsCollapsed: false,
+
+                // Collapsible states for sidebar menu groups
+                sidebarMeditationsOpen: true,
+                sidebarStatsOpen: true,
+                sidebarSettingsOpen: true,
+
+                user: {
+                    name: 'سارا احمدی',
+                    email: 'sara@aramia.com',
+                    avatar: 'س.ا',
+                    level: 'مدیتیشن‌کار پیشرفته',
+                    streak: 45,
+                    totalMinutes: 2340,
+                    sessions: 156,
+                },
+
+                meditations: [
+                    { id: 1, title: 'تنفس آگاهانه', duration: 10, type: 'breathing', color: 'calm', description: 'تمرکز بر تنفس برای آرامش ذهن' },
+                    { id: 2, title: 'آرامش عمیق', duration: 20, type: 'relaxation', color: 'serenity', description: 'رهایی از تنش‌های روزانه' },
+                    { id: 3, title: 'تمرکز و توجه', duration: 15, type: 'focus', color: 'peace', description: 'افزایش تمرکز و بهره‌وری' },
+                    { id: 4, title: 'اسکن بدن', duration: 25, type: 'bodyscan', color: 'calm', description: 'آگاهی از احساسات بدن' },
+                    { id: 5, title: 'مدیتیشن خواب', duration: 30, type: 'sleep', color: 'serenity', description: 'آمادگی برای خواب عمیق' },
+                    { id: 6, title: 'ذهن‌آگاهی', duration: 15, type: 'mindfulness', color: 'peace', description: 'حضور در لحظه حال' },
+                ],
+
+                recentSessions: [
+                    { id: 1, date: 'امروز', title: 'تنفس آگاهانه', duration: 10, mood: 'عالی' },
+                    { id: 2, date: 'دیروز', title: 'آرامش عمیق', duration: 20, mood: 'خوب' },
+                    { id: 3, date: '۲ روز پیش', title: 'مدیتیشن خواب', duration: 30, mood: 'عالی' },
+                ],
+
+                moodChart: null,
+                progressChart: null,
+                windowWidth: window.innerWidth,
+
+                init() {
+                    this.$watch('darkMode', val => localStorage.setItem('darkMode', val));
+
+                    // Track window resize
+                    window.addEventListener('resize', () => {
+                        this.windowWidth = window.innerWidth;
+                    });
+
+                    this.notifications = [
+                        { id: 1, title: 'یادآوری مدیتیشن', message: 'زمان مدیتیشن عصر شما فرا رسیده است 🧘‍♀️', time: '۱۰ دقیقه پیش', type: 'reminder', read: false },
+                        { id: 2, title: 'دستاورد جدید', message: 'شما به رکورد ۴۵ روز متوالی رسیدید! 🎉', time: '۲ ساعت پیش', type: 'achievement', read: false },
+                        { id: 3, title: 'مدیتیشن جدید', message: 'مدیتیشن "عشق و مهربانی" به کتابخانه اضافه شد', time: '۱ روز پیش', type: 'new', read: false },
+                    ];
+
+                    this.$watch('currentPage', page => {
+                        if (page === 'dashboard') {
+                            this.$nextTick(() => {
+                                setTimeout(() => this.initCharts(), 100);
+                            });
+                        }
+                    });
+
+                    this.$watch('activeDashboardSection', section => {
+                        if (section === 'stats' || section === 'overview') {
+                            this.$nextTick(() => {
+                                setTimeout(() => this.initCharts(), 100);
+                            });
+                        }
+                    });
+
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= 1024) {
+                            this.sidebarOpen = false;
+                        }
+                    });
+                },
+
+                toggleDarkMode() { this.darkMode = !this.darkMode; },
+
+                navigateTo(page) {
+                    this.currentPage = page;
+                    this.sidebarOpen = false;
+                    this.mobileMenuOpen = false;
+                    this.activeDashboardSection = 'overview';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                setDashboardSection(section) {
+                    this.activeDashboardSection = section;
+                    // Close sidebar on mobile after selection
+                    if (window.innerWidth < 1024) {
+                        this.sidebarOpen = false;
+                    }
+                },
+
+                startMeditation(meditation) {
+                    this.activeMeditation = meditation;
+                    this.meditationTimer = meditation.duration * 60;
+                    this.isTimerRunning = true;
+                    if (this.timerInterval) clearInterval(this.timerInterval);
+                    this.timerInterval = setInterval(() => {
+                        if (this.meditationTimer > 0) { this.meditationTimer--; }
+                        else { this.stopMeditation(); alert('مدیتیشن به پایان رسید! 🌸'); }
+                    }, 1000);
+                },
+
+                stopMeditation() {
+                    clearInterval(this.timerInterval);
+                    this.isTimerRunning = false;
+                    this.activeMeditation = null;
+                    this.meditationTimer = 0;
+                },
+
+                formatTime(seconds) {
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                },
+
+                markAllRead() {
+                    this.notifications.forEach(n => n.read = true);
+                    this.notificationCount = 0;
+                },
+
+                initCharts() {
+                    if (this.moodChart) {
+                        this.moodChart.destroy();
+                        this.moodChart = null;
+                    }
+                    if (this.progressChart) {
+                        this.progressChart.destroy();
+                        this.progressChart = null;
+                    }
+
+                    const moodCtx = document.getElementById('moodChart');
+                    if (moodCtx) {
+                        this.moodChart = new Chart(moodCtx, {
+                            type: 'line',
+                            data: {
+                                labels: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'],
+                                datasets: [{
+                                    label: 'سطح آرامش',
+                                    data: [7, 6, 8, 7.5, 8.5, 9, 8],
+                                    borderColor: '#8b5cf6',
+                                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                                    tension: 0.4,
+                                    fill: true,
+                                    borderWidth: window.innerWidth < 640 ? 2 : 3,
+                                    pointBackgroundColor: '#8b5cf6',
+                                    pointRadius: window.innerWidth < 640 ? 3 : 5,
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: window.innerWidth > 640,
+                                        labels: {
+                                            font: {
+                                                size: window.innerWidth < 640 ? 10 : 12,
+                                                family: 'Vazirmatn'
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 10,
+                                        ticks: {
+                                            stepSize: 2,
+                                            font: {
+                                                size: window.innerWidth < 640 ? 10 : 12,
+                                                family: 'Vazirmatn'
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            font: {
+                                                size: window.innerWidth < 640 ? 10 : 12,
+                                                family: 'Vazirmatn'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    const progressCtx = document.getElementById('progressChart');
+                    if (progressCtx) {
+                        this.progressChart = new Chart(progressCtx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['مدیتیشن', 'تنفس', 'یوگا', 'ذهن‌آگاهی'],
+                                datasets: [{
+                                    data: [40, 25, 20, 15],
+                                    backgroundColor: ['#8b5cf6', '#22c55e', '#0ea5e9', '#f59e0b'],
+                                    borderWidth: 0
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: window.innerWidth < 640 ? 'bottom' : 'bottom',
+                                        labels: {
+                                            padding: window.innerWidth < 640 ? 10 : 20,
+                                            usePointStyle: true,
+                                            font: {
+                                                size: window.innerWidth < 640 ? 11 : 14,
+                                                family: 'Vazirmatn'
+                                            }
+                                        }
+                                    }
+                                },
+                                cutout: '70%',
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Meditation Timer Modal -->
+    <div x-show="activeMeditation" x-cloak class="fixed inset-0 z-50 overflow-y-auto" x-transition>
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm"></div>
+            <div
+                class="relative bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-[95vw] sm:max-w-lg p-6 sm:p-8 text-center animate-slide-up mx-2">
+                <div
+                    class="breathing-circle w-24 h-24 sm:w-32 sm:h-32 bg-serenity-400 to-calm-400 rounded-full mx-auto mb-6 sm:mb-8 flex items-center justify-center">
+                    <div
+                        class="w-20 h-20 sm:w-24 sm:h-24 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center">
+                        <span class="text-3xl sm:text-4xl font-black gradient-text"
+                            x-text="formatTime(meditationTimer)"></span>
+                    </div>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2"
+                    x-text="activeMeditation?.title"></h2>
+                <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6 sm:mb-8">نفس عمیق بکشید و آرامش را
+                    احساس کنید...</p>
+                <button @click="stopMeditation()"
+                    class="px-6 sm:px-8 py-2.5 sm:py-3 bg-red-500 text-white rounded-xl font-bold hover:bg-red-600 transition-all text-sm sm:text-base">پایان
+                    مدیتیشن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div x-show="showLoginModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" x-transition>
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="showLoginModal = false"></div>
+            <div
+                class="relative bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-[95vw] sm:max-w-md p-6 sm:p-8 animate-slide-up mx-2">
+                <button @click="showLoginModal = false"
+                    class="absolute top-3 sm:top-4 left-3 sm:left-4 text-gray-400 hover:text-gray-600"><svg
+                        class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg></button>
+                <div class="text-center mb-6">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 bg-serenity-400 to-calm-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">به آرامیا خوش آمدید</h2>
+                </div>
+                <form @submit.prevent="navigateTo('dashboard'); showLoginModal = false">
+                    <div class="mb-4"><label
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">ایمیل</label><input
+                            type="email"
+                            class="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm"
+                            placeholder="example@email.com"></div>
+                    <div class="mb-6"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">رمز
+                            عبور</label><input type="password"
+                            class="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm"
+                            placeholder="••••••••"></div>
+                    <button type="submit"
+                        class="w-full bg-serenity-500 to-calm-500 text-white py-2.5 sm:py-3 rounded-xl font-bold hover:shadow-lg transition-all text-sm sm:text-base">ورود</button>
+                </form>
+                <p class="mt-4 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">حساب کاربری ندارید؟
+                    <button @click="showLoginModal = false; showRegisterModal = true"
+                        class="text-serenity-600 dark:text-serenity-400 hover:underline">ثبت نام کنید</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div x-show="showRegisterModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto" x-transition>
+        <div class="flex min-h-full items-center justify-center p-4">
+            <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="showRegisterModal = false"></div>
+            <div
+                class="relative bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-[95vw] sm:max-w-md p-6 sm:p-8 animate-slide-up mx-2">
+                <button @click="showRegisterModal = false"
+                    class="absolute top-3 sm:top-4 left-3 sm:left-4 text-gray-400 hover:text-gray-600"><svg
+                        class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg></button>
+                <div class="text-center mb-6">
+                    <div
+                        class="w-16 h-16 sm:w-20 sm:h-20 bg-serenity-400 to-calm-400 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">شروع سفر آرامش</h2>
+                </div>
+                <form @submit.prevent="navigateTo('dashboard'); showRegisterModal = false">
+                    <div class="mb-4"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">نام
+                            کامل</label><input type="text"
+                            class="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm"
+                            placeholder="سارا احمدی"></div>
+                    <div class="mb-4"><label
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">ایمیل</label><input
+                            type="email"
+                            class="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm"
+                            placeholder="example@email.com"></div>
+                    <div class="mb-6"><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">رمز
+                            عبور</label><input type="password"
+                            class="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm"
+                            placeholder="••••••••"></div>
+                    <button type="submit"
+                        class="w-full bg-serenity-500 to-calm-500 text-white py-2.5 sm:py-3 rounded-xl font-bold hover:shadow-lg transition-all text-sm sm:text-base">شروع
+                        کنید</button>
+                </form>
+                <p class="mt-4 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">قبلاً ثبت نام کرده‌اید؟
+                    <button @click="showRegisterModal = false; showLoginModal = true"
+                        class="text-serenity-600 dark:text-serenity-400 hover:underline">وارد شوید</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--LANDING PAGE-->
+    <div x-show="currentPage === 'home'" x-transition:enter="transition-all duration-500">
+
+        <!-- Floating Elements-->
+        <div class="hidden sm:block fixed inset-0 pointer-events-none overflow-hidden">
+            <div
+                class="absolute top-20 right-[10%] w-48 sm:w-72 h-48 sm:h-72 bg-serenity-400/10 dark:bg-serenity-600/10 rounded-full blur-3xl animate-float">
+            </div>
+            <div class="absolute bottom-20 left-[10%] w-64 sm:w-96 h-64 sm:h-96 bg-calm-400/10 dark:bg-calm-600/10 rounded-full blur-3xl animate-float"
+                style="animation-delay: -3s"></div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
+            <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-14 sm:h-20">
+                    <div class="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-serenity-600 dark:text-serenity-400"
+                            viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                        <div>
+                            <span class="text-lg sm:text-2xl font-black text-gray-900 dark:text-white">آرامیا</span>
+                            <span class="hidden sm:block text-xxs sm:text-xs text-gray-500 dark:text-gray-400">سفر به
+                                آرامش درون</span>
+                        </div>
+                    </div>
+
+                    <div class="hidden lg:flex items-center space-x-1 space-x-reverse">
+                        <a href="#features"
+                            class="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-serenity-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">ویژگی‌ها</a>
+                        <a href="#meditations"
+                            class="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-serenity-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">مدیتیشن‌ها</a>
+                        <a href="#pricing"
+                            class="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-serenity-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">تعرفه‌ها</a>
+                        <a href="#testimonials"
+                            class="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-serenity-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">تجربه‌ها</a>
+                    </div>
+
+                    <div class="flex items-center space-x-1.5 sm:space-x-3 space-x-reverse">
+                        <button @click="toggleDarkMode()"
+                            class="p-2 sm:p-2.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white rounded-lg sm:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                            <svg x-show="!darkMode" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                            <svg x-show="darkMode" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        </button>
+                        <button @click="showLoginModal = true"
+                            class="hidden xs:block px-3 sm:px-6 py-1.5 sm:py-2.5 text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-medium rounded-lg sm:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">ورود</button>
+                        <button @click="showRegisterModal = true"
+                            class="px-3 sm:px-6 py-1.5 sm:py-2.5 bg-serenity-500 to-calm-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold hover:shadow-lg transition-all active:scale-95">شروع
+                            سفر</button>
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden p-2 text-gray-500"><svg
+                                class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    :d="mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'" />
+                            </svg></button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div x-show="mobileMenuOpen" x-cloak
+                    class="lg:hidden py-3 border-t border-gray-200 dark:border-gray-700 animate-slide-down">
+                    <div class="space-y-1">
+                        <a href="#features" @click="mobileMenuOpen = false"
+                            class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">ویژگی‌ها</a>
+                        <a href="#meditations" @click="mobileMenuOpen = false"
+                            class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">مدیتیشن‌ها</a>
+                        <a href="#pricing" @click="mobileMenuOpen = false"
+                            class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">تعرفه‌ها</a>
+                        <a href="#testimonials" @click="mobileMenuOpen = false"
+                            class="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">تجربه‌ها</a>
+                        <button @click="showLoginModal = true; mobileMenuOpen = false"
+                            class="block w-full text-right px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">ورود</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-[90vh] sm:min-h-screen flex items-center pt-14 sm:pt-20 overflow-hidden meditation-gradient">
+            <div class="zen-pattern absolute inset-0"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+                <div class="grid lg:grid-cols-2 gap-8 sm:gap-16 items-center">
+                    <div class="animate-slide-up text-white text-center lg:text-right">
+                        <div
+                            class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white/20 backdrop-blur-sm rounded-full text-xs sm:text-sm mb-4 sm:mb-6">
+                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-300 rounded-full ml-2 animate-pulse"></span>
+                            بیش از ۵۰۰,۰۰۰ کاربر فعال
+                        </div>
+                        <h1 class="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-black mb-4 sm:mb-6 leading-tight">
+                            آرامش را <span class="text-yellow-300">تجربه</span> کن</h1>
+                        <p class="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 leading-relaxed text-white/90">با آرامیا،
+                            سفری عمیق به دنیای درون را آغاز کنید. مدیتیشن‌های هدایت‌شده، تمرین‌های تنفسی و ابزارهای
+                            ذهن‌آگاهی برای زندگی آرام‌تر و شادتر</p>
+                        <div class="flex flex-col xs:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                            <button @click="navigateTo('dashboard')"
+                                class="group px-6 sm:px-8 py-3 sm:py-4 bg-white text-serenity-700 rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold hover:shadow-2xl transition-all active:scale-95 flex items-center justify-center">
+                                شروع مدیتیشن رایگان
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:translate-x-1 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                            <button
+                                class="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/50 text-white rounded-xl sm:rounded-2xl text-sm sm:text-base font-bold hover:bg-white/10 transition-all">بیشتر
+                                بدانید</button>
+                        </div>
+                        <div
+                            class="flex items-center justify-center lg:justify-start mt-6 sm:mt-8 space-x-6 sm:space-x-8 space-x-reverse text-white/80">
+                            <div class="flex -space-x-2 space-x-reverse">
+                                <div
+                                    class="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/30 flex items-center justify-center text-xs sm:text-sm font-bold">
+                                    س.ا</div>
+                                <div
+                                    class="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/30 flex items-center justify-center text-xs sm:text-sm font-bold">
+                                    م.ک</div>
+                                <div
+                                    class="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/30 flex items-center justify-center text-xs sm:text-sm font-bold">
+                                    ۴۸۲+</div>
+                            </div>
+                            <span class="text-xs sm:text-sm">افرادی که امروز مدیتیشن کردند</span>
+                        </div>
+                    </div>
+                    <div class="hidden lg:block relative animate-float">
+                        <div class="breathing-circle w-72 xl:w-96 h-72 xl:h-96 mx-auto">
+                            <div
+                                class="w-full h-full bg-white/10 backdrop-blur-sm rounded-full border-4 border-white/20 flex items-center justify-center">
+                                <div class="text-center text-white">
+                                    <svg class="w-24 xl:w-32 h-24 xl:h-32 mx-auto mb-4" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="9" stroke-width="1" />
+                                        <circle cx="12" cy="12" r="3" stroke-width="1" />
+                                    </svg>
+                                    <p class="text-lg xl:text-2xl font-light">نفس بکشید...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 sm:mb-16">
+                    <span class="text-serenity-600 dark:text-serenity-400 font-semibold text-xs sm:text-sm">چرا
+                        آرامیا؟</span>
+                    <h2
+                        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mt-3 sm:mt-4 mb-4 sm:mb-6">
+                        ابزارهای سفر به آرامش</h2>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">همه
+                        آنچه برای شروع و ادامه مسیر ذهن‌آگاهی نیاز دارید</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                    <div
+                        class="card-hover group bg-gray-50 dark:bg-gray-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-700 text-center">
+                        <div
+                            class="w-16 h-16 sm:w-20 sm:h-20 bg-serenity-100 to-calm-100 dark:from-serenity-900/30 dark:to-calm-900/30 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-serenity-600 dark:text-serenity-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="9" stroke-width="1.5" />
+                                <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">مدیتیشن‌های
+                            هدایت‌شده</h3>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">بیش از ۲۰۰ مدیتیشن صوتی با
+                            راهنمایی مربیان مجرب برای سطوح مختلف</p>
+                    </div>
+                    <div
+                        class="card-hover group bg-gray-50 dark:bg-gray-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-700 text-center">
+                        <div
+                            class="w-16 h-16 sm:w-20 sm:h-20 bg-calm-100 to-peace-100 dark:from-calm-900/30 dark:to-peace-900/30 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-calm-600 dark:text-calm-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">تمرینات
+                            تنفسی</h3>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">تکنیک‌های علمی تنفس برای کاهش
+                            استرس و افزایش آرامش در زندگی روزمره</p>
+                    </div>
+                    <div
+                        class="card-hover group bg-gray-50 dark:bg-gray-800 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-gray-700 text-center sm:col-span-2 lg:col-span-1">
+                        <div
+                            class="w-16 h-16 sm:w-20 sm:h-20 bg-peace-100 to-serenity-100 dark:from-peace-900/30 dark:to-serenity-900/30 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-peace-600 dark:text-peace-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">پیگیری
+                            پیشرفت</h3>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">نمودارهای پیشرفت، آمار جلسات و
+                            یادآوری‌های هوشمند برای ادامه مسیر</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meditations Section -->
+        <section id="meditations" class="py-16 sm:py-24 bg-gray-50 dark:bg-gray-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 sm:mb-16">
+                    <span class="text-calm-600 dark:text-calm-400 font-semibold text-xs sm:text-sm">مدیتیشن‌های
+                        محبوب</span>
+                    <h2
+                        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mt-3 sm:mt-4 mb-4 sm:mb-6">
+                        سفر خود را آغاز کنید</h2>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                    <template x-for="meditation in meditations.slice(0, 3)" :key="meditation.id">
+                        <div
+                            class="bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 p-4 sm:p-6 card-hover">
+                            <div class="h-32 sm:h-40 bg-green-500 rounded-xl sm:rounded-2xl mb-4 flex items-center justify-center"
+                                :class="{'from-calm-400 to-calm-600': meditation.color === 'calm', 'from-serenity-400 to-serenity-600': meditation.color === 'serenity', 'from-peace-400 to-peace-600': meditation.color === 'peace'}">
+                                <svg class="w-12 h-12 sm:w-16 sm:h-16 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9" stroke-width="1.5" />
+                                    <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+                                </svg>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2"
+                                x-text="meditation.title"></h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4"><span
+                                    x-text="meditation.duration"></span> دقیقه</p>
+                            <button @click="startMeditation(meditation)"
+                                class="w-full py-2 sm:py-2.5 bg-serenity-500 to-calm-500 text-white rounded-lg sm:rounded-xl text-sm sm:text-base font-bold hover:shadow-lg transition-all">شروع
+                                مدیتیشن</button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 sm:mb-16">
+                    <span
+                        class="text-serenity-600 dark:text-serenity-400 font-semibold text-xs sm:text-sm">تعرفه‌ها</span>
+                    <h2
+                        class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mt-3 sm:mt-4 mb-4 sm:mb-6">
+                        سرمایه‌گذاری برای آرامش</h2>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8 card-hover text-center sm:col-span-2 lg:col-span-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">آغاز</h3>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">شروع رایگان</p>
+                        <div class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-8">رایگان</div>
+                        <button
+                            class="w-full py-2.5 sm:py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-sm sm:text-base font-bold hover:border-serenity-500 hover:text-serenity-600 transition-all">شروع
+                            کنید</button>
+                    </div>
+                    <div
+                        class="bg-serenity-500 to-calm-500 rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 card-hover text-center text-white transform lg:scale-105 relative">
+                        <div
+                            class="absolute -top-3 sm:-top-4 right-4 sm:right-8 bg-yellow-400 text-gray-900 px-3 sm:px-4 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold">
+                            محبوب‌ترین</div>
+                        <h3 class="text-xl sm:text-2xl font-bold mb-2">حرفه‌ای</h3>
+                        <p class="text-sm sm:text-base text-white/80 mb-6">دسترسی کامل</p>
+                        <div class="text-4xl sm:text-5xl font-black mb-8">۱۴۹,۰۰۰ <span
+                                class="text-base sm:text-lg">تومان</span></div>
+                        <button
+                            class="w-full py-2.5 sm:py-3 bg-white text-serenity-600 rounded-xl text-sm sm:text-base font-bold hover:bg-gray-100 transition-all">شروع
+                            نسخه حرفه‌ای</button>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 sm:p-8 card-hover text-center sm:col-span-2 lg:col-span-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">خانوادگی</h3>
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">تا ۵ نفر</p>
+                        <div class="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-8">۲۹۹,۰۰۰ <span
+                                class="text-base sm:text-lg">تومان</span></div>
+                        <button
+                            class="w-full py-2.5 sm:py-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-sm sm:text-base font-bold hover:border-serenity-500 hover:text-serenity-600 transition-all">انتخاب
+                            طرح</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 sm:py-24 bg-gray-50 dark:bg-gray-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10 sm:mb-16">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white mb-4 sm:mb-6">
+                        تجربه کاربران</h2>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800">
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 leading-relaxed">
+                            "آرامیا زندگی من رو تغییر داد. الان هر روز مدیتیشن می‌کنم و استرسم خیلی کمتر شده."</p>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-serenity-400 to-calm-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                م.ر</div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">مریم رضایی
+                                </div>
+                                <div class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">کاربر حرفه‌ای</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800">
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 leading-relaxed">
+                            "تمرینات تنفسی آرامیا واقعاً عالیه. توی جلسات کاری خیلی به دردم می‌خوره."</p>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-peace-400 to-calm-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                ع.ک</div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">علی کریمی
+                                </div>
+                                <div class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">مدیر اجرایی</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-sm border border-gray-200 dark:border-gray-800 sm:col-span-2 lg:col-span-1">
+                        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 leading-relaxed">
+                            "بهترین اپلیکیشن مدیتیشن فارسی. با آرامیا بالاخره تونستم خواب منظمی داشته باشم."</p>
+                        <div class="flex items-center space-x-3 space-x-reverse">
+                            <div
+                                class="w-10 h-10 sm:w-12 sm:h-12 bg-calm-400 to-serenity-400 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                ن.ا</div>
+                            <div>
+                                <div class="font-semibold text-gray-900 dark:text-white text-sm sm:text-base">نگار احمدی
+                                </div>
+                                <div class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">روانشناس</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 dark:bg-black text-white py-10 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+                    <div class="col-span-2 md:col-span-1">
+                        <div class="flex items-center space-x-2 space-x-reverse mb-3 sm:mb-4">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-serenity-400" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                            <span class="text-lg sm:text-xl font-bold">آرامیا</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4 sm:mb-6">سفر به آرامش درون</p>
+
+                        <!-- Social Media SVG Icons -->
+                        <div class="flex flex-wrap gap-2 sm:gap-3">
+                            <a href="#"
+                                class="social-svg w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-pink-500 rounded-lg sm:rounded-xl flex items-center justify-center transition-all">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="social-svg w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-blue-500 rounded-lg sm:rounded-xl flex items-center justify-center transition-all">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.141.12.098.153.228.169.32.016.093.036.306.02.472z" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="social-svg w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-black hover:border hover:border-white/20 rounded-lg sm:rounded-xl flex items-center justify-center transition-all">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="social-svg w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-blue-700 rounded-lg sm:rounded-xl flex items-center justify-center transition-all">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                            </a>
+                            <a href="#"
+                                class="social-svg w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-red-600 rounded-lg sm:rounded-xl flex items-center justify-center transition-all">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base mb-3 sm:mb-4">مدیتیشن‌ها</h4>
+                        <ul class="space-y-1.5 sm:space-y-2 text-gray-400 text-xs sm:text-sm">
+                            <li><a href="#" class="hover:text-white transition-colors">تنفس آگاهانه</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">آرامش عمیق</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">مدیتیشن خواب</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base mb-3 sm:mb-4">درباره ما</h4>
+                        <ul class="space-y-1.5 sm:space-y-2 text-gray-400 text-xs sm:text-sm">
+                            <li><a href="#" class="hover:text-white transition-colors">داستان آرامیا</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">وبلاگ</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">همکاری با ما</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm sm:text-base mb-3 sm:mb-4">پشتیبانی</h4>
+                        <ul class="space-y-1.5 sm:space-y-2 text-gray-400 text-xs sm:text-sm">
+                            <li><a href="#" class="hover:text-white transition-colors">تماس با ما</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">سوالات متداول</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">حریم خصوصی</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-6 sm:pt-8 text-center text-gray-400 text-xs sm:text-sm">
+                    <p>© ۱۴۰۵ آرامیا. تمامی حقوق محفوظ است. با عشق برای آرامش شما ساخته شده است.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ========== DASHBOARD ========== -->
+    <div x-show="currentPage === 'dashboard'" x-transition class="min-h-screen bg-gray-50 dark:bg-gray-950">
+        <div class="flex h-screen overflow-hidden">
+
+            <!-- Mobile Sidebar Overlay -->
+            <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 sidebar-overlay z-40 lg:hidden"
+                x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300"
+                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-cloak>
+            </div>
+
+            <!-- Sidebar with Collapsible Groups -->
+            <aside :class="sidebarOpen ? 'translate-x-0' : 'translate-x-full'"
+                class="sidebar-transition fixed inset-y-0 right-0 z-50 w-64 sm:w-72 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 shadow-2xl lg:relative lg:translate-x-0">
+
+                <div
+                    class="flex items-center justify-between h-14 sm:h-20 px-4 sm:px-6 border-b border-gray-200 dark:border-gray-800">
+                    <button @click="sidebarOpen = false" class="lg:hidden text-gray-500 p-1"><svg
+                            class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg></button>
+                    <div class="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-serenity-600 dark:text-serenity-400"
+                            viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                        <div><span
+                                class="text-lg sm:text-xl font-black text-gray-900 dark:text-white">آرامیا</span><span
+                                class="block text-xxs sm:text-xs text-gray-500">داشبورد آرامش</span></div>
+                    </div>
+                </div>
+
+                <nav class="mt-4 sm:mt-6 px-3 sm:px-4 space-y-1.5 sm:space-y-2">
+                    <!-- Main Menu Item - Overview -->
+                    <a href="#" @click="setDashboardSection('overview')"
+                        :class="activeDashboardSection === 'overview' ? 'bg-serenity-50 dark:bg-serenity-900/20 text-serenity-700 dark:text-serenity-300' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'"
+                        class="flex items-center px-3 sm:px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl transition-all text-sm sm:text-base">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        پیشخوان
+                    </a>
+
+                    <!-- Collapsible Group: Meditations -->
+                    <div>
+                        <button @click="sidebarMeditationsOpen = !sidebarMeditationsOpen"
+                            class="flex items-center justify-between w-full px-3 sm:px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-sm sm:text-base">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9" stroke-width="2" />
+                                    <circle cx="12" cy="12" r="3" stroke-width="2" />
+                                </svg>
+                                مدیتیشن
+                            </div>
+                            <svg :class="sidebarMeditationsOpen ? 'rotate-180' : ''"
+                                class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="sidebarMeditationsOpen" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform -translate-y-2"
+                            x-transition:enter-end="opacity-100 transform translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform translate-y-0"
+                            x-transition:leave-end="opacity-0 transform -translate-y-2"
+                            class="mr-4 sm:mr-6 space-y-1 mt-1">
+                            <a href="#" @click="setDashboardSection('my-meditations')"
+                                :class="activeDashboardSection === 'my-meditations' ? 'bg-serenity-50 dark:bg-serenity-900/20 text-serenity-700 dark:text-serenity-300' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                مدیتیشن‌های من
+                            </a>
+                            <a href="#" @click="setDashboardSection('stats')"
+                                :class="activeDashboardSection === 'stats' ? 'bg-serenity-50 dark:bg-serenity-900/20 text-serenity-700 dark:text-serenity-300' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                آمار و پیشرفت
+                            </a>
+                            <a href="#" @click="setDashboardSection('reminders')"
+                                :class="activeDashboardSection === 'reminders' ? 'bg-serenity-50 dark:bg-serenity-900/20 text-serenity-700 dark:text-serenity-300' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                یادآوری‌ها
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Collapsible Group: Settings -->
+                    <div>
+                        <button @click="sidebarSettingsOpen = !sidebarSettingsOpen"
+                            class="flex items-center justify-between w-full px-3 sm:px-4 py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all text-sm sm:text-base">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                تنظیمات
+                            </div>
+                            <svg :class="sidebarSettingsOpen ? 'rotate-180' : ''" class="w-4 h-4 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div x-show="sidebarSettingsOpen" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform -translate-y-2"
+                            x-transition:enter-end="opacity-100 transform translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform translate-y-0"
+                            x-transition:leave-end="opacity-0 transform -translate-y-2"
+                            class="mr-4 sm:mr-6 space-y-1 mt-1">
+                            <a href="#" @click="setDashboardSection('settings')"
+                                :class="activeDashboardSection === 'settings' ? 'bg-serenity-50 dark:bg-serenity-900/20 text-serenity-700 dark:text-serenity-300' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                تنظیمات حساب
+                            </a>
+                            <a href="#"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                تغییر رمز عبور
+                            </a>
+                            <a href="#"
+                                class="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl transition-all text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <span class="w-1.5 h-1.5 bg-gray-400 rounded-full ml-2"></span>
+                                راهنما و پشتیبانی
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4 border-t border-gray-200 dark:border-gray-800">
+                    <div
+                        class="flex items-center space-x-2 sm:space-x-3 space-x-reverse bg-gray-50 dark:bg-gray-800 p-2.5 sm:p-3 rounded-lg sm:rounded-xl">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-serenity-400 from-serenity-400 to-calm-400 rounded-lg sm:rounded-xl flex items-center justify-center text-white font-bold text-xs sm:text-sm"
+                            x-text="user.avatar"></div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white truncate"
+                                x-text="user.name"></p>
+                            <p class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400 truncate"
+                                x-text="user.level"></p>
+                        </div>
+                        <button @click="navigateTo('home')"
+                            class="text-gray-400 hover:text-red-500 transition-colors p-1"><svg
+                                class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg></button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+
+                <!-- Header -->
+                <header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+                    <div class="flex items-center justify-between h-14 sm:h-20 px-3 sm:px-4 lg:px-8">
+                        <div class="flex items-center space-x-3 sm:space-x-4 space-x-reverse">
+                            <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden text-gray-500 p-1"><svg
+                                    class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg></button>
+                            <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white"
+                                x-text="activeDashboardSection === 'overview' ? 'پیشخوان' : activeDashboardSection === 'my-meditations' ? 'مدیتیشن‌های من' : activeDashboardSection === 'stats' ? 'آمار و پیشرفت' : activeDashboardSection === 'reminders' ? 'یادآوری‌ها' : 'تنظیمات'">
+                            </h1>
+                        </div>
+                        <div class="flex items-center space-x-1.5 sm:space-x-3 space-x-reverse">
+                            <button @click="toggleDarkMode()"
+                                class="p-2 sm:p-2.5 text-gray-500 rounded-lg sm:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <svg x-show="!darkMode" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                </svg>
+                                <svg x-show="darkMode" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </button>
+                            <div class="relative">
+                                <button @click="showNotifications = !showNotifications"
+                                    class="relative p-2 sm:p-2.5 text-gray-500 rounded-lg sm:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                    <span
+                                        class="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full text-xxs sm:text-xs text-white flex items-center justify-center"
+                                        x-text="notificationCount">3</span>
+                                </button>
+
+                                <!-- Notifications Dropdown -->
+                                <div x-show="showNotifications" @click.outside="showNotifications = false"
+                                    class="absolute left-0 mt-2 w-72 sm:w-80 bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50 animate-slide-down">
+                                    <div
+                                        class="p-3 sm:p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+                                        <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-white">
+                                            اعلان‌ها</h3>
+                                        <button @click="markAllRead()"
+                                            class="text-xs sm:text-sm text-serenity-600 dark:text-serenity-400 hover:underline">خواندن
+                                            همه</button>
+                                    </div>
+                                    <div class="max-h-48 sm:max-h-64 overflow-y-auto">
+                                        <template x-for="notif in notifications" :key="notif.id">
+                                            <div
+                                                class="p-3 sm:p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                                                <p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white"
+                                                    x-text="notif.title"></p>
+                                                <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-1"
+                                                    x-text="notif.message"></p>
+                                                <p class="text-xxs sm:text-xs text-gray-400 mt-1.5 sm:mt-2"
+                                                    x-text="notif.time"></p>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Dynamic Dashboard Content -->
+                <main class="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-8 scrollbar-thin">
+
+                    <!-- OVERVIEW -->
+                    <div x-show="activeDashboardSection === 'overview'">
+                        <div class="mb-6 sm:mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">سلام، <span
+                                            x-text="user.name"></span> 🌸</h2>
+                                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1"
+                                        x-text="`${user.streak} روز متوالی مدیتیشن - ادامه بده!`"></p>
+                                </div>
+                                <button @click="overviewCollapsed = !overviewCollapsed"
+                                    class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <svg :class="overviewCollapsed ? 'rotate-180' : ''"
+                                        class="w-5 h-5 transition-transform" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div x-show="!overviewCollapsed" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-3 sm:p-4 lg:p-6 card-hover">
+                                    <svg class="w-6 h-6 sm:w-8 lg:w-10 sm:h-8 lg:h-10 text-serenity-500 mb-2 sm:mb-3 lg:mb-4"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <p class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">روزهای
+                                        متوالی
+                                    </p>
+                                    <p class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mt-1"
+                                        x-text="user.streak">۴۵</p>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-3 sm:p-4 lg:p-6 card-hover">
+                                    <svg class="w-6 h-6 sm:w-8 lg:w-10 sm:h-8 lg:h-10 text-calm-500 mb-2 sm:mb-3 lg:mb-4"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="9" stroke-width="2" />
+                                        <circle cx="12" cy="12" r="3" stroke-width="2" />
+                                    </svg>
+                                    <p class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">جلسات</p>
+                                    <p class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mt-1"
+                                        x-text="user.sessions">۱۵۶</p>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-3 sm:p-4 lg:p-6 card-hover">
+                                    <svg class="w-6 h-6 sm:w-8 lg:w-10 sm:h-8 lg:h-10 text-peace-500 mb-2 sm:mb-3 lg:mb-4"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <p class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">دقیقه
+                                        مدیتیشن
+                                    </p>
+                                    <p class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mt-1"
+                                        x-text="user.totalMinutes">۲,۳۴۰</p>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-3 sm:p-4 lg:p-6 card-hover">
+                                    <svg class="w-6 h-6 sm:w-8 lg:w-10 sm:h-8 lg:h-10 text-pink-500 mb-2 sm:mb-3 lg:mb-4"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    <p class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">سطح آرامش
+                                    </p>
+                                    <p
+                                        class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mt-1">
+                                        ۸.۵</p>
+                                </div>
+                            </div>
+                            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        سطح آرامش هفتگی</h3>
+                                    <div class="chart-container"><canvas id="moodChart"></canvas></div>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        انواع تمرینات</h3>
+                                    <div class="chart-container"><canvas id="progressChart"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MY MEDITATIONS -->
+                    <div x-show="activeDashboardSection === 'my-meditations'">
+                        <div class="mb-6 sm:mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">مدیتیشن‌های
+                                        من
+                                    </h2>
+                                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">کتابخانه
+                                        مدیتیشن‌های شخصی شما</p>
+                                </div>
+                                <button @click="meditationsCollapsed = !meditationsCollapsed"
+                                    class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <svg :class="meditationsCollapsed ? 'rotate-180' : ''"
+                                        class="w-5 h-5 transition-transform" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div x-show="!meditationsCollapsed" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                                <template x-for="meditation in meditations" :key="meditation.id">
+                                    <div
+                                        class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6 card-hover">
+                                        <div class="h-28 sm:h-32 bg-purple-400 rounded-lg sm:rounded-xl mb-3 sm:mb-4 flex items-center justify-center"
+                                            :class="{'from-calm-400 to-calm-600': meditation.color === 'calm', 'from-serenity-400 to-serenity-600': meditation.color === 'serenity', 'from-peace-400 to-peace-600': meditation.color === 'peace'}">
+                                            <svg class="w-12 h-12 sm:w-16 sm:h-16 text-white" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <circle cx="12" cy="12" r="9" stroke-width="1.5" />
+                                                <circle cx="12" cy="12" r="3" stroke-width="1.5" />
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1.5 sm:mb-2"
+                                            x-text="meditation.title"></h3>
+                                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1.5 sm:mb-2"
+                                            x-text="meditation.description"></p>
+                                        <p class="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4"><span
+                                                x-text="meditation.duration"></span> دقیقه</p>
+                                        <button @click="startMeditation(meditation)"
+                                            class="w-full py-2 sm:py-2.5 bg-serenity-500 to-calm-500 text-white rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold hover:shadow-lg transition-all">شروع
+                                            مدیتیشن</button>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STATS -->
+                    <div x-show="activeDashboardSection === 'stats'">
+                        <div class="mb-6 sm:mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">آمار و
+                                        پیشرفت
+                                    </h2>
+                                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">تحلیل مسیر
+                                        مدیتیشن شما</p>
+                                </div>
+                                <button @click="statsCollapsed = !statsCollapsed"
+                                    class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <svg :class="statsCollapsed ? 'rotate-180' : ''"
+                                        class="w-5 h-5 transition-transform" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div x-show="!statsCollapsed" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        سطح آرامش هفتگی</h3>
+                                    <div class="chart-container"><canvas id="moodChart"></canvas></div>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        انواع تمرینات</h3>
+                                    <div class="chart-container"><canvas id="progressChart"></canvas></div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                <h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                    جلسات اخیر</h3>
+                                <div class="space-y-2 sm:space-y-4">
+                                    <template x-for="session in recentSessions" :key="session.id">
+                                        <div
+                                            class="flex items-center justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg sm:rounded-xl">
+                                            <div>
+                                                <p class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white"
+                                                    x-text="session.title"></p>
+                                                <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400"
+                                                    x-text="session.date + ' - ' + session.duration + ' دقیقه'"></p>
+                                            </div>
+                                            <span
+                                                class="px-2 sm:px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs sm:text-sm"
+                                                x-text="session.mood"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REMINDERS -->
+                    <div x-show="activeDashboardSection === 'reminders'">
+                        <div class="mb-6 sm:mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">یادآوری‌ها
+                                    </h2>
+                                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">تنظیم زمان‌های
+                                        مدیتیشن روزانه</p>
+                                </div>
+                                <button @click="remindersCollapsed = !remindersCollapsed"
+                                    class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <svg :class="remindersCollapsed ? 'rotate-180' : ''"
+                                        class="w-5 h-5 transition-transform" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div x-show="!remindersCollapsed" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <div class="grid sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        یادآوری صبح</h3>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
+                                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-yellow-500" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                            <div>
+                                                <p
+                                                    class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
+                                                    ۰۷:۰۰ صبح</p>
+                                                <p class="text-xs sm:text-sm text-gray-500">هر روز</p>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class="px-2 sm:px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs sm:text-sm">فعال</span>
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6">
+                                    <h3
+                                        class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
+                                        یادآوری عصر</h3>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2 sm:space-x-3 space-x-reverse">
+                                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-serenity-500" fill="none"
+                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                            </svg>
+                                            <div>
+                                                <p
+                                                    class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white">
+                                                    ۲۱:۰۰ شب</p>
+                                                <p class="text-xs sm:text-sm text-gray-500">هر روز</p>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class="px-2 sm:px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-xs sm:text-sm">فعال</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SETTINGS -->
+                    <div x-show="activeDashboardSection === 'settings'">
+                        <div class="mb-6 sm:mb-8">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">تنظیمات
+                                    </h2>
+                                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">مدیریت حساب
+                                        کاربری</p>
+                                </div>
+                                <button @click="settingsCollapsed = !settingsCollapsed"
+                                    class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+                                    <svg :class="settingsCollapsed ? 'rotate-180' : ''"
+                                        class="w-5 h-5 transition-transform" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div x-show="!settingsCollapsed" x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95">
+                            <div
+                                class="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-sm border p-4 sm:p-6 lg:p-8 max-w-2xl">
+                                <div class="space-y-4 sm:space-y-6">
+                                    <div>
+                                        <label
+                                            class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 sm:mb-2">نام
+                                            کامل</label>
+                                        <input type="text" x-model="user.name"
+                                            class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 sm:mb-2">ایمیل</label>
+                                        <input type="email" x-model="user.email"
+                                            class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm">
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 sm:mb-2">سطح
+                                            تجربه</label>
+                                        <select
+                                            class="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-serenity-500 text-sm">
+                                            <option>مبتدی</option>
+                                            <option selected>پیشرفته</option>
+                                            <option>حرفه‌ای</option>
+                                        </select>
+                                    </div>
+                                    <button
+                                        class="w-full py-2.5 sm:py-3 bg-serenity-500 to-calm-500 text-white rounded-lg sm:rounded-xl text-sm sm:text-base font-bold hover:shadow-lg transition-all">ذخیره
+                                        تغییرات</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بهشت حیوانات خانگی</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Vazir";
+      line-height: 1.6;
+      color: #4a3f35;
+      background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+      direction: rtl;
+    }
+
+    /* Navigation */
+    nav {
+      background: linear-gradient(90deg, #ff9a56 0%, #ffb380 100%);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(255, 154, 86, 0.3);
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: #fff;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 8rem 2rem;
+      background: linear-gradient(135deg, #ffd4a3 0%, #ffb87a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "🐾";
+      position: absolute;
+      font-size: 15rem;
+      opacity: 0.1;
+      top: -3rem;
+      right: -3rem;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: "🐾";
+      position: absolute;
+      font-size: 12rem;
+      opacity: 0.1;
+      bottom: -2rem;
+      left: -2rem;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-30px) rotate(10deg);
+      }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #8b4513;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease-out;
+      text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.2);
+      font-family: "Vazirmatn__Title";
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: #a0522d;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+      font-family: "Vazirmatn__P";
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(90deg, #ff6b35 0%, #ff8c5a 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 35px rgba(255, 107, 53, 0.6);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 3rem;
+      color: #8b4513;
+      margin-bottom: 3rem;
+      position: relative;
+      animation: fadeIn 1s ease-out;
+      font-family: "Vazirmatn__Title";
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff9a56, #ffb380);
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, #fff 0%, #fff5e6 100%);
+      padding: 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 25px rgba(139, 69, 19, 0.1);
+      border: 2px solid transparent;
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(255, 154, 86, 0.3);
+      border-color: #ffb380;
+    }
+
+    .service-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .service-card:nth-child(2) .service-icon {
+      animation-delay: 0.2s;
+    }
+
+    .service-card:nth-child(3) .service-icon {
+      animation-delay: 0.4s;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      color: #8b4513;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: #6b5a4d;
+      font-size: 1rem;
+      font-family: "Vazirmatn__P";
+    }
+
+    /* Products Section */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, #ffffff 0%, #fff8f0 100%);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.1);
+    }
+
+    .product-card:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 12px 35px rgba(255, 154, 86, 0.3);
+    }
+
+    .product-image {
+      background: linear-gradient(135deg, #ffd4a3 0%, #ffb87a 100%);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-info h3 {
+      color: #8b4513;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    .product-info p {
+      color: #6b5a4d;
+      margin-bottom: 1rem;
+      font-family: "Vazirmatn__P";
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: linear-gradient(135deg, #ffe8cc 0%, #ffd4a3 100%);
+      border-radius: 30px;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .testimonial {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.1);
+      transition: all 0.4s ease;
+    }
+
+    .testimonial:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(255, 154, 86, 0.3);
+    }
+
+    .testimonial-text {
+      color: #6b5a4d;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-author {
+      font-weight: bold;
+      color: #8b4513;
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #8b4513 0%, #a0522d 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+
+    footer h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-family: "Vazirmatn__P";
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+  <body>
+    <!-- منوی ناوبری -->
+    <nav>
+      <ul>
+        <li><a href="#home">خانه</a></li>
+        <li><a href="#services">خدمات</a></li>
+        <li><a href="#products">محصولات</a></li>
+        <li><a href="#testimonials">نظرات</a></li>
+        <li><a href="#contact">تماس با ما</a></li>
+      </ul>
+    </nav>
+
+    <!-- بخش اصلی صفحه -->
+    <section id="home" class="hero">
+      <h1>🐾 بهشت حیوانات 🐾</h1>
+      <p>جایی که هر حیوانی عضوی از خانواده است</p>
+      <a href="#services" class="cta-button">مشاهده خدمات ما</a>
+    </section>
+
+    <!-- خدمات فروشگاه -->
+    <section id="services">
+      <h2>خدمات ما</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🛁</div>
+          <h3>آرایش حیوانات</h3>
+          <p>خدمات تخصصی برای زیبایی و سلامت ظاهری حیوان شما</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏥</div>
+          <h3>مراقبت دامپزشکی</h3>
+          <p>مراقبت‌های پزشکی جامع توسط دامپزشکان مجرب</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>نگهداری حیوانات</h3>
+          <p>محیطی امن و راحت برای حیوان خانگی شما در زمان نبودنتان</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- محصولات فروشگاه -->
+    <section id="products">
+      <h2>محصولات ویژه</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">🦴</div>
+          <div class="product-info">
+            <h3>غذای سگ ممتاز</h3>
+            <p>غذایی مغذی و خوشمزه برای سگ‌های عزیز شما</p>
+            <div class="price">۲۹.۹۹ دلار</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">🐱</div>
+          <div class="product-info">
+            <h3>برج بازی گربه</h3>
+            <p>مرکز تفریحی چندطبقه برای گربه‌های پرانرژی</p>
+            <div class="price">۷۹.۹۹ دلار</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">🎾</div>
+          <div class="product-info">
+            <h3>مجموعه اسباب‌بازی‌ها</h3>
+            <p>مجموعه‌ای از اسباب‌بازی‌های سرگرم‌کننده برای حیوانات</p>
+            <div class="price">۱۹.۹۹ دلار</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">🛏️</div>
+          <div class="product-info">
+            <h3>تخت راحت حیوانات</h3>
+            <p>راحتی ارتوپدی برای حیوانات در هر اندازه</p>
+            <div class="price">۴۹.۹۹ دلار</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- نظرات کاربران فروشگاه -->
+    <section id="testimonials">
+      <div class="testimonials">
+        <h2>نظرات مشتریان</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "بهشت حیوانات، سگ نجات یافته من را از اضطراب به حیوانی شاد و آرام
+              تبدیل کرد. تیم آرایش عالی است!"
+            </p>
+            <p class="testimonial-author">عباس</p>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "بهترین فروشگاه حیوانات در شهر! کارکنان مهربان و با اطلاعات زیاد
+              هستند و واقعاً به حیوانات اهمیت می‌دهند."
+            </p>
+            <p class="testimonial-author">علی</p>
+          </div>
+          <div class="testimonial">
+            <p class="testimonial-text">
+              "من به هیچ‌کس جز آن‌ها اعتماد نمی‌کنم! مکان نگهداری تمیز و ایمن
+              است و حیواناتم همیشه با ذوق به آنجا می‌روند."
+            </p>
+            <p class="testimonial-author">سارا</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش پایانی -->
+    <footer id="contact">
+      <h3>امروز به ما سر بزنید</h3>
+      <p>
+        <i class="fa-solid fa-location-dot"></i> شهر شادی - خیابان بهشت -
+        حیوانات 123
+      </p>
+      <p><i class="fa-solid fa-phone"></i> 0903738353</p>
+      <p><i class="fa-solid fa-envelope"></i> hello@petparadise.com</p>
+    </footer>
+  </body>
+</html>

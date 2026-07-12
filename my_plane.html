@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Plane in Day</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #fff;
+            text-align: center;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-rows: auto auto;
+        }
+
+        .profile_section {
+            background:orangered;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            display: grid;
+            grid-template-rows: auto auto auto auto;
+            justify-content: center;
+        }
+
+        .profile_img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 10px auto;
+            background-color: rgba(255, 230, 0, 0.623);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .username {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .handle {
+            color: #d8605d;
+            font-size: 14px;
+            margin-top: -5px;
+            direction: ltr;
+        }
+
+        .logout {
+            background: #f4c27f;
+            color: black;
+            padding: 8px;
+            border: none;
+            border-radius: 15px;
+            width: 100px;
+            cursor: pointer;
+            margin: 10px auto;
+        }
+
+        .todo_section {
+            background: #fff;
+            padding: 0 20px 20px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-rows: auto auto;
+            justify-content: center;
+        }
+
+        .clock_container {
+            margin: 20px auto;
+        }
+
+        .clock {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 30px #f4c27f;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            position: relative;
+            margin: 20px auto;
+            background: #fef5e7;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translateX(-50%) rotate(0deg);
+            border-radius: 5px;
+        }
+
+        .hour_hand {
+            width: 4px;
+            height: 30px;
+            background: gray;
+        }
+
+        .minute_hand {
+            width: 3px;
+            height: 40px;
+            background: orange;
+        }
+
+        .second_hand {
+            width: 2px;
+            height: 45px;
+            background: red;
+        }
+
+        .center_dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #d8605d;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .task_container {
+            width: 100%;
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-rows: auto auto;
+            margin-top: 10px;
+        }
+
+        .task_header {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+
+        .task_title {
+            font-weight: bold;
+            text-align: right;
+            margin: 0;
+        }
+
+        .add_btn {
+            background-color: #fff;
+            color: #f4c27f;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #f4c27f;
+            border-radius: 50%;
+            display: grid;
+            cursor: pointer;
+            place-items: center;
+            font-size: 16px;
+        }
+
+        .task_list {
+            display: grid;
+            grid-template-rows: repeat(6, auto);
+            gap: 8px;
+            text-align: right;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #f4c27f;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .task input[type="checkbox"]:checked {
+            background-color: #f4c27f;
+        }
+
+        .task input[type="checkbox"]:checked::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 11px;
+            color: #d8605d;
+            font-weight: bold;
+        }
+
+        .task span {
+            font-size: 13px;
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile_section">
+            <div class="profile_img">👤</div>
+            <p class="username">امیر</p>
+            <p class="handle">@amir</p>
+            <button class="logout" onclick="alert('خروج از حساب')">خروج</button>
+        </div>
+        <div class="todo_section">
+            <div class="clock_container">
+                <div class="clock">
+                    <div class="hand hour_hand"></div>
+                    <div class="hand minute_hand"></div>
+                    <div class="hand second_hand"></div>
+                    <div class="center_dot"></div>
+                </div>
+                <h5>عصر بخیر</h5>
+            </div>
+        </div>
+        <div class="task_container">
+            <div class="task_header">
+                <p class="task_title">لیست کار ها</p>
+                <span class="add_btn" onclick="alert('برای اضافه کردن کار از منوی افزودن استفاده کنید')">+</span>
+            </div>
+            <div class="task_list">
+                <div class="task">
+                    <input type="checkbox"> <span>پخت مرغ و برنج ساعت 10 صبح</span>
+                </div>
+                <div class="task">
+                    <input type="checkbox"> <span>ساعت 12 ظهر React.js یادگیری</span>
+                </div>
+                <div class="task">
+                    <input type="checkbox"> <span>ناهار خوردن ساعت 1 ظهر</span>
+                </div>
+                <div class="task">
+                    <input type="checkbox"> <span>ساعت 3 بعد از ظهر یادگیری HTML و CSS</span>
+                </div>
+                <div class="task">
+                    <input type="checkbox"> <span>ساعت 8 شب شام خوردن</span>
+                </div>
+                <div class="task">
+                    <input type="checkbox"> <span>پیاده روی ساعت 9 شب</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

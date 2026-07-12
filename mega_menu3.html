@@ -1,0 +1,149 @@
+<html>
+<head>
+    <title>تمرین سوم</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fff;
+        }
+
+        .top {
+            width: 100%;
+            height: 90px;
+            background-color: #f2f2f2;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            border-radius: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .logo span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .menu ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #222;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        .menu ul li a:hover {
+            border-bottom: 2px solid red;
+        }
+
+        .megamenu {
+            width: 60%;
+            height: 0px;
+            background-color: gray;
+            position: absolute;
+            border-radius: 20px;
+            transition: 0.8s;
+            transform: translateX(50%);
+            right: 50%;
+            top: 100px;
+        }
+
+        .megaitem:hover .megamenu {
+            height: 400px;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .search-icon:hover {
+            background-color: #dceaff;
+        }
+
+        .right-side {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile img {
+            height: 55px;
+            width: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="logo">
+            <img src="assets/IMAGES/logo2.jpg" alt="">
+            <span>Medical</span>
+        </div>
+        <div class="menu">
+            <ul class="megaitem">
+                <li>
+                    <a class="btn" href="#">Dashboard</a>
+                    <div class="megamenu">
+                    </div>
+                </li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Message</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+        <div class="right-side">
+            <div class="search-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                    <circle cx="11" cy="11" r="7" stroke="#333" stroke-width="2" />
+                    <line x1="16" y1="16" x2="21" y2="21" stroke="#333" stroke-width="2" />
+                </svg>
+            </div>
+            <div class="profile">
+                <span>Online</span>
+                <img src="assets/IMAGES/human.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

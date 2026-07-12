@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>سازنده امضای ایمیل حرفه‌ای</title>
+  </head>
+  <style>
+    /* فونت فارسی */
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap");
+
+    /* متغیرهای رنگ */
+    :root {
+      --primary-blue: #3b82f6;
+      --primary-green: #10b981;
+      --primary-red: #ef4444;
+      --primary-purple: #8b5cf6;
+      --primary-orange: #f97316;
+      --primary-gray: #6b7280;
+
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --text-muted: #94a3b8;
+
+      --border-light: #e2e8f0;
+      --border-medium: #cbd5e1;
+
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md:
+        0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg:
+        0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    /* استایل‌های عمومی */
+    .social-icon {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+      transition: color 0.3s;
+      vertical-align: middle;
+    }
+
+    .social-link {
+      margin-left: 12px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+      display: inline-block;
+    }
+
+    .social-link:hover {
+      color: var(--primary-color, var(--primary-blue));
+      transform: translateY(-1px);
+    }
+
+    .logo-preview {
+      max-width: 100px;
+      max-height: 60px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+
+    /* استایل‌های پیش‌نمایش */
+    #preview table {
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px;
+      background: var(--bg-primary);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+    }
+
+    #preview p {
+      margin: 4px 0;
+      line-height: 1.5;
+    }
+
+    #preview .name {
+      font-weight: 700;
+      font-size: 18px;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    #preview .job-title {
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    #preview a {
+      text-decoration: none;
+      color: var(--primary-color, var(--primary-blue));
+      transition: color 0.3s ease;
+    }
+
+    #preview a:hover {
+      color: var(--primary-color, var(--primary-blue));
+      text-decoration: underline;
+    }
+
+    #preview td {
+      vertical-align: middle;
+    }
+
+    /* استایل‌های فرم */
+    .form-input {
+      width: 100%;
+
+      border-radius: 8px;
+      border: 2px solid var(--border-light);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 14px;
+      min-height: 48px;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-color, var(--primary-blue));
+      background-color: var(--bg-primary);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-input:hover {
+      border-color: var(--border-medium);
+      background-color: var(--bg-primary);
+    }
+
+    .form-input.dark {
+      border-color: #4b5563;
+      background-color: #374151;
+      color: #f9fafb;
+    }
+
+    .form-input.dark:focus {
+      border-color: #3b82f6;
+    }
+
+    /* استایل‌های دکمه */
+    .btn-primary {
+      width: 100%;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-success {
+      background: var(--gradient-success);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      filter: brightness(1.1);
+    }
+
+    .btn-success:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-secondary::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    .btn-secondary:hover::before {
+      left: 100%;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .button-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    /* استایل‌های کانتینر */
+    .container {
+      background: var(--bg-primary);
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      max-width: 64rem;
+      width: 100%;
+      margin: 0 16px;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+    }
+
+    .container.dark {
+      background-color: #1f2937;
+    }
+
+    /* استایل‌های تیتر */
+    .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      text-align: center;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      text-align: center;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+    }
+
+    /* استایل‌های فرم */
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      padding: 0 20px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 14px;
+      color: var(--primary-blue);
+    }
+
+    /* استایل‌های پیش‌نمایش */
+    .preview-container {
+      background: var(--bg-secondary);
+      padding: 32px;
+      border-radius: 12px;
+      color: var(--text-primary);
+      min-height: 200px;
+      max-width: 48rem;
+      margin: 0 auto;
+      box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(10px);
+    }
+
+    .preview-container.dark {
+      background-color: #374151;
+      color: #f9fafb;
+    }
+
+    .copy-button-container {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* استایل‌های فایل آپلود */
+    .file-input {
+      width: 100%;
+
+      border-radius: 8px;
+      border: 2px solid var(--border-light);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 14px;
+      min-height: 48px;
+      transition: all 0.3s ease;
+    }
+
+    .file-input:hover {
+      border-color: var(--border-medium);
+      background-color: var(--bg-primary);
+    }
+
+    .file-input:focus {
+      outline: none;
+      border-color: var(--primary-color, var(--primary-blue));
+      background-color: var(--bg-primary);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    .file-input.dark {
+      border-color: #4b5563;
+      background-color: #374151;
+      color: #f9fafb;
+    }
+
+    /* استایل‌های سلکت */
+    .select-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 2px solid var(--border-light);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      font-size: 14px;
+      min-height: 48px;
+      transition: all 0.3s ease;
+    }
+
+    .select-input:hover {
+      border-color: var(--border-medium);
+      background-color: var(--bg-primary);
+    }
+
+    .select-input:focus {
+      outline: none;
+      border-color: var(--primary-color, var(--primary-blue));
+      background-color: var(--bg-primary);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    .select-input.dark {
+      border-color: #4b5563;
+      background-color: #374151;
+      color: #f9fafb;
+    }
+
+    /* استایل‌های عمومی صفحه */
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body.dark {
+      background-color: #111827;
+      color: #f9fafb;
+    }
+
+    /* استایل‌های واکنش‌گرا */
+    @media (max-width: 768px) {
+      .container {
+        padding: 16px;
+        margin: 0 8px;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
+
+      .preview-container {
+        padding: 16px;
+      }
+
+      .form-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0 16px;
+      }
+
+      .button-group {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        gap: 20px;
+        padding: 0 12px;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      .button-group {
+        gap: 12px;
+      }
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1 class="title">سازنده امضای ایمیل حرفه‌ای</h1>
+
+      <form
+        id="signatureForm"
+        class="form-container"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="name" class="form-label">نام و نام خانوادگی:</label>
+          <input
+            id="name"
+            type="text"
+            placeholder="مثلاً علی رضایی"
+            required
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="job" class="form-label">سمت یا عنوان شغلی:</label>
+          <input
+            id="job"
+            type="text"
+            placeholder="مثلاً توسعه‌دهنده وب"
+            required
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">ایمیل:</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="مثلاً ali@example.com"
+            required
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">تلفن (اختیاری):</label>
+          <input
+            id="phone"
+            type="tel"
+            placeholder="مثلاً 09123456789"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="website" class="form-label">وب‌سایت (اختیاری):</label>
+          <input
+            id="website"
+            type="url"
+            placeholder="مثلاً https://example.com"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="instagram" class="form-label"
+            >لینک اینستاگرام (اختیاری):</label
+          >
+          <input
+            id="instagram"
+            type="url"
+            placeholder="مثلاً https://instagram.com/username"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="linkedin" class="form-label"
+            >لینک لینکدین (اختیاری):</label
+          >
+          <input
+            id="linkedin"
+            type="url"
+            placeholder="مثلاً https://linkedin.com/in/username"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telegram" class="form-label"
+            >لینک تلگرام (اختیاری):</label
+          >
+          <input
+            id="telegram"
+            type="url"
+            placeholder="مثلاً https://t.me/username"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp" class="form-label"
+            >شماره واتساپ (اختیاری):</label
+          >
+          <input
+            id="whatsapp"
+            type="tel"
+            placeholder="مثلاً 989123456789"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="logo" class="form-label">لوگو (اختیاری):</label>
+          <input id="logo" type="file" accept="image/*" class="file-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="themeColor" class="form-label">رنگ تم اصلی:</label>
+          <select id="themeColor" class="select-input">
+            <option value="blue" selected>آبی</option>
+            <option value="green">سبز</option>
+            <option value="red">قرمز</option>
+            <option value="gray">خاکستری</option>
+            <option value="purple">بنفش</option>
+            <option value="orange">نارنجی</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <div class="button-group">
+            <button type="submit" class="btn-primary">ساخت امضا</button>
+            <button type="button" class="btn-secondary" id="clearBtn">
+              پاک کردن فرم
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <h2 class="subtitle">پیش‌نمایش امضا:</h2>
+      <div id="preview" class="preview-container"></div>
+
+      <div class="copy-button-container">
+        <button id="copyBtn" class="btn-success" disabled>
+          📋 کپی کد HTML امضا
+        </button>
+      </div>
+    </div>
+
+    <script src="assets/JS/email_signature.js"></script>
+  </body>
+</html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <style>
+    body {
+      font-family: "Vazir";
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+
+    header {
+      padding: 10px 20px 0;
+      border-bottom: 1px solid #ddd;
+      display: grid;
+      grid-template-rows: auto auto;
+      box-shadow: 0px 0px 6px 0px #4b5563;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 20px;
+      padding: 5px;
+    }
+
+    .logo {
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+    }
+
+    .search-box {
+      width: 40%;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 50px 10px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+      background-color: #f0f0f1;
+      font-family: "Vazir";
+      cursor: pointer;
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    /* منوی چندسطحی */
+    .dropdown {
+      width: 100%;
+    }
+
+    .dropdown > ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .dropdown ul li {
+      position: relative;
+    }
+
+    .dropdown ul li a {
+      text-decoration: none;
+      color: #4b5563;
+      padding: 10px 15px;
+      display: block;
+      font-size: 13px;
+    }
+
+    .dropdown ul li a i {
+      padding: 0 3px;
+    }
+
+    .dropdown ul li ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 15px;
+      background: #fff;
+      border: 1px solid #ccc;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .dropdown ul li:hover > ul {
+      display: flex;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0px;
+    }
+
+    ul li a:hover {
+      color: #ed1944;
+    }
+
+    /* عرض اختصاصی برای هر زیرمنو */
+    .dropdown ul li ul.menu-all {
+      min-width: 350px;
+    }
+
+    .dropdown ul li ul.menu-mobile {
+      min-width: 150px;
+    }
+
+    .menu-mobile-iphone {
+      min-width: 150px;
+    }
+
+    .dropdown ul li ul.menu-laptop {
+      min-width: 150px;
+    }
+
+    .dropdown ul li ul.menu-home {
+      min-width: 150px;
+    }
+
+    .dropdown ul li ul.menu-fashion {
+      min-width: 150px;
+    }
+
+    /* زیرمنوی سوم */
+    .dropdown ul li ul li ul {
+      top: 0;
+      right: 100%;
+    }
+
+    main {
+      width: 50%;
+      margin: 100px auto;
+      text-align: justify;
+      line-height: 1.8;
+    }
+
+    main h1,
+    strong {
+      color: #ed1944;
+      font-weight: bold;
+    }
+
+    /* ریسپانسیو */
+    @media (max-width: 768px) {
+      header {
+        padding: 5px;
+      }
+
+      .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        width: 160px;
+      }
+
+      .search-box {
+        width: 50%;
+      }
+
+      .dropdown > ul {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .dropdown ul li {
+        width: 100%;
+      }
+
+      .dropdown ul li ul {
+        position: relative;
+        right: auto;
+        top: auto;
+        border: none;
+        border: 1px solid #ccc;
+        padding: 5px;
+      }
+
+      .dropdown ul li ul li ul {
+        right: auto;
+        left: 0;
+      }
+
+      main {
+        width: 90%;
+        top: 10px;
+      }
+
+      main h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div class="logo">
+          <img src="assets/IMAGES/digikala-logo.svg" alt="لوگو" />
+        </div>
+        <div class="search-box">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="جستجو" />
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <ul>
+          <!-- زیر مجموعه دسته بندی کالا  -->
+          <li>
+            <a href="#" class="active">
+              <i class="fa-solid fa-bars"></i>
+              دسته بندی کالا
+            </a>
+            <ul class="menu-all">
+              <!-- زیر مجموعه موبایل ها  -->
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-mobile"></i>
+                  موبایل</a
+                >
+                <ul class="menu-mobile">
+                  <li><a href="#">سامسونگ</a></li>
+                  <li><a href="#">شیائومی</a></li>
+                  <li>
+                    <a href="#">آیفون</a>
+                    <ul class="menu-mobile-iphone">
+                      <li><a href="#">آیفون 13 </a></li>
+                      <li><a href="#">آیفون 13 Pro </a></li>
+                      <li><a href="#">آیفون 14 </a></li>
+                      <li><a href="#">آیفون 16 </a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">نوکیا</a></li>
+                  <li><a href="#">برندهای مختلف</a></li>
+                </ul>
+              </li>
+
+              <!-- زیر مجموعه لپ تاپ ها -->
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-laptop"></i>
+                  لپ تاپ</a
+                >
+                <ul class="menu-laptop">
+                  <li><a href="#">مک</a></li>
+                  <li><a href="#">ایسوس</a></li>
+                  <li><a href="#">لنوو</a></li>
+                </ul>
+              </li>
+
+              <!-- زیر مجموعه خانه و آشپزخانه-->
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-house"></i>
+                  خانه و آشپزخانه</a
+                >
+                <ul class="menu-home">
+                  <li><a href="#">ابزار آشپزخانه</a></li>
+                </ul>
+              </li>
+
+              <!-- زیر مجموعه و مد و پوشاک-->
+              <li>
+                <a href="#">
+                  <i class="fa-solid fa-shirt"></i>
+                  مد و پوشاک</a
+                >
+                <ul class="menu-fashion">
+                  <li><a href="#">لباس مردانه</a></li>
+                  <li><a href="#">لباس زنانه</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li><a href="#">شگفت انگیزها</a></li>
+          <li><a href="#">سوپر مارکت</a></li>
+          <li><a href="#">طلای دیجیتال</a></li>
+          <li><a href="#">پرفروش ترین ها</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <h1>" Multi Mega Menu "</h1>
+      <p>
+        منوی چندسطحی یا <strong>Multi Mega Menu</strong> یکی از بهترین روش‌ها
+        برای نمایش دسته‌بندی‌های زیاد در یک وب‌سایت است. با استفاده از این منو
+        می‌توان زیرمنوها و حتی زیرمجموعه‌های چندسطحی را نمایش داد، بدون این‌که
+        کاربر گیج شود یا صفحه بیش از حد شلوغ به نظر برسد.
+      </p>
+      <p>
+        در طراحی بالا، منو به صورت کاملاً CSS Only ساخته شده و بدون نیاز به
+        جاوااسکریپت کار می‌کند. کاربر با حرکت ماوس روی هر آیتم می‌تواند زیرمنوها
+        را مشاهده کند. همچنین این منو رسپانسیو است و در نمایشگرهای کوچک به صورت
+        ستونی نمایش داده می‌شود.
+      </p>
+    </main>
+  </body>
+</html>

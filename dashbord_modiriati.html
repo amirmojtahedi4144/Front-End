@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سایبر ادمین - داشبورد</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      direction: rtl;
+      font-family: "Vazirmatn";
+      background: radial-gradient(ellipse at center, #0f0f23 0%, #000000 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: grid-move 20s linear infinite;
+      z-index: -2;
+    }
+
+    @keyframes grid-move {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(50px, 50px);
+      }
+    }
+
+    /* Glowing orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: float-orb 15s infinite ease-in-out;
+      z-index: -1;
+    }
+
+    .orb1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #396dfa 0%, transparent 70%);
+      top: 10%;
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .orb2 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #8338ec 0%, transparent 70%);
+      bottom: 20%;
+      right: 15%;
+      animation-delay: 5s;
+    }
+
+    .orb3 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #06ffa5 0%, transparent 70%);
+      top: 60%;
+      left: 70%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float-orb {
+      0%,
+      100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+      }
+
+      33% {
+        transform: translateY(-30px) translateX(20px) scale(1.1);
+      }
+
+      66% {
+        transform: translateY(20px) translateX(-15px) scale(0.9);
+      }
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* CSS-only mobile menu toggle */
+    #menu-toggle {
+      display: none;
+    }
+
+    .menu-toggle-label {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1001;
+      background: rgba(15, 15, 35, 0.9);
+      border: 1px solid rgba(6, 255, 165, 0.5);
+      border-radius: 12px;
+      padding: 0.8rem;
+      color: #06ffa5;
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .menu-toggle-label:hover {
+      background: rgba(6, 255, 165, 0.1);
+      box-shadow: 0 0 30px rgba(6, 255, 165, 0.5);
+      transform: scale(1.1);
+    }
+
+    /* Sidebar overlay for mobile */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Menu toggle states */
+    #menu-toggle:checked ~ .sidebar-overlay {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #menu-toggle:checked ~ .container .sidebar {
+      transform: translateX(0);
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      margin-right: 320px;
+      transition: all 0.3s ease;
+    }
+
+    /* Header */
+    .header {
+      background: rgba(15, 15, 35, 0.8);
+      border: 1px solid rgba(6, 255, 165, 0.3);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(6, 255, 165, 0.1);
+    }
+
+    /* اسکن نوار در هدر — در حالت راست‌چین از راست شروع می‌کند */
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(6, 255, 165, 0.1),
+        transparent
+      );
+      animation: scan 3s infinite;
+    }
+
+    @keyframes scan {
+      0% {
+        right: -100%;
+      }
+
+      100% {
+        right: 100%;
+      }
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #06ffa5, #00d4ff, #ff006e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(6, 255, 165, 0.5);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(6, 255, 165, 0.1);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid rgba(6, 255, 165, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ff006e, #8338ec, #06ffa5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      animation: glow-pulse 2s infinite alternate;
+    }
+
+    @keyframes glow-pulse {
+      0% {
+        box-shadow: 0 0 20px rgba(6, 255, 165, 0.5);
+      }
+
+      100% {
+        box-shadow: 0 0 40px rgba(6, 255, 165, 0.8);
+      }
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: rgba(15, 15, 35, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stat-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .stat-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .stat-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .stat-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #ff006e, #8338ec, #06ffa5, #00d4ff);
+      background-size: 300% 100%;
+      animation: gradient-flow 2s linear infinite;
+    }
+
+    @keyframes gradient-flow {
+      0% {
+        background-position: 0% 0%;
+      }
+
+      100% {
+        background-position: 300% 0%;
+      }
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(6, 255, 165, 0.5);
+      box-shadow: 0 20px 60px rgba(6, 255, 165, 0.2);
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #06ffa5, #00d4ff);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #06ffa5;
+      text-shadow: 0 0 20px rgba(6, 255, 165, 0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-change {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #06ffa5;
+      font-weight: 600;
+    }
+
+    /* Content Cards */
+    .content-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .content-card {
+      background: rgba(15, 15, 35, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 2rem;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      animation-delay: 0.5s;
+    }
+
+    .content-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        rgba(6, 255, 165, 0.05),
+        rgba(255, 0, 110, 0.05)
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .content-card:hover::after {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .card-title::before {
+      content: "";
+      width: 4px;
+      height: 30px;
+      background: linear-gradient(180deg, #06ffa5, #00d4ff);
+      border-radius: 2px;
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+      text-align: right;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .data-table th {
+      background: rgba(6, 255, 165, 0.1);
+      color: #06ffa5;
+      font-weight: 700;
+      padding: 1.5rem 1rem;
+      text-align: left;
+      border-bottom: 2px solid rgba(6, 255, 165, 0.3);
+      font-size: 0.9rem;
+      text-align: right;
+    }
+
+    .data-table td {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .data-table td:last-child {
+      border-bottom: none;
+    }
+
+    .data-table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    .data-table tbody tr:hover {
+      background: rgba(6, 255, 165, 0.05);
+      transform: scale(1.01);
+    }
+
+    /* Status badges */
+    .status-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-completed {
+      background: rgba(6, 255, 165, 0.2);
+      color: #06ffa5;
+      border: 1px solid rgba(6, 255, 165, 0.5);
+      box-shadow: 0 0 20px rgba(6, 255, 165, 0.3);
+    }
+
+    .status-processing {
+      background: rgba(255, 204, 0, 0.2);
+      color: #ffcc00;
+      border: 1px solid rgba(255, 204, 0, 0.5);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+    }
+
+    .status-cancelled {
+      background: rgba(255, 0, 110, 0.2);
+      color: #ff006e;
+      border: 1px solid rgba(255, 0, 110, 0.5);
+      box-shadow: 0 0 20px rgba(255, 0, 110, 0.3);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: rgba(15, 15, 35, 0.95);
+      border-left: 1px solid rgba(6, 255, 165, 0.3);
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-header {
+      padding: 2rem;
+      border-bottom: 1px solid rgba(6, 255, 165, 0.2);
+      text-align: right;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #06ffa5, #00d4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 2rem 0;
+    }
+
+    .nav-item {
+      margin: 0.5rem 1rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+    }
+
+    /* نوار کوچک تاکید در سمت راست (برای تطابق بصری با راست‌چین) */
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: linear-gradient(180deg, #06ffa5, #00d4ff);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+      transform: scaleY(1);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #06ffa5;
+      background: rgba(6, 255, 165, 0.1);
+      border-color: rgba(6, 255, 165, 0.3);
+      box-shadow: 0 0 30px rgba(6, 255, 165, 0.2);
+      transform: translateX(5px);
+    }
+
+    .nav-icon {
+      font-size: 1.2rem;
+      margin-left: 1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    /* Activity Feed */
+    .activity-feed {
+      margin-top: 1rem;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    /* نوار تاکید در سمت راست برای آیتم‌های اکتیویتی */
+    .activity-item::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, #06ffa5, transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .activity-item:hover::before {
+      opacity: 1;
+    }
+
+    .activity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      position: relative;
+    }
+
+    .activity-dot::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .dot-new {
+      background: #06ffa5;
+      color: #06ffa5;
+    }
+
+    .dot-update {
+      background: #00d4ff;
+      color: #00d4ff;
+    }
+
+    .dot-delete {
+      background: #ff006e;
+      color: #ff006e;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-text {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.2rem;
+      margin-right: 10px;
+      text-align: right;
+    }
+
+    .activity-time {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      margin-right: 10px;
+      text-align: right;
+    }
+
+    /* Page load animation */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1400px) {
+      .main-content {
+        margin-right: 300px;
+      }
+
+      .sidebar {
+        width: 300px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .content-section {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .menu-toggle-label {
+        display: flex;
+      }
+
+      .main-content {
+        margin-right: 0;
+        padding: 1rem;
+        padding-top: 4rem;
+        width: 100%;
+      }
+
+      .sidebar {
+        transform: translateX(100%);
+        width: 85%;
+        max-width: 400px;
+        box-shadow: -20px 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .sidebar-header {
+        text-align: center;
+      }
+
+      .sidebar-overlay {
+        display: block;
+      }
+
+      .header {
+        padding: 1.5rem;
+      }
+
+      .header h1 {
+        font-size: 2.2rem;
+      }
+
+      .user-profile {
+        padding: 0.8rem 1.2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .stat-card {
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 0.8rem;
+        padding-top: 4rem;
+      }
+
+      .header {
+        padding: 1.2rem;
+        border-radius: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .user-profile {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .stat-card {
+        padding: 1.5rem;
+      }
+
+      .stat-value {
+        font-size: 2.5rem;
+      }
+
+      .content-card {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+      }
+
+      .data-table {
+        font-size: 0.9rem;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 0.8rem 0.5rem;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(15, 15, 35, 0.99);
+      }
+
+      .nav-link {
+        padding: 1rem 1.5rem;
+        color: rgba(255, 255, 255, 0.95);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        font-weight: 500;
+      }
+
+      .logo {
+        color: #06ffa5;
+        text-shadow: 0 0 20px rgba(6, 255, 165, 0.5);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .menu-toggle-label {
+        top: 0.8rem;
+        right: 0.8rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+      }
+
+      .main-content {
+        padding: 0.5rem;
+        padding-top: 3.5rem;
+      }
+
+      .header {
+        padding: 1rem;
+        border-radius: 16px;
+        margin-bottom: 1rem;
+      }
+
+      .header h1 {
+        font-size: 1.5rem;
+      }
+
+      .user-profile {
+        padding: 0.8rem;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .stat-card,
+      .content-card {
+        padding: 1rem;
+        border-radius: 16px;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+      }
+
+      .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .card-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 0.6rem 0.3rem;
+        font-size: 0.8rem;
+      }
+
+      .status-badge {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+      }
+
+      .activity-item {
+        padding: 0.8rem 0;
+      }
+
+      .activity-text {
+        font-size: 0.9rem;
+      }
+
+      .nav-link {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .nav-icon {
+        font-size: 1rem;
+        margin-right: 0.8rem;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 15, 35, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #06ffa5, #00d4ff);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #00d4ff, #06ffa5);
+    }
+  </style>
+  <body>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <!-- CSS-only mobile menu toggle -->
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-toggle-label">☰</label>
+    <div class="sidebar-overlay"></div>
+
+    <div class="container">
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="header-content">
+            <h1>سایبر ادمین</h1>
+            <div class="user-profile">
+              <div style="text-align: right">
+                <div style="font-weight: 600">سپهر فاضل</div>
+                <div style="font-size: 0.9rem; opacity: 0.7">مدیر سیستم</div>
+              </div>
+              <div class="user-avatar">SF</div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">👥</div>
+            </div>
+            <div class="stat-value">24,847</div>
+            <div class="stat-label">کاربران فعال</div>
+            <div class="stat-change">
+              <span>↗</span>
+              <span>+۱۸.۲٪ نسبت به هفته گذشته</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">💰</div>
+            </div>
+            <div class="stat-value">$127K</div>
+            <div class="stat-label">کل درآمد</div>
+            <div class="stat-change">
+              <span>↗</span>
+              <span>+۲۴.۸٪ نسبت به هفته گذشته</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">📊</div>
+            </div>
+            <div class="stat-value">3,429</div>
+            <div class="stat-label">سفارش‌های امروز</div>
+            <div class="stat-change">
+              <span>↗</span>
+              <span>+۱۲.۵٪ نسبت به دیروز</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-header">
+              <div class="stat-icon">⚡</div>
+            </div>
+            <div class="stat-value">99.8%</div>
+            <div class="stat-label">درصد دسترسی سیستم</div>
+            <div class="stat-change">
+              <span>↗</span>
+              <span>+۰.۱٪ نسبت به ماه قبل</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+          <!-- Orders Table -->
+          <div class="content-card">
+            <h2 class="card-title">تراکنش‌های اخیر</h2>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>شناسه تراکنش</th>
+                    <th>مشتری</th>
+                    <th>مبلغ</th>
+                    <th>وضعیت</th>
+                    <th>تاریخ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#TX-2847</td>
+                    <td>سارا</td>
+                    <td>$2,899.00</td>
+                    <td>
+                      <span class="status-badge status-completed"
+                        >تکمیل‌شده</span
+                      >
+                    </td>
+                    <td>خرداد 1403</td>
+                  </tr>
+                  <tr>
+                    <td>#TX-2846</td>
+                    <td>علی</td>
+                    <td>$1,459.50</td>
+                    <td>
+                      <span class="status-badge status-processing"
+                        >در حال پردازش</span
+                      >
+                    </td>
+                    <td>تیر 1402</td>
+                  </tr>
+                  <tr>
+                    <td>#TX-2845</td>
+                    <td>علیرضا</td>
+                    <td>$899.99</td>
+                    <td>
+                      <span class="status-badge status-completed"
+                        >تکمیل‌شده</span
+                      >
+                    </td>
+                    <td>مرداد 1404</td>
+                  </tr>
+                  <tr>
+                    <td>#TX-2844</td>
+                    <td>مریم</td>
+                    <td>$3,249.00</td>
+                    <td>
+                      <span class="status-badge status-cancelled">لغو‌شده</span>
+                    </td>
+                    <td>آذر 1402</td>
+                  </tr>
+                  <tr>
+                    <td>#TX-2843</td>
+                    <td>زهرا</td>
+                    <td>$1,899.99</td>
+                    <td>
+                      <span class="status-badge status-completed"
+                        >تکمیل‌شده</span
+                      >
+                    </td>
+                    <td>بهمن 1404</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Activity Feed -->
+          <div class="content-card">
+            <h2 class="card-title">فعالیت سیستم</h2>
+            <div class="activity-feed">
+              <div class="activity-item">
+                <div class="activity-dot dot-new"></div>
+                <div class="activity-content">
+                  <div class="activity-text">کاربر جدید ثبت‌نام کرد</div>
+                  <div class="activity-time">۲ دقیقه قبل</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-update"></div>
+                <div class="activity-content">
+                  <div class="activity-text">
+                    پشتیبان‌گیری پایگاه‌داده انجام شد
+                  </div>
+                  <div class="activity-time">۱۵ دقیقه قبل</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-new"></div>
+                <div class="activity-content">
+                  <div class="activity-text">پرداخت دریافت شد: $2,899</div>
+                  <div class="activity-time">۱ ساعت قبل</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-delete"></div>
+                <div class="activity-content">
+                  <div class="activity-text">هشدار امنیتی حل شد</div>
+                  <div class="activity-time">۲ ساعت قبل</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-update"></div>
+                <div class="activity-content">
+                  <div class="activity-text">نگهداری سرور کامل شد</div>
+                  <div class="activity-time">۴ ساعت قبل</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-new"></div>
+                <div class="activity-content">
+                  <div class="activity-text">
+                    محصول جدید به کاتالوگ اضافه شد
+                  </div>
+                  <div class="activity-time">۶ ساعت قبل</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sidebar -->
+      <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">سایبر</div>
+          <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem">
+            داشبورد مدیریت
+          </div>
+        </div>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="#" class="nav-link active">
+              <span class="nav-icon">🏠</span>
+              داشبورد
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">👥</span>
+              کاربران
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">📊</span>
+              آنالیتیکس
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">💰</span>
+              تراکنش‌ها
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">📦</span>
+              محصولات
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">📈</span>
+              گزارش‌ها
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">🔔</span>
+              اعلان‌ها
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">⚙️</span>
+              تنظیمات
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">🔐</span>
+              امنیت
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <span class="nav-icon">📋</span>
+              لاگ‌ها
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+</html>

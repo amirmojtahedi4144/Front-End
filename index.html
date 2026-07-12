@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Payment</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(-70deg, #202020, #000000);
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* ── Background Circles ── */
+        .circles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 450px;
+            height: 270px;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(120deg, #1D976C, #2c3e50);
+            opacity: 0.8;
+            animation: float 6s cubic-bezier(0.54, 0.085, 0.5, 0.92) infinite alternate;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: 100px;
+            left: -50px;
+            animation-delay: 3.5s;
+        }
+
+        .circle-2 {
+            width: 240px;
+            height: 240px;
+            bottom: 40px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotateX(0deg) translateY(0px) translateX(0px);
+            }
+            50% {
+                transform: rotateX(0deg) translateY(10px) translateX(5px);
+            }
+            100% {
+                transform: rotateX(0deg) translateY(0px) translateX(1px);
+            }
+        }
+
+        /* ── Main Layout ── */
+        .mdl {
+            position: relative;
+            width: 420px;
+            max-width: 100%;
+        }
+
+        /* ── Title ── */
+        .title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 1.5;
+            color: #ffffff;
+            padding: 0 0 20px 30px;
+            width: 100%;
+        }
+        .title strong {
+            font-weight: 600;
+        }
+
+        /* ── Card ── */
+        .card {
+            border-radius: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.25);
+            transition: box-shadow 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ── Logo ── */
+        .logo {
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        .logo svg {
+            display: block;
+        }
+
+        /* ── Form Fields ── */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            margin-top: 4px;
+        }
+
+        .field {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .field label {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+            transition: color 0.3s;
+        }
+        .field:focus-within label {
+            color: #ffffff;
+        }
+
+        .field input {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: #ffffff;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 4px 0 6px;
+            outline: none;
+            width: 100%;
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .field input::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 14px;
+        }
+        .field input:hover,
+        .field input:focus {
+            border-bottom-color: #ffffff;
+        }
+
+        /* Card number – bigger */
+        .field--number input {
+            font-size: 28px;
+            padding: 4px 0 8px;
+            letter-spacing: 2px;
+        }
+        .field--number input::placeholder {
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* Fixed widths for expiry & CCV */
+        .field--exp {
+            flex: 0 0 100px;
+        }
+        .field--ccv {
+            flex: 0 0 70px;
+        }
+        .field--name {
+            flex: 1 1 160px;
+        }
+
+        /* ── Error state ── */
+        .field.error input {
+            border-bottom-color: #ff6b6b;
+        }
+        .field.error label {
+            color: #ff6b6b;
+        }
+        .field .error-msg {
+            font-size: 11px;
+            color: #ff6b6b;
+            height: 0;
+            opacity: 0;
+            transition: height 0.2s, opacity 0.2s, margin 0.2s;
+            overflow: hidden;
+            margin-top: 0;
+        }
+        .field.error .error-msg {
+            height: 18px;
+            opacity: 1;
+            margin-top: 4px;
+        }
+
+        /* ── Submit Button ── */
+        .submit-btn {
+            margin-top: 28px;
+            padding: 14px 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            background: linear-gradient(120deg, #1D976C, #2c3e50);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(29, 151, 108, 0.25);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29, 151, 108, 0.35);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── Success / Feedback ── */
+        .form-feedback {
+            text-align: center;
+            margin-top: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #1D976C;
+            opacity: 0;
+            transition: opacity 0.4s;
+            min-height: 24px;
+        }
+        .form-feedback.show {
+            opacity: 1;
+        }
+        .form-feedback.error {
+            color: #ff6b6b;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            .mdl {
+                width: 100%;
+            }
+            .title {
+                padding-left: 0;
+                font-size: 18px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .field--number input {
+                font-size: 22px;
+            }
+            .field--number input::placeholder {
+                font-size: 18px;
+            }
+            .field-group {
+                gap: 16px 20px;
+            }
+            .field--exp {
+                flex: 0 0 80px;
+            }
+            .field--ccv {
+                flex: 0 0 60px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .field-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .field--exp,
+            .field--ccv,
+            .field--name {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+            .field--number input {
+                font-size: 20px;
+            }
+            .field--number input::placeholder {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mdl">
+
+        <!-- Animated Background -->
+        <div class="circles" aria-hidden="true">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="title">
+            Please enter your <strong>credit card</strong><br />details below
+        </h1>
+
+        <!-- Card -->
+        <div class="card">
+            <form id="payment-form" novalidate>
+
+                <!-- Logo -->
+                <div class="logo">
+                    <svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#FFFFFF">
+                            <circle cx="16" cy="16" r="16" />
+                            <circle cx="16" cy="48" r="16" />
+                            <circle cx="48" cy="16" r="16" />
+                            <circle cx="48" cy="48" r="16" />
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Card Number -->
+                <div class="field field--number" id="field-number">
+                    <label for="card-number">Card Number</label>
+                    <input
+                    id="card-number"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="cc-number"
+                    placeholder="1234 1234 1234 1234"
+                    maxlength="19"
+                    required
+                    />
+                    <div class="error-msg">Please enter a valid 16-digit card number</div>
+                </div>
+
+                <!-- Row: Name + Exp + CCV -->
+                <div class="field-group">
+                    <div class="field field--name" id="field-name">
+                        <label for="card-name">Card Holder</label>
+                        <input
+                        id="card-name"
+                        type="text"
+                        autocomplete="cc-name"
+                        placeholder="ISRAEL ISRAELI"
+                        required
+                        />
+                        <div class="error-msg">Name is required</div>
+                    </div>
+
+                    <div class="field field--exp" id="field-exp">
+                        <label for="card-exp">Exp. Date</label>
+                        <input
+                        id="card-exp"
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="cc-exp"
+                        placeholder="MM/YY"
+                        maxlength="5"
+                        required
+                        />
+                        <div class="error-msg">Use MM/YY format</div>
+                    </div>
+
+                    <div class="field field--ccv" id="field-ccv">
+                        <label for="card-ccv">CCV</label>
+                        <input
+                        id="card-ccv"
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="cc-csc"
+                        placeholder="123"
+                        maxlength="3"
+                        required
+                        />
+                        <div class="error-msg">3 digits</div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="submit-btn">Pay Now</button>
+
+                <!-- Feedback -->
+                <div class="form-feedback" id="form-feedback"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const form = document.getElementById('payment-form');
+            const cardNumber = document.getElementById('card-number');
+            const cardName = document.getElementById('card-name');
+            const cardExp = document.getElementById('card-exp');
+            const cardCcv = document.getElementById('card-ccv');
+            const feedback = document.getElementById('form-feedback');
+
+            const fieldNumber = document.getElementById('field-number');
+            const fieldName = document.getElementById('field-name');
+            const fieldExp = document.getElementById('field-exp');
+            const fieldCcv = document.getElementById('field-ccv');
+
+            // ── Helpers ──
+            function setError(field, error) {
+                field.classList.toggle('error', error);
+            }
+
+            function showFeedback(msg, isError = false) {
+                feedback.textContent = msg;
+                feedback.className = 'form-feedback show' + (isError ? ' error' : '');
+            }
+
+            function clearFeedback() {
+                feedback.className = 'form-feedback';
+                feedback.textContent = '';
+            }
+
+            // ── Format: Card Number (add spaces every 4 digits) ──
+            function formatCardNumber(value) {
+                const digits = value.replace(/\D/g, '');
+                const chunks = [];
+                for (let i = 0; i < digits.length && i < 16; i += 4) {
+                    chunks.push(digits.slice(i, i + 4));
+                }
+                return chunks.join(' ').trim();
+            }
+
+            cardNumber.addEventListener('input', function(e) {
+                const raw = this.value;
+                const formatted = formatCardNumber(raw);
+                // Only update if changed to avoid cursor jumps
+                if (formatted !== this.value) {
+                    const cursor = this.selectionStart;
+                    this.value = formatted;
+                    // try to keep cursor in a sensible place
+                    const newCursor = Math.min(cursor, this.value.length);
+                    this.setSelectionRange(newCursor, newCursor);
+                }
+                // validate
+                const digits = this.value.replace(/\s/g, '');
+                const isValid = digits.length === 16 && /^\d{16}$/.test(digits);
+                setError(fieldNumber, this.value.length > 0 && !isValid);
+                clearFeedback();
+            });
+
+            // ── Format: Expiration Date (auto-slash) ──
+            cardExp.addEventListener('input', function(e) {
+                let raw = this.value.replace(/\D/g, '');
+                if (raw.length > 4) raw = raw.slice(0, 4);
+                let formatted = raw;
+                if (raw.length >= 3) {
+                    formatted = raw.slice(0, 2) + '/' + raw.slice(2);
+                } else if (raw.length === 2) {
+                    formatted = raw + '/';
+                }
+                if (formatted !== this.value) {
+                    const cursor = this.selectionStart;
+                    this.value = formatted;
+                    const newCursor = Math.min(cursor, this.value.length);
+                    this.setSelectionRange(newCursor, newCursor);
+                }
+                // validate MM/YY
+                const parts = this.value.split('/');
+                const isValid = parts.length === 2 &&
+                    parts[0].length === 2 && /^\d{2}$/.test(parts[0]) &&
+                    parts[1].length === 2 && /^\d{2}$/.test(parts[1]) &&
+                    parseInt(parts[0], 10) >= 1 && parseInt(parts[0], 10) <= 12;
+                setError(fieldExp, this.value.length > 0 && !isValid);
+                clearFeedback();
+            });
+
+            // ── CCV: digits only ──
+            cardCcv.addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '').slice(0, 3);
+                const isValid = this.value.length === 3;
+                setError(fieldCcv, this.value.length > 0 && !isValid);
+                clearFeedback();
+            });
+
+            // ── Card Name: basic required ──
+            cardName.addEventListener('input', function(e) {
+                const isValid = this.value.trim().length > 0;
+                setError(fieldName, this.value.length > 0 && !isValid);
+                clearFeedback();
+            });
+
+            // ── Submit ──
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Gather values
+                const numberRaw = cardNumber.value.replace(/\s/g, '');
+                const name = cardName.value.trim();
+                const exp = cardExp.value.trim();
+                const ccv = cardCcv.value.trim();
+
+                // Validate all
+                const isNumberValid = numberRaw.length === 16 && /^\d{16}$/.test(numberRaw);
+                const isNameValid = name.length > 0;
+                const isExpValid = /^\d{2}\/\d{2}$/.test(exp) &&
+                    parseInt(exp.slice(0, 2), 10) >= 1 &&
+                    parseInt(exp.slice(0, 2), 10) <= 12;
+                const isCcvValid = ccv.length === 3 && /^\d{3}$/.test(ccv);
+
+                setError(fieldNumber, !isNumberValid);
+                setError(fieldName, !isNameValid);
+                setError(fieldExp, !isExpValid);
+                setError(fieldCcv, !isCcvValid);
+
+                if (isNumberValid && isNameValid && isExpValid && isCcvValid) {
+                    // Simulate success
+                    showFeedback('✓ Payment successful! Thank you.', false);
+                    form.reset();
+                    // clear error states
+                    [fieldNumber, fieldName, fieldExp, fieldCcv].forEach(f => f.classList.remove('error'));
+                    // re-trigger formatting reset
+                    cardNumber.value = '';
+                    cardExp.value = '';
+                    cardCcv.value = '';
+                    cardName.value = '';
+                } else {
+                    showFeedback('✗ Please fix the highlighted fields.', true);
+                    // Focus the first invalid field
+                    const firstInvalid = document.querySelector('.field.error input');
+                    if (firstInvalid) firstInvalid.focus();
+                }
+            });
+
+            // ── Clicking on a field label focuses the input ──
+            document.querySelectorAll('.field label').forEach(label => {
+                const input = label.closest('.field').querySelector('input');
+                if (input) {
+                    label.addEventListener('click', () => input.focus());
+                }
+            });
+
+            // ── Live clear feedback on any input ──
+            form.querySelectorAll('input').forEach(inp => {
+                inp.addEventListener('input', function() {
+                    if (feedback.classList.contains('show')) {
+                        clearFeedback();
+                    }
+                });
+            });
+
+            // ── Initial placeholder fix for card number (no auto-fill weirdness) ──
+            // Ensure card number is empty on load
+            cardNumber.value = '';
+
+        })();
+    </script>
+
+</body>
+</html>

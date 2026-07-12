@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TickTick فارسی - مدیریت حرفه‌ای وظایف</title>
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--alpine.js-->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <!--Font-->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'vazir': ['Vazirmatn', 'sans-serif'],
+                    },
+                    screens: {
+                        'xs': '375px',
+                        'sm': '640px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.3s ease-out',
+                        'slide-in-right': 'slideInRight 0.3s ease-out',
+                        'slide-in-left': 'slideInLeft 0.3s ease-out',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'scale-in': 'scaleIn 0.2s ease-out',
+                        'bounce-soft': 'bounceSoft 0.3s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        bounceSoft: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        input,
+        select,
+        textarea {
+            font-size: 16px !important;
+        }
+
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+        }
+
+        .custom-checkbox:active {
+            transform: scale(0.9);
+        }
+
+        .custom-checkbox:checked {
+            background-color: #10b981;
+            border-color: #10b981;
+        }
+
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 12px;
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-size: contain;
+        }
+
+        .dark .custom-checkbox {
+            border-color: #4b5563;
+        }
+
+        .sidebar-link {
+            position: relative;
+            transition: all 0.2s;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sidebar-link:active {
+            transform: scale(0.98);
+        }
+
+        .task-item {
+            transition: all 0.2s ease;
+        }
+
+        .task-item:active {
+            transform: scale(0.99);
+        }
+
+        @media (min-width: 768px) {
+            .task-item:hover {
+                transform: translateX(-4px);
+            }
+        }
+
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .svg-icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .svg-icon-lg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .svg-icon-xl {
+            width: 28px;
+            height: 28px;
+        }
+
+        .sidebar-overlay {
+            backdrop-filter: blur(2px);
+        }
+
+        .bottom-nav-item {
+            position: relative;
+        }
+
+        .bottom-nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: #3b82f6;
+            border-radius: 0 0 3px 3px;
+        }
+
+        @supports (padding: max(0px)) {
+            .safe-bottom {
+                padding-bottom: max(1rem, env(safe-area-inset-bottom));
+            }
+
+            .mobile-nav-safe {
+                padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900" x-data="tickTickApp()" x-init="init()"
+    :class="{ 'dark': darkMode, 'overflow-hidden': sidebarOpen && isMobile }">
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <defs>
+            <symbol id="icon-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+            </symbol>
+            <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+            </symbol>
+            <symbol id="icon-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+            </symbol>
+            <symbol id="icon-today" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+                <circle cx="12" cy="15" r="1" />
+            </symbol>
+            <symbol id="icon-week" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+            </symbol>
+            <symbol id="icon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </symbol>
+            <symbol id="icon-star-filled" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"
+                stroke-width="1">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </symbol>
+            <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+            </symbol>
+            <symbol id="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+            </symbol>
+            <symbol id="icon-plus-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </symbol>
+            <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 01-3.46 0" />
+            </symbol>
+            <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+            </symbol>
+            <symbol id="icon-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+                <line x1="7" y1="7" x2="7.01" y2="7" />
+            </symbol>
+            <symbol id="icon-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </symbol>
+            <symbol id="icon-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+            </symbol>
+            <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </symbol>
+            <symbol id="icon-list-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6" />
+                <line x1="8" y1="12" x2="21" y2="12" />
+                <line x1="8" y1="18" x2="21" y2="18" />
+                <line x1="3" y1="6" x2="3.01" y2="6" />
+                <line x1="3" y1="12" x2="3.01" y2="12" />
+                <line x1="3" y1="18" x2="3.01" y2="18" />
+            </symbol>
+            <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </symbol>
+            <symbol id="icon-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+            </symbol>
+            <symbol id="icon-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </symbol>
+            <symbol id="icon-priority-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="2" x2="12" y2="22" />
+                <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+            </symbol>
+            <symbol id="icon-empty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                <circle cx="12" cy="16" r="1" />
+            </symbol>
+            <symbol id="icon-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Main Layout -->
+    <div class="flex h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
+
+        <div x-show="sidebarOpen && isMobile" @click="sidebarOpen = false"
+            class="sidebar-overlay fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden transition-opacity duration-300"
+            x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        </div>
+
+        <!-- Sidebar -->
+        <aside
+            class="fixed lg:relative inset-y-0 right-0 w-72 lg:w-72 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 flex flex-col shrink-0 transition-all duration-300 z-50 shadow-2xl lg:shadow-none"
+            :class="{
+                   'translate-x-0': sidebarOpen,
+                   'translate-x-full lg:translate-x-0': !sidebarOpen,
+                   'lg:-mr-72': !sidebarOpen && !isMobile
+               }">
+
+            <!-- User Info -->
+            <div class="p-4 lg:p-5 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 lg:w-12 lg:h-12 bg-[linear-gradient(to_right,#3b82f6,#9333ea)] rounded-xl flex items-center justify-center shadow-lg">
+                        <svg class="svg-icon svg-icon-lg text-white">
+                            <use href="#icon-logo" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-200 truncate text-sm lg:text-base">کاربر
+                            تیک‌تیک</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 truncate">امیر مجتهدی</p>
+                    </div>
+                    <!-- Close button for mobile -->
+                    <button @click="sidebarOpen = false"
+                        class="lg:hidden p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <svg class="svg-icon">
+                            <use href="#icon-x" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-3 lg:mt-4">
+                    <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1.5">
+                        <span class="flex items-center gap-1">
+                            <svg class="svg-icon svg-icon-sm">
+                                <use href="#icon-activity" />
+                            </svg>
+                            <span class="hidden xs:inline">پیشرفت امروز</span>
+                        </span>
+                        <span class="font-semibold" x-text="todayProgress + '%'"></span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div class="bg-[linear-gradient(to_right,#3b82f6,#9333ea)]h-2 rounded-full transition-all duration-700 ease-out"
+                            :style="'width: ' + todayProgress + '%'"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 overflow-y-auto p-2 lg:p-3 space-y-1">
+                <div class="mb-4 lg:mb-6">
+                    <h4
+                        class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1.5 lg:mb-2 px-2 lg:px-3 flex items-center gap-2">
+                        <svg class="svg-icon svg-icon-sm">
+                            <use href="#icon-all" />
+                        </svg>
+                        <span class="hidden xs:inline">لیست‌های هوشمند</span>
+                    </h4>
+
+                    <a @click.prevent="setView('all'); if(isMobile) sidebarOpen = false"
+                        class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                        :class="{ 'active': currentView === 'all' }">
+                        <svg class="svg-icon">
+                            <use href="#icon-list-check" />
+                        </svg>
+                        <span class="flex-1">همه</span>
+                        <span
+                            class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 lg:px-2 py-0.5 rounded-full font-medium"
+                            x-text="tasks.length"></span>
+                    </a>
+
+                    <a @click.prevent="setView('today'); if(isMobile) sidebarOpen = false"
+                        class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                        :class="{ 'active': currentView === 'today' }">
+                        <svg class="svg-icon text-blue-500">
+                            <use href="#icon-today" />
+                        </svg>
+                        <span class="flex-1">امروز</span>
+                        <span
+                            class="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-1.5 lg:px-2 py-0.5 rounded-full font-medium"
+                            x-text="getTodayTasks().length"></span>
+                    </a>
+
+                    <a @click.prevent="setView('week'); if(isMobile) sidebarOpen = false"
+                        class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                        :class="{ 'active': currentView === 'week' }">
+                        <svg class="svg-icon text-purple-500">
+                            <use href="#icon-week" />
+                        </svg>
+                        <span class="flex-1">این هفته</span>
+                    </a>
+
+                    <a @click.prevent="setView('important'); if(isMobile) sidebarOpen = false"
+                        class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                        :class="{ 'active': currentView === 'important' }">
+                        <svg class="svg-icon text-yellow-500">
+                            <use href="#icon-star" />
+                        </svg>
+                        <span class="flex-1">مهم</span>
+                        <span
+                            class="text-xs bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 px-1.5 lg:px-2 py-0.5 rounded-full font-medium"
+                            x-text="getImportantTasks().length"></span>
+                    </a>
+
+                    <a @click.prevent="setView('completed'); if(isMobile) sidebarOpen = false"
+                        class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                        :class="{ 'active': currentView === 'completed' }">
+                        <svg class="svg-icon text-green-500">
+                            <use href="#icon-check-circle" />
+                        </svg>
+                        <span class="flex-1">انجام شده</span>
+                        <span
+                            class="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-1.5 lg:px-2 py-0.5 rounded-full font-medium"
+                            x-text="getCompletedTasks().length"></span>
+                    </a>
+                </div>
+
+                <!-- Projects -->
+                <div>
+                    <h4
+                        class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1.5 lg:mb-2 px-2 lg:px-3 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <svg class="svg-icon svg-icon-sm">
+                                <use href="#icon-folder" />
+                            </svg>
+                            <span class="hidden xs:inline">پروژه‌ها</span>
+                        </span>
+                        <button @click="showAddProject = true"
+                            class="hover:text-blue-500 dark:hover:text-blue-400 transition-colors p-1">
+                            <svg class="svg-icon svg-icon-sm">
+                                <use href="#icon-plus" />
+                            </svg>
+                        </button>
+                    </h4>
+
+                    <template x-for="project in projects" :key="project.id">
+                        <a @click.prevent="setView('project', project.id); if(isMobile) sidebarOpen = false"
+                            class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                            :class="{ 'active': currentView === 'project' && selectedProjectId === project.id }">
+                            <span class="w-3 h-3 rounded-full shrink-0 shadow-sm"
+                                :style="'background-color: ' + project.color"></span>
+                            <span class="flex-1" x-text="project.name"></span>
+                            <span
+                                class="text-xs bg-gray-100 dark:bg-gray-700 px-1.5 lg:px-2 py-0.5 rounded-full font-medium"
+                                x-text="getProjectTaskCount(project.id)"></span>
+                        </a>
+                    </template>
+                </div>
+
+                <!-- Tags -->
+                <div class="mt-4 lg:mt-6">
+                    <h4
+                        class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1.5 lg:mb-2 px-2 lg:px-3 flex items-center gap-2">
+                        <svg class="svg-icon svg-icon-sm">
+                            <use href="#icon-tag" />
+                        </svg>
+                        <span class="hidden xs:inline">برچسب‌ها</span>
+                    </h4>
+
+                    <template x-for="tag in tags" :key="tag">
+                        <a @click.prevent="filterByTag(tag); if(isMobile) sidebarOpen = false"
+                            class="sidebar-link flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 lg:py-2.5 rounded-lg text-gray-700 dark:text-gray-300 mb-0.5 text-sm lg:text-base"
+                            :class="{ 'active': selectedTag === tag }">
+                            <svg class="svg-icon text-gray-400">
+                                <use href="#icon-tag" />
+                            </svg>
+                            <span class="flex-1" x-text="tag"></span>
+                        </a>
+                    </template>
+                </div>
+            </nav>
+
+            <!-- Bottom Actions - Only show on desktop -->
+            <div class="hidden lg:block p-3 border-t border-gray-200 dark:border-gray-700">
+                <button @click="darkMode = !darkMode; saveSettings()"
+                    class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all">
+                    <svg class="svg-icon" x-show="!darkMode">
+                        <use href="#icon-moon" />
+                    </svg>
+                    <svg class="svg-icon" x-show="darkMode">
+                        <use href="#icon-sun" />
+                    </svg>
+                    <span x-text="darkMode ? 'حالت روشن' : 'حالت تاریک'"></span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden w-full lg:w-auto">
+
+            <!-- Top Header -->
+            <header
+                class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-3 sm:px-4 lg:px-6 py-2.5 lg:py-4 flex items-center gap-2 sm:gap-4 shadow-sm">
+                <button @click="sidebarOpen = !sidebarOpen"
+                    class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors p-1.5 lg:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl shrink-0">
+                    <svg class="svg-icon svg-icon-lg">
+                        <use href="#icon-menu" />
+                    </svg>
+                </button>
+
+                <div class="flex-1 flex items-center gap-2 lg:gap-3 min-w-0">
+                    <h2 class="text-base sm:text-lg lg:text-xl font-bold text-gray-800 dark:text-gray-200 truncate"
+                        x-text="viewTitle"></h2>
+                    <span
+                        class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 hidden sm:flex items-center gap-1 shrink-0">
+                        <svg class="svg-icon svg-icon-sm">
+                            <use href="#icon-calendar" />
+                        </svg>
+                        <span class="hidden md:inline" x-text="persianDate"></span>
+                    </span>
+                </div>
+
+                <div class="flex items-center gap-1 sm:gap-3">
+                    <!-- Search - visible on mobile as icon button -->
+                    <button @click="mobileSearchOpen = !mobileSearchOpen"
+                        class="md:hidden p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl">
+                        <svg class="svg-icon svg-icon-lg">
+                            <use href="#icon-search" />
+                        </svg>
+                    </button>
+
+                    <div class="relative hidden md:block">
+                        <svg class="svg-icon svg-icon-sm absolute right-3 top-3 text-gray-400">
+                            <use href="#icon-search" />
+                        </svg>
+                        <input type="text" x-model="searchQuery" @input="searchTasks()" placeholder="جستجو..."
+                            class="w-48 lg:w-72 pr-10 pl-4 py-2 lg:py-2.5 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-700 dark:text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-sm">
+                    </div>
+
+                    <button
+                        class="relative p-1.5 lg:p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl shrink-0">
+                        <svg class="svg-icon svg-icon-lg">
+                            <use href="#icon-bell" />
+                        </svg>
+                        <span
+                            class="absolute top-1.5 right-1.5 lg:top-2 lg:right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-gray-800"></span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mobile Search Bar -->
+            <div x-show="mobileSearchOpen" @click.outside="mobileSearchOpen = false"
+                class="md:hidden bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-3 py-2 animate-slide-in">
+                <div class="relative">
+                    <svg class="svg-icon svg-icon-sm absolute right-3 top-3 text-gray-400">
+                        <use href="#icon-search" />
+                    </svg>
+                    <input type="text" x-model="searchQuery" @input="searchTasks()" placeholder="جستجو در وظایف..."
+                        class="w-full pr-10 pl-4 py-2.5 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-700 dark:text-gray-200 placeholder-gray-400 focus:outline-none text-sm">
+                </div>
+            </div>
+
+            <!-- Task Input -->
+            <div
+                class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-3 sm:px-4 lg:px-6 py-2.5 lg:py-4">
+                <div class="flex items-center gap-2 lg:gap-3">
+                    <button @click="quickAdd = !quickAdd"
+                        class="text-blue-500 hover:text-blue-600 transition-all p-1 shrink-0 active:scale-90">
+                        <svg class="svg-icon svg-icon-xl">
+                            <use href="#icon-plus-circle" />
+                        </svg>
+                    </button>
+
+                    <input type="text" x-model="newTaskTitle" @keyup.enter="addTask()" placeholder="وظیفه جدید..."
+                        class="flex-1 bg-transparent text-gray-800 dark:text-gray-200 placeholder-gray-400 focus:outline-none text-sm lg:text-lg min-w-0"
+                        x-ref="taskInput">
+
+                    <div x-show="quickAdd" class="hidden sm:flex items-center gap-2 animate-fade-in">
+                        <select x-model="newTaskPriority"
+                            class="px-2 lg:px-3 py-1.5 lg:py-2 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs lg:text-sm text-gray-700 dark:text-gray-200 border-0 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="low">کم</option>
+                            <option value="medium">متوسط</option>
+                            <option value="high">زیاد</option>
+                        </select>
+
+                        <select x-model="newTaskProject"
+                            class="px-2 lg:px-3 py-1.5 lg:py-2 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs lg:text-sm text-gray-700 dark:text-gray-200 border-0 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">بدون پروژه</option>
+                            <template x-for="project in projects" :key="project.id">
+                                <option :value="project.id" x-text="project.name"></option>
+                            </template>
+                        </select>
+
+                        <input type="date" x-model="newTaskDate"
+                            class="px-2 lg:px-3 py-1.5 lg:py-2 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs lg:text-sm text-gray-700 dark:text-gray-200 border-0 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Mobile Quick Add Options -->
+                <div x-show="quickAdd" class="sm:hidden mt-2 flex flex-wrap gap-2 animate-fade-in">
+                    <select x-model="newTaskPriority"
+                        class="flex-1 px-2 py-2 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs text-gray-700 dark:text-gray-200 border-0 focus:outline-none">
+                        <option value="low">کم</option>
+                        <option value="medium">متوسط</option>
+                        <option value="high">زیاد</option>
+                    </select>
+
+                    <input type="date" x-model="newTaskDate"
+                        class="flex-1 px-2 py-2 bg-gray-100 dark:bg-gray-700 rounded-xl text-xs text-gray-700 dark:text-gray-200 border-0 focus:outline-none">
+                </div>
+            </div>
+
+            <!-- Tasks List -->
+            <div class="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6 pb-20 lg:pb-6">
+                <div class="max-w-4xl mx-auto space-y-1.5 lg:space-y-2">
+
+                    <template x-for="(task, index) in filteredTasks" :key="task.id">
+                        <div class="task-item bg-white dark:bg-gray-800 rounded-xl p-3 lg:p-4 flex items-center gap-2 lg:gap-4 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all animate-slide-in group"
+                            :class="{ 'opacity-60': task.completed }">
+
+                            <input type="checkbox" :checked="task.completed" @change="toggleTask(task.id)"
+                                class="custom-checkbox shrink-0">
+
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-1.5 lg:gap-2">
+                                    <p class="text-gray-800 dark:text-gray-200 font-medium text-sm lg:text-base truncate"
+                                        :class="{ 'line-through': task.completed }" x-text="task.title"></p>
+
+                                    <span x-show="task.priority !== 'low'" class="shrink-0 hidden xs:block">
+                                        <svg class="svg-icon svg-icon-sm" :class="{
+                                                 'text-red-500': task.priority === 'high',
+                                                 'text-yellow-500': task.priority === 'medium'
+                                             }">
+                                            <use href="#icon-priority-high" />
+                                        </svg>
+                                    </span>
+
+                                    <button @click="toggleImportant(task.id)"
+                                        class="shrink-0 transition-all active:scale-75 p-0.5"
+                                        :class="task.important ? 'text-yellow-500' : 'text-gray-300 dark:text-gray-600'">
+                                        <svg class="svg-icon svg-icon-sm" x-show="!task.important">
+                                            <use href="#icon-star" />
+                                        </svg>
+                                        <svg class="svg-icon svg-icon-sm" x-show="task.important">
+                                            <use href="#icon-star-filled" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <div
+                                    class="flex items-center gap-2 lg:gap-3 mt-1 text-xs text-gray-500 dark:text-gray-400 flex-wrap">
+                                    <span x-show="task.dueDate" class="flex items-center gap-1"
+                                        :class="{ 'text-red-500 font-semibold': isOverdue(task) }">
+                                        <svg class="svg-icon svg-icon-sm">
+                                            <use href="#icon-calendar" />
+                                        </svg>
+                                        <span x-text="formatDate(task.dueDate)"></span>
+                                    </span>
+
+                                    <span x-show="task.projectId" class="flex items-center gap-1">
+                                        <span class="w-2 h-2 rounded-full shrink-0"
+                                            :style="'background-color: ' + getProjectColor(task.projectId)"></span>
+                                        <span class="hidden xs:inline" x-text="getProjectName(task.projectId)"></span>
+                                    </span>
+
+                                    <template x-for="tag in task.tags" :key="tag">
+                                        <span
+                                            class="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 rounded-full text-xs cursor-pointer active:bg-blue-100 dark:active:bg-blue-900 transition-colors flex items-center gap-1"
+                                            @click="filterByTag(tag)">
+                                            <svg class="svg-icon" style="width: 10px; height: 10px;">
+                                                <use href="#icon-tag" />
+                                            </svg>
+                                            <span class="hidden xs:inline" x-text="tag"></span>
+                                        </span>
+                                    </template>
+
+                                    <span x-show="task.subtasks && task.subtasks.length > 0"
+                                        class="flex items-center gap-1">
+                                        <svg class="svg-icon svg-icon-sm">
+                                            <use href="#icon-list-check" />
+                                        </svg>
+                                        <span x-text="getSubtaskProgress(task)"></span>
+                                    </span>
+                                </div>
+
+                                <div x-show="task.showSubtasks && task.subtasks && task.subtasks.length > 0"
+                                    class="mt-2 mr-4 lg:mr-8 space-y-1.5">
+                                    <template x-for="subtask in task.subtasks" :key="subtask.id">
+                                        <div class="flex items-center gap-2 text-sm">
+                                            <input type="checkbox" :checked="subtask.completed"
+                                                @change="toggleSubtask(task.id, subtask.id)"
+                                                class="custom-checkbox w-4 h-4">
+                                            <span class="text-gray-600 dark:text-gray-400 text-xs lg:text-sm"
+                                                :class="{ 'line-through': subtask.completed }"
+                                                x-text="subtask.title"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <!--Actions-->
+                            <div
+                                class="flex items-center gap-0.5 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-200">
+                                <button @click="task.showSubtasks = !task.showSubtasks"
+                                    class="p-1.5 lg:p-2 text-gray-400 hover:text-blue-500 active:bg-blue-50 dark:active:bg-blue-900/50 rounded-lg transition-all"
+                                    x-show="task.subtasks && task.subtasks.length > 0">
+                                    <svg class="svg-icon svg-icon-sm">
+                                        <use href="#icon-list-check" />
+                                    </svg>
+                                </button>
+
+                                <button @click="editTask(task)"
+                                    class="p-1.5 lg:p-2 text-gray-400 hover:text-blue-500 active:bg-blue-50 dark:active:bg-blue-900/50 rounded-lg transition-all">
+                                    <svg class="svg-icon svg-icon-sm">
+                                        <use href="#icon-edit" />
+                                    </svg>
+                                </button>
+
+                                <button @click="deleteTask(task.id)"
+                                    class="p-1.5 lg:p-2 text-gray-400 hover:text-red-500 active:bg-red-50 dark:active:bg-red-900/50 rounded-lg transition-all">
+                                    <svg class="svg-icon svg-icon-sm">
+                                        <use href="#icon-trash" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- Empty State -->
+                    <div x-show="filteredTasks.length === 0" class="text-center py-12 lg:py-20">
+                        <svg class="mx-auto mb-4 lg:mb-6 text-gray-300 dark:text-gray-600 w-16 h-16 lg:w-24 lg:h-24">
+                            <use href="#icon-empty" />
+                        </svg>
+                        <h3 class="text-base lg:text-xl font-bold text-gray-500 dark:text-gray-400 mb-2">همه کارها انجام
+                            شده!</h3>
+                        <p class="text-sm lg:text-base text-gray-400 dark:text-gray-500">یک وظیفه جدید اضافه کنید</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav
+        class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-2xl z-40 mobile-nav-safe">
+        <div class="flex items-center justify-around px-2 py-1.5">
+            <button @click="setView('all')"
+                class="bottom-nav-item flex flex-col items-center gap-0.5 p-2 rounded-lg transition-colors"
+                :class="{ 'active text-blue-600 dark:text-blue-400': currentView === 'all', 'text-gray-500 dark:text-gray-400': currentView !== 'all' }">
+                <svg class="svg-icon svg-icon-lg">
+                    <use href="#icon-list-check" />
+                </svg>
+                <span class="text-xs">همه</span>
+            </button>
+
+            <button @click="setView('today')"
+                class="bottom-nav-item flex flex-col items-center gap-0.5 p-2 rounded-lg transition-colors"
+                :class="{ 'active text-blue-600 dark:text-blue-400': currentView === 'today', 'text-gray-500 dark:text-gray-400': currentView !== 'today' }">
+                <svg class="svg-icon svg-icon-lg">
+                    <use href="#icon-today" />
+                </svg>
+                <span class="text-xs">امروز</span>
+            </button>
+
+            <button @click="$refs.taskInput.focus(); quickAdd = true"
+                class="flex flex-col items-center justify-center -mt-5 bg-blue-500 text-white rounded-full w-14 h-14 shadow-lg active:scale-90 transition-transform">
+                <svg class="svg-icon svg-icon-xl">
+                    <use href="#icon-plus" />
+                </svg>
+            </button>
+
+            <button @click="setView('important')"
+                class="bottom-nav-item flex flex-col items-center gap-0.5 p-2 rounded-lg transition-colors"
+                :class="{ 'active text-blue-600 dark:text-blue-400': currentView === 'important', 'text-gray-500 dark:text-gray-400': currentView !== 'important' }">
+                <svg class="svg-icon svg-icon-lg">
+                    <use href="#icon-star" />
+                </svg>
+                <span class="text-xs">مهم</span>
+            </button>
+
+            <button @click="darkMode = !darkMode; saveSettings()"
+                class="flex flex-col items-center gap-0.5 p-2 rounded-lg text-gray-500 dark:text-gray-400">
+                <svg class="svg-icon svg-icon-lg" x-show="!darkMode">
+                    <use href="#icon-moon" />
+                </svg>
+                <svg class="svg-icon svg-icon-lg" x-show="darkMode">
+                    <use href="#icon-sun" />
+                </svg>
+                <span class="text-xs" x-text="darkMode ? 'روشن' : 'تاریک'"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Add Project Modal -->
+    <div x-show="showAddProject"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm p-4"
+        @click.self="showAddProject = false">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 lg:p-6 w-full max-w-md animate-scale-in">
+            <div class="flex items-center justify-between mb-4 lg:mb-6">
+                <h3 class="text-lg lg:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                    <svg class="svg-icon text-blue-500">
+                        <use href="#icon-folder" />
+                    </svg>
+                    پروژه جدید
+                </h3>
+                <button @click="showAddProject = false"
+                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1 rounded-lg">
+                    <svg class="svg-icon">
+                        <use href="#icon-x" />
+                    </svg>
+                </button>
+            </div>
+
+            <form @submit.prevent="addProject()" class="space-y-4 lg:space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">نام
+                        پروژه</label>
+                    <input type="text" x-model="newProject.name"
+                        class="w-full px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="مثال: پروژه طراحی وب" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 lg:mb-3">رنگ
+                        پروژه</label>
+                    <div class="flex gap-2 lg:gap-3 flex-wrap">
+                        <template x-for="color in projectColors" :key="color">
+                            <button type="button" @click="newProject.color = color"
+                                class="w-8 h-8 lg:w-10 lg:h-10 rounded-full transition-all active:scale-90 shadow-md flex items-center justify-center"
+                                :class="{ 'ring-2 ring-offset-2 ring-blue-500 dark:ring-offset-gray-800': newProject.color === color }"
+                                :style="'background-color: ' + color">
+                                <svg x-show="newProject.color === color" class="text-white w-4 h-4 lg:w-5 lg:h-5"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="submit"
+                        class="flex-1 bg-blue-500 text-white py-2.5 lg:py-3 rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-colors font-medium text-sm lg:text-base">
+                        ایجاد پروژه
+                    </button>
+                    <button type="button" @click="showAddProject = false"
+                        class="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 lg:py-3 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 active:bg-gray-400 transition-colors font-medium text-sm lg:text-base">
+                        لغو
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div x-show="showEditModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fade-in backdrop-blur-sm p-4"
+        @click.self="showEditModal = false">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 lg:p-6 w-full max-w-2xl animate-scale-in max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 lg:mb-6">
+                <h3 class="text-lg lg:text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                    <svg class="svg-icon text-blue-500">
+                        <use href="#icon-edit" />
+                    </svg>
+                    ویرایش وظیفه
+                </h3>
+                <button @click="showEditModal = false"
+                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 p-1 rounded-lg">
+                    <svg class="svg-icon">
+                        <use href="#icon-x" />
+                    </svg>
+                </button>
+            </div>
+
+            <form @submit.prevent="updateTask()" class="space-y-4 lg:space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">عنوان
+                        وظیفه</label>
+                    <input type="text" x-model="editingTask.title"
+                        class="w-full px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">اولویت</label>
+                        <select x-model="editingTask.priority"
+                            class="w-full px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="low">کم</option>
+                            <option value="medium">متوسط</option>
+                            <option value="high">زیاد</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">تاریخ
+                            سررسید</label>
+                        <input type="datetime-local" x-model="editingTask.dueDate"
+                            class="w-full px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">پروژه</label>
+                        <select x-model="editingTask.projectId"
+                            class="w-full px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">بدون پروژه</option>
+                            <template x-for="project in projects" :key="project.id">
+                                <option :value="project.id" x-text="project.name"></option>
+                            </template>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 lg:mb-2">برچسب‌ها</label>
+                        <div class="flex gap-2">
+                            <input type="text" x-model="newTag" @keyup.enter="addTag()" placeholder="اینتر برای افزودن"
+                                class="flex-1 px-4 py-2.5 lg:py-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <template x-for="tag in editingTask.tags" :key="tag">
+                                <span
+                                    class="px-2.5 py-1 lg:px-3 lg:py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full text-xs flex items-center gap-1.5">
+                                    <span x-text="tag"></span>
+                                    <button @click="removeTag(tag)" class="hover:text-red-500 transition-colors p-0.5">
+                                        <svg class="svg-icon" style="width: 12px; height: 12px;">
+                                            <use href="#icon-x" />
+                                        </svg>
+                                    </button>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 lg:mb-3">
+                        زیروظیفه‌ها
+                        <button type="button" @click="addSubtask()"
+                            class="text-blue-500 hover:text-blue-600 mr-2 transition-colors p-1 inline-flex">
+                            <svg class="svg-icon svg-icon-sm">
+                                <use href="#icon-plus" />
+                            </svg>
+                        </button>
+                    </label>
+                    <div class="space-y-2">
+                        <template x-for="(subtask, index) in editingTask.subtasks" :key="index">
+                            <div class="flex items-center gap-2 animate-slide-in">
+                                <input type="text" x-model="subtask.title"
+                                    class="flex-1 px-4 py-2 lg:py-2.5 bg-gray-100 dark:bg-gray-700 rounded-xl text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="عنوان زیروظیفه">
+                                <button type="button" @click="removeSubtask(index)"
+                                    class="text-red-500 hover:text-red-600 p-1.5 lg:p-2 rounded-lg active:bg-red-50 dark:active:bg-red-900/50">
+                                    <svg class="svg-icon svg-icon-sm">
+                                        <use href="#icon-trash" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="submit"
+                        class="flex-1 bg-blue-500 text-white py-2.5 lg:py-3 rounded-xl hover:bg-blue-600 active:bg-blue-700 transition-colors font-medium text-sm lg:text-base">
+                        ذخیره تغییرات
+                    </button>
+                    <button type="button" @click="showEditModal = false"
+                        class="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2.5 lg:py-3 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-600 active:bg-gray-400 transition-colors font-medium text-sm lg:text-base">
+                        لغو
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div x-show="toast.show" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-4"
+        class="fixed bottom-20 lg:bottom-6 left-4 lg:left-6 bg-white dark:bg-gray-800 shadow-2xl rounded-2xl px-4 lg:px-5 py-2.5 lg:py-3 z-50 flex items-center gap-2 lg:gap-3 border border-gray-100 dark:border-gray-700 text-sm lg:text-base"
+        style="display: none;">
+        <svg class="svg-icon text-green-500 shrink-0">
+            <use href="#icon-success" />
+        </svg>
+        <span class="text-gray-800 dark:text-gray-200 font-medium" x-text="toast.message"></span>
+    </div>
+
+    <script>
+        function tickTickApp() {
+            return {
+                // State
+                darkMode: false,
+                sidebarOpen: false,
+                isMobile: false,
+                mobileSearchOpen: false,
+                currentView: 'all',
+                selectedProjectId: null,
+                selectedTag: null,
+                searchQuery: '',
+                quickAdd: false,
+                showAddProject: false,
+                showEditModal: false,
+                newTaskTitle: '',
+                newTaskPriority: 'medium',
+                newTaskProject: '',
+                newTaskDate: '',
+                newTag: '',
+                persianDate: '',
+
+                toast: {
+                    show: false,
+                    message: '',
+                    timeout: null
+                },
+
+                tasks: [],
+                projects: [
+                    { id: 1, name: 'کار', color: '#3b82f6' },
+                    { id: 2, name: 'شخصی', color: '#10b981' },
+                    { id: 3, name: 'یادگیری', color: '#8b5cf6' }
+                ],
+                tags: ['مهم', 'فوری', 'در حال انجام', 'منتظر'],
+                projectColors: ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'],
+
+                newProject: { name: '', color: '#3b82f6' },
+
+                editingTask: {
+                    id: null,
+                    title: '',
+                    priority: 'medium',
+                    dueDate: '',
+                    projectId: '',
+                    tags: [],
+                    subtasks: [],
+                    important: false,
+                    completed: false
+                },
+
+                get viewTitle() {
+                    const titles = {
+                        'all': 'همه وظایف',
+                        'today': 'امروز',
+                        'week': 'این هفته',
+                        'important': 'مهم',
+                        'completed': 'انجام شده',
+                        'project': this.selectedProjectId ? this.getProjectName(this.selectedProjectId) : 'پروژه'
+                    };
+                    return titles[this.currentView] || 'همه وظایف';
+                },
+
+                get todayProgress() {
+                    const todayTasks = this.getTodayTasks();
+                    if (todayTasks.length === 0) return 0;
+                    const completed = todayTasks.filter(t => t.completed).length;
+                    return Math.round((completed / todayTasks.length) * 100);
+                },
+
+                get filteredTasks() {
+                    let filtered = [...this.tasks];
+
+                    switch (this.currentView) {
+                        case 'today': filtered = this.getTodayTasks(); break;
+                        case 'week': filtered = this.getWeekTasks(); break;
+                        case 'important': filtered = this.getImportantTasks(); break;
+                        case 'completed': filtered = this.getCompletedTasks(); break;
+                        case 'project': filtered = filtered.filter(t => t.projectId === this.selectedProjectId); break;
+                    }
+
+                    if (this.selectedTag) {
+                        filtered = filtered.filter(t => t.tags && t.tags.includes(this.selectedTag));
+                    }
+
+                    if (this.searchQuery) {
+                        const query = this.searchQuery.toLowerCase();
+                        filtered = filtered.filter(t =>
+                            t.title.toLowerCase().includes(query) ||
+                            (t.tags && t.tags.some(tag => tag.includes(query)))
+                        );
+                    }
+
+                    filtered.sort((a, b) => {
+                        if (a.completed !== b.completed) return a.completed ? 1 : -1;
+                        const priorityOrder = { high: 0, medium: 1, low: 2 };
+                        return priorityOrder[a.priority] - priorityOrder[b.priority];
+                    });
+
+                    return filtered;
+                },
+
+                init() {
+                    this.checkMobile();
+                    window.addEventListener('resize', () => this.checkMobile());
+
+                    this.loadSettings();
+                    this.loadData();
+                    this.updateDateTime();
+                    setInterval(() => this.updateDateTime(), 60000);
+
+                    document.addEventListener('keydown', (e) => {
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                            e.preventDefault();
+                            if (this.isMobile) {
+                                this.mobileSearchOpen = true;
+                            } else {
+                                document.querySelector('input[placeholder="جستجو..."]')?.focus();
+                            }
+                        }
+                    });
+                },
+
+                checkMobile() {
+                    this.isMobile = window.innerWidth < 1024;
+                    if (!this.isMobile) {
+                        this.sidebarOpen = true;
+                    } else {
+                        this.sidebarOpen = false;
+                    }
+                },
+
+                loadSettings() {
+                    const settings = localStorage.getItem('ticktick-settings');
+                    if (settings) {
+                        const parsed = JSON.parse(settings);
+                        this.darkMode = parsed.darkMode || false;
+                    }
+                },
+
+                saveSettings() {
+                    localStorage.setItem('ticktick-settings', JSON.stringify({
+                        darkMode: this.darkMode
+                    }));
+                },
+
+                loadData() {
+                    const saved = localStorage.getItem('ticktick-tasks');
+                    if (saved) {
+                        this.tasks = JSON.parse(saved);
+                    } else {
+                        this.tasks = [
+                            {
+                                id: 1,
+                                title: 'تکمیل گزارش پروژه',
+                                priority: 'high',
+                                dueDate: new Date(Date.now() + 86400000).toISOString().slice(0, 16),
+                                projectId: 1,
+                                tags: ['فوری'],
+                                subtasks: [
+                                    { id: 101, title: 'جمع‌آوری داده‌ها', completed: true },
+                                    { id: 102, title: 'نوشتن گزارش', completed: false }
+                                ],
+                                important: true,
+                                completed: false,
+                                showSubtasks: false
+                            },
+                            {
+                                id: 2,
+                                title: 'ورزش صبحگاهی',
+                                priority: 'medium',
+                                dueDate: '',
+                                projectId: 2,
+                                tags: [],
+                                subtasks: [],
+                                important: false,
+                                completed: false,
+                                showSubtasks: false
+                            }
+                        ];
+                    }
+
+                    const savedProjects = localStorage.getItem('ticktick-projects');
+                    if (savedProjects) this.projects = JSON.parse(savedProjects);
+
+                    const savedTags = localStorage.getItem('ticktick-tags');
+                    if (savedTags) this.tags = JSON.parse(savedTags);
+                },
+
+                saveData() {
+                    localStorage.setItem('ticktick-tasks', JSON.stringify(this.tasks));
+                    localStorage.setItem('ticktick-projects', JSON.stringify(this.projects));
+                    localStorage.setItem('ticktick-tags', JSON.stringify(this.tags));
+                },
+
+                updateDateTime() {
+                    this.persianDate = new Date().toLocaleDateString('fa-IR', {
+                        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                    });
+                },
+
+                setView(view, projectId = null) {
+                    this.currentView = view;
+                    this.selectedProjectId = projectId;
+                    this.selectedTag = null;
+                },
+
+                filterByTag(tag) {
+                    this.selectedTag = this.selectedTag === tag ? null : tag;
+                    this.currentView = 'all';
+                },
+
+                addTask() {
+                    if (!this.newTaskTitle.trim()) return;
+
+                    const task = {
+                        id: Date.now(),
+                        title: this.newTaskTitle.trim(),
+                        priority: this.newTaskPriority,
+                        dueDate: this.newTaskDate,
+                        projectId: this.newTaskProject || null,
+                        tags: [],
+                        subtasks: [],
+                        important: false,
+                        completed: false,
+                        createdAt: new Date().toISOString(),
+                        showSubtasks: false
+                    };
+
+                    this.tasks.unshift(task);
+                    this.saveData();
+
+                    this.newTaskTitle = '';
+                    this.newTaskPriority = 'medium';
+                    this.newTaskProject = '';
+                    this.newTaskDate = '';
+                    this.quickAdd = false;
+
+                    this.showToast('وظیفه با موفقیت اضافه شد');
+                },
+
+                toggleTask(id) {
+                    const task = this.tasks.find(t => t.id === id);
+                    if (task) {
+                        task.completed = !task.completed;
+                        this.saveData();
+                        if (task.completed) this.showToast('آفرین! یک وظیفه تکمیل شد');
+                    }
+                },
+
+                toggleImportant(id) {
+                    const task = this.tasks.find(t => t.id === id);
+                    if (task) { task.important = !task.important; this.saveData(); }
+                },
+
+                editTask(task) {
+                    this.editingTask = JSON.parse(JSON.stringify(task));
+                    this.showEditModal = true;
+                },
+
+                updateTask() {
+                    const index = this.tasks.findIndex(t => t.id === this.editingTask.id);
+                    if (index !== -1) {
+                        this.tasks[index] = JSON.parse(JSON.stringify(this.editingTask));
+                        this.saveData();
+                        this.showEditModal = false;
+                        this.showToast('وظیفه با موفقیت به‌روزرسانی شد');
+                    }
+                },
+
+                deleteTask(id) {
+                    if (confirm('آیا از حذف این وظیفه اطمینان دارید؟')) {
+                        this.tasks = this.tasks.filter(t => t.id !== id);
+                        this.saveData();
+                        this.showToast('وظیفه حذف شد');
+                    }
+                },
+
+                addProject() {
+                    if (!this.newProject.name.trim()) return;
+                    this.projects.push({ id: Date.now(), name: this.newProject.name.trim(), color: this.newProject.color });
+                    this.saveData();
+                    this.newProject = { name: '', color: '#3b82f6' };
+                    this.showAddProject = false;
+                    this.showToast('پروژه جدید ایجاد شد');
+                },
+
+                addTag() {
+                    if (!this.newTag.trim()) return;
+                    if (!this.editingTask.tags) this.editingTask.tags = [];
+                    const tagName = this.newTag.trim();
+                    if (!this.editingTask.tags.includes(tagName)) {
+                        this.editingTask.tags.push(tagName);
+                        if (!this.tags.includes(tagName)) { this.tags.push(tagName); this.saveData(); }
+                    }
+                    this.newTag = '';
+                },
+
+                removeTag(tag) { this.editingTask.tags = this.editingTask.tags.filter(t => t !== tag); },
+
+                addSubtask() {
+                    if (!this.editingTask.subtasks) this.editingTask.subtasks = [];
+                    this.editingTask.subtasks.push({ id: Date.now(), title: '', completed: false });
+                },
+
+                removeSubtask(index) { this.editingTask.subtasks.splice(index, 1); },
+
+                toggleSubtask(taskId, subtaskId) {
+                    const task = this.tasks.find(t => t.id === taskId);
+                    if (task?.subtasks) {
+                        const subtask = task.subtasks.find(s => s.id === subtaskId);
+                        if (subtask) { subtask.completed = !subtask.completed; this.saveData(); }
+                    }
+                },
+
+                searchTasks() { },
+
+                getTodayTasks() {
+                    const today = new Date().toDateString();
+                    return this.tasks.filter(t => t.dueDate && new Date(t.dueDate).toDateString() === today);
+                },
+
+                getWeekTasks() {
+                    const now = new Date();
+                    const weekEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7);
+                    return this.tasks.filter(t => {
+                        if (!t.dueDate) return false;
+                        const d = new Date(t.dueDate);
+                        return d >= now && d <= weekEnd;
+                    });
+                },
+
+                getImportantTasks() { return this.tasks.filter(t => t.important && !t.completed); },
+                getCompletedTasks() { return this.tasks.filter(t => t.completed); },
+                getProjectTaskCount(pid) { return this.tasks.filter(t => t.projectId === pid && !t.completed).length; },
+                getProjectName(pid) { const p = this.projects.find(p => p.id == pid); return p ? p.name : ''; },
+                getProjectColor(pid) { const p = this.projects.find(p => p.id == pid); return p ? p.color : '#gray'; },
+
+                getSubtaskProgress(task) {
+                    if (!task.subtasks?.length) return '';
+                    return `${task.subtasks.filter(s => s.completed).length}/${task.subtasks.length}`;
+                },
+
+                isOverdue(task) {
+                    if (!task.dueDate || task.completed) return false;
+                    return new Date(task.dueDate) < new Date();
+                },
+
+                formatDate(dateString) {
+                    if (!dateString) return '';
+                    const date = new Date(dateString);
+                    const diffDays = Math.ceil((date - new Date()) / (1000 * 60 * 60 * 24));
+                    if (diffDays === 0) return 'امروز';
+                    if (diffDays === 1) return 'فردا';
+                    if (diffDays === -1) return 'دیروز';
+                    if (diffDays < -1) return `${Math.abs(diffDays)} روز پیش`;
+                    if (diffDays <= 7) return `${diffDays} روز دیگر`;
+                    return date.toLocaleDateString('fa-IR', { month: 'long', day: 'numeric' });
+                },
+
+                showToast(message) {
+                    if (this.toast.timeout) clearTimeout(this.toast.timeout);
+                    this.toast.message = message;
+                    this.toast.show = true;
+                    this.toast.timeout = setTimeout(() => { this.toast.show = false; }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

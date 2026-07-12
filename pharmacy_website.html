@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💊 داروخانه آنلاین پلاس | خرید دارو با تجویز پزشک</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazir:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      font-family: "Vazir", sans-serif;
+      background: linear-gradient(
+        135deg,
+        #f0f9ff 0%,
+        #e0f2fe 50%,
+        #f0fdf4 100%
+      );
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .medical-gradient {
+      background: linear-gradient(
+        135deg,
+        #06b6d4 0%,
+        #0891b2 50%,
+        #0e7490 100%
+      );
+    }
+
+    .health-gradient {
+      background: linear-gradient(
+        135deg,
+        #10b981 0%,
+        #059669 50%,
+        #047857 100%
+      );
+    }
+
+    .pharmacy-gradient {
+      background: linear-gradient(
+        135deg,
+        #3b82f6 0%,
+        #2563eb 50%,
+        #1d4ed8 100%
+      );
+    }
+
+    .emergency-gradient {
+      background: linear-gradient(
+        135deg,
+        #ef4444 0%,
+        #dc2626 50%,
+        #b91c1c 100%
+      );
+    }
+
+    .hover-scale {
+      transition: all 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+      }
+    }
+
+    .medicine-icon {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      border-radius: 50%;
+      padding: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+    }
+
+    .category-card {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.7)
+      );
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    .category-card:hover::before {
+      left: 100%;
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .prescription-upload {
+      border: 3px dashed #06b6d4;
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .prescription-upload:hover {
+      border-color: #0891b2;
+      background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    }
+
+    .prescription-upload.dragover {
+      border-color: #10b981;
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      transform: scale(1.02);
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .product-card:hover {
+      border-color: #06b6d4;
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .discount-badge {
+      background: linear-gradient(135deg, #10b981, #059669) !important;
+    }
+
+    .stock-indicator {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    /* Ensure cart buttons stay above floating badges */
+    .add-to-cart {
+      position: relative;
+      z-index: 20;
+    }
+
+    /* Search Enhancement */
+    .search-container {
+      position: relative;
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      z-index: 50;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .search-results.show {
+      display: block;
+      animation: fadeInDown 0.3s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 60px 0;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .category-grid,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading Animation */
+    .loading-spinner {
+      border: 4px solid #f3f4f6;
+      border-top: 4px solid #06b6d4;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+    }
+
+    /* Custom responsive rules for 1020px breakpoint */
+    @media (max-width: 1020px) {
+      #mainNav {
+        display: none !important;
+      }
+      #mobileMenuBtn {
+        display: inline-flex !important;
+      }
+      #mobileMenu {
+        border-top-width: 1px;
+      }
+      #emergencyBtn {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 1021px) {
+      #mobileMenuBtn {
+        display: none !important;
+      }
+      #mobileMenu {
+        display: none !important;
+      }
+    }
+  </style>
+  <body class="min-h-screen">
+    <!-- Header -->
+    <header class="glass-card sticky top-0 z-40 border-b">
+      <div class="container mx-auto px-4 py-3 md:py-4">
+        <div class="flex items-center justify-between flex-wrap gap-2 md:gap-4">
+          <!-- Logo -->
+          <div class="flex items-center space-x-3 space-x-reverse">
+            <div class="medical-gradient text-white p-3 rounded-full">
+              <i class="fas fa-pills text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-xl md:text-2xl font-bold text-gray-800">
+                داروخانه آنلاین پلاس
+              </h1>
+              <p class="text-xs md:text-sm text-gray-500">
+                خدمات دارویی 24 ساعته
+              </p>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <nav
+            id="mainNav"
+            class="hidden md:flex items-center space-x-8 space-x-reverse"
+          >
+            <a
+              href="#"
+              class="text-gray-700 hover:text-cyan-600 font-medium transition-colors"
+            >
+              <i class="fas fa-home ml-2"></i>خانه
+            </a>
+            <a
+              href="#products"
+              class="text-gray-700 hover:text-cyan-600 font-medium transition-colors"
+            >
+              <i class="fas fa-capsules ml-2"></i>محصولات
+            </a>
+            <a
+              href="#prescription"
+              class="text-gray-700 hover:text-cyan-600 font-medium transition-colors"
+            >
+              <i class="fas fa-prescription ml-2"></i>تجویز آنلاین
+            </a>
+            <a
+              href="#consultation"
+              class="text-gray-700 hover:text-cyan-600 font-medium transition-colors"
+            >
+              <i class="fas fa-user-md ml-2"></i>مشاوره
+            </a>
+          </nav>
+
+          <!-- Header Actions -->
+          <div
+            class="flex items-center space-x-2 sm:space-x-3 md:space-x-4 space-x-reverse"
+          >
+            <!-- Emergency Button -->
+            <button
+              id="emergencyBtn"
+              class="emergency-gradient hidden sm:inline-flex text-white px-3 md:px-4 py-2 rounded-full hover:shadow-lg transition-all pulse-glow text-sm md:text-base mx-2"
+            >
+              <i class="fas fa-phone-alt ml-2"></i>اورژانس
+            </button>
+
+            <!-- Cart -->
+            <div class="relative ml-3 sm:ml-4 md:ml-6 lg:ml-4">
+              <button
+                id="cartBtn"
+                class="medical-gradient text-white p-3 rounded-full hover:shadow-lg transition-all"
+              >
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+              <span
+                id="cartCount"
+                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold"
+                >0</span
+              >
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-700 p-2">
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div
+          id="mobileMenu"
+          class="md:hidden mt-3 hidden border-t border-gray-100 pt-3"
+        >
+          <div class="space-y-2">
+            <a
+              href="#"
+              class="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-lg"
+            >
+              <i class="fas fa-home ml-2"></i>خانه
+            </a>
+            <a
+              href="#products"
+              class="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-lg"
+            >
+              <i class="fas fa-capsules ml-2"></i>محصولات
+            </a>
+            <a
+              href="#prescription"
+              class="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-lg"
+            >
+              <i class="fas fa-prescription ml-2"></i>تجویز آنلاین
+            </a>
+            <a
+              href="#consultation"
+              class="block py-2 px-4 text-gray-700 hover:bg-gray-50 rounded-lg"
+            >
+              <i class="fas fa-user-md ml-2"></i>مشاوره
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section py-20 relative overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-cyan-50 to-green-50 opacity-50"
+      ></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
+        >
+          <div>
+            <div
+              class="search-container max-w-2xl mx-auto md:mx-0 mb-6 order-2 md:order-none"
+            >
+              <div class="relative">
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="جستجوی دارو..."
+                  class="w-full px-4 py-3 pl-10 pr-4 bg-white/80 backdrop-blur border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"
+                />
+                <i
+                  class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+              </div>
+              <div id="searchResults" class="search-results"></div>
+            </div>
+            <h2
+              class="hero-title text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight text-center md:text-right"
+            >
+              💊 سلامتی شما،
+              <span class="text-transparent bg-clip-text medical-gradient"
+                >اولویت ماست</span
+              >
+            </h2>
+            <p
+              class="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed text-center md:text-right"
+            >
+              دسترسی آسان به هزاران نوع دارو با تایید داروساز متخصص
+              <br />
+              ✅ تحویل سریع در کمتر از 30 دقیقه
+            </p>
+
+            <div
+              class="flex flex-wrap gap-4 mb-8 justify-center md:justify-start"
+            >
+              <button
+                class="medical-gradient text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover-scale"
+              >
+                <i class="fas fa-pills ml-2"></i>خرید فوری دارو
+              </button>
+              <button
+                class="border-2 border-cyan-500 text-cyan-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-cyan-50 transition-all hover-scale"
+              >
+                <i class="fas fa-upload ml-2"></i>آپلود نسخه
+              </button>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div
+              class="flex flex-wrap items-center gap-6 text-sm text-gray-600"
+            >
+              <div class="flex items-center">
+                <i class="fas fa-shield-alt text-green-500 ml-2"></i>
+                <span>تضمین اصالت کالا</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-shipping-fast text-blue-500 ml-2"></i>
+                <span>ارسال رایگان</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-user-md text-purple-500 ml-2"></i>
+                <span>مشاوره پزشکی</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Image/Illustration -->
+          <div class="relative">
+            <div class="floating glass-card rounded-3xl p-8 text-center">
+              <div class="text-8xl mb-6">🏥</div>
+              <h3 class="text-2xl font-bold text-gray-800 mb-4">
+                خدمات 24 ساعته
+              </h3>
+              <div class="grid grid-cols-2 gap-4 text-center">
+                <div class="bg-green-50 p-4 rounded-xl">
+                  <div class="text-2xl mb-2">⏰</div>
+                  <div class="text-sm font-semibold text-green-700">
+                    تحویل سریع
+                  </div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-xl">
+                  <div class="text-2xl mb-2">💊</div>
+                  <div class="text-sm font-semibold text-blue-700">
+                    دارو اصل
+                  </div>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-xl">
+                  <div class="text-2xl mb-2">👨‍⚕️</div>
+                  <div class="text-sm font-semibold text-purple-700">
+                    مشاوره آنلاین
+                  </div>
+                </div>
+                <div class="bg-red-50 p-4 rounded-xl">
+                  <div class="text-2xl mb-2">🚨</div>
+                  <div class="text-sm font-semibold text-red-700">اورژانس</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-th-large ml-3 text-cyan-500"></i>
+            دسته‌بندی محصولات
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            انواع داروها و تجهیزات پزشکی را از دسته‌بندی‌های مختلف انتخاب کنید
+          </p>
+        </div>
+
+        <div
+          class="category-grid grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+        >
+          <!-- Prescription Medicines -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-prescription text-2xl text-amber-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">داروهای تجویزی</h3>
+            <p class="text-sm text-gray-600 mb-4">با ارائه نسخه پزشک</p>
+            <div class="text-xs text-cyan-600 font-semibold">1,250+ محصول</div>
+          </div>
+
+          <!-- OTC Medicines -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-pills text-2xl text-green-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">
+              داروهای بدون نسخه
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">قابل خرید آزاد</p>
+            <div class="text-xs text-cyan-600 font-semibold">850+ محصول</div>
+          </div>
+
+          <!-- Medical Equipment -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-stethoscope text-2xl text-blue-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">تجهیزات پزشکی</h3>
+            <p class="text-sm text-gray-600 mb-4">ابزار و وسایل درمانی</p>
+            <div class="text-xs text-cyan-600 font-semibold">320+ محصول</div>
+          </div>
+
+          <!-- Health & Beauty -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-heart text-2xl text-pink-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">سلامت و زیبایی</h3>
+            <p class="text-sm text-gray-600 mb-4">مکمل‌ها و کرم‌ها</p>
+            <div class="text-xs text-cyan-600 font-semibold">450+ محصول</div>
+          </div>
+
+          <!-- Vitamins -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-seedling text-2xl text-green-500"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">ویتامین و مکمل</h3>
+            <p class="text-sm text-gray-600 mb-4">تقویت سیستم ایمنی</p>
+            <div class="text-xs text-cyan-600 font-semibold">280+ محصول</div>
+          </div>
+
+          <!-- Baby Care -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-baby text-2xl text-purple-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">مراقبت نوزاد</h3>
+            <p class="text-sm text-gray-600 mb-4">شیر خشک و پوشک</p>
+            <div class="text-xs text-cyan-600 font-semibold">180+ محصول</div>
+          </div>
+
+          <!-- Herbal -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-leaf text-2xl text-green-700"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">داروهای گیاهی</h3>
+            <p class="text-sm text-gray-600 mb-4">طب سنتی و طبیعی</p>
+            <div class="text-xs text-cyan-600 font-semibold">150+ محصول</div>
+          </div>
+
+          <!-- Emergency -->
+          <div class="category-card rounded-2xl p-6 text-center cursor-pointer">
+            <div class="medicine-icon">
+              <i class="fas fa-ambulance text-2xl text-red-600"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800 mb-2">اورژانس</h3>
+            <p class="text-sm text-gray-600 mb-4">داروهای ضروری</p>
+            <div class="text-xs text-cyan-600 font-semibold">95+ محصول</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prescription Upload Section -->
+    <section
+      id="prescription"
+      class="py-16 bg-gradient-to-r from-cyan-50 to-blue-50"
+    >
+      <div class="container mx-auto px-4">
+        <div class="glass-card rounded-3xl p-8 md:p-12">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-prescription text-cyan-500 ml-3"></i>
+              آپلود نسخه پزشک
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              نسخه پزشک خود را آپلود کنید تا داروساز ما آن را بررسی کرده و
+              داروهای مورد نیاز را آماده کند
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center"
+          >
+            <!-- Upload Area -->
+            <div
+              class="prescription-upload rounded-2xl p-8 text-center cursor-pointer"
+              id="prescriptionUpload"
+            >
+              <div class="mb-6">
+                <i
+                  class="fas fa-cloud-upload-alt text-6xl text-cyan-500 mb-4"
+                ></i>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">
+                  آپلود تصویر نسخه
+                </h3>
+                <p class="text-gray-600">فایل را اینجا بکشید یا کلیک کنید</p>
+              </div>
+              <input
+                type="file"
+                id="prescriptionFile"
+                class="hidden"
+                accept="image/*,.pdf"
+              />
+              <div class="text-sm text-gray-500">
+                فرمت‌های مجاز: JPG, PNG, PDF | حداکثر حجم: 5MB
+              </div>
+            </div>
+
+            <!-- Process Steps -->
+            <div class="space-y-4">
+              <h3 class="text-xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-list-check ml-2 text-green-500"></i>
+                مراحل پردازش نسخه
+              </h3>
+
+              <div class="flex items-start space-x-4 space-x-reverse">
+                <div
+                  class="medical-gradient text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                >
+                  1
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800">آپلود نسخه</h4>
+                  <p class="text-gray-600 text-sm">
+                    تصویر واضح از نسخه پزشک ارسال کنید
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4 space-x-reverse">
+                <div
+                  class="health-gradient text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                >
+                  2
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800">بررسی داروساز</h4>
+                  <p class="text-gray-600 text-sm">
+                    داروساز متخصص نسخه را بررسی می‌کند
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4 space-x-reverse">
+                <div
+                  class="pharmacy-gradient text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                >
+                  3
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800">آماده‌سازی سفارش</h4>
+                  <p class="text-gray-600 text-sm">
+                    داروها آماده و بسته‌بندی می‌شوند
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4 space-x-reverse">
+                <div
+                  class="emergency-gradient text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                >
+                  4
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-800">تحویل سریع</h4>
+                  <p class="text-gray-600 text-sm">تحویل در کمتر از 30 دقیقه</p>
+                </div>
+              </div>
+
+              <div class="pt-4">
+                <button
+                  class="medical-gradient text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all w-full"
+                >
+                  <i class="fas fa-paper-plane ml-2"></i>
+                  ارسال نسخه برای بررسی
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-star text-yellow-500 ml-3"></i>
+            محصولات پرفروش
+          </h2>
+          <p class="text-gray-600">
+            داروها و محصولات پرطرفدار با بهترین قیمت‌ها
+          </p>
+        </div>
+
+        <div
+          class="product-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+        >
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-badge">20% تخفیف</div>
+            <div class="p-6">
+              <div class="text-center mb-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-pills text-3xl text-blue-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">قرص استامینوفن 500</h3>
+                <p class="text-sm text-gray-600 mb-3">ضد درد و تب بر قوی</p>
+              </div>
+
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">برند:</span>
+                  <span class="font-semibold">پارس درمان</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">تعداد:</span>
+                  <span class="font-semibold">20 قرص</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-base md:text-lg font-bold text-gray-800"
+                    >15,000 تومان</span
+                  >
+                  <span
+                    class="text-xs md:text-sm text-gray-500 line-through mr-2"
+                    >18,750 تومان</span
+                  >
+                </div>
+                <button
+                  class="medical-gradient add-to-cart text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg transition-all"
+                  onclick="addToCart(1, 'قرص استامینوفن 500', 15000)"
+                >
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-badge discount-badge">تخفیف ویژه</div>
+            <div class="p-6">
+              <div class="text-center mb-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-heartbeat text-3xl text-green-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">شربت سرماخوردگی</h3>
+                <p class="text-sm text-gray-600 mb-3">تسکین علائم سرماخوردگی</p>
+              </div>
+
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">برند:</span>
+                  <span class="font-semibold">ابوریحان</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">حجم:</span>
+                  <span class="font-semibold">120 میلی‌لیتر</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-base md:text-lg font-bold text-gray-800"
+                    >25,000 تومان</span
+                  >
+                </div>
+                <button
+                  class="health-gradient add-to-cart text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg transition-all"
+                  onclick="addToCart(2, 'شربت سرماخوردگی', 25000)"
+                >
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="p-6">
+              <div class="text-center mb-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-thermometer text-3xl text-purple-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">دماسنج دیجیتال</h3>
+                <p class="text-sm text-gray-600 mb-3">دماسنج پیشرفته و دقیق</p>
+              </div>
+
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">برند:</span>
+                  <span class="font-semibold">اومرون</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">گارانتی:</span>
+                  <span class="font-semibold">1 سال</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-base md:text-lg font-bold text-gray-800"
+                    >45,000 تومان</span
+                  >
+                </div>
+                <button
+                  class="pharmacy-gradient add-to-cart text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg transition-all"
+                  onclick="addToCart(3, 'دماسنج دیجیتال', 45000)"
+                >
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="p-6">
+              <div class="text-center mb-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-band-aid text-3xl text-red-600"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-2">چسب زخم ضد آب</h3>
+                <p class="text-sm text-gray-600 mb-3">محافظت کامل از زخم‌ها</p>
+              </div>
+
+              <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">تعداد:</span>
+                  <span class="font-semibold">50 عددی</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">اندازه:</span>
+                  <span class="font-semibold">مختلف</span>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between mt-4">
+                <div>
+                  <span class="text-base md:text-lg font-bold text-gray-800"
+                    >12,000 تومان</span
+                  >
+                </div>
+                <button
+                  class="medical-gradient add-to-cart text-white px-4 py-2 rounded-full text-sm font-semibold hover:shadow-lg transition-all"
+                  onclick="addToCart(4, 'چسب زخم ضد آب', 12000)"
+                >
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10">
+          <button
+            class="medical-gradient text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all hover-scale"
+          >
+            <i class="fas fa-th-large ml-2"></i>
+            مشاهده همه محصولات
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section
+      id="consultation"
+      class="py-16 bg-gradient-to-r from-purple-50 to-pink-50"
+    >
+      <div class="container mx-auto px-4">
+        <div class="glass-card rounded-3xl p-8 md:p-12">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-3xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-user-md text-purple-500 ml-3"></i>
+                مشاوره آنلاین با پزشک
+              </h2>
+              <p class="text-gray-600 mb-8 leading-relaxed">
+                با پزشکان متخصص ما مشاوره کنید و پاسخ سوالات پزشکی خود را دریافت
+                کنید. خدمات مشاوره‌ای ما شامل:
+              </p>
+
+              <div class="space-y-4 mb-8">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                  <div
+                    class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-check text-purple-600 text-sm"></i>
+                  </div>
+                  <span class="text-gray-700">مشاوره تخصصی دارویی</span>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                  <div
+                    class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-check text-purple-600 text-sm"></i>
+                  </div>
+                  <span class="text-gray-700">راهنمایی مصرف دارو</span>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                  <div
+                    class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-check text-purple-600 text-sm"></i>
+                  </div>
+                  <span class="text-gray-700">بررسی تداخلات دارویی</span>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                  <div
+                    class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-check text-purple-600 text-sm"></i>
+                  </div>
+                  <span class="text-gray-700">مشاوره تغذیه درمانی</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                <button
+                  class="pharmacy-gradient text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+                >
+                  <i class="fas fa-video ml-2"></i>مشاوره ویدیویی
+                </button>
+                <button
+                  class="border-2 border-purple-500 text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-50 transition-all"
+                >
+                  <i class="fas fa-phone ml-2"></i>تماس تلفنی
+                </button>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="glass-card rounded-2xl p-8 text-center">
+                <div class="text-6xl mb-6">👨‍⚕️</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                  دکتر احمد محمدی
+                </h3>
+                <p class="text-gray-600 mb-6">متخصص داخلی و قلب</p>
+
+                <div class="bg-green-50 rounded-xl p-4 mb-6">
+                  <div
+                    class="flex items-center justify-center space-x-2 space-x-reverse mb-2"
+                  >
+                    <div
+                      class="w-3 h-3 bg-green-500 rounded-full animate-pulse"
+                    ></div>
+                    <span class="text-green-700 font-semibold text-sm"
+                      >آنلاین</span
+                    >
+                  </div>
+                  <p class="text-green-600 text-sm">
+                    آماده پاسخگویی به سوالات شما
+                  </p>
+                </div>
+
+                <button
+                  class="medical-gradient text-white w-full py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+                >
+                  <i class="fas fa-comments ml-2"></i>شروع مشاوره
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            <i class="fas fa-concierge-bell text-cyan-500 ml-3"></i>
+            خدمات ویژه ما
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            خدمات جامع سلامت برای راحتی و آسایش شما
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8"
+        >
+          <!-- Fast Delivery -->
+          <div class="text-center">
+            <div
+              class="medical-gradient text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-6 floating"
+            >
+              <i class="fas fa-shipping-fast text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">تحویل سریع</h3>
+            <p class="text-gray-600 leading-relaxed">
+              تحویل دارو در کمتر از 30 دقیقه در شهر تهران و 2 ساعت در سایر شهرها
+            </p>
+          </div>
+
+          <!-- 24/7 Support -->
+          <div class="text-center">
+            <div
+              class="health-gradient text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-6 floating"
+              style="animation-delay: 0.5s"
+            >
+              <i class="fas fa-headset text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">
+              پشتیبانی 24 ساعته
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              پشتیبانی کامل در تمامی ساعات شبانه‌روز برای پاسخگویی به سوالات شما
+            </p>
+          </div>
+
+          <!-- Quality Guarantee -->
+          <div class="text-center">
+            <div
+              class="pharmacy-gradient text-white w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center mx-auto mb-6 floating"
+              style="animation-delay: 1s"
+            >
+              <i class="fas fa-shield-alt text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">تضمین اصالت</h3>
+            <p class="text-gray-600 leading-relaxed">
+              تضمین 100% اصالت کالا و امکان بازگرداندن در صورت عدم رضایت
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div
+          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8"
+        >
+          <!-- Company Info -->
+          <div>
+            <div class="flex items-center mb-6">
+              <div class="medical-gradient text-white p-3 rounded-full ml-3">
+                <i class="fas fa-pills text-xl"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold">داروخانه آنلاین پلاس</h3>
+                <p class="text-gray-400 text-sm">سلامتی در اولویت</p>
+              </div>
+            </div>
+            <p class="text-gray-400 leading-relaxed mb-4">
+              ارائه‌دهنده خدمات دارویی آنلاین با بیش از 10 سال تجربه در زمینه
+              سلامت و درمان
+            </p>
+            <div class="flex space-x-4 space-x-reverse">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                <i class="fab fa-telegram text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                <i class="fab fa-instagram text-xl"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-cyan-400 transition-colors"
+              >
+                <i class="fab fa-whatsapp text-xl"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">دسترسی سریع</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >درباره ما</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >تماس با ما</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >قوانین و مقررات</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >حریم خصوصی</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >سوالات متداول</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">خدمات</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >داروهای تجویزی</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >مشاوره آنلاین</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >تحویل در منزل</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >اورژانس 24 ساعته</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-cyan-400 transition-colors"
+                  >تست‌های آزمایشگاهی</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">اطلاعات تماس</h4>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-3 space-x-reverse">
+                <i class="fas fa-phone text-cyan-400"></i>
+                <span class="text-gray-400">021-88776655</span>
+              </div>
+              <div class="flex items-center space-x-3 space-x-reverse">
+                <i class="fas fa-envelope text-cyan-400"></i>
+                <span class="text-gray-400">info@pharmacy-plus.ir</span>
+              </div>
+              <div class="flex items-start space-x-3 space-x-reverse">
+                <i class="fas fa-map-marker-alt text-cyan-400 mt-1"></i>
+                <span class="text-gray-400"
+                  >تهران، خیابان ولیعصر، نرسیده به پارک وی، پلاک 1255</span
+                >
+              </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="mt-6 p-4 bg-red-900 rounded-xl">
+              <div class="flex items-center space-x-2 space-x-reverse mb-2">
+                <i class="fas fa-ambulance text-red-400"></i>
+                <span class="font-bold text-red-400">اورژانس</span>
+              </div>
+              <p class="text-red-300 text-sm">در شرایط اضطراری:</p>
+              <p class="text-white font-bold">0912-3456789</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p class="text-gray-400">
+            © 1402 داروخانه آنلاین پلاس. تمامی حقوق محفوظ است.
+            <span class="mx-2">|</span>
+            <span class="text-cyan-400">ساخته شده با ❤️ برای سلامت شما</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div
+      id="cartSidebar"
+      class="fixed top-0 left-0 w-full sm:w-96 h-full bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="p-6 border-b">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold text-gray-800">
+            <i class="fas fa-shopping-cart ml-2 text-cyan-500"></i>
+            سبد خرید
+          </h3>
+          <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="cartItems" class="flex-1 overflow-y-auto p-6">
+        <div class="text-center text-gray-500 py-12">
+          <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+          <p>سبد خرید شما خالی است</p>
+        </div>
+      </div>
+
+      <div class="p-6 border-t">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-lg font-bold">مجموع:</span>
+          <span id="cartTotal" class="text-xl font-bold text-cyan-600"
+            >0 تومان</span
+          >
+        </div>
+        <button
+          class="medical-gradient text-white w-full py-3 rounded-full font-semibold hover:shadow-lg transition-all"
+        >
+          <i class="fas fa-credit-card ml-2"></i>
+          تسویه حساب
+        </button>
+      </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div
+      id="cartOverlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+    ></div>
+
+    <!-- Loading Modal -->
+    <div
+      id="loadingModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="bg-white rounded-2xl p-8 text-center">
+        <div class="loading-spinner mx-auto mb-4"></div>
+        <p class="text-gray-700">در حال پردازش...</p>
+      </div>
+    </div>
+    <script src="assets/JS/pharmacy_website.js"></script>
+  </body>
+</html>
